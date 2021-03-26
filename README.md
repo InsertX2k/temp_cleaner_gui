@@ -2,7 +2,7 @@
 A free (and of course an **Open-Source**) alternative to all Temp Cleaning Software available for all Windows Versions that can be expanded by you!<br/>
 ## Requirements : <br/>
 * A little knowledge in Python (Specially the if statements usage) <br/>
-* The module WINTCMD <br/>
+* The Python module **WINTCMD** <br/>
 * A Windows 10 PC <br/>
 * A working human brain <br/>
 * Pyinstaller or auto-py-to-exe (this one is recommended) <br/>
