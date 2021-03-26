@@ -10,3 +10,4 @@ A free (and of course an **Open-Source**) alternative to all Temp Cleaning Softw
 * Notepad++ or Visual Studio Code <br/>
 **If Python knowledge doesn't exist**, don't worry, as I must be trying to explain to you how do you modify it by yourself! <br/>
 ## Inside of the program <br/>
+![alt text](https://github.com/InsertX2k/temp_cleaner_gui/blob/main/.readme.files/temp_cleaner_gui.inside_ss.jpg?raw=true)
