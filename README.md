@@ -13,7 +13,7 @@ A free (and of course an **Open-Source**) alternative to all Temp Cleaning Softw
 ![A screenshot of the inside of the program Temp_Cleaner GUI](https://github.com/InsertX2k/temp_cleaner_gui/blob/main/.readme.files/temp_cleaner_gui.inside_ss.jpg?raw=true) <br/>
 <br/>
 ## Recompiling guide <br/>
-This program usually comes as an executable ONLY for 64-bit based PCs, but there is problem ONLY if your PC is a 32-bit one, but don't worry, You don't have to open an issue, all what you have to do is just following this guide step by step so you can recompile a 32-bit version of this program. <br/>
+This program usually comes as an executable ONLY for 64-bit based PCs, but there is a problem ONLY if your PC is a 32-bit one, but don't worry, You don't have to open an issue, all what you have to do is just following this guide step by step so you can recompile a 32-bit version of this program. <br/>
 **Please before doing this make sure you have all of the requirements** <br/>
 Download and install **pyinstaller** <br/>
 Open **Windows Command Prompt** as **Administrator** and then execute the following command : <br/>
@@ -29,7 +29,7 @@ pip install auto-py-to-exe
 Then you should wait for the installation to be done. <br/>
 <br/>
 Once done, You should then be sure to make some changes to the source code file of the program (at least to make it appear like a 32-bit program) <br/>
-Simply, all what you have to do is just replacing all words that are between quotes `" "` that says the program is 64-bit with the appropriate ones that says the program is 64-bit <br/>
+Simply, all what you have to do is just replacing all words that are between quotes `" "` that says the program is 64-bit with the appropriate ones that says the program is a 32-bit one <br/>
 Once you are done, be sure to save your changes and make sure that you edited everything properly/correctly. <br/>
 Open ` auto-py-to-exe ` using **Windows Command Prompt** and then choose the program's source code file (that **.py** file you've been editing) as the script <br/>
 and then choose all of the following configurations for the program : <br/>
