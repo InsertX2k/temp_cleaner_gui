@@ -43,7 +43,7 @@ If a GUI seems hard for you to use, then type the following command into a **Com
 pyinstaller --noconfirm --onedir --windowed --icon "path\to\program\temp_cleaner_gui\icon0.ico" --name "temp-cleaner-v1.1-gui-foss" --clean --uac-admin --add-data "path\to\program\temp_cleaner_gui\icon0.ico;." --add-data "path\to\program\temp_cleaner_gui\temp_cleaner_gui_console0.py;." --add-data "path\to\program\temp_cleaner_gui\WINTCMD.py;."  "path\to\program\temp_cleaner_gui\temp_cleaner_gui_console0.py"
 ```
 <br/>
-And of course, do not forget to replace ` path\to\program\temp_cleaner_gui\ ` with the correct path of where did you store the program Temp_Cleaner GUI in <br/>
+And of course, do not forget to replace ` path\to\program\temp_cleaner_gui\ ` with the correct path of where did you store the program Temp_Cleaner GUI in  <br/>
 <br/>
 ## Adding new features : <br/>
 That's the main adventage of Temp_Cleaner GUI is that it can be manually expanded by **you** <br/>
