@@ -57,4 +57,5 @@ The icon of the program, and the file **icon0.ico** is just a modified icon imag
 <br/>
 ## Download an already compiled version <br/>
 If recompiling the program is hard for you, feel free to download the executable of the program from [here](https://drive.google.com/file/d/10XCWXAyhNL5lygi5qeCEOQJEwzXAibfQ/view?usp=sharing) <br/>
+**Please note that this version is only available for 64-bit based PCs**
 -Insert
