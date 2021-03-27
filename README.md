@@ -47,9 +47,11 @@ And of course, do not forget to replace ` path\to\program\temp_cleaner_gui\ ` wi
 <br/>
 ## Adding new features : <br/>
 That's the main adventage of Temp_Cleaner GUI is that it can be manually expanded by **you** <br/>
-All what you will have to do is just downloading the file that says the `` recompiling-guide `` and then extract it and then read it, and you are going to be ready to go! <br/>
+All what you will have to do is just downloading the file that says the ``recompiling-guide`` and then extract it and then read it, and you are going to be ready to go! <br/>
 <br/>
 **Please note :** that you shouldn't post your modified version of **Temp_Cleaner GUI** here, please keep it for yourself, however, if you want to give us some paths to where should we look for temporary files, feel free to create an issue, and I will reply you as fast as possible! <br/>
 And thanks for everyone who had supported me all this time <br/>
 <br/>
+## Copyrights <br/>
+The icon of the program, and the file **icon0.ico** is just a modified icon image that is originally owned by the **Numix Icon pack** author
 -Insert
