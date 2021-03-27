@@ -54,4 +54,5 @@ And thanks for everyone who had supported me all this time <br/>
 <br/>
 ## Copyrights <br/>
 The icon of the program, and the file **icon0.ico** is just a modified icon image that is originally owned by the **Numix Icon pack** author
+<br/>
 -Insert
