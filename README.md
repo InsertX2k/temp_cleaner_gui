@@ -22,3 +22,34 @@ pip install pyinstaller
 ``` 
 <br/>
 Once done, please make sure to install auto-py-to-exe too, execute the following command to do so : <br/>
+```
+pip install auto-py-to-exe
+```
+<br/>
+Then you should wait for the installation to be done. <br/>
+<br/>
+Once done, You should then be sure to make some changes to the source code file of the program (at least to make it appear like a 32-bit program) <br/>
+Simply, all what you have to do is just replacing all words that are between quotes `" "` that says the program is 64-bit with the appropriate ones that says the program is 64-bit <br/>
+Once you are done, be sure to save your changes and make sure that you edited everything properly/correctly. <br/>
+Open ` auto-py-to-exe ` using **Windows Command Prompt** and then choose the program's source code file (that **.py** file you've been editing) as the script <br/>
+and then choose all of the following configurations for the program : <br/>
+* The program must be recompiled in One directory mode (--ondir) <br/>
+* The icon file (icon0.ico) must be set as the program icon <br/>
+* The files **icon0.ico** and the source code of the program (that **.py** file you've been editing) and the file **WINTCMD.py** must be added to the integrate files option, and BE SURE to keep their extraction directory as in the current directory (Simply don't modify anything after you add those files and everything is gonna be fine) <br/>
+* The program must ask for UAC Admin privileges, Which means you will of course have to enable the option UAC-Access or something similar to it <br/>
+* IMPORTANT : You must choose the **Console Window** as **Window based (Hide the console)** <br/>
+If a GUI seems hard for you to use, then type the following command into a **Command Prompt Window** that is not elevated. <br/>
+```
+pyinstaller --noconfirm --onedir --windowed --icon "path\to\program\temp_cleaner_gui\icon0.ico" --name "temp-cleaner-v1.1-gui-foss" --clean --uac-admin --add-data "path\to\program\temp_cleaner_gui\icon0.ico;." --add-data "path\to\program\temp_cleaner_gui\temp_cleaner_gui_console0.py;." --add-data "path\to\program\temp_cleaner_gui\WINTCMD.py;."  "path\to\program\temp_cleaner_gui\temp_cleaner_gui_console0.py"
+```
+<br/>
+And of course, do not forget to replace ` path\to\program\temp_cleaner_gui\ ` with the correct path of where did you store the program Temp_Cleaner GUI in <br/>
+<br/>
+## Adding new features : <br/>
+That's the main adventage of Temp_Cleaner GUI is that it can be manually expanded by **you** <br/>
+All what you will have to do is just downloading the file that says the `` recompiling-guide `` and then extract it and then read it, and you are going to be ready to go! <br/>
+<br/>
+**Please note :** that you shouldn't post your modified version of **Temp_Cleaner GUI** here, please keep it for yourself, however, if you want to give us some paths to where should we look for temporary files, feel free to create an issue, and I will reply you as fast as possible! <br/>
+And thanks for everyone who had supported me all this time <br/>
+<br/>
+-Insert
