@@ -1,2 +1,2 @@
-# Temp_Cleaner GUI
-The official GitHub Repository for Temp_Cleaner GUI Project.
+# Temp_Cleaner GUI <br/>
+A **free** and **Open-Source** alternative to all preparatory and paid temp cleaning software.
