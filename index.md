@@ -31,7 +31,7 @@ Then you should wait for the installation to be done. <br/>
 Once done, You should then be sure to make some changes to the source code file of the program (at least to make it appear like a 32-bit program) <br/>
 Simply, all what you have to do is just replacing all words that are between quotes `" "` that says the program is 64-bit with the appropriate ones that says the program is a 32-bit one <br/>
 Once you are done, be sure to save your changes and make sure that you edited everything properly/correctly. <br/>
-Open ` auto-py-to-exe ` using **Windows Command Prompt** and then choose the program's source code file (that **.py** file you've been editing) as the script <br/>
+Open `auto-py-to-exe` using **Windows Command Prompt** and then choose the program's source code file (that **.py** file you've been editing) as the script <br/>
 and then choose all of the following configurations for the program : <br/>
 * The program must be recompiled in One directory mode (--ondir) <br/>
 * The icon file (icon0.ico) must be set as the program icon <br/>
