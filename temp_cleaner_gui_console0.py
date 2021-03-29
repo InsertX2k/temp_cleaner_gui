@@ -28,57 +28,12 @@ import WINTCMD
 from tkinter import scrolledtext
 from tkinter import messagebox
 from tkinter.ttk import *
-from pystray import MenuItem as item
 from PIL import Image
-import pystray
-# Somwhat adding a new function that could help me someday to resolve issues with pyinstaller and auto-py-to-exe
-import sys, os 
-def resource_path(relative_path):
-    if hasattr(sys, '_MEIPASS'):
-        return os.path.join(sys._MEIPASS, relative_path)
-    return os.path.join(os.path.abspath("."), relative_path)
-# Adding the multi-threading support (aka Multi-core support for the main program.)
-from multiprocessing import freeze_support
-freeze_support()
 root = Tk()
 root.title("Temp_Cleaner Console Window (64-bit)")
 root.iconbitmap("icon0.ico")
 root.geometry('600x460')
 root.resizable(False,False)
-# Defining the function used to close the program's window through the tray icon.
-def quit_window(icon, item):
-    icon.stop()
-    root.destroy()
-# Defining the function used to show the main program's window through the tray icon.
-def show_window(icon, item):
-    icon.stop()
-    root.after(0,root.deiconify)
-# Defining the quick temp cleaning function of the Tray Icon process.
-def quick_tmp_clean():
-    WINTCMD.term('cd /d %localappdata%&erase /s /f /q "Temp"')
-    WINTCMD.term('cd /d %localappdata%&erase /s /f /q "D3DSCache"')
-    WINTCMD.term('rmdir /s /q "%systemdrive%\\$Recycle.bin"')
-    WINTCMD.term('cd /d %windir%&erase /s /f /q prefetch')
-    WINTCMD.term('cd /d "%systemdrive%\\Users\\Default\\AppData\\Local"&erase /s /f /q Temp')
-    WINTCMD.term('@echo off | clip')
-    messagebox.showinfo("Quick Temporary Folders Erase - Tray Icon Process", "Successfully erased User Temporary folder, and Windows Temporary folder, and D3DSCache folder (Only when running on Windows 10), and PrefetchW Data, and Systemdrive Recycle Bin, and Local Low Temporary Data!, and User Clipboard Data.")
-# Defining the erase recent documents list function of the Tray Icon Process.
-def erase_recentdocs():
-    WINTCMD.term('cd /d %userprofile%\\AppData\\Roaming&cd Microsoft&cd Windows&erase /s /f /q Recent')
-    messagebox.showinfo("Clean Recent Documents List", "Done Cleaning Recent Documents List!")
-# Defining the erase user clipboard function of the Tray Icon Process.
-def erase_usrclip_tray():
-    WINTCMD.term('@echo off | clip')
-    messagebox.showinfo("Clean User Clipboard Data", "Done Cleaning user clipboard data.")
-# Defining the window(root) withdrawing function
-def withdraw_window():
-    root.withdraw()
-    pic = Image.open("icon0.ico")
-    menu = (item("Quit Temp_Cleaner GUI", quit_window), item("Quickly Erase all Temporary files and PrefetchW data and User Clipboard Data", quick_tmp_clean), item("Erase Recent Documents List", erase_recentdocs), item("Clean User Clipboard Data", erase_usrclip_tray) ,item("Show Temp_Cleaner GUI's Main Window", show_window), item("About Temp_Cleaner GUI Project by Insertx2k Dev", show_about_scr))
-    icon = pystray.Icon("The Temp_Cleaner GUI Project by Insertx2k Dev - Tray Icon Process", pic, "The Temp_Cleaner GUI Project by Insertx2k Dev\nSee github.com/insertx2k/temp_cleaner_gui", menu)
-    icon.run()
-
-
 # Defining the function used to show the user the About window of the program.
 def show_about_scr():
     messagebox.showinfo("About Temp_Cleaner Console Window (64-bit)","""
@@ -506,7 +461,4 @@ go_commit.place(x=520 ,y=405)
 # Defining the about button used to show the user more information about this program.
 about_btn = Button(root, text="About", command=show_about_scr)
 about_btn.place(x=520 ,y=0)
-
-# Defining the Window manager (WM) protocol.
-root.protocol('WM_DELETE_WINDOW', withdraw_window)
 root.mainloop()
