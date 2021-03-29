@@ -31,7 +31,7 @@ Then you should wait for the installation to be done. <br/>
 Once done, You should then be sure to make some changes to the source code file of the program (at least to make it appear like a 32-bit program) <br/>
 Simply, all what you have to do is just replacing all words that are between quotes `" "` that says the program is 64-bit with the appropriate ones that says the program is a 32-bit one <br/>
 Once you are done, be sure to save your changes and make sure that you edited everything properly/correctly. <br/>
-Open `auto-py-to-exe` using **Windows Command Prompt** and then choose the program's source code file (that **.py** file you've been editing) as the script <br/>
+Open ` auto-py-to-exe ` using **Windows Command Prompt** and then choose the program's source code file (that **.py** file you've been editing) as the script <br/>
 and then choose all of the following configurations for the program : <br/>
 * The program must be recompiled in One directory mode (--ondir) <br/>
 * The icon file (icon0.ico) must be set as the program icon <br/>
@@ -52,10 +52,18 @@ All what you will have to do is just downloading the file that says the ``recomp
 **Please note :** that you shouldn't post your modified version of **Temp_Cleaner GUI** here, please keep it for yourself, however, if you want to give us some paths to where should we look for temporary files, feel free to create an issue, and I will reply you as fast as possible! <br/>
 And thanks for everyone who had supported me all this time <br/>
 <br/>
+## What happened to version 1.3? <br/>
+I have actually canceled it's release due to compiling problems, but don't worry, someday I might be able to make a new update for that project like this one and without any compiling problems. <br/>
+<br/>
 ## Copyrights <br/>
 The icon of the program, and the file **icon0.ico** is just a modified icon image that is originally owned by the **Numix Icon pack** author
 <br/>
 ## Download an already compiled version <br/>
-If recompiling the program is hard for you, feel free to download the executable of the program from here :(https://drive.google.com/file/d/10XCWXAyhNL5lygi5qeCEOQJEwzXAibfQ/view?usp=sharing) <br/>
+If recompiling the program is hard for you, feel free to download the executable of the program from [here](https://drive.google.com/file/d/10XCWXAyhNL5lygi5qeCEOQJEwzXAibfQ/view?usp=sharing) <br/>
 **Please note that this version is only available for 64-bit based PCs** <br/>
+<br/>
+## Download an already compiled version with installer <br/>
+If installing a portable version seems to be hard for you, then I strongly recommend you to use the version compiled with an installer, you can get it by clicking [here](https://drive.google.com/file/d/1jyjoKa3cizoAwEeVzV90Jp6zm2jlE70t/view?usp=sharing) <br/>
+**Please note that this version is only available for 64-bit based PCs** <br/>
+<br/>
 -Insert
