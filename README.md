@@ -52,8 +52,8 @@ All what you will have to do is just downloading the file that says the ``recomp
 **Please note :** that you shouldn't post your modified version of **Temp_Cleaner GUI** here, please keep it for yourself, however, if you want to give us some paths to where should we look for temporary files, feel free to create an issue, and I will reply you as fast as possible! <br/>
 And thanks for everyone who had supported me all this time <br/>
 <br/>
-## Known problems : <br/>
-* The current release of the project (**v1.3**) is known to have compiling problems, but don't worry as I will be trying to resolve all of them as fast as possible.
+## What happened to version 1.3? <br/>
+I have actually canceled it's release due to compiling problems, but don't worry, someday I might be able to make a new update for that project like this one and without any compiling problems. <br/>
 <br/>
 ## Copyrights <br/>
 The icon of the program, and the file **icon0.ico** is just a modified icon image that is originally owned by the **Numix Icon pack** author
