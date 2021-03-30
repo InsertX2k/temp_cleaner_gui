@@ -67,12 +67,8 @@ In this version you no longer need to recompile the program to resolve path issu
 **Please keep in mind the variable `adwclrpath` is optional, and the program will function properly without it.** <br/>
 `cdpccpath` - When the **ConnectedDevicesPlatform** cache cleaner doesn't function properly, simply create this variable with the name of the folder inside of the folder `%localappdata%\ConnectedDevicesPlatform`, it can be a random numbers or words. <br/>
 <br/>
-## Download an already compiled version <br/>
-If recompiling the program is hard for you, feel free to download the executable of the program from [here](https://drive.google.com/file/d/10XCWXAyhNL5lygi5qeCEOQJEwzXAibfQ/view?usp=sharing) <br/>
-**Please note that this version is only available for 64-bit based PCs** <br/>
-<br/>
 ## Download an already compiled version with installer <br/>
-If installing a portable version seems to be hard for you, then I strongly recommend you to use the version compiled with an installer, you can get it by clicking [here](https://drive.google.com/file/d/1jyjoKa3cizoAwEeVzV90Jp6zm2jlE70t/view?usp=sharing) <br/>
+If installing a portable version seems to be hard for you, then I strongly recommend you to use the version compiled with an installer, you can get it by clicking [here](https://drive.google.com/file/d/1z_avElSRiph1CLKT4LLU02H8f_xMa92a/view?usp=sharing) <br/>
 **Please note that this version is only available for 64-bit based PCs** <br/>
 <br/>
 -Insert
