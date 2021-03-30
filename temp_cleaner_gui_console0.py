@@ -29,6 +29,7 @@ from tkinter import scrolledtext
 from tkinter import messagebox
 from tkinter.ttk import *
 from PIL import Image
+import os
 root = Tk()
 root.title("Temp_Cleaner Console Window (64-bit)")
 root.iconbitmap("icon0.ico")
@@ -37,21 +38,20 @@ root.resizable(False,False)
 # Defining the function used to show the user the About window of the program.
 def show_about_scr():
     messagebox.showinfo("About Temp_Cleaner Console Window (64-bit)","""
-    Temp_Cleaner Console Window (64-bit)\n
-    Version 1.2 (Tray Icon Edition)\n
-    Written in Python By Insertx2k Dev\n
-    Programmer's way to clean temporary folders in their computers\n
-    Uses the Python Module Tkinter and WINTCMD by Insertx2k Dev\n
-    Requires Windows 10 and newer (64-bit versions only!)\n
-    Support for Windows 8,8.1 or older is dropped\n
-    Support Twitter : @insertplayztw\n
-    Support URL : https://creative-development.wixsite.com/cwofficial/forum\n
-    Requires a fully installed Windows, or a Windows with cmd.exe installed at least to function properly\n
-    This program is COMPLETELY free and Open-Source, which means you are premitted to redistribute it within anything for free and without any restrictions\n
-    Thanks to everyone who supported me!, I really appreciate their support!\n
-    \n
-    \nPress OK to return to the main program.\n
-    """)
+A simple way to help you clean up all temporary directories and files in your computer for free and without any restrictions! \n
+Version : 1.32 (Environment Variables Edition)
+Author  : Insertx2k Dev
+License : The GNU General Public License Version 2.0
+Github  : https://github.com/insertx2k/temp_cleaner_gui
+Uses    : This program uses Environment variables to get correct user specified pathes for temporary folders, e.g. :
+When the environment variable 'rammappath' is specified, the program will execute the command to Empty Workingsets from the path specified in the variable.
+Variable: It uses the following variables : 
+s       : 'rammappath' - used to define the full path of the program RAMMap by Sysinternals (must be entered with the full executable name of the RAMMap tool)
+        : 'cdpccpath' - used to determine the correct location of the ConnectedDevicesPlatform cache folder.
+        : 'adwclrpath' - when a custom path is specified for the program Adware cleaner in its settings page, please create this variable and specify (simply copy and paste) the path you specified for Adware cleaner to store it's data as the variable value
+        : 'winxpepath' - used to retrieve the correct path of where the files of the program WinXPE is stored in (This environment variable is COMPLETELY required for the WinXPE Downloads cleaner to work).
+Arch    : This version of program (Temp_Cleaner GUI) only functions on 64-bit Operating Systems (x64).
+""")
 # Defining the function used to execute the main program. (the working function for short)
 def exec_confirm():
     choice = get_usr_input.get()
@@ -183,16 +183,24 @@ def exec_confirm():
     if choice == "x":
         conf2 = messagebox.askquestion("Empty Windows Workingsets", "Would you really like to run RAMMap by Sysinternals to empty RAM Workingsets?")
         if conf2 == "yes":
-            WINTCMD.term('"D:\\Software Repository\\RAMMap\\RAMMap.exe" -Ew')
-            messagebox.showinfo("Empty Windows Workingsets", "RAMMap.exe - Command sent.")
+            if os.getenv("rammappath") is not None:
+                WINTCMD.term('""%rammappath%"" -Ew')
+                messagebox.showinfo("Empty Windows Workingsets", "RAMMap.exe - Command sent.")
+            else:
+                messagebox.showinfo("An ERROR has occured", "The environment variable 'rammappath' doesn't exist either in the current user or the SYSTEM environment variables, Please make sure this environment variable exists and then try again.\nIf you don't know how, please follow the instructions given in this window:\n1-Open Control Panel\n2-Click on System and Security then click on System\n3-At the bottom of the window, you will find a button named 'Environment Variables' click on it\n4-Under the word 'User Variables for username' locate the button 'New' and then click on it\n5-Specify the variable name as 'rammappath' and then in the variable value write the full path of the program RAMMap.exe by Sysinternals (Incl. its exe name) (For an example : C:\\Programs\\RAMMap\\RAMMap.exe).\n6-When you are done, Please press the button OK, and then OK and then click on Apply and OK, then restart this program.")
         else:
             messagebox.showinfo("Empty Windows Workingsets", "Operation has been canceled.")
     if choice == "y":
         WINTCMD.term('cd /d "%localappdata%\\Google\\Chrome\\User Data\\Default"&del /s /q "Extension Cookies"&del /s /q "Extension Cookies-journal"')
         messagebox.showinfo("Clean GChrome Extension Cookies", "Done cleaning extension cookies data of Gchrome! (Included. Extension cookies-journal)")
     if choice == "z":
-        WINTCMD.term('cd /d "%localappdata%\\ConnectedDevicesPlatform"&erase /s /f /q "ee2999716b7783e6"')
-        messagebox.showinfo("Clean Windows 10 Activities cache", "Done cleaning Windows activites cache.")
+        if os.getenv("cdpccpath") is not None:
+            WINTCMD.term('cd /d "%localappdata%\\ConnectedDevicesPlatform"&erase /s /f /q ""%cdpccpath%""')
+            messagebox.showinfo("Clean Windows 10 Activities cache", "Done cleaning Windows activites cache.")
+        else:
+            messagebox.showinfo("Notification", "The custom environemnt variable 'cdpccpath' doesn't exist for custom path specification, Temp_Cleaner GUI will attempt to use the default path, which might not work properly in most cases.")
+            WINTCMD.term('cd /d "%localappdata%\\ConnectedDevicesPlatform"&erase /s /f /q "ee2999716b7783e6"')
+            messagebox.showinfo("Clean Windows 10 Activities cache", "Done cleaning Windows activites cache.")
     if choice == "0b":
         conf3 = messagebox.askquestion("Clean icon cache", "Cleaning IconCache.db file can not be done automatically, which means the user is premitted to do that manually, all what you have to do is just deleting the file iconcache.db in the directory we will open to you\nDo you wish to processed?")
         if conf3 == "yes":
@@ -204,8 +212,12 @@ def exec_confirm():
         WINTCMD.term('cd /d "%localappdata%"&erase /s /f /q "Microvirt"')
         messagebox.showinfo("Clean MEmu Microvirt Logs", "Done!")
     if choice == "0f":
-        WINTCMD.term('cd /d "%systemdrive%\\AdwCleaner"&erase /s /f /q "Logs"')
-        messagebox.showinfo("Clean AdwCleaner Logs", "Done!")
+        if os.getenv("adwclrpath") is not None:
+            messagebox.showinfo("Notification", "A custom environment variable ('adwclrpath') is specified for the tool Adware cleaner path, the custom path will be used instead of the default path.")
+            WINTCMD.term('cd /d ""%adwclrpath%""&erase /s /f /q "Logs"')
+            messagebox.showinfo("Clean AdwCleaner Logs", "Done!")
+        else:
+            messagebox.showinfo("Notification", "The custom environment variable for the path of the program ADWare cleaner ('adwclrpath') is not specified, the program will continue using the default path.")
     if choice == "0k":
         WINTCMD.term('%systemdrive%&&cd /d \\.\\&erase /s /f /q "PerfLogs"')
         messagebox.showinfo("Clean Perflogs folder", "Done!")
@@ -258,9 +270,12 @@ def exec_confirm():
         WINTCMD.term('cd /d "%userprofile%\\AppData\\Roaming\\Code"&erase /s /f /q "CachedExtensions"&erase /s /f /q "CachedExtensionVSIXs"')
         messagebox.showinfo("Clean VS Code Cached Extensions", "Done cleaning VS Code Cached Extensions data")
     if choice == "2k":
-        WINTCMD.term('erase /s /f /q "D:\\Win10XPE\\Temp"')
-        messagebox.showinfo("Clean Win10XPE Temp data", "Successfully deleted all downloaded data by the WinXPE Application!")
-        messagebox.showinfo("Note", "You will need to redownload all downloaded data by the tool for the exporting phase to be done!")
+        if os.getenv("winxpepath") is not None:
+            WINTCMD.term('erase /s /f /q "%winxpepath%\\Temp"')
+            messagebox.showinfo("Clean Win10XPE Temp data", "Successfully deleted all downloaded data by the WinXPE Application!")
+            messagebox.showinfo("Note", "You will need to redownload all downloaded data by the tool for the exporting phase to be done!")
+        else:
+            messagebox.showinfo("An ERROR has occured", "The environment variable 'winxpepath' doesn't exist either in the current user or the SYSTEM environment variables, Please make sure this environment variable exists and then try again.\nIf you don't know how, please follow the instructions given in this window:\n1-Open Control Panel\n2-Click on System and Security then click on System\n3-At the bottom of the window, you will find a button named 'Environment Variables' click on it\n4-Under the word 'User Variables for username' locate the button 'New' and then click on it\n5-Specify the variable name as 'winxpepath' and then in the variable value write the full path of where the WinXPE tool is stored in.\n6-When you are done, Please press the button OK, and then OK and then click on Apply and OK, then restart this program.")
     if choice == "0v":
         WINTCMD.term('cd /d "%localappdata%"&erase /s /f /q "ServiceHub"')
         messagebox.showinfo("Clean ServiceHub identity file", "Done deleting the Service Hub identity file (salt file)!")
@@ -289,6 +304,9 @@ def exec_confirm():
     if choice == "3r":
         WINTCMD.term('cd /d "%userprofile%\\AppData\\LocalLow\\Sun\\Java\\Deployment"&erase /s /f /q "tmp"')
         messagebox.showinfo("Clean SunMicroSystems Java Deployment Temp Data", "Done erasing temp data of Sun Micro Systems Java Deployment Software (aka Java Runtime)")
+    if choice == "3y":
+        WINTCMD.term('cd /d "%localappdata%\\HiSuite\\userdata"&erase /s /f /q "DropTemp"')
+        messagebox.showinfo("Clean Huawei HiSuite Drag 'n' Drop Temporary Data", "Done erasing temporary data of Huawei HiSuite Drag 'n' Drop Temporary Data.")
 # Defining the labels inside the window.
 lbl0 = Label(root, text="This should help you clean all Temporary files in your computer.", font=("arial", 10))
 lbl0.grid(column=0, row=1, sticky='w')
@@ -298,12 +316,7 @@ lbl1.grid(column=0, row=2, sticky='w')
 menu_show = scrolledtext.ScrolledText(root, width=72, height=22)
 menu_show.grid(column=0, row=3, sticky='w')
 # Setting the text of a scolledtext.
-menu_show.insert(INSERT, """ _____________________________________________\n
- Temporary folders cleaner for Windows \n
- _____________________________________________\n
- Welcome User to Temporary Folders Cleaner for Windows!\n
- This tool will help you to clean up all the temporary folders through a few clicks!\n
- Please choose something from the list to do : \n
+menu_show.insert(INSERT, """
 \n
  1-Clean SystemDrive Recycle Bin\n
 \n
@@ -445,6 +458,8 @@ menu_show.insert(INSERT, """ _____________________________________________\n
 \n
  3r-Clean Java Deployment Cached Data.\n
 \n
+ 3y-Clean Huawei Mobile Hisuite Drag 'n' Drop Temporary Data.\n
+\n
  0-Close this tool\n
 \n
 """)
@@ -454,7 +469,7 @@ menu_show.configure(state=DISABLED)
 get_usr_input = Combobox(root, width=59)
 get_usr_input.place(x=10 ,y=409)
 # Defining the values of the combobox used to get input from the user.
-get_usr_input['values']= (1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0b", "0x", "0f", "0k", "0l", "0n", "0m", "0d", "0p", "1f", "1x", "2x", "1o", "1p", "1q", "2f", "2d", "3m", "3w", "2c", "2k", "0v", "0e", "0g", "0t", "0z", "0r", "3r", 0)
+get_usr_input['values']= (1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0b", "0x", "0f", "0k", "0l", "0n", "0m", "0d", "0p", "1f", "1x", "2x", "1o", "1p", "1q", "2f", "2d", "3m", "3w", "2c", "2k", "0v", "0e", "0g", "0t", "0z", "0r", "3r", "3y", 0)
 # Defining the button used to commit selection and GO.
 go_commit = Button(root, text="Execute", command=exec_confirm)
 go_commit.place(x=520 ,y=405)
