@@ -58,6 +58,15 @@ I have actually canceled it's release due to compiling problems, but don't worry
 ## Copyrights <br/>
 The icon of the program, and the file **icon0.ico** is just a modified icon image that is originally owned by the **Numix Icon pack** author
 <br/>
+## Version 1.32 of Temp_Cleaner GUI <br/>
+In this version you no longer need to recompile the program to resolve path issues, all what you will have to do is just creating the environment variable that redirectes to the correct path of the operation (e.g. when trying to resolve issues with **RAMMap.exe** by **Sysinternals**, all what you have to do is just creating a new environment variable or overwriting an existing environment variable which contains the **RAMMap.exe** full path) <br/>
+**Environment variables needed by the program :** <br/>
+`rammappath` - It's value must be the full path of the program **RAMMap.exe** (incl. it's name too) (e.g. C:\Users\Insert\Desktop\RAMMap\RAMMap.exe) <br/>
+`winxpepath` - It's value must be the full path of where the **WinXPE** program is installed in (excl. it's name) (e.g. D:\WinXPE) <br/>
+`adwclrpath` - When a custom path is defined for the program **ADWCleaner** to store it's data in, You will have to specify it in the value of this variable <br/>
+**Please keep in mind the variable `adwclrpath` is optional, and the program will function properly without it.** <br/>
+`cdpccpath` - When the **ConnectedDevicesPlatform** cache cleaner doesn't function properly, simply create this variable with the name of the folder inside of the folder `%localappdata%\ConnectedDevicesPlatform`, it can be a random numbers or words. <br/>
+<br/>
 ## Download an already compiled version <br/>
 If recompiling the program is hard for you, feel free to download the executable of the program from [here](https://drive.google.com/file/d/10XCWXAyhNL5lygi5qeCEOQJEwzXAibfQ/view?usp=sharing) <br/>
 **Please note that this version is only available for 64-bit based PCs** <br/>
