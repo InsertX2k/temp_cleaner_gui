@@ -75,4 +75,8 @@ If installing a portable version seems to be hard for you, then I strongly recom
 If you want to download an already compiled version of **Temp_Cleaner GUI v1.32** for **32-bit based PCs**, then this is your lucky day! <br/>
 You can get it by clicking [here](https://drive.google.com/file/d/1TPJcLnxAGz-yo5NFUwcRND8PzA9Oyfp4/view?usp=sharing) <br/>
 <br/>
+## Download an edition for older OSes (Windows 7) (32-bit and 64-bit editions) <br/>
+You can download it by clicking here (Currently unavailable) <br/>
+I am currently working on a new compile of this project so that it would function properly on older OSes (Windows 7) so don't worry, as I will be publishing it here once I am done. <br/>
+<br/>
 -Insert
