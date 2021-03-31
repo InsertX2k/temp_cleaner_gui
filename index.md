@@ -71,4 +71,12 @@ In this version you no longer need to recompile the program to resolve path issu
 If installing a portable version seems to be hard for you, then I strongly recommend you to use the version compiled with an installer, you can get it by clicking [here](https://drive.google.com/file/d/1z_avElSRiph1CLKT4LLU02H8f_xMa92a/view?usp=sharing) <br/>
 **Please note that this version is only available for 64-bit based PCs** <br/>
 <br/>
+## Download an already compiled version with installer, but for 32-bit based PCs <br/>
+If you want to download an already compiled version of **Temp_Cleaner GUI v1.32** for **32-bit based PCs**, then this is your lucky day! <br/>
+You can get it by clicking [here](https://drive.google.com/file/d/1TPJcLnxAGz-yo5NFUwcRND8PzA9Oyfp4/view?usp=sharing) <br/>
+<br/>
+## Download an edition for older OSes (Windows 7) (32-bit and 64-bit editions) <br/>
+You can download it by clicking here (Currently unavailable) <br/>
+I am currently working on a new compile of this project so that it would function properly on older OSes (Windows 7) so don't worry, as I will be publishing it here once I am done. <br/>
+<br/>
 -Insert
