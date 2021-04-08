@@ -90,9 +90,10 @@ If you would consider replacing it with a new file, Feel free to do, I won't pre
 **File extension :** it must be a png file (Portable Network Picture or whatever is it called) <br/>
 **Bit Depth :** 32 (Don't go lower than this, or even higher than this) <br/>
 <br/>
-## Download an already compiled version with installer (Version 1.32 only) <br/>
-If installing a portable version seems to be hard for you, then I strongly recommend you to use the version compiled with an installer, you can get it by clicking [here](https://drive.google.com/file/d/1z_avElSRiph1CLKT4LLU02H8f_xMa92a/view?usp=sharing) <br/>
-**Please note that this version is only available for 64-bit based PCs, and this doesn't port the version 1.52, it just ports the version 1.32** <br/>
+## Download an already compiled version with installer (Only Windows 10) (64-bit Only) <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 10 (Any version) 64-bit edition only, Simply click [here](https://drive.google.com/file/d/1yolD8q6-GZzO3WPWlewmhEvE9HAZV0F7/view?usp=sharing) <br/>
+**This is a download link to the latest version of the program, v1.52 Update 2 for Windows 10 64-bit** <br/>
+If you can't download it for any reason, feel free to create an issue, and I must be trying my best to resolve your problem. <br/>
 <br/>
 ## Download an already compiled version with installer, but for 32-bit based PCs (Version 1.32 only) <br/>
 If you want to download an already compiled version of **Temp_Cleaner GUI v1.32** for **32-bit based PCs**, then this is your lucky day! <br/>
