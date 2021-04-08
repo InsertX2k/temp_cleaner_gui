@@ -108,8 +108,4 @@ If you just want to download an already compiled version alongwith an installer 
 ## Download an already compiled version with installer, but for Windows 7 SP1 32-bit <br/>
 If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 7 Service Pack 1 32-bit, Simply click **here** (Currently unavailable)
 <br/>
-**Please note** : This is only the download link for the version 1.32 of **The Temp_Cleaner GUI Project**, which means it is outdated, Please come here later, when the compiled release of version 1.52 update 2 is published if you want to download it. <br/>
-**Download a 32-bit compatible version of Temp_Cleaner GUI for Windows 7** - Click here (Currently Unavailable) <br/>
-I will be working on a 32-bit compile of this program, this shouldn't take so long... <br/>
-<br/>
 -Insert
