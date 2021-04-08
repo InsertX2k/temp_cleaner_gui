@@ -34,8 +34,9 @@ from tkinter import ttk
 import os
 root = Tk()
 root.title("The Temp_Cleaner GUI Project (v1.52)")
-root.geometry('640x480')
+root.geometry('1202x600')
 root.iconbitmap("icon0.ico")
+root.minsize(1202,600)
 # Configuring the scrollbar to make it available for the main program's window.
 # Create a main frame.
 main_frame = Frame(root)
@@ -55,8 +56,9 @@ show_frame = Frame(main_canvas)
 main_canvas.create_window((0,0), window=show_frame, anchor="nw")
 
 # Defining some informative labels inside of the Temp_Cleaner GUI's Window.
-lbl0 = Label(show_frame, text="Welcome to Temp_Cleaner GUI, the renewed version!", font=("Arial", 19))
-lbl0.grid(column=0, row=1, sticky='w')
+banner = PhotoImage(file="banner.png")
+banner_show = Label(show_frame, image=banner, width=1200, height=300)
+banner_show.grid(column=0, row=1, sticky='w')
 
 # Defining the function used to show the user the about window of the program.
 def show_about_window():
@@ -595,8 +597,8 @@ destroy_activity_after_done_btn.grid(column=0, row=66, sticky='w')
 about_window_btn = Button(show_frame, text="About", command=show_about_window)
 about_window_btn.grid(column=0, row=67, sticky='w')
 # Defining the execute button.
-exec_btn = Button(show_frame, text="Execute", command=execute_theprogram)
-exec_btn.place(x=150 ,y=1658)
+exec_btn = Button(show_frame, text="Execute All Selected Commands", command=execute_theprogram)
+exec_btn.place(x=300 ,y=1929)
 
 # Calling the mainloop of the Tkinter window root.
 root.mainloop()
