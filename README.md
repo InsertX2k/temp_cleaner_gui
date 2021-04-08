@@ -10,7 +10,7 @@ A free (and of course an **Open-Source**) alternative to all Temp Cleaning Softw
 * Notepad++ or Visual Studio Code <br/>
 **If Python knowledge doesn't exist**, don't worry, as I must be trying to explain to you how do you modify it by yourself! <br/>
 ## Inside of the program <br/>
-![A screenshot of the inside of the program Temp_Cleaner GUI](https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/main/.readme.files/the_temp_cleaner_gui_project_screenshot_with_renewed_gui.jpg) <br/>
+![A screenshot of the inside of the program Temp_Cleaner GUI](https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/main/.readme.files/temp_cleaner_gui_project_v1.52_update2_default_banner_ss.jpg) <br/>
 <br/>
 ## Recompiling guide <br/>
 This program usually comes as an executable ONLY for 64-bit based PCs, but there is a problem ONLY if your PC is a 32-bit one, but don't worry, You don't have to open an issue, all what you have to do is just following this guide step by step so you can recompile a 32-bit version of this program. <br/>
@@ -75,6 +75,15 @@ In this version you no longer need to recompile the program to resolve path issu
 `cdpccpath` - When the **ConnectedDevicesPlatform** cache cleaner doesn't function properly, simply create this variable with the name of the folder inside of the folder `%localappdata%\ConnectedDevicesPlatform`, it can be a random numbers or words. <br/>
 **Please keep in mind that I no longer support this version**, Consider downloading **v1.52** if you want to get support.
 <br/>
+## Version 1.52 Update 2 : <br/>
+In this update of the project **Temp_Cleaner GUI** I just have replaced the word that says `Welcome to The Temp_Cleaner GUI Project, the renewed version` or whatever it was, with an awesome and a customizable banner, Which allows for better customization (And of course, without any programming knowledge) <br/>
+<br/>
+## How to change the banner in Update 2? : <br/>
+The best feature of Update 2 in Version 1.52 of **Temp_Cleaner GUI**, is that it allows for a better customization for the banner image, if you really want to change the banner image of the program, please first install it on your computer, then go to the path where you installed it in, then go to the file `banner.png` and make the changes you wish to it. <br/>
+If you would consider replacing it with a new file, Feel free to do, I won't prevent you so, but before you go, please keep in mind the new picture must be with the *following properties :* <br/>
+**Resolution :** 1200x300 (Don't go higher than this, or even lower than this) <br/>
+**File extension :** it must be a png file (Portable Network Picture or whatever is it called) <br/>
+**Bit Depth :** 32 (Don't go lower than this, or even higher than this) <br/>
 <br/>
 ## Download an already compiled version with installer (Version 1.32 only) <br/>
 If installing a portable version seems to be hard for you, then I strongly recommend you to use the version compiled with an installer, you can get it by clicking [here](https://drive.google.com/file/d/1z_avElSRiph1CLKT4LLU02H8f_xMa92a/view?usp=sharing) <br/>
@@ -89,7 +98,7 @@ You can download it by clicking [here](https://drive.google.com/file/d/1NufB2brp
 There you go with the link, I can not guarantee it will even work on your computer, it worked for me, but however that doesn't mean it will work for you, as it requires at least a Computer with Windows 7 Service Pack 1 with the latest Windows Updates (basically the IE11 update), and of course **that is 64-bit compatible.** <br/>
 Regardless of everything, feel free to try it, as you are losing nothing if it didn't work. <br/>
 <br/>
-**Please note** : This is only the download link for the version 1.32 of **The Temp_Cleaner GUI Project**, which means it is outdated, Please come here later, when the compiled release of version 1.52 is published if you want to download it. <br/>
+**Please note** : This is only the download link for the version 1.32 of **The Temp_Cleaner GUI Project**, which means it is outdated, Please come here later, when the compiled release of version 1.52 update 2 is published if you want to download it. <br/>
 **Download a 32-bit compatible version of Temp_Cleaner GUI for Windows 7** - Click here (Currently Unavailable) <br/>
 I will be working on a 32-bit compile of this program, this shouldn't take so long... <br/>
 <br/>
