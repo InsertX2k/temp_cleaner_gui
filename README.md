@@ -101,10 +101,12 @@ If you just want to download an already compiled version alongwith an installer 
 If you are running **Windows 10 64-bit** and thinking to download this, just don't, and download the **64-bit Only** version for better performance. <br/>
 If you can't download it for any reason, feel free to create an issue, and I must be trying my best to resolve your problem. <br/>
 <br/>
-## Download an edition for older OSes (Windows 7) (64-bit ONLY!) (Version 1.32 only) <br/>
-You can download it by clicking [here](https://drive.google.com/file/d/1NufB2brpUdX-Bg0CdGuhInThyIV71t0e/view?usp=sharing) <br/>
-There you go with the link, I can not guarantee it will even work on your computer, it worked for me, but however that doesn't mean it will work for you, as it requires at least a Computer with Windows 7 Service Pack 1 with the latest Windows Updates (basically the IE11 update), and of course **that is 64-bit compatible.** <br/>
-Regardless of everything, feel free to try it, as you are losing nothing if it didn't work. <br/>
+## Download an already compiled version with installer, but for Windows 7 SP1 64-bit <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 7 Service Pack 1 64-bit, Simply click [here](https://drive.google.com/file/d/1Iy9pSwjc7AJP1DvyiG4GIo22tSb9_63V/view?usp=sharing) <br/>
+**This is a download link to the latest version of the program, v1.52 Update 2 for Windows 7 Service Pack 1 64-bit** <br/>
+<br/>
+## Download an already compiled version with installer, but for Windows 7 SP1 32-bit <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 7 Service Pack 1 32-bit, Simply click **here** (Currently unavailable)
 <br/>
 **Please note** : This is only the download link for the version 1.32 of **The Temp_Cleaner GUI Project**, which means it is outdated, Please come here later, when the compiled release of version 1.52 update 2 is published if you want to download it. <br/>
 **Download a 32-bit compatible version of Temp_Cleaner GUI for Windows 7** - Click here (Currently Unavailable) <br/>
