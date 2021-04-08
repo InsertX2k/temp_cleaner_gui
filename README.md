@@ -95,9 +95,11 @@ If you just want to download an already compiled version alongwith an installer 
 **This is a download link to the latest version of the program, v1.52 Update 2 for Windows 10 64-bit** <br/>
 If you can't download it for any reason, feel free to create an issue, and I must be trying my best to resolve your problem. <br/>
 <br/>
-## Download an already compiled version with installer, but for 32-bit based PCs (Version 1.32 only) <br/>
-If you want to download an already compiled version of **Temp_Cleaner GUI v1.32** for **32-bit based PCs**, then this is your lucky day! <br/>
-You can get it by clicking [here](https://drive.google.com/file/d/1TPJcLnxAGz-yo5NFUwcRND8PzA9Oyfp4/view?usp=sharing) <br/>
+## Download an already compiled version with installer, but for Windows 10 32-bit <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program),  and if you are running Windows 10 (Any version) 32-bit and 64-bit, Simply click [here](https://drive.google.com/file/d/1sYH5_kAfnl-DlGTm6-ilJd-J3QpR6Ni6/view?usp=sharing) <br/>
+**This is a download link to the latest version of the program, v1.52 Update 2 for Windows 10 32-bit and 64-bit** <br/>
+If you are running **Windows 10 64-bit** and thinking to download this, just don't, and download the **64-bit Only** version for better performance. <br/>
+If you can't download it for any reason, feel free to create an issue, and I must be trying my best to resolve your problem. <br/>
 <br/>
 ## Download an edition for older OSes (Windows 7) (64-bit ONLY!) (Version 1.32 only) <br/>
 You can download it by clicking [here](https://drive.google.com/file/d/1NufB2brpUdX-Bg0CdGuhInThyIV71t0e/view?usp=sharing) <br/>
