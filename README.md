@@ -1,5 +1,10 @@
 # Temp_Cleaner GUI Project
 A free (and of course an **Open-Source**) alternative to all Temp Cleaning Software available for all Windows Versions that can be expanded by you!<br/>
+<br/>
+## Download a compiled version : <br/>
+OK, I know you won't be even trying to recompile the program, exactly like most people on GitHub, However, If you are, feel free to continue reading, if you just want to download a compiled version of the program, simply scroll down until the end, you should find some download links for compiled versions with installers for this program. <br/>
+<br/>
+**Yes, I used Inno setup for the installer, thanks for the creator/developer of Inno setup installers.** <br/>
 ## Requirements : <br/>
 * A little knowledge in Python (Specially the if statements usage) <br/>
 * The Python module **WINTCMD** <br/>
