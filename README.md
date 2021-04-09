@@ -108,4 +108,8 @@ If you just want to download an already compiled version alongwith an installer 
 ## Download an already compiled version with installer, but for Windows 7 SP1 32-bit <br/>
 If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 7 Service Pack 1 32-bit, Simply click **here** (Currently unavailable)
 <br/>
+## Additional Downloadable banners for **The Temp_Cleaner GUI Project v1.52 Update 2** <br/>
+If you feel bored of the default banner, and you don't have any suggestions for a new cool banner, or you even don't know how to create a new one for yourself, simply click [here](https://github.com/InsertX2k/temp_cleaner_gui/tree/main/additional-downloadable-banners), for some awesome additional downloadable banners for the program! <br/>
+**Please keep in mind that it also includes the installation guide, simply in the README.md** <br/>
+<br/>
 -Insert
