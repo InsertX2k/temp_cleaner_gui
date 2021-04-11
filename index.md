@@ -8,6 +8,7 @@ OK, I know you won't be even trying to recompile the program, exactly like most 
 ## Requirements : <br/>
 * A little knowledge in Python (Specially the if statements usage) <br/>
 * The Python module **WINTCMD** <br/>
+* The Python module **PIL** or **Python Pillow** <br/>
 * A Windows 10 PC <br/>
 * A working human brain <br/>
 * Pyinstaller or auto-py-to-exe (this one is recommended) <br/>
@@ -90,25 +91,33 @@ If you would consider replacing it with a new file, Feel free to do, I won't pre
 **File extension :** it must be a png file (Portable Network Picture or whatever is it called) <br/>
 **Bit Depth :** 32 (Don't go lower than this, or even higher than this) <br/>
 <br/>
+## Update 3 to v1.52, What's new? <br/>
+In this update I have made some changes to the style & apperance of the most used UI buttons so they would look a way better than they were before. <br/>
+<br/>
+**Take a quick look at this :** <br/>
+![Highlighting the biggest changes/the most important changes in Update 3 to v1.52](https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/main/.readme.files/temp_cleaner_gui_project_new_buttons_ui_style_update3_inside_screenshot_file.jpg) 
+<br/>
+**Looks beautiful?, right?**, You can right now access this new update if you recompiled the program or you downloaded an already compiled version with installer from the links below (Coming soon). <br/>
+<br/>
 ## Download an already compiled version with installer (Only Windows 10) (64-bit Only) <br/>
-If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 10 (Any version) 64-bit edition only, Simply click [here](https://drive.google.com/file/d/1yolD8q6-GZzO3WPWlewmhEvE9HAZV0F7/view?usp=sharing) <br/>
-**This is a download link to the latest version of the program, v1.52 Update 2 for Windows 10 64-bit** <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 10 (Any version) 64-bit edition only, Simply click [here](https://drive.google.com/file/d/12lD0pStxm7GXtP-obPzw59wAYNGgV3b9/view?usp=sharing) <br/>
+**This is a download link to the latest version of the program, v1.52 Update 3 for Windows 10 64-bit** <br/>
 If you can't download it for any reason, feel free to create an issue, and I must be trying my best to resolve your problem. <br/>
 <br/>
 ## Download an already compiled version with installer, but for Windows 10 32-bit <br/>
-If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program),  and if you are running Windows 10 (Any version) 32-bit and 64-bit, Simply click [here](https://drive.google.com/file/d/1sYH5_kAfnl-DlGTm6-ilJd-J3QpR6Ni6/view?usp=sharing) <br/>
-**This is a download link to the latest version of the program, v1.52 Update 2 for Windows 10 32-bit and 64-bit** <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program),  and if you are running Windows 10 (Any version) 32-bit and 64-bit, Simply click [here](https://drive.google.com/file/d/1mhumnsDNnhZgj5vdfJNa_ACr-hHe4zRZ/view?usp=sharing) <br/>
+**This is a download link to the latest version of the program, v1.52 Update 3 for Windows 10 32-bit and 64-bit** <br/>
 If you are running **Windows 10 64-bit** and thinking to download this, just don't, and download the **64-bit Only** version for better performance. <br/>
 If you can't download it for any reason, feel free to create an issue, and I must be trying my best to resolve your problem. <br/>
 <br/>
 ## Download an already compiled version with installer, but for Windows 7 SP1 64-bit <br/>
-If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 7 Service Pack 1 64-bit, Simply click [here](https://drive.google.com/file/d/1Iy9pSwjc7AJP1DvyiG4GIo22tSb9_63V/view?usp=sharing) <br/>
-**This is a download link to the latest version of the program, v1.52 Update 2 for Windows 7 Service Pack 1 64-bit** <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 7 Service Pack 1 64-bit, Simply click [here](https://drive.google.com/file/d/1j8Q1Cy1OOoOd3usfxWs0MGp9t9ryB3X7/view?usp=sharing) <br/>
+**This is a download link to the latest version of the program, v1.52 Update 3 for Windows 7 Service Pack 1 64-bit** <br/>
 <br/>
 ## Download an already compiled version with installer, but for Windows 7 SP1 32-bit <br/>
 If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 7 Service Pack 1 32-bit, Simply click **here** (Currently unavailable)
 <br/>
-## Additional Downloadable banners for **The Temp_Cleaner GUI Project v1.52 Update 2** <br/>
+## Additional Downloadable banners for **The Temp_Cleaner GUI Project v1.52 Update 2 & 3** <br/>
 If you feel bored of the default banner, and you don't have any suggestions for a new cool banner, or you even don't know how to create a new one for yourself, simply click [here](https://github.com/InsertX2k/temp_cleaner_gui/tree/main/additional-downloadable-banners), for some awesome additional downloadable banners for the program! <br/>
 **Please keep in mind that it also includes the installation guide, simply in the README.md** <br/>
 <br/>
