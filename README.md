@@ -100,8 +100,8 @@ In this update I have made some changes to the style & apperance of the most use
 **Looks beautiful?, right?**, You can right now access this new update if you recompiled the program or you downloaded an already compiled version with installer from the links below (Coming soon). <br/>
 <br/>
 ## Download an already compiled version with installer (Only Windows 10) (64-bit Only) <br/>
-If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 10 (Any version) 64-bit edition only, Simply click [here](https://drive.google.com/file/d/1yolD8q6-GZzO3WPWlewmhEvE9HAZV0F7/view?usp=sharing) <br/>
-**This is a download link to an older version of the program, v1.52 Update 2 for Windows 10 64-bit** <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 10 (Any version) 64-bit edition only, Simply click [here](https://drive.google.com/file/d/12lD0pStxm7GXtP-obPzw59wAYNGgV3b9/view?usp=sharing) <br/>
+**This is a download link to the latest version of the program, v1.52 Update 3 for Windows 10 64-bit** <br/>
 If you can't download it for any reason, feel free to create an issue, and I must be trying my best to resolve your problem. <br/>
 <br/>
 ## Download an already compiled version with installer, but for Windows 10 32-bit <br/>
