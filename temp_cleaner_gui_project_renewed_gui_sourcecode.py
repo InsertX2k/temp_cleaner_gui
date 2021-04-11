@@ -32,6 +32,8 @@ import WINTCMD
 from tkinter import messagebox
 from tkinter import ttk
 import os
+from PIL import Image, ImageTk
+import time
 root = Tk()
 root.title("The Temp_Cleaner GUI Project (v1.52)")
 root.geometry('1202x600')
@@ -64,6 +66,7 @@ banner_show.grid(column=0, row=1, sticky='w')
 def show_about_window():
     messagebox.showinfo("About The Temp_Cleaner GUI Project (v1.52)","""The Temp_Cleaner GUI Project by Insertx2k Dev\n
 Version 1.52
+Update 3 (Renewed Graphical Buttons Edition)
 Written in Python by Insertx2k Dev
 Support Twitter : @insertplayztw
 Support Forum URL : https://creative-development.wixsite.com/cwofficial/forum
@@ -80,6 +83,10 @@ Better UI GitHub page : https://insertx2k.github.io/temp_cleaner_gui
 
 # Defining the function to execute the following selected commands : 
 def execute_theprogram():
+    # Defining the executing image to be the image of the button using Python pillow.
+    pic_file_executing_image0 = Image.open("executing_icon_for_btns.png")
+    picture_output_executing_execute_btn = ImageTk.PhotoImage(pic_file_executing_image0)
+    exec_btn.configure(image=picture_output_executing_execute_btn)
     selection = var0.get()
     if selection == '1':
         WINTCMD.term('rmdir /s /q "%systemdrive%\\$Recycle.bin"')
@@ -394,7 +401,10 @@ def execute_theprogram():
     if selection66 == '1':
         messagebox.showinfo("Close when done", "All pending operations has been successfully completed!\nPress the OK button to close the program.")
         root.destroy()
-
+    # Sleeping a bit for longer (or equal) to 5 seconds.
+    time.sleep(1)
+    # Ok, let's revert everything back to what it was before.
+    exec_btn.configure(text="", image=picture_output, command=execute_theprogram)
 # Defining a sample get var functionaking a new checkbox.
 # Defining the ON-OFF Like variable
 var0 = StringVar()
@@ -593,12 +603,20 @@ clr_huawei_hisuite_dnd_temp_btn = Checkbutton(show_frame, text="Clean Huawei HiS
 clr_huawei_hisuite_dnd_temp_btn.grid(column=0, row=65, sticky='w')
 destroy_activity_after_done_btn = Checkbutton(show_frame, text="Do you want to close this program when it's done with cleaning up temp?", variable=var64, onvalue="1", offvalue="0", command=None)
 destroy_activity_after_done_btn.grid(column=0, row=66, sticky='w')
+# Defining the source of the image of the about button.
+pic_file_about_btn = Image.open("about_btn_noclick.png")
+picture_output_about_btn = ImageTk.PhotoImage(pic_file_about_btn)
 # Defining the about button.
-about_window_btn = Button(show_frame, text="About", command=show_about_window)
+about_window_btn = Button(show_frame, width=200, height=50, text="", image=picture_output_about_btn, command=show_about_window)
 about_window_btn.grid(column=0, row=67, sticky='w')
+# Defining the source of the image of the execute button.
+pic_file = Image.open("execute_btn_noclick.png")
+picture_output = ImageTk.PhotoImage(pic_file)
 # Defining the execute button.
-exec_btn = Button(show_frame, text="Execute All Selected Commands", command=execute_theprogram)
+exec_btn = Button(show_frame, width=200 ,height=50, text="", image=picture_output, command=execute_theprogram)
 exec_btn.place(x=300 ,y=1929)
+space = Label(show_frame, text="")
+space.grid(column=0, row=68, sticky='w')
 
 # Calling the mainloop of the Tkinter window root.
 root.mainloop()
