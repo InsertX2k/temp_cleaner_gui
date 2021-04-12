@@ -74,7 +74,7 @@ and then choose all of the following configurations for the program : <br/>
 * The icon file (icon0.ico) must be set as the program icon <br/>
 
 
-* The files **icon0.ico** and the source code of the program (that **.py** file you've been editing) and the file **WINTCMD.py** must be added to the integrate files option, and BE SURE to keep their extraction directory as in the current directory (Simply don't modify anything after you add those files and everything is gonna be fine) <br/>
+* The files **icon0.ico** and the source code of the program (that **.py** file you've been editing) and the file **WINTCMD.py** must be added to the integrate files option, and BE SURE to keep their extraction directory as in the current directory, also don't forget to integrate all files in the folder `sourcecode.files` into the exe as they are needed to make the program function. <br/>
 
 
 * The program must ask for UAC Admin privileges, Which means you will of course have to enable the option UAC-Access or something similar to it <br/>
@@ -87,14 +87,20 @@ If a GUI seems hard for you to use, then type the following command into a **Com
 
 
 ```
-pyinstaller --noconfirm --onedir --windowed --icon "path\to\program\temp_cleaner_gui\icon0.ico" --name "temp-cleaner-v1.1-gui-foss" --clean --uac-admin --add-data "path\to\program\temp_cleaner_gui\icon0.ico;." --add-data "path\to\program\temp_cleaner_gui\temp_cleaner_gui_console0.py;." --add-data "path\to\program\temp_cleaner_gui\WINTCMD.py;."  "path\to\program\temp_cleaner_gui\temp_cleaner_gui_console0.py"
+pyinstaller --noconfirm --onedir --windowed --icon "/path/to/sourcecode.files/icon0.ico" --name "temp_cleaner_gui_project_v1.52_update3_[winosname]_[archname]_main" --uac-admin --add-data "/path/to/sourcecode.files/about_btn_noclick.png;." --add-data "/path/to/sourcecode.files/banner.png;." --add-data "/path/to/sourcecode.files/done_for_execute_btn_wait5.png;." --add-data "/path/to/sourcecode.files/execute_btn_noclick.png;." --add-data "/path/to/sourcecode.files/executing_icon_for_btns.png;." --add-data "/path/to/sourcecode.files/icon0.ico;." --add-data "/path/to/sourcecode.files/nul';." --add-data "/path/to/sourcecode.files/temp_cleaner_gui_project_renewed_gui_sourcecode.py;." --add-data "/path/to/sourcecode.files/WINTCMD.py;."  "/path/to/sourcecode.files/temp_cleaner_gui_project_renewed_gui_sourcecode.py"
 ```
 
 
 <br/>
 
 
-And of course, do not forget to replace ` path\to\program\temp_cleaner_gui\ ` with the correct path of where did you store the program Temp_Cleaner GUI in  <br/>
+And of course, do not forget to replace ` /path/to/sourcecode.files ` with the correct path of where did you store the files you downloaded from the folder `sourcecode.files` in this branch. <br/>
+
+Also, don't forget to replace `[winosname]` with the name of the operating system this version of program is capable of running on, (e.g. `win7sp1`, `win10`, `win8`, `win81`, `winxp`). <br/>
+
+Don't forget too to replace `[archname]` with the name of the architecture this program will be capable of running on (if 32-bit, write `x86`, if 64-bit, write `win64`). <br/>
+
+If you find this too complicated, consider reading [this guide on how to compile py to exe files using `pyinstaller`](https://datatofish.com/executable-pyinstaller/) (***Not sponsored***) <br/>
 
 
 <br/>
@@ -112,7 +118,7 @@ All what you will have to do is just downloading the file that says the ``recomp
 <br/>
 
 
-**Please keep in mind this recompiling guide doesn't work for the version 1.53, and I won't be doing a new recompiling guide, feel free to read the source code so you can learn how do you add new features to the program.**
+**Please keep in mind this recompiling guide doesn't work for the version 1.52 (Updates 2 and 3), and I won't be doing a new recompiling guide, feel free to read the source code so you can learn how do you add new features to the program.**
 
 
 <br/>
