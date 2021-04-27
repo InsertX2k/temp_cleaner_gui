@@ -241,8 +241,15 @@ In this update I have made some changes to the style & apperance of the most use
 <br/>
 
 
-**Looks beautiful?, right?**, You can right now access this new update if you recompiled the program or you downloaded an already compiled version with installer from the links below (Coming soon). <br/>
+**Looks beautiful?, right?**, You can right now access this new update if you recompiled the program or you downloaded an already compiled version with installer from the links below. <br/>
 
+
+<br/>
+
+
+## Update 4 to v1.52, What's new? <br/>
+
+In this update, I had to fix these annoying UI bugs that caused the checkboxes to stay in 'disabled' state until you click on it, This update is really worth it, *as it helps making this program easier to use*.
 
 <br/>
 
@@ -250,10 +257,10 @@ In this update I have made some changes to the style & apperance of the most use
 ## Download an already compiled version with installer (Only Windows 10) (64-bit Only) <br/>
 
 
-If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 10 (Any version) 64-bit edition only, Simply click [here](https://drive.google.com/file/d/12lD0pStxm7GXtP-obPzw59wAYNGgV3b9/view?usp=sharing) <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 10 (Any version) 64-bit edition only, Simply click [here](https://drive.google.com/file/d/125jSf37gaYnWZCrXe8M5pJwWC7xffwyp/view?usp=sharing) <br/>
 
 
-**This is a download link to the latest version of the program, v1.52 Update 3 for Windows 10 64-bit** <br/>
+**This is a download link to the latest version of the program, v1.52 Update 4 for Windows 10 64-bit** <br/>
 
 
 If you can't download it for any reason, feel free to create an issue, and I must be trying my best to resolve your problem. <br/>
@@ -265,10 +272,10 @@ If you can't download it for any reason, feel free to create an issue, and I mus
 ## Download an already compiled version with installer, but for Windows 10 32-bit <br/>
 
 
-If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program),  and if you are running Windows 10 (Any version) 32-bit and 64-bit, Simply click [here](https://drive.google.com/file/d/1mhumnsDNnhZgj5vdfJNa_ACr-hHe4zRZ/view?usp=sharing) <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program),  and if you are running Windows 10 (Any version) 32-bit and 64-bit, Simply click [here](https://drive.google.com/file/d/1d9Lfd-_wLP_iA55knIK9igoI4eZ0h61S/view?usp=sharing) <br/>
 
 
-**This is a download link to the latest version of the program, v1.52 Update 3 for Windows 10 32-bit and 64-bit** <br/>
+**This is a download link to the latest version of the program, v1.52 Update 4 for Windows 10 32-bit and 64-bit** <br/>
 
 
 If you are running **Windows 10 64-bit** and thinking to download this, just don't, and download the **64-bit Only** version for better performance. <br/>
@@ -283,10 +290,10 @@ If you can't download it for any reason, feel free to create an issue, and I mus
 ## Download an already compiled version with installer, but for Windows 7 SP1 64-bit <br/>
 
 
-If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 7 Service Pack 1 64-bit, Simply click [here](https://drive.google.com/file/d/1j8Q1Cy1OOoOd3usfxWs0MGp9t9ryB3X7/view?usp=sharing) <br/>
+If you just want to download an already compiled version alongwith an installer for it (If you are just too lazy to compile the program), and if you are running Windows 7 Service Pack 1 64-bit, Simply click [here](https://drive.google.com/file/d/1lZg2q5q-QceRdnBxic4FFTMJyGFQdPw-/view?usp=sharing) <br/>
 
 
-**This is a download link to the latest version of the program, v1.52 Update 3 for Windows 7 Service Pack 1 64-bit** <br/>
+**This is a download link to the latest version of the program, v1.52 Update 4 for Windows 7 Service Pack 1 64-bit** <br/>
 
 
 <br/>
