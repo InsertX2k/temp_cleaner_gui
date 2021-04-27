@@ -308,7 +308,7 @@ If you just want to download an already compiled version alongwith an installer 
 <br/>
 
 
-## Additional Downloadable banners for **The Temp_Cleaner GUI Project v1.52 Update 2 & 3** <br/>
+## Additional Downloadable banners for **The Temp_Cleaner GUI Project v1.52 Update 2 & 3 & 4 ** <br/>
 
 
 If you feel bored of the default banner, and you don't have any suggestions for a new cool banner, or you even don't know how to create a new one for yourself, simply click [here](https://github.com/InsertX2k/temp_cleaner_gui/tree/main/additional-downloadable-banners), for some awesome additional downloadable banners for the program! <br/>
