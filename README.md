@@ -249,7 +249,7 @@ In this update I have made some changes to the style & apperance of the most use
 
 ## Update 4 to v1.52, What's new? <br/>
 
-In this update, I had to fix these annoying UI bugs that caused the checkboxes to stay in 'disabled' state until you click on it, This update is really worth it, *as it helps making this program easier to use*.
+In this update, I had to fix these annoying UI bugs that caused the checkboxes to stay in `disabled` state until you click on it, This update is really worth it, *as it helps making this program easier to use*.
 
 <br/>
 
