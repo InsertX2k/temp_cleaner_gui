@@ -1,3 +1,4 @@
+"""
 # The Project Temp_Cleaner GUI by Insertx2k Dev.
 # A simple temporary folders cleaning solution made by Insertx2k Dev under the GNU General Public License
 # That will help you free up a lot of disk space in your computer through erasing all the Temporary folders
@@ -27,6 +28,17 @@
 # 
 # The program Temp_Cleaner GUI was previously Temp_Cleaner and it was using a CUI instead of a GUI. 
 # 
+"""
+
+print()
+print("Greetings from the Temp_Cleaner GUI Project.")
+print("By Insertx2k Dev")
+print("Github : https://github.com/insertx2k/temp_cleaner_gui")
+print("Twitter : https://twitter.com/insertplayztw")
+print()
+
+# Importing all the required 3rd party modules.
+from re import L
 from tkinter import *
 import WINTCMD
 from tkinter import messagebox
@@ -34,8 +46,16 @@ from tkinter import ttk
 import os
 from PIL import Image, ImageTk
 import time
+import configparser
+from tkinter import filedialog
+
+# Defining the function that will get the current values of an configparser values.
+GetConfig = configparser.ConfigParser()
+GetConfig.read('Config.ini')
+
+
 root = Tk()
-root.title("The Temp_Cleaner GUI Project (v1.52)")
+root.title("The Temp_Cleaner GUI Project (v2.0)")
 root.geometry('1202x600')
 root.iconbitmap("icon0.ico")
 root.minsize(1202,600)
@@ -64,19 +84,14 @@ banner_show.grid(column=0, row=1, sticky='w')
 
 # Defining the function used to show the user the about window of the program.
 def show_about_window():
-    messagebox.showinfo("About The Temp_Cleaner GUI Project (v1.52)","""The Temp_Cleaner GUI Project by Insertx2k Dev\n
-Version 1.52
-Update 3 (Renewed Graphical Buttons Edition)
+    messagebox.showinfo("About The Temp_Cleaner GUI Project (v2.0)","""The Temp_Cleaner GUI Project by Insertx2k Dev\n
+Version 2.0
+Update 4 (CfgParser Edition)
 Written in Python by Insertx2k Dev
 Support Twitter : @insertplayztw
 Support Forum URL : https://creative-development.wixsite.com/cwofficial/forum
 \n
-The following version of The Temp_Cleaner GUI Project uses the following environment variables : 
-'rammappath' - used to define the full path of the program RAMMap by Sysinternals (must be entered with the full executable name of the RAMMap tool)
-'cdpccpath' - used to determine the correct location of the ConnectedDevicesPlatform cache folder.
-'adwclrpath' - when a custom path is specified for the program Adware cleaner in its settings page, please create this variable and specify (simply copy and paste) the path you specified for Adware cleaner to store it's data as the variable value
-'winxpepath' - used to retrieve the correct path of where the files of the program WinXPE is stored in (This environment variable is COMPLETELY required for the WinXPE Downloads cleaner to work).
-\n
+In this update of The Temp_Cleaner GUI Project, you will no longer have to use Environment Variables to customize the program as you want, You will just need to go to it's configuration page.
 GitHub page : https://github.com/insertx2k/temp_cleaner_gui
 Better UI GitHub page : https://insertx2k.github.io/temp_cleaner_gui
 """)
@@ -90,19 +105,15 @@ def execute_theprogram():
     selection = var0.get()
     if selection == '1':
         WINTCMD.term('rmdir /s /q "%systemdrive%\\$Recycle.bin"')
-        messagebox.showinfo("Clean Systemdrive Recyclebin folder", "I am done with erasing your Systemdrive Recyclebin folder!")
     selection1 = var1.get()
     if selection1 == '1':
         WINTCMD.term('cd /d %windir%&erase /s /f /q prefetch')
-        messagebox.showinfo("Clean PrefetchW Local data", "I am done with erasing your PrefetchW Local Data!")
     selection2 = var2.get()
     if selection2 == '1':
         WINTCMD.term('cd /d %localappdata%&erase /s /f /q "D3DSCache"')
-        messagebox.showinfo("Clean D3DSCached data", "I am done with erasing all of your D3DSCached data that exists in your Localappdata folder!")
     selection3 = var3.get()
     if selection3 == '1':
         WINTCMD.term('cd /d %windir%&erase /s /f /q "Temp"')
-        messagebox.showinfo("Clean Windir Temporary Folders", "I am done with erasing all of your Windir Temporary Folders content.\nPlease keep in mind that files in use won't be erased.")
     selection4 = var4.get()
     if selection4 == '1':
         WINTCMD.term('cd /d %localappdata%&erase /s /f /q "Temp"')
@@ -110,47 +121,36 @@ def execute_theprogram():
     selection5 = var5.get()
     if selection5 == '1':
         WINTCMD.term('cd /d %localappdata%&cd Google&cd Chrome&cd "User Data"&cd "Default"&erase /s /f /q "GPUCache"&erase /s /f /q Cache&erase /s /f /q "Code Cache"')
-        messagebox.showinfo("Clean Google Chrome Webcached data", "Done cleaning google chrome webcache and Temporary directories and GPUCache and Code Cache data.")
     selection6 = var6.get()
     if selection6 == '1':
         WINTCMD.term('cd /d %localappdata%&cd Google&cd Chrome&cd "User Data"&cd "Default"&del /s /q "Cookies"&del /s /q "Cookies-journal"')
-        messagebox.showinfo("Clean Google Chrome Cookies", "Done cleaning Google Chrome cookies data.")
     selection9 = var7.get()
     if selection9 == '1':
         WINTCMD.term('cd /d "%systemdrive%\\Users\\Default\\AppData\\Local"&erase /s /f /q Temp')
-        messagebox.showinfo("Clean Default User Temporary Data", "Done cleaning Default user temporary data!")
     selection10 = var8.get()
     if selection10 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Microsoft\\Windows"&erase /s /f /q "INetCache"')
-        messagebox.showinfo("Clean IECache", "Done cleaning IE Cache!")
     selection11 = var9.get()
     if selection11 == '1':
         WINTCMD.term('@echo off | clip')
-        messagebox.showinfo("Clean User Clipboard Data", "Done Cleaning user clipboard data.")
     selection12 = var10.get()
     if selection12 == '1':
         WINTCMD.term('cd /d %localappdata%&cd microsoft&cd windows&cd explorer&del /s /q *thumbcache*&cd /d %localappdata%\microsoft\windows\explorer&del /s /q *thumb*')
-        messagebox.showinfo("Clean Windows Explorer Thumbnails", "Done Cleaning Windows Explorer Thumbnails Data.")
     selection13 = var11.get()
     if selection13 == '1':
         WINTCMD.term('cd /d %userprofile%\\AppData\\Roaming&cd Microsoft&cd Windows&erase /s /f /q Recent')
-        messagebox.showinfo("Clean Recent Documents List", "Done Cleaning Recent Documents List!")
     selection14 = var12.get()
     if selection14 == '1':
         WINTCMD.term('cd /d "%userprofile%\\AppData\\Roaming\\discord"&erase /s /f /q "Cache"&erase /s /f /q "Code Cache"&erase /s /f /q "GPUCache"&erase /s /f /q "Local Storage"')
-        messagebox.showinfo("Clean Discord webclient webcache", "Done cleaning Discord webclient cached data!")
     selection15 = var13.get()
     if selection15 == '1':
         WINTCMD.term('cd /d "%userprofile%\\AppData\\Roaming\\GIMP\\2.10"&erase /s /f /q "tmp"')
-        messagebox.showinfo("Clean GIMP's TMPs", "Done cleaning GIMP's TMPS!")
     selection16 = var14.get()
     if selection16 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Steam\\htmlcache"&erase /s /f /q "Cache"&erase /s /f /q "Code Cache"&erase /s /f /q "GPUCache"')
-        messagebox.showinfo("Clean Steam webclient cache data", "Done.")
     selection17 = var15.get()
     if selection17 == '1':
         WINTCMD.term('cd /d "%windir%\\SoftwareDistribution"&del /f /s /q "Download"')
-        messagebox.showinfo("Clean Windows Update Downloads", "Done.")
         reboot_uwp = messagebox.askquestion("Restart Windows Update Service", "After you delete all Downloaded files by the Windows Update Service you should restart the whole service to commit changes you did to it\nWould you like to restart the Windows Update Service?")
         if reboot_uwp == "yes":
             # Importing the module WINTCMD by Insertx2k Dev.
@@ -176,27 +176,21 @@ def execute_theprogram():
     selection18 = var16.get()
     if selection18 == '1':
         WINTCMD.term('cd /d %localappdata%\\Microsoft\\Windows&erase /s /f /q "Caches"')
-        messagebox.showinfo("Clean Windows 10 Cached data", "Done!")
     selection19 = var17.get()
     if selection19 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Microsoft\\Windows"&erase /s /f /q "INetCookies"')
-        messagebox.showinfo("Clean IE Cookies", "Done cleaning IE Cookies!")
     selection20 = var18.get()
     if selection20 == '1':
         WINTCMD.term('cd /d %localappdata%\\Microsoft\\Windows&erase /s /f /q "IECompatCache"&erase /s /f /q "IECompatUaCache"')
-        messagebox.showinfo("Clean Additional IE Cached Data", "Done Cleaning Additional IE Cached data!")
     selection21 = var19.get()
     if selection21 == '1':
         WINTCMD.term('cd /d %localappdata%\\Microsoft\\Windows&erase /s /f /q "IEDownloadHistory"')
-        messagebox.showinfo("Clean IE Downloads History", "Done erasing IE Downloads History")
     selection22 = var20.get()
     if selection22 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Microsoft\\Windows"&erase /s /f /q "ActionCenterCache"')
-        messagebox.showinfo("Clean Windows 10 Action Center/Notifications Center Cache", "Done cleaning Windows 10 Notifications Center/Action Center Cached data!")
     selection23 = var21.get()
     if selection23 == '1':
         WINTCMD.term('cd /d %localappdata%\\Microsoft\\Windows&erase /s /f /q "AppCache"')
-        messagebox.showinfo("Clean Windows Modern Applications Cached Data", "Done cleaning Windows Modern Applications cached data!")
     selection24 = var22.get()
     if selection24 == '1':
         conf1 = messagebox.askquestion("Clean Store-based MS Edge Cached Data", "Cleaning Store-based MS Edge cached data can not be done automatically, which means you are supposed to do that manually, which will make this tool open an explorer (Windows Explorer) window for you showing you the folder where you are supposed to clean MS-Store-Based EDGE Webcache data\nPlease keep in mind that you shouldn't leave the directory opened to you by this tool\nSo do you wish to processed?")
@@ -209,63 +203,55 @@ def execute_theprogram():
     selection25 = var23.get()
     if selection25 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Microsoft\\Windows\\Explorer"&erase /s /f /q "ThumbCacheToDelete"')
-        messagebox.showinfo("Clean Additional Windows Explorer Thumbnails Cache.", "Done!")
     selection26 = var24.get()
     if selection26 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Microsoft\\Edge\\User Data\\Default"&erase /s /f /q "GPUCache"&erase /s /f /q "Cache"&erase /s /f /q "Code Cache"')
-        messagebox.showinfo("Clean Chromium-based MS Edge Webcache", "Done!")
     selection27 = var25.get()
     if selection27 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Microsoft\\Edge\\User Data\\Default"&del /s /q "Cookies"&del /s /q "Cookies-journal"')
-        messagebox.showinfo("Clean Chromium-based MS Edge Cookies", "Done!")
     selection28 = var26.get()
     if selection28 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Roblox"&erase /s /f /q "Downloads"')
-        messagebox.showinfo("Clean ROBLOX Game Downloads", "Done!")
     selection29 = var27.get()
     if selection29 == '1':
         WINTCMD.term('cd /d "%appdata%\\Adobe\\Adobe Photoshop 2020\\Adobe Photoshop 2020 Settings\\web-cache-temp"&erase /s /f /q "GPUCache"&erase /s /f /q "Code Cache"&del /s /f /q "Visited Links"')
-        messagebox.showinfo("Clean Adobe Photoshop 2020 Webcache", "Successfully cleaned GPUCache and Code Cache and Visited Links!")
     selection30 = var28.get()
     if selection30 == '1':
         WINTCMD.term('cd /d "%localappdata%\\VEGAS Pro\\17.0"&erase /s /f /q "File Explorer Thumbnails"&erase /s /f /q "Device Explorer Thumbnails"&del /s /f /q "*.autosave.veg.bak"&del /s /f /q "svfx_Ofx*.log"')
-        messagebox.showinfo("Clean Sony Vegas Pro temp and Logs", "Successfully cleaned File explorer thumbnails and device explorer thumbnails and autosave.veg.bak files and fx log files of Sony Vegas Pro 17")
     selection31 = var29.get()
     if selection31 == '1':
         WINTCMD.term('cd /d "%localappdata%\\McNeel\\Rhinoceros"&erase /s /f /q "temp"')
-        messagebox.showinfo("Clean Rhino3d moduling temp", "Done!")
     selection32 = var30.get()
     if selection32 == '1':
         WINTCMD.term('cd /d "%userprofile%\\AppData\\LocalLow\\Microsoft"&erase /s /f /q /A:S "CryptnetUrlCache"')
-        messagebox.showinfo("Clean Cryptnet URL Cache", "Done!")
     selection33 = var31.get()
     if selection33 == '1':
         WINTCMD.term('cd /d "%localappdata%\\pip"&erase /s /f /q "cache"')
-        messagebox.showinfo("Clean Python PIP Cached data", "Done!")
     selection34 = var32.get()
     if selection34 == '1':
         conf2 = messagebox.askquestion("Empty Windows Workingsets", "Would you really like to run RAMMap by Sysinternals to empty RAM Workingsets?")
         if conf2 == "yes":
-            if os.getenv("rammappath") is not None:
-                WINTCMD.term('""%rammappath%"" -Ew')
+            RAMMAPpath_var = GetConfig['ProgConfig']['RAMMapPath']
+            if RAMMAPpath_var == '$DEFAULT':
+                messagebox.showinfo("Notification", "The path of the RAMMap tool is set to '$DEFAULT', Continuing using the default configured RAMMap path.")
+                WINTCMD.term(r'"%systemdrive%\RAMMap\RAMMap.exe" -Ew')
                 messagebox.showinfo("Empty Windows Workingsets", "RAMMap.exe - Command sent.")
             else:
-                messagebox.showinfo("An ERROR has occured", "The environment variable 'rammappath' doesn't exist either in the current user or the SYSTEM environment variables, Please make sure this environment variable exists and then try again.\nIf you don't know how, please follow the instructions given in this window:\n1-Open Control Panel\n2-Click on System and Security then click on System\n3-At the bottom of the window, you will find a button named 'Environment Variables' click on it\n4-Under the word 'User Variables for username' locate the button 'New' and then click on it\n5-Specify the variable name as 'rammappath' and then in the variable value write the full path of the program RAMMap.exe by Sysinternals (Incl. its exe name) (For an example : C:\\Programs\\RAMMap\\RAMMap.exe).\n6-When you are done, Please press the button OK, and then OK and then click on Apply and OK, then restart this program.")
+                WINTCMD.term(rf'""{RAMMAPpath_var}"\RAMMap.exe" -Ew')
+                messagebox.showinfo("Empty Windows Workingsets", "RAMMap.exe - Command sent.")
         else:
             messagebox.showinfo("Empty Windows Workingsets", "Operation has been canceled.")
     selection35 = var33.get()
     if selection35 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Google\\Chrome\\User Data\\Default"&del /s /q "Extension Cookies"&del /s /q "Extension Cookies-journal"')
-        messagebox.showinfo("Clean GChrome Extension Cookies", "Done cleaning extension cookies data of Gchrome! (Included. Extension cookies-journal)")
     selection36 = var34.get()
     if selection36 == '1':
-        if os.getenv("cdpccpath") is not None:
-            WINTCMD.term('cd /d "%localappdata%\\ConnectedDevicesPlatform"&erase /s /f /q ""%cdpccpath%""')
-            messagebox.showinfo("Clean Windows 10 Activities cache", "Done cleaning Windows activites cache.")
-        else:
-            messagebox.showinfo("Notification", "The custom environemnt variable 'cdpccpath' doesn't exist for custom path specification, Temp_Cleaner GUI will attempt to use the default path, which might not work properly in most cases.")
+        CDPCCPATH_var = GetConfig['ProgConfig']['CDPCCPATH']
+        if CDPCCPATH_var == '$DEFAULT':
+            messagebox.showinfo("Notification", "You didn't specify a custom location for the Windows activites cache cleaner to work on, Continuing using the Default values.")
             WINTCMD.term('cd /d "%localappdata%\\ConnectedDevicesPlatform"&erase /s /f /q "ee2999716b7783e6"')
-            messagebox.showinfo("Clean Windows 10 Activities cache", "Done cleaning Windows activites cache.")
+        else:
+            WINTCMD.term(rf'cd /d "%localappdata%\\ConnectedDevicesPlatform"&erase /s /f /q "{CDPCCPATH_var}"')
     selection37 = var35.get()
     if selection37 == '1':
         conf3 = messagebox.askquestion("Clean icon cache", "Cleaning IconCache.db file can not be done automatically, which means the user is premitted to do that manually, all what you have to do is just deleting the file iconcache.db in the directory we will open to you\nDo you wish to processed?")
@@ -277,93 +263,74 @@ def execute_theprogram():
     selection38 = var36.get()
     if selection38 == '1':
         WINTCMD.term('cd /d "%localappdata%"&erase /s /f /q "Microvirt"')
-        messagebox.showinfo("Clean MEmu Microvirt Logs", "Done!")
     selection39 = var37.get()
     if selection39 == '1':
-        if os.getenv("adwclrpath") is not None:
-            messagebox.showinfo("Notification", "A custom environment variable ('adwclrpath') is specified for the tool Adware cleaner path, the custom path will be used instead of the default path.")
-            WINTCMD.term('cd /d ""%adwclrpath%""&erase /s /f /q "Logs"')
-            messagebox.showinfo("Clean AdwCleaner Logs", "Done!")
-        else:
-            messagebox.showinfo("Notification", "The custom environment variable for the path of the program ADWare cleaner ('adwclrpath') is not specified, the program will continue using the default path.")
+        ADWCLRPATH_var = GetConfig['ProgConfig']['ADWCLRPath']
+        if ADWCLRPATH_var == '$DEFAULT':
+            messagebox.showinfo("Notification", "You didn't specify a custom working location for the AdwareCleaner Cleaner, Continuing using the default path.")
             WINTCMD.term('erase /s /f /q "%systemdrive%\\AdwCleaner\\Logs"')
-            messagebox.showinfo("Adware Cleaner Log files cleared!", "All pending operations has been successfully completed!\nPlease keep in mind this might not function properly due to path differences.")
+        else:
+            WINTCMD.term(rf'erase /s /f /q "{ADWCLRPATH_var}\Logs"')
     selection40 = var38.get()
     if selection40 == '1':
         WINTCMD.term('%systemdrive%&&cd /d \\.\\&erase /s /f /q "PerfLogs"')
-        messagebox.showinfo("Clean Perflogs folder", "Done!")
     selection41 = var39.get()
     if selection41 == '1':
         WINTCMD.term('cd /d "%userprofile%"&rmdir /s /q ".cache"')
-        messagebox.showinfo("Clean .cache folder", "Done!")
     selection42 = var40.get()
     if selection42 == '1':
         WINTCMD.term('cd /d "%localappdata%"&erase /s /f /q "SquirrelTemp"')
-        messagebox.showinfo("Clean Discord SquirrelTemp", "Done!")
     selection43 = var41.get()
     if selection43 == '1':
         WINTCMD.term('cd /d "%userprofile%\\AppData\\LocalLow"&erase /s /f /q "Temp"')
-        messagebox.showinfo("Clean LocalLow Temporary Directory", "Done!")
     selection44 = var42.get()
     if selection44 == '1':
         WINTCMD.term('cd /d "%localappdata%"&erase /s /f /q "ElevatedDiagnostics"')
-        messagebox.showinfo("Clean ElevatedDiagnostics Folder (Only Windows 10)", "Done cleaning the elevated diagnostics folder in your localappdata directory!")
     selection45 = var43.get()
     if selection45 == '1':
         WINTCMD.term('cd /d "%localappdata%\\VMware"&erase /s /f /q "vmware-download*"')
-        messagebox.showinfo("Clean VMware Downloads", "Done!")
     selection46 = var44.get()
     if selection46 == '1':
         WINTCMD.term('cd /d "%userprofile%\\appdata\\roaming\\balena-etcher"&erase /s /f /q "blob_storage"&erase /s /f /q "Code Cache"&erase /s /f /q "GPUCache"&erase /s /f /q "Local Storage"&erase /s /f /q "Session Storage"')
-        messagebox.showinfo("Clean balenaitcher's webcached data", "Successfully erased blob_storage, Code Cache, GPUCache, Local Storage, Session Storage files.")
     selection47 = var45.get()
     if selection47 == '1':
         WINTCMD.term('cd /d "%appdata%"&cd /d "%userprofile%\\AppData\\Roaming"&erase /s /f /q "pyinstaller"')
-        messagebox.showinfo("Clean Pyinstaller cached data", "Done!")
     selection48 = var46.get()
     if selection48 == '1':
         WINTCMD.term('cd /d "%localappdata%"&erase /s /f /q "Jedi"')
-        messagebox.showinfo("Clean Jedi Python Additionals", "Done cleaning Jedi Python Additionals!")
     selection49 = var47.get()
     if selection49 == '1':
         WINTCMD.term('cd /d "%localappdata%"&del /s /q "recently-used.xbel"')
-        messagebox.showinfo("Clean GIMP Recent Documents List", "Successfully erased GIMP Recent Documents List!")
     selection50 = var48.get()
     if selection50 == '1':
         WINTCMD.term('cd /d "%localappdata%"&del /s /q "llftool.*.agreement"')
-        messagebox.showinfo("Delete LLFTOOL agreement confirmation file.", "Now the Low Level Format Tool by HDD Guru does not remember either you accepted its license agreement or no.")
     selection51 = var49.get()
     if selection51 == '1':
         WINTCMD.term('cd /d "%localappdata%"&erase /s /f /q "IdentityNexusIntegration"')
-        messagebox.showinfo("Clean IdentityNexusIntegration folder" ,"Done!")
     selection52 = var50.get()
     if selection52 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Axolot Games"&cd "Scrap Mechanic"&cd "Temp"&erase /s /f /q "WorkshopIcons"')
-        messagebox.showinfo("Clean Scrap Mechanic WorkshopIcons cache", "Done cleaning Scrap Mechanic game Workshop Icons")
     selection53 = var51.get()
     if selection53 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Roblox"&erase /s /f /q "logs"')
-        messagebox.showinfo("Clean ROBLOX Game Logs", "Done cleaning ROBLOX Game Logs!")
     selection54 = var52.get()
     if selection54 == '1':
         WINTCMD.term('cd /d "%userprofile%\\AppData\\Roaming\\Code"&erase /s /f /q "GPUCache"&erase /s /f /q "Code Cache"&erase /s /f /q "CachedData"&erase /s /f /q "Cache"')
-        messagebox.showinfo("Clean VS Code Webcached data", "Done cleaning VS Code Webcached data!")
     selection55 = var53.get()
     if selection55 == '1':
         WINTCMD.term('cd /d "%userprofile%\\AppData\\Roaming\\Code"&del /s /q "Cookies"&del /s /q "Cookies-journal"')
-        messagebox.showinfo("Clean VS Code Cookies data", "Done cleaning VS Code cookies and Cookies-journal data!")
     selection56 = var54.get()
     if selection56 == '1':
         WINTCMD.term('cd /d "%userprofile%\\AppData\\Roaming\\Code"&erase /s /f /q "CachedExtensions"&erase /s /f /q "CachedExtensionVSIXs"')
-        messagebox.showinfo("Clean VS Code Cached Extensions", "Done cleaning VS Code Cached Extensions data")
     selection57 = var55.get()
     if selection57 == '1':
-        if os.getenv("winxpepath") is not None:
-            WINTCMD.term('erase /s /f /q "%winxpepath%\\Temp"')
-            messagebox.showinfo("Clean Win10XPE Temp data", "Successfully deleted all downloaded data by the WinXPE Application!")
-            messagebox.showinfo("Note", "You will need to redownload all downloaded data by the tool for the exporting phase to be done!")
+        WINXPEPATH_var = GetConfig['ProgConfig']['WINXPEPATH']
+        if WINXPEPATH_var == '$NONE':
+            messagebox.showinfo("An ERROR has occured", "You didn't specify the path of the 'WinXPE' program, The cleaner can't continue.")
         else:
-            messagebox.showinfo("An ERROR has occured", "The environment variable 'winxpepath' doesn't exist either in the current user or the SYSTEM environment variables, Please make sure this environment variable exists and then try again.\nIf you don't know how, please follow the instructions given in this window:\n1-Open Control Panel\n2-Click on System and Security then click on System\n3-At the bottom of the window, you will find a button named 'Environment Variables' click on it\n4-Under the word 'User Variables for username' locate the button 'New' and then click on it\n5-Specify the variable name as 'winxpepath' and then in the variable value write the full path of where the WinXPE tool is stored in.\n6-When you are done, Please press the button OK, and then OK and then click on Apply and OK, then restart this program.")
+            WINTCMD.term(rf'erase /s /f /q "{WINXPEPATH_var}\Temp"')
+            messagebox.showinfo("Note", "You will need to redownload all downloaded data by the tool for the exporting phase to be done!")
+            
     selection58 = var56.get()
     if selection58 == '1':
         WINTCMD.term('cd /d "%localappdata%"&erase /s /f /q "ServiceHub"')
@@ -372,39 +339,209 @@ def execute_theprogram():
     selection59 = var57.get()
     if selection59 == '1':
         WINTCMD.term('erase /s /f /q "%localappdata%\\HiSuite\\log"')
-        messagebox.showinfo("Clean HiSuite Log data", "Done cleaning HiSuite Logs data.")
     selection60 = var58.get()
     if selection60 == '1':
         WINTCMD.term('erase /s /f /q "%userprofile%\\AppData\\Roaming\\.minecraft\\webcache"')
-        messagebox.showinfo("Clean Minecraft Webcache data", "Done cleaning Minecraft webcache data!")
     selection61 = var59.get()
     if selection61 == '1':
         WINTCMD.term('cd /d "%localappdata%\\Mozilla\\Firefox\\Profiles"&cd *.default-release&erase /s /f /q "cache2"&erase /s /f /q "jumpListCache"&cd /d "%userprofile%\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles"&cd *.default-release&erase /s /f /q "shader-cache"')
-        messagebox.showinfo("Clean Mozilla Firefox Internet Cache", "Done cleaning Mozilla Firefox internet browser cached data, and jumpListcache and shader cache!")
     selection62 = var60.get()
     if selection62 == '1':
         WINTCMD.term('cd /d "%userprofile%\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles"&cd *.default-release&del /s /q "cookies.sqlite"')
-        messagebox.showinfo("Clean Mozilla Firefox Cookies SQLITE File", "Done cleaning Mozilla Firefox Cookies SQLITE File!")
     selection63 = var61.get()
     if selection63 == '1':
         WINTCMD.term('cd /d "%localappdata%\\VEGAS"&erase /s /f /q "ErrorReport"')
-        messagebox.showinfo("Clean Sony Vegas Pro 17 Error Report data", "Done cleaning Sony Vegas Pro 17 Error Report Data.")
     selection64 = var62.get()
     if selection64 == '1':
         WINTCMD.term('cd /d "%userprofile%\\AppData\\LocalLow\\Sun\\Java\\Deployment"&erase /s /f /q "tmp"')
-        messagebox.showinfo("Clean SunMicroSystems Java Deployment Temp Data", "Done erasing temp data of Sun Micro Systems Java Deployment Software (aka Java Runtime)")
     selection65 = var63.get()
     if selection65 == '1':
         WINTCMD.term('cd /d "%localappdata%\\HiSuite\\userdata"&erase /s /f /q "DropTemp"')
-        messagebox.showinfo("Clean Huawei HiSuite Drag 'n' Drop Temporary Data", "Done erasing temporary data of Huawei HiSuite Drag 'n' Drop Temporary Data.")
     selection66 = var64.get()
     if selection66 == '1':
         messagebox.showinfo("Close when done", "All pending operations has been successfully completed!\nPress the OK button to close the program.")
         root.destroy()
     # Sleeping a bit for longer (or equal) to 5 seconds.
     time.sleep(1)
+    # Now, let's send the user a message telling them that everything had done.
+    messagebox.showinfo("Complete", "All pending operations has been completed!")
     # Ok, let's revert everything back to what it was before.
     exec_btn.configure(text="", image=picture_output, command=execute_theprogram)
+
+# Defining the function that calls the configuration window of this program.
+def StartConfigurationWindow():
+    """
+    This thing here just defines the Configuration window of such software.
+    WARNING : THIS THING HERE IS COMPLETELY EXPERIEMENTAL, SO PLEASE DO NOT MESS WITH IT SO MUCH.
+    """
+    # Defining the function used to destroy the whole activity without saving any changes.
+    def SelfDestroy():
+        ConfigRoot.destroy()
+
+    # Defining the browse for directory function for all browsing folders.
+    def BrowseForDirectory(parent):
+        BrowseForDirectoryWindow = filedialog.askdirectory()
+        FinalDirectory = BrowseForDirectoryWindow
+        parent.delete(0, END)
+        parent.insert(INSERT, FinalDirectory)
+
+    # Defining the browse 1 func.
+    def BrowseOne():
+        BrowseForDirectory(rammappath_input)
+    
+    def BrowseTwo():
+        BrowseForDirectory(adwcleanerwpath_input)
+    
+    def BrowseThree():
+        BrowseForDirectory(winxpeapppath_input)
+    
+    def BrowseFour():
+        BrowseForDirectory(cdpccpath_input)
+
+
+    # Defining the function to retrieve the configuration from the configuration file then outputs it into the textboxes.
+    def RetrieveConfig():
+        """
+        The function used to get the configuration information from the file "Config.ini" in the current program path.
+        Do not try to call this function, it will be automatically called when needed.
+        """
+
+        RetrieveConfig_Init = configparser.ConfigParser()
+        try:
+            RetrieveConfig_Init.read("Config.ini")
+        except:
+            messagebox.showerror("Runtime Exception", "Unable to retrieve the configuration information, this can be due to a hard exception, or a something else, the settings window will close.")
+            ConfigRoot.destroy()
+        
+        try:
+            rammappath_input.insert(INSERT, RetrieveConfig_Init['ProgConfig']['RAMMapPath'])
+            adwcleanerwpath_input.insert(INSERT, RetrieveConfig_Init['ProgConfig']['ADWCLRPath'])
+            winxpeapppath_input.insert(INSERT, RetrieveConfig_Init['ProgConfig']['WINXPEPATH'])
+            cdpccpath_input.insert(INSERT, RetrieveConfig_Init['ProgConfig']['CDPCCPATH'])
+        except:
+            messagebox.showerror("A runtime exception", "Unable to read the configuration file from your computer, please make sure to give this program a permission to read files in your hard disk if blocked by your antivirus software and try again, The settings window will close.")
+            ConfigRoot.destroy()
+
+
+
+    # It is the time to define the function used to save the changes to the configuration file "Config.ini"
+    def SaveConfigurationandQuit():
+        try:
+            ConfigFileSaveProcess = configparser.ConfigParser()
+            ConfigFileSaveProcess.read("Config.ini")
+        except:
+            messagebox.showerror("A runtime exception", "Unable to open the configuration file on your computer, please make sure to give this program enough permissions to do so, and if your antivirus blocks it, please give it access and try again.")
+            ConfigRoot.destroy()
+
+        # Second try.
+        try:
+            ConfigFileSaveProcess['ProgConfig']['RAMMapPath'] = rammappath_input.get()
+            ConfigFileSaveProcess['ProgConfig']['ADWCLRPath'] = adwcleanerwpath_input.get()
+            ConfigFileSaveProcess['ProgConfig']['WINXPEPATH'] = winxpeapppath_input.get()
+            ConfigFileSaveProcess['ProgConfig']['CDPCCPATH'] = cdpccpath_input.get()
+
+            # Right now, I guess it is enough and we should rn write the configuration data to the file "Config.ini".
+            with open("Config.ini", 'w') as ConfigFileProcessor:
+                    ConfigFileSaveProcess.write(ConfigFileProcessor)
+
+            # Defining the window which will tell the user that a reboot is needed to apply the changes.
+            messagebox.showinfo("Saved your changes", "All changes you did has been successfully saved, but for the changes to take effect, you will need to restart Temp_Cleaner GUI.")
+
+            # Okay, enough with that, let's destroy the main loop ok?
+            ConfigRoot.destroy()
+        except:
+            messagebox.showerror("A runtime exception", "Unable to save your changes to the file 'Config.ini', Nothing has changed yet, and this window will not close.")
+
+    # Defining the root constructor.
+    ConfigRoot = Tk()
+    
+    # Defining the root properties.
+    ConfigRoot.title("Settings @ Temp_Cleaner GUI")
+    ConfigRoot.geometry('1202x600')
+    ConfigRoot.resizable(False,False)
+    ConfigRoot.minsize(1202,600)
+    ConfigRoot.maxsize(1202,600)
+    ConfigRoot.iconbitmap("icon0.ico")
+    ConfigRoot.configure(bg='#008aff')
+
+    # Defining some informative labels (Basically some bla bla blas).
+    lbl0_config = Label(ConfigRoot, text="Temp_Cleaner Settings", font=("Arial Bold", 32), background='#008aff', foreground='white')
+    lbl0_config.place(x=20, y=7)
+    lbl1_config = Label(ConfigRoot, text="Configure The Working Pathes and all related settings of Temp_Cleaner GUI", foreground='white', background='#008aff', font=("Arial", 12))
+    lbl1_config.place(x=20, y=70)
+    lbl2_config = Label(ConfigRoot, text="Enter the path where RAMMap by Sysinternals tool executable is stored in :", foreground='white', background='#008aff', font=("Arial",12))
+    lbl2_config.place(x=20, y=100)
+    rammappath_input = ttk.Entry(ConfigRoot, width=180)
+    rammappath_input.place(x=20, y=130)
+    rammappath_input_browsebtn = ttk.Button(ConfigRoot, text="...", command=BrowseOne)
+    rammappath_input_browsebtn.place(x=1108, y=131, relwidth=0.027, relheight=0.033)
+    lbl3_config = Label(ConfigRoot, text="Enter the current working path of the tool MalwareBytes AdwareCleaner :", foreground='white', background='#008aff', font=("Arial",12))
+    lbl3_config.place(x=20, y=155)
+    adwcleanerwpath_input = ttk.Entry(ConfigRoot, width=180)
+    adwcleanerwpath_input.place(x=20, y=180)
+    adwcleanerwpath_input_browsebtn = ttk.Button(ConfigRoot, text="...", command=BrowseTwo)
+    adwcleanerwpath_input_browsebtn.place(x=1108, y=180, relwidth=0.027, relheight=0.033)
+    lbl4_config = Label(ConfigRoot, text="WinXPE Program Path :", foreground='white', background='#008aff', font=("Arial", 12))
+    lbl4_config.place(x=20, y=205)
+    winxpeapppath_input = ttk.Entry(ConfigRoot, width=180)
+    winxpeapppath_input.place(x=20, y=230)
+    winxpeapppath_input_browsebtn = ttk.Button(ConfigRoot, text="...", command=BrowseThree)
+    winxpeapppath_input_browsebtn.place(x=1108, y=230, relwidth=0.027, relheight=0.033)
+    lbl5_config = Label(ConfigRoot, text="Enter the name of the User ID folder inside the WindowsActivitiesCache Folder (Optional) :", foreground='white', background='#008aff', font=("Arial",12))
+    lbl5_config.place(x=20, y=257)
+    cdpccpath_input = ttk.Entry(ConfigRoot, width=180)
+    cdpccpath_input.place(x=20, y=283)
+    cdpccpath_input_browsebtn = ttk.Button(ConfigRoot, text="...", command=BrowseFour)
+    cdpccpath_input_browsebtn.place(x=1108, y=283, relwidth=0.027, relheight=0.033)
+    # Defining the copyright notice label.
+    copyright_lbl0 = Label(ConfigRoot, text="""Copyright (C) Insertx2k Dev (Mr.X) 2018-2021 - All rights reserved.
+
+ A simple program made to help you erase temporary files in your Windows-based PC.
+ Copyright (C) 2021 - Insertx2k Dev
+ 
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License along
+ with this program; if not, write to the Free Software Foundation, Inc.,
+ 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+""", font=("Arial Bold", 8), background='#008aff', foreground='grey')
+    copyright_lbl0.place(x=345, y=307)
+    # Defining the buttons used to destroy the configuration window, or to save changes and to close the window (I honestly don't know)
+    # Ok.
+    # Gas Gas Gas, I'm gonna step on the gas.
+
+    closewindow_btn = ttk.Button(ConfigRoot, text="Quit", command=SelfDestroy)
+    closewindow_btn.place(x=20, y=550, relwidth=0.30, relheight=0.060)
+
+    # Tonight I'd fly, and be your lover.
+    # Yeah, Yeah, Yeah....
+
+    applychangesandclose_btn = ttk.Button(ConfigRoot, text="Apply and Quit", command=SaveConfigurationandQuit)
+    applychangesandclose_btn.place(x=800, y=550, relwidth=0.30, relheight=0.060)
+
+    # Gas Gas Gas.
+    # I'm gonna run in the flash.
+    # Tonight I will fight, to be the winner.
+
+    lbl6_config = Label(ConfigRoot, text="License : ", font=("Arial Bold", 20), foreground='white', background='#008aff')
+    lbl6_config.place(x=200, y=400)
+
+
+
+    # Calling the function to retrieve the configuration information from the config.ini file.
+    RetrieveConfig()
+
+    # Calling the ConfigRoot's Mainloop (Used to allow the user to interact to the window freely)
+    ConfigRoot.mainloop()
+
 # Defining a sample get var functionaking a new checkbox.
 # Defining the ON-OFF Like variable
 var0 = StringVar()
@@ -617,6 +754,14 @@ exec_btn = Button(show_frame, width=200 ,height=50, text="", image=picture_outpu
 exec_btn.place(x=300 ,y=1929)
 space = Label(show_frame, text="")
 space.grid(column=0, row=68, sticky='w')
+
+# Defining the source of the image of the configuration button
+pic_settings_btn = Image.open("settingsbutton_image.png")
+picture_output_settings_btn = ImageTk.PhotoImage(pic_settings_btn)
+
+# Defining the go to configuration page button.
+config_page_btn = Button(show_frame, text="", width=200, height=50, image=picture_output_settings_btn, command=StartConfigurationWindow, cursor='hand2')
+config_page_btn.place(x=600 ,y=1929)
 
 # Executing the commands required to make the buttons active and unchecked.
 clr_recyclebin_sysdrive_btn.deselect()
