@@ -3,7 +3,10 @@ A free (and of course an **Open-Source**) alternative to all Temp Cleaning Softw
 <br/>
 
 ## Inside of the program <br/>
-![A screenshot of the inside of the program Temp_Cleaner GUI](https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/main/.readme.files/temp_cleaner_gui_project_v1.52_update2_default_banner_ss.jpg) <br/>
+**Might not always be up-to-date.**
+<br/>
+<br/>
+![A screenshot of the inside of the program Temp_Cleaner GUI](https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/gh-pages/ss0.jpg) <br/>
 <br/>
 
 
@@ -68,16 +71,10 @@ About the module `WINTCMD`, you can download it from the source code files (**of
 4-**Do not choose the output file as a single file, instead choose one directory.** <br/>
 5-**Choose to include all of the following files :** <br/>
 ```bat
-about_btn_noclick.png
 banner.png
 Config.ini
-config_banner.png
-done_for_execute_btn_wait5.png
-execute_btn_noclick.png
-executing_icon_for_btns.png
 icon0.ico
 nul'
-settingsbutton_image.png
 ```
 
 <br/>
