@@ -1,0 +1,280 @@
+/*Defining the background image properties*/
+.bdy{
+    background-color: #212121;
+}
+.table-header{
+    font-size: xx-large;
+    color: white;
+}
+/*Somewhat configuring the main header properties*/
+.main-header{
+    border-color: azure;
+    border-style: outset;
+    border-color: red;
+}
+
+.col1{
+    width: 34%;
+}
+.col2{
+    width: 34%;
+}
+.col3{
+    width: 34%;
+}
+
+
+.wnewtable0{
+    background-color: orange;
+    border-color: yellow;
+    opacity: 10%;
+    margin-bottom: 20px;
+}
+
+.col2{
+    text-align: center;
+}
+.col1{
+    text-align: center;
+}
+.col3{
+    text-align: center;
+}
+
+.windownloads0{
+    color: white;
+    background-color: skyblue;
+    margin-bottom: 15px;
+}
+.dosdownloads0{
+    color: white;
+    background-color: forestgreen;
+    margin-bottom: 15px;
+}
+
+.linuxdownloads0{
+    color: black;
+    background-color: yellow;
+    margin-bottom: 15px;
+}
+
+.codedownloads0{
+    color: white;
+    background-color: indigo;
+    margin-bottom: 15px;
+}
+
+
+/* Somewhat configuring the style of the main-header's navigation buttons. */
+/* Let's remove the decoration of it*/
+.homeword0{
+    text-decoration: none;
+    cursor: default;
+}
+.homelinkword0{
+    text-decoration: none;
+    cursor: default;
+}
+.downloadslinkword0{
+    text-decoration: overline;
+    cursor: default;
+}
+.downloadsword0{
+    text-decoration: none;
+    cursor: default;
+}
+.aboutword0{
+    text-decoration: none;
+    cursor: default;
+}
+.header-link{
+    text-decoration: none;
+    color: white;
+}
+
+.homeword0:hover{
+    text-decoration: overline;
+}
+.downloadsword0:hover{
+    text-decoration: overline;
+}
+.aboutword0:hover{
+    text-decoration: overline;
+}
+
+/* Configuring the style of wnewtable0*/
+.wnewtable0{
+    margin-top: 15px;
+}
+
+.licensebigh10:hover{
+    text-decoration: line-through;
+    color: red;
+}
+
+.downloadsh1big0:hover{
+    text-decoration: line-through;
+    color: red;
+}
+
+.windownloads0:hover{
+    background-color: cadetblue;
+    cursor: default;
+}
+
+.dosdownloads0:hover{
+    background-color: cadetblue;
+    cursor: default;
+}
+
+.linuxdownloads0:hover{
+    background-color: cadetblue;
+    cursor: default;
+}
+
+.codedownloads0:hover{
+    background-color: cadetblue;
+    cursor: default;
+}
+
+.wnewtable0:hover{
+    opacity: 100%;
+}
+
+
+/* Configuring the text decorations of the download links for ms windows detail. */
+
+.dwn1032{
+    text-decoration: none;
+}
+
+.dwn1064{
+    text-decoration: none;
+}
+
+.dwn764{
+    text-decoration: none;
+}
+
+/*            end          */
+
+/*    Making on hover effect for them      */
+
+.dwn1032:hover{
+    text-decoration: underline;
+}
+.dwn1064:hover{
+    text-decoration: underline;
+}
+.dwn764:hover{
+    text-decoration: underline;
+}
+.doslink0{
+    text-decoration: none;
+}
+.doslink0:hover{
+    text-decoration: underline;
+}
+.codelink0{
+    text-decoration: none;
+}
+.codelink0:hover{
+    text-decoration: underline;
+}
+
+/*           end             */
+
+
+.dwnp{
+    margin-bottom: 45px;
+}
+
+
+/* Configuring the download png properties, and the hover on effect code */
+.dwnpng{
+    opacity: 100%;
+}
+.dwnpng:hover{
+    opacity: 25%;
+}
+
+/*   END         */
+
+
+/*  Configuring the license png properties, and the hover on effect code */
+.liimg0{
+    opacity: 100%;
+}
+
+.liimg0:hover{
+    opacity: 25%;
+}
+
+
+/*    END          */
+
+/*  Defining the on_hover effect for cols 1,2,3  */
+.col1:hover{
+    background-color: indigo;
+}
+
+.col2:hover{
+    background-color: indigo;
+}
+
+.col3:hover{
+    background-color: indigo;
+}
+
+/*        END                     */
+
+.maincol0{
+    background-color: black;
+}
+
+.maincol0:hover{
+    background-color: goldenrod;
+}
+
+
+.licensep0{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*  Configuring the properties of the "licensetable0"  elements and the table itself.   */
+.licensetable0{
+    width: 100%;
+    margin-top: 10px;
+    border-color: darkgreen;
+    opacity: 15%;
+    margin-bottom: 10px;
+}
+
+.lcol0{
+    background-color: lightseagreen;
+}
+.lcol1{
+    background-color: rgba(222, 184, 135, 0.562);
+}
+
+/*           END                 */
+
+/*  The code of 'licensetable0' hover effect goes over here. */
+.licensetable0:hover{
+    opacity: 100%;
+}
+
+
+
+
+/*          END                  */
+
+
+
+
+/* Applying the best overflow configuration to make sure things won't go outside of div element  */
+div{
+    overflow: auto;
+}
+/*      END       */
