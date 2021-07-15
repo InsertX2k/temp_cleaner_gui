@@ -64,28 +64,6 @@
     opacity: 50%;
 }
 
-
-.closelnk{
-    text-decoration: none;
-    color: white;
-    cursor: default;
-}
-.w7sp1_lnk{
-    color: white;
-    text-decoration: none;
-    cursor: default;
-}
-.w1032_lnk{
-    color: white;
-    text-decoration: none;
-    cursor: default;
-}
-.w1064_lnk{
-    color: white;
-    text-decoration: none;
-    cursor: default;
-}
-
 /* Somewhat configuring the style of the main-header's navigation buttons. */
 /* Let's remove the decoration of it*/
 .homeword0{
@@ -176,7 +154,7 @@
     border-width: 1px;
 }
 .closeapp{
-    width: 75px;
+    width: 35px;
     background-color: red;
     height: 10px;
     padding-right: 0px;
@@ -189,7 +167,7 @@
 }
 .closeapptxt{
     padding-right: 50%;
-    padding-left: 42%;
+    padding-left: 50%;
     cursor: default;
 }
 .hint0{
@@ -206,6 +184,7 @@
 }
 .hint2{
     cursor: default;
+    margin-top: 55px;
 }
 .win1032:hover{
     background-color: darkgrey;
@@ -233,10 +212,49 @@
     font-size: 14px;
 }
 
-.download0{
+.btnsholder{
+    width: 1000px;
+}
+.godownloadsbtn{
+    width: 50px;
+    cursor: default;
+}
+.gohomebtn{
+    width: 50px;
+    height: 30px;
+    padding-right: 100%;
+    cursor: default;
+}
+.godownloadsbtn_font{
+    cursor: default;
+}
+.gohomebtn_font{
+    cursor: default;
+}
+
+.gohome_lnk{
     color: white;
     text-decoration: none;
     cursor: default;
+}
+.godownloads_lnk{
+    color: white;
+    text-decoration: none;
+    cursor: default;
+}
+
+.godownloadsbtn:hover{
+    background-color: darkgrey;
+}
+.gohomebtn:hover{
+    background-color: darkgrey;
+}
+
+
+.closelnk{
+    cursor: default;
+    color: white;
+    text-decoration: none;
 }
 
 /*          END                  */

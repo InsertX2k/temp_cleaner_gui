@@ -7,18 +7,26 @@
 }
 /*Somewhat configuring the main header properties*/
 .main-header{
-    border-color: azure;
-    border-style: outset;
-    border-color: red;
+    border-color: whitesmoke;
+    border-style: hidden;
+    border-color: orange;
+}
+
+.wtxt0:hover{
+    text-decoration: line-through;
+    color: orange;
 }
 .col1{
-    width: 34%;
+    width: 8%;
+    height: 3%;
 }
 .col2{
-    width: 34%;
+    width: 8%;
+    height: 3%;
 }
 .col3{
-    width: 34%;
+    width: 8%;
+    height: 3%;
 }
 .featuresli0{
     color:white;
@@ -26,7 +34,7 @@
 }
 .wnewtable0{
     background-color: orange;
-    border-color: yellow;
+    border-color: yellowgreen;
     opacity: 10%;
 }
 .wnewlist0{
@@ -70,6 +78,10 @@
     text-decoration: none;
     color: white;
 }
+.header-link:hover{
+    text-decoration: overline;
+    color: orange;
+}
 
 .homeword0:hover{
     text-decoration: overline;
@@ -92,22 +104,22 @@
 
 .featuresh1:hover{
     text-decoration: line-through;
-    color: red;
+    color: orange;
 }
 
 .screenshotsh1:hover{
     text-decoration: line-through;
-    color: red;
+    color: orange;
 }
 
 .downloadh1:hover{
     text-decoration: line-through;
-    color: red;
+    color: orange;
 }
 
 .supporth1:hover{
     text-decoration: line-through;
-    color: red;
+    color: orange;
 }
 
 .support_twlink{
@@ -183,25 +195,30 @@
 
 /*  Defining the on_hover effect for cols 1,2,3  */
 .col1:hover{
-    background-color: indigo;
+    background-color: grey;
 }
 
 .col2:hover{
-    background-color: indigo;
+    background-color: grey;
 }
 
 .col3:hover{
-    background-color: indigo;
+    background-color: grey;
 }
 
 /*        END                     */
 
 .maincol0{
     background-color: black;
+    height: 3%;
 }
 
 .maincol0:hover{
-    background-color: goldenrod;
+    background-color: grey;
+}
+
+.imgtcg:hover{
+    opacity: 50%;
 }
 
 
