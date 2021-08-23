@@ -6,7 +6,9 @@ A free (and of course an **Open-Source**) alternative to all Temp Cleaning Softw
 **Might not always be up-to-date.**
 <br/>
 <br/>
-![A screenshot of the inside of the program Temp_Cleaner GUI](https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/gh-pages/ss0.jpg) <br/>
+![Screenshot #0 of Update 12 (Preview Release)](https://user-images.githubusercontent.com/62176660/130435496-cdcab919-21d2-4cc0-a8bf-e20f8882c77c.jpg) <br>
+![An Official Screenshot showing up the new position of the output console for the new update of Temp_Cleaner GUI](https://user-images.githubusercontent.com/62176660/130435886-982a011d-42f2-4a5d-afae-5f29002d9dbf.jpg) <br>
+
 <br/>
 
 
