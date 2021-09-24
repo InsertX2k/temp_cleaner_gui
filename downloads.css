@@ -9,12 +9,12 @@
 .main-header{
     border-color: whitesmoke;
     border-style: hidden;
-    border-color: orange;
+    border-color: rgb(0, 173, 173);
 }
 
 .wtxt0:hover{
     text-decoration: line-through;
-    color: orange;
+    color: rgb(0, 173, 173);
 }
 .col1{
     width: 8%;
@@ -67,21 +67,22 @@
 
 .closelnk{
     text-decoration: none;
-    color: white;
+    color: black;
     cursor: default;
+    
 }
 .w7sp1_lnk{
-    color: white;
+    color: black;
     text-decoration: none;
     cursor: default;
 }
 .w1032_lnk{
-    color: white;
+    color: black;
     text-decoration: none;
     cursor: default;
 }
 .w1064_lnk{
-    color: white;
+    color: black;
     text-decoration: none;
     cursor: default;
 }
@@ -114,7 +115,7 @@
 }
 .header-link:hover{
     text-decoration: overline;
-    color: orange;
+    color: rgb(0, 173, 173);
 }
 
 .homeword0:hover{
@@ -169,23 +170,24 @@
 
 
 .downloadtcg{
-    background-color: green;
+    background-color: white;
+    color: black;
     width: 1000px;
     margin-top: 60px;
     margin-left: 25%;
     border-width: 1px;
 }
 .closeapp{
-    width: 75px;
+    width: 65px;
     background-color: red;
-    height: 10px;
-    padding-right: 0px;
+    color: black;
+    border-radius: 50%;
 }
 .cwindows{
     height: 5px;
 }
 .closeapp:hover{
-    background-color: darkgrey;
+    background-color: grey;
 }
 .closeapptxt{
     padding-right: 50%;
@@ -199,11 +201,11 @@
     cursor: default;
 }
 .hint1{
-    cursor: not-allowed;
+    cursor: default;
 }
 .win7:hover{
-    background-color: rgb(150, 0, 0);
-    cursor: not-allowed;
+    background-color: darkgrey;
+    cursor: default;
 }
 .hint2{
     cursor: default;
@@ -218,7 +220,9 @@
     background-color: darkgrey;
 }
 .headerdownloads{
-    background-color: rgb(0, 131, 131);
+    width: 75px;
+    background-color: white;
+    height: 25px;
 }
 .hint4{
     cursor: default;
@@ -258,8 +262,8 @@ kbd{
 kbd:hover{
     background: none;
     box-shadow: none;
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: grey;
 }
 
 .hint69{
@@ -269,6 +273,14 @@ kbd:hover{
 .protip{
     cursor: default;
 }
+
+.linuxdownloads{
+    width: 100%;
+}
+.linuxdownloads:hover{
+    background-color: grey;
+}
+
 
 /*          END                  */
 

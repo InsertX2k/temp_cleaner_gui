@@ -9,12 +9,12 @@
 .main-header{
     border-color: whitesmoke;
     border-style: hidden;
-    border-color: orange;
+    border-color: rgb(0, 173, 173);
 }
 
 .wtxt0:hover{
     text-decoration: line-through;
-    color: orange;
+    color: rgb(0, 173, 173);
 }
 .col1{
     width: 8%;
@@ -33,12 +33,14 @@
     font-size: large;
 }
 .wnewtable0{
-    background-color: orange;
+    background-color: rgb(0, 173, 173);
     border-color: yellowgreen;
     opacity: 10%;
 }
 .wnewlist0{
-    color: black;
+    color: white;
+    padding-left: 25px;
+    margin-right: 25px;
 }
 
 .col2{
@@ -80,7 +82,7 @@
 }
 .header-link:hover{
     text-decoration: overline;
-    color: orange;
+    color: rgb(0, 173, 173);
 }
 
 .homeword0:hover{
@@ -104,22 +106,22 @@
 
 .featuresh1:hover{
     text-decoration: line-through;
-    color: orange;
+    color: rgb(0, 173, 173);
 }
 
 .screenshotsh1:hover{
     text-decoration: line-through;
-    color: orange;
+    color: rgb(0, 173, 173);
 }
 
 .downloadh1:hover{
     text-decoration: line-through;
-    color: orange;
+    color: rgb(0, 173, 173);
 }
 
 .supporth1:hover{
     text-decoration: line-through;
-    color: orange;
+    color: rgb(0, 173, 173);
 }
 
 .support_twlink{
@@ -166,6 +168,8 @@
     height:250px;
     margin-left: 0px;
 }
+
+
 
 /*        END                        */
 
@@ -220,6 +224,7 @@
 .imgtcg:hover{
     opacity: 50%;
 }
+
 
 
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
