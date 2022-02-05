@@ -2,12 +2,12 @@
 A free (and of course an **Open-Source**) alternative to all Temp Cleaning Software available for all Windows Versions that can be expanded by you!<br/>
 <br/>
 
-## Inside of the program <br/>
+## Screenshots: <br/>
 **Might not always be up-to-date.**
 <br/>
 <br/>
-![Screenshot #0 of Update 12 (Preview Release)](https://user-images.githubusercontent.com/62176660/130435496-cdcab919-21d2-4cc0-a8bf-e20f8882c77c.jpg) <br>
-![An Official Screenshot showing up the new position of the output console for the new update of Temp_Cleaner GUI](https://user-images.githubusercontent.com/62176660/130435886-982a011d-42f2-4a5d-afae-5f29002d9dbf.jpg) <br>
+![new_temp_cleaner_gui_update_lightmode](https://user-images.githubusercontent.com/62176660/152652137-ab1af094-f4ee-45a9-aa98-641f88b0bf56.jpg)
+
 
 <br/>
 
@@ -85,11 +85,9 @@ nul'
 7-**If you want to**, Create a **version file** and include it with the compiled version. <br/>
 8-**Choose all of the following modules to be imported using the `--hidden-import` option** <br/>
 ```py
-re
-WINTCMD
 PIL
 pillow
-temp_cleaner_gui_project_renewed_gui_sourcecode
+awesometkinter
 ```
 
 <br/>
@@ -105,7 +103,8 @@ temp_cleaner_gui_project_renewed_gui_sourcecode
 ## Copyrights <br/>
 
 
-The icon of the program, and the file **icon0.ico** is just a modified icon image that is originally owned by the **Numix Icon pack** author
+In this new and up to date icon, I just used sources from the given link: <br>
+<a href="https://www.flaticon.com/free-icons/spray" title="spray icons">Spray icons created by photo3idea_studio - Flaticon</a>
 
 
 <br/>
