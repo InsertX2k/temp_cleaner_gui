@@ -280,7 +280,16 @@ kbd:hover{
 .linuxdownloads:hover{
     background-color: grey;
 }
-
+.aboutlnk{
+    color:rgb(0, 255, 255);
+    text-decoration: none;
+    cursor: default;
+}
+.aboutlnk:hover{
+    color: rgb(0, 255, 255);
+    text-decoration: overline;
+    cursor: default;
+}
 
 /*          END                  */
 

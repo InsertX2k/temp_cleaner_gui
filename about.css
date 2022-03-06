@@ -57,7 +57,7 @@
 /* Somewhat configuring the style of the main-header's navigation buttons. */
 /* Let's remove the decoration of it*/
 .homeword0{
-    text-decoration: overline;
+    text-decoration: none;
     cursor: default;
 }
 .homelinkword0{
@@ -73,7 +73,7 @@
     cursor: default;
 }
 .aboutword0{
-    text-decoration: none;
+    text-decoration: overline;
     cursor: default;
 }
 .header-link{
@@ -224,6 +224,72 @@
 .imgtcg:hover{
     opacity: 50%;
 }
+
+.p0font{
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+}
+.p0font:hover{
+    text-decoration: line-through;
+    color: rgb(0, 173, 173);
+}
+
+.p1font{
+    color:white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.p2font{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.githublink{
+    text-decoration: none;
+    color: rgb(0, 173, 173);
+    font-size: 20px;
+}
+.githublink:hover{
+    text-decoration: underline;
+}
+.batchlinkwikipedia{
+    text-decoration: none;
+    color: rgb(0, 173, 173);
+    font-size: 20px;
+}
+.batchlinkwikipedia:hover{
+    text-decoration:underline;
+}
+.pythonorglink{
+    text-decoration: none;
+    color: rgb(0, 173, 173);
+    font-size: 20px;
+}
+.pythonorglink:hover{
+    text-decoration: underline;
+}
+.p3font{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.tempcleanerguidatatable{
+    color: white;
+    font-size: 18px;
+    border-color: whitesmoke;
+    border-style: solid;
+    width: 100%;
+    border-width: 2px;
+    border-radius: 20px;
+}
+.insertlink{
+    color: rgb(0, 173, 173);
+    text-decoration: none;
+}
+.insertlink:hover{
+    text-decoration: underline;
+}
 .aboutlnk{
     color:rgb(0, 255, 255);
     text-decoration: none;
@@ -234,8 +300,6 @@
     text-decoration: overline;
     cursor: default;
 }
-
-
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;
