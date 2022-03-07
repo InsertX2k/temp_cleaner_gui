@@ -1,0 +1,307 @@
+/*Defining the background image properties*/
+.bdy{
+    background-color: #212121;
+}
+.table-header{
+    font-size: xx-large;
+}
+/*Somewhat configuring the main header properties*/
+.main-header{
+    border-color: whitesmoke;
+    border-style: hidden;
+    border-color: rgb(0, 173, 173);
+}
+
+.wtxt0:hover{
+    text-decoration: line-through;
+    color: rgb(0, 173, 173);
+}
+.col1{
+    width: 8%;
+    height: 3%;
+}
+.col2{
+    width: 8%;
+    height: 3%;
+}
+.col3{
+    width: 8%;
+    height: 3%;
+}
+.featuresli0{
+    color:white;
+    font-size: large;
+}
+.wnewtable0{
+    background-color: rgb(0, 173, 173);
+    border-color: yellowgreen;
+    opacity: 10%;
+}
+.wnewlist0{
+    color: white;
+    padding-left: 25px;
+    margin-right: 25px;
+}
+
+.col2{
+    text-align: center;
+}
+.col1{
+    text-align: center;
+}
+.col3{
+    text-align: center;
+}
+
+
+/* Somewhat configuring the style of the main-header's navigation buttons. */
+/* Let's remove the decoration of it*/
+.homeword0{
+    text-decoration: none;
+    cursor: default;
+}
+.homelinkword0{
+    text-decoration: none;
+    cursor: default;
+}
+.downloadslinkword0{
+    text-decoration: none;
+    cursor: default;
+}
+.downloadsword0{
+    text-decoration: none;
+    cursor: default;
+}
+.aboutword0{
+    text-decoration: overline;
+    cursor: default;
+}
+.header-link{
+    text-decoration: none;
+    color: white;
+}
+.header-link:hover{
+    text-decoration: overline;
+    color: rgb(0, 173, 173);
+}
+
+.homeword0:hover{
+    text-decoration: overline;
+}
+.downloadsword0:hover{
+    text-decoration: overline;
+}
+.aboutword0:hover{
+    text-decoration: overline;
+}
+
+/* Configuring the style of wnewtable0*/
+.wnewtable0{
+    margin-top: 15px;
+}
+
+.wnewtable0:hover{
+    opacity: 100%;
+}
+
+.featuresh1:hover{
+    text-decoration: line-through;
+    color: rgb(0, 173, 173);
+}
+
+.screenshotsh1:hover{
+    text-decoration: line-through;
+    color: rgb(0, 173, 173);
+}
+
+.downloadh1:hover{
+    text-decoration: line-through;
+    color: rgb(0, 173, 173);
+}
+
+.supporth1:hover{
+    text-decoration: line-through;
+    color: rgb(0, 173, 173);
+}
+
+.support_twlink{
+    text-decoration: none;
+}
+
+.support_twlink:hover{
+    text-decoration: underline;
+}
+
+.support_ghlink{
+    text-decoration: none;
+}
+.support_ghlink:hover{
+    text-decoration: underline;
+}
+
+.goto_downloads{
+    text-decoration: none;
+}
+
+.goto_downloads:hover{
+    text-decoration: underline;
+}
+
+
+/* Configuring the properties of the classes ss0, ss1, ss2 */
+
+.ss0{
+    opacity: 25%;
+    width:500px;
+    height:250px;
+    margin-left: 0px;
+}
+.ss1{
+    opacity: 25%;
+    width:500px;
+    height:250px;
+    margin-left: 0px;
+}
+.ss2{
+    opacity: 25%;
+    width:500px;
+    height:250px;
+    margin-left: 0px;
+}
+
+
+
+/*        END                        */
+
+
+
+/* Making their opacity go back again after we hover on them. */
+
+.ss0:hover{
+    opacity: 100%;
+}
+.ss1:hover{
+    opacity: 100%;
+}
+.ss2:hover{
+    opacity: 100%;
+}
+
+/*         END                   */
+
+
+.ssdiv{
+    display: inline-block;
+    width: 96%;
+    height: 300px;
+}
+
+
+/*  Defining the on_hover effect for cols 1,2,3  */
+.col1:hover{
+    background-color: grey;
+}
+
+.col2:hover{
+    background-color: grey;
+}
+
+.col3:hover{
+    background-color: grey;
+}
+
+/*        END                     */
+
+.maincol0{
+    background-color: black;
+    height: 3%;
+}
+
+.maincol0:hover{
+    background-color: grey;
+}
+
+.imgtcg:hover{
+    opacity: 50%;
+}
+
+.p0font{
+    font-size: 25px;
+    color: white;
+    text-decoration: none;
+}
+.p0font:hover{
+    text-decoration: line-through;
+    color: rgb(0, 173, 173);
+}
+
+.p1font{
+    color:white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.p2font{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+.githublink{
+    text-decoration: none;
+    color: rgb(0, 173, 173);
+    font-size: 20px;
+}
+.githublink:hover{
+    text-decoration: underline;
+}
+.batchlinkwikipedia{
+    text-decoration: none;
+    color: rgb(0, 173, 173);
+    font-size: 20px;
+}
+.batchlinkwikipedia:hover{
+    text-decoration:underline;
+}
+.pythonorglink{
+    text-decoration: none;
+    color: rgb(0, 173, 173);
+    font-size: 20px;
+}
+.pythonorglink:hover{
+    text-decoration: underline;
+}
+.p3font{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.tempcleanerguidatatable{
+    color: white;
+    font-size: 18px;
+    border-color: whitesmoke;
+    border-style: solid;
+    width: 100%;
+    border-width: 2px;
+    border-radius: 20px;
+}
+.insertlink{
+    color: rgb(0, 173, 173);
+    text-decoration: none;
+}
+.insertlink:hover{
+    text-decoration: underline;
+}
+.aboutlnk{
+    color:rgb(0, 255, 255);
+    text-decoration: none;
+    cursor: default;
+}
+.aboutlnk:hover{
+    color: rgb(0, 255, 255);
+    text-decoration: overline;
+    cursor: default;
+}
+/* Applying the best overflow configuration to all 'dev' elements to this website  */
+div{
+    overflow: auto;
+}
+/*       END         */
