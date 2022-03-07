@@ -290,7 +290,147 @@ kbd:hover{
     text-decoration: overline;
     cursor: default;
 }
-
+.downtcg{
+    color: white;
+    text-decoration: none;
+    cursor: default;
+    font-size: 30px;
+}
+.downtcg:hover{
+    text-decoration: line-through;
+    color: rgb(0, 173, 173);
+}
+.thxsourceforge{
+    color: white;
+    font-size: 18px;
+}
+.h2inst{
+    color: white;
+    text-decoration: none;
+    cursor: default;
+    font-size: 30px;
+}
+.h2inst:hover{
+    color: rgb(0, 173, 173);
+    text-decoration: line-through;
+}
+.win1064downloads{
+    color: white;
+    text-decoration: none;
+    cursor: default;
+    font-size: 24px;
+}
+.win1064downloads:hover{
+    color: rgb(0, 173, 173);
+    text-decoration: line-through;
+}
+.win1064instructions{
+    color: white;
+    font-size: 18px;
+}
+.win1032bitinstructions{
+    color: white;
+    text-decoration: none;
+    cursor: default;
+    font-size: 24px;
+}
+.win1032bitinstructions:hover{
+    color: rgb(0, 173, 173);
+    text-decoration: line-through;
+}
+.forpaddingormarginonly0{
+    padding-top: 25px;
+}
+.note0{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+.note0:hover{
+    color: red;
+}
+.win1032bittext{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+.win764bitinstructionshoveroneffect{
+    color: white;
+    text-decoration: none;
+    cursor: default;
+    font-size: 24px;
+}
+.win764bitinstructionshoveroneffect:hover{
+    color: rgb(0, 173, 173);
+    text-decoration: line-through;
+}
+.win7downloadinstructionsfor64bit{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+.forpaddingandmarginonly1{
+    padding-top: 25px;
+}
+.downloadfromothersourcestext{
+    color: white;
+    text-decoration: none;
+    cursor: default;
+    font-size: 30px;
+    padding-top: 35px;
+}
+.downloadfromothersourcestext:hover{
+    color: rgb(0, 173, 173);
+    text-decoration: line-through;
+}
+.softpediaword{
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+    cursor: default;
+}
+.softpediaword:hover{
+    color: rgb(0, 173, 173);
+    text-decoration: line-through;
+}
+.softpediadescription{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+.softpediahowtodownloadfrom{
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+}
+.softpediahowtodownloadfrom:hover{
+    color: orange;
+    text-decoration: none;
+}
+.softpediadownloadlink{
+    color: rgb(0, 255, 255);
+    text-decoration: none;
+    font-size: 18px;
+}
+.softpediadownloadlink:hover{
+    text-decoration: underline;
+}
+.protipwhovereffect{
+    color: white;
+    text-decoration: none;
+    font-size: 30px;
+    cursor: default;
+    padding-top: 30px;
+}
+.protipwhovereffect:hover{
+    color: rgb(0, 173, 173);
+    text-decoration: line-through;
+}
+.howtostaysafeul{
+    cursor: default;
+    color: white;
+    font-size: 18px;
+}
 /*          END                  */
 
 
