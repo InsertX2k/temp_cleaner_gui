@@ -342,12 +342,12 @@ kbd:hover{
     padding-top: 25px;
 }
 .note0{
-    color: white;
+    color: red;
     text-decoration: none;
     font-size: 18px;
 }
 .note0:hover{
-    color: red;
+    color: white;
 }
 .win1032bittext{
     color: white;
@@ -430,6 +430,60 @@ kbd:hover{
     cursor: default;
     color: white;
     font-size: 18px;
+}
+.latestreleaseh1{
+    color: white;
+    text-decoration: none;
+    cursor: default;
+}
+.latestreleaseh1:hover{
+    color: rgb(0, 173, 173);
+    text-decoration: line-through;
+}
+.currentversionforwindows{
+    color: white;
+    cursor: default;
+    font-size: 20px;
+}
+.currentversionforwindows:hover{
+    color: rgb(0, 183, 255);
+}
+.currentversionforlinux{
+    color: white;
+    cursor: default;
+    font-size: 20px;
+}
+.currentversionformacosx{
+    color: white;
+    font-size: 20px;
+    cursor: default;
+}
+.currentversionforandroid{
+    color: white;
+    font-size: 20px;
+    cursor: default;
+}
+.noteforwindowsreleases{
+    color: red;
+    font-size: 18px;
+    cursor: default;
+}
+.noteforwindowsreleases:hover{
+    color: white;
+}
+.changeloghomeredirector{
+    color: rgb(0, 173, 173);
+    text-decoration: none;
+    cursor: default;
+}
+.changeloghomeredirector:hover{
+    text-decoration: underline;
+}
+.currentversionforlinux:hover{
+    color: rgb(238, 255, 0);
+}
+.currentversionforandroid:hover{
+    color: rgb(72, 255, 0);
 }
 /*          END                  */
 
