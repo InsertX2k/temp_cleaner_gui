@@ -170,6 +170,15 @@ This program is Free Software (FOSS), You are allowed to modify or redistribute 
     license_window_title = "License for Temp_Cleaner GUI"
     quit_settings_btn = "Quit"
     commit_changes_plus_exit_btn = "Apply and Quit"
+    cant_retrieve_config_fromfile_mainloop = "Unable to retrieve the configuration information, this can be due to a hard exception, or a something else."
+    dontknow_whattodo_presets_text = "Don't know what to do?, Choose a preset:"
+    preset_default = "Default Preset (Recommended for Everyday use)"
+    preset_maximum_cleaning = "Maximum Cleaning (Cleans up all sections, thus giving you more disk space)"
+    preset_recyclebin_cleaning = "Empty Recycle Bin Only"
+    preset_webbrowser_cleaning = "Web Browser Cleaning"
+    preset_webbrowser_cleaning_with_cookies = "Web Browser Cleaning + Cookies"
+    fix_roblox_error_preset = "Fix ROBLOX Error 267 (Recommended to restart PC after apply)"
+    widgets_sticking_direction = 'w'
 
 
 
@@ -348,4 +357,13 @@ GNU General Public License v2.0 او احدث @ Free Software Foundation. هذا
     license_window_title = "Temp_Cleaner GUI الرخصة لبرنامج"
     quit_settings_btn = "خروج"
     commit_changes_plus_exit_btn = "حفظ وخروج"
+    cant_retrieve_config_fromfile_mainloop = "فشل في قراءة الضبط من ملف الضبط، يرجي التأكد من إعطاء البرنامج الاذونات الكافية لفعل ذلك او التأكد من ان برنامج مضاد الفيروسات لم يقم بمنع هذا البرنامج من القيام بهذا الامر"
+    dontknow_whattodo_presets_text = ":لا تعلم ماذا تفعل؟، اختر إعداد مسبق"
+    preset_default = "الإعداد الإفتراضي (مستحسن به للإستخدام اليومي)"
+    preset_maximum_cleaning = "اقصي تنظيف (يقوم بنظيف جميع الخيارات المتاحة، بالتالي يوفر الكثير من المساحة)"
+    preset_recyclebin_cleaning = "تفريغ سلة المهملات فقط"
+    preset_webbrowser_cleaning = "تنظيف ملفات المتصفح المؤقتة"
+    preset_webbrowser_cleaning_with_cookies = "تنظيف ملفات المتصفح المؤقتة + الكعكات"
+    fix_roblox_error_preset = "إصلاح الخطأ 267 في لعبة روبلوكس (يستحسن إعادة تشغيل الجهاز بعد إستخدامه)"
+    widgets_sticking_direction = 'e'
     

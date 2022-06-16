@@ -1,9 +1,6 @@
 """
 The Project Temp_Cleaner GUI by Insertx2k Dev.
-A simple temporary folders cleaning solution made by Insertx2k Dev under the GNU General Public License
-That will help you free up a lot of disk space in your computer through erasing all the Temporary folders
-Exist in almost all temporary folders directories either in your C:\ drive (Windows drive) or other drives. 
-Free to modify and redistribute to fit in your needs as explained in the GNU General Public License v2.0 or later.
+A simple alternative to all Temp cleaning software available for Windows available under the GNU General Public License v2.0 or later
 
 License for the Project Temp_Cleaner GUI.
    A simple program made to help you erase temporary files in your Windows-based PC.
@@ -28,12 +25,15 @@ For a much better github page, try visiting https://insertx2k.github.io/temp_cle
 
 The program Temp_Cleaner GUI was previously Temp_Cleaner and it was using a CUI instead of a GUI. 
 
+**THIS FILE (AS IT IS) BELONGS TO THE TEMP_CLEANER GUI PROJECT AND SHALL BE ONLY USED IN ACCORDING TO THE TERMS OF THE PRODUCT**
+
 """
 
 # defining the global variable that holds the font_size of the scrolledtext.ScrolledText widget
 # named 'showLicense'
 font_size = 14
 
+# print greetings text.
 print()
 print("Greetings from the Temp_Cleaner GUI Project.")
 print("By Insertx2k Dev (Mr.X)")
@@ -42,17 +42,15 @@ print("Twitter : https://twitter.com/insertplayztw")
 print()
 print("Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X)")
 print()
+# end of print greetings text.
 
 
-# Importing all the required 3rd party modules.
-# from re import L -> This import was no longer required as of Update 3.1
+# Imports
 from tkinter import *
-# import WINTCMD -> This import was no longer required as of Update 3.1
 from tkinter import messagebox
 from tkinter import ttk
 import os
 from PIL import Image, ImageTk
-import time
 import configparser
 from tkinter import filedialog
 from tkinter import scrolledtext
@@ -68,6 +66,7 @@ from translations import *
 GetConfig = configparser.ConfigParser()
 GetConfig.read('Config.ini')
 
+# This is program's Main Window Class.
 class MainWindowLightMode(Tk):
     def __init__(self):
         global GetConfig, font_size
@@ -107,7 +106,7 @@ class MainWindowLightMode(Tk):
                 WindowNewTitle = en.prog_title_no_username
             self.title(WindowNewTitle)
 
-
+        # configuring program's main window geometry (DO NOT MODIFY)
         self.geometry('1225x600')
 
         # attempting to change the iconbitmap attribute of the window.
@@ -117,13 +116,11 @@ class MainWindowLightMode(Tk):
             messagebox.showerror("ERROR 1 in ICONBITMAP", f"Unable to load icon file for this window due to exception:\n{excpt12}")
             pass
 
+        # basically preventing you from resizing it smaller than it's geometry.
         self.minsize(1225,600)
 
-        # Changing the self's color.
-        # self.configure(background='black')
-        # Configuring the scrollbar to make it available for the main program's window.
-        # Create a main frame.
         if str(GetConfig['ProgConfig']['appearancemode']) == '1': # light mode
+            # making a full screen scrollable frame.
             self.main_frame = Frame(self)
             self.main_frame.pack(fill=BOTH, expand=1)
             # Create a canvas.
@@ -143,6 +140,7 @@ class MainWindowLightMode(Tk):
             self.banner_show = Label(self.show_frame, image=self.banner, width=1200, height=300)
             self.banner_show.grid(column=0, row=1, sticky='w')
         elif str(GetConfig['ProgConfig']['appearancemode']) == '2': # dark mode.
+            # making a full screen scrollable frame.
             self.main_frame = Frame(self, background=atk.DEFAULT_COLOR)
             self.main_frame.pack(fill=BOTH, expand=1)
             # Create a canvas.
@@ -170,6 +168,7 @@ class MainWindowLightMode(Tk):
             # self.style.configure('Vertical.TScrollbar', background=atk.DEFAULT_COLOR, foreground=atk.DEFAULT_COLOR)
         else: 
             messagebox.showerror("Unsupported appearance mode in Config file", f"Unsupported appearance mode in config file: {str(GetConfig['ProgConfig']['appearancemode'])}.\nThe program will continue with the Light mode instead.")
+            # making a full screen scrollable frame.
             self.main_frame = Frame(self)
             self.main_frame.pack(fill=BOTH, expand=1)
             # Create a canvas.
@@ -197,7 +196,9 @@ class MainWindowLightMode(Tk):
                 new_btn_text = ar.executing_text
             else:
                 new_btn_text = en.executing_text
-            self.exec_btn.configure(text=new_btn_text, command=None)
+            self.exec_btn.configure(text=new_btn_text)
+            self.exec_btn.configure(command=empty_function)
+            self.exec_btn.configure(state='disabled')
             # show_output() # Calling the show output method so you can actually see what's happening inside.
             self.output_show.configure(state='normal')
             self.selection = self.var0.get()
@@ -657,30 +658,514 @@ class MainWindowLightMode(Tk):
             if self.selection66 == '1':
                 self.destroy()
             # Sleeping a bit for longer (or equal) to 5 seconds.
-            time.sleep(1)
+            # time.sleep(1)
 
             try:
                 # Ok, let's revert everything back to what it was before.
-                self.exec_btn.configure(text=self.begin_cleaning_btn_text, command=multiprocessing_execute_btn_function)
+                self.exec_btn.configure(text=self.begin_cleaning_btn_text)
+                self.exec_btn.configure(command=multiprocessing_execute_btn_function)
+                self.exec_btn.configure(state='normal')
             except TclError as tkerr:
-                pass
+                messagebox.showerror("An ERROR has occured", f"An ERROR has occured during the program's mainloop\nHere are some technical details if you want to reach us\n{tkerr}\nThe program can't continue and will close after you press OK")
+                raise SystemExit(15) # error code 15 is for an urgent mainloop exception.
 
 
             return None
 
-
         def multiprocessing_execute_btn_function():
             threading.Thread(target=execute_theprogram).start()
             pass
+            
+        
+        def empty_function():
+            "a function used to fix the issue when temp cleaner gui does not stop the executing button even when cleaning."
+            pass
+        
+
+        def uncheck_all_options():
+            """
+            A function to uncheck all available cleaning options in the Home Screen UI.
+            """
+            try:
+                self.var0.set(0)
+                self.var1.set(0)
+                self.var2.set(0)
+                self.var3.set(0)
+                self.var4.set(0)
+                self.var5.set(0)
+                self.var6.set(0)
+                self.var7.set(0)
+                self.var8.set(0)
+                self.var9.set(0)
+                self.var10.set(0)
+                self.var11.set(0)
+                self.var12.set(0)
+                self.var13.set(0)
+                self.var14.set(0)
+                self.var15.set(0)
+                self.var16.set(0)
+                self.var17.set(0)
+                self.var18.set(0)
+                self.var19.set(0)
+                self.var20.set(0)
+                self.var21.set(0)
+                self.var22.set(0)
+                self.var23.set(0)
+                self.var24.set(0)
+                self.var25.set(0)
+                self.var26.set(0)
+                self.var27.set(0)
+                self.var28.set(0)
+                self.var29.set(0)
+                self.var30.set(0)
+                self.var31.set(0)
+                self.var32.set(0)
+                self.var33.set(0)
+                self.var34.set(0)
+                self.var35.set(0)
+                self.var36.set(0)
+                self.var37.set(0)
+                self.var38.set(0)
+                self.var39.set(0)
+                self.var40.set(0)
+                self.var41.set(0)
+                self.var42.set(0)
+                self.var43.set(0)
+                self.var44.set(0)
+                self.var45.set(0)
+                self.var46.set(0)
+                self.var47.set(0)
+                self.var48.set(0)
+                self.var49.set(0)
+                self.var50.set(0)
+                self.var51.set(0)
+                self.var52.set(0)
+                self.var53.set(0)
+                self.var54.set(0)
+                self.var55.set(0)
+                self.var56.set(0)
+                self.var57.set(0)
+                self.var58.set(0)
+                self.var59.set(0)
+                self.var60.set(0)
+                self.var61.set(0)
+                self.var62.set(0)
+                self.var63.set(0)
+                self.var64.set(0)
+            except Exception as unable_to_uncheck_all_exception:
+                print(f"Unable to execute the function uncheck_all_options() due to this exception\n{unable_to_uncheck_all_exception}")
+                return False
+            return True
+
+        def apply_cleaning_preset(user_choice):
+            if str(GetConfig['ProgConfig']['languagesetting']) == "en": # if program language is english
+                print(str(self.preset_chooser.get()))
+                if str(self.preset_chooser.get()) == en.preset_default :
+                    try:
+                        uncheck_all_options()
+                        self.var0.set(1)
+                        self.var2.set(1)
+                        self.var9.set(1)
+                        self.var3.set(1)
+                        self.var4.set(1)
+                        self.var8.set(1)
+                        self.var23.set(1)
+                    except Exception as exception_applying_preset:
+                        print(exception_applying_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.preset_maximum_cleaning :
+                    try:
+                        uncheck_all_options()
+                        self.var0.set(1)
+                        self.var1.set(1)
+                        self.var2.set(1)
+                        self.var3.set(1)
+                        self.var4.set(1)
+                        self.var5.set(1)
+                        self.var6.set(1)
+                        self.var7.set(1)
+                        self.var8.set(1)
+                        self.var9.set(1)
+                        self.var10.set(1)
+                        self.var11.set(1)
+                        self.var12.set(1)
+                        self.var13.set(1)
+                        self.var14.set(1)
+                        self.var15.set(1)
+                        self.var16.set(1)
+                        self.var17.set(1)
+                        self.var18.set(1)
+                        self.var19.set(1)
+                        self.var20.set(1)
+                        self.var21.set(1)
+                        self.var22.set(1)
+                        self.var23.set(1)
+                        self.var24.set(1)
+                        self.var25.set(1)
+                        self.var26.set(1)
+                        self.var27.set(1)
+                        self.var28.set(1)
+                        self.var29.set(1)
+                        self.var30.set(1)
+                        self.var31.set(1)
+                        self.var32.set(1)
+                        self.var33.set(1)
+                        self.var34.set(1)
+                        self.var35.set(1)
+                        self.var36.set(1)
+                        self.var37.set(1)
+                        self.var38.set(1)
+                        self.var39.set(1)
+                        self.var40.set(1)
+                        self.var41.set(1)
+                        self.var42.set(1)
+                        self.var43.set(1)
+                        self.var44.set(1)
+                        self.var45.set(1)
+                        self.var46.set(1)
+                        self.var47.set(1)
+                        self.var48.set(1)
+                        self.var49.set(1)
+                        self.var50.set(1)
+                        self.var51.set(1)
+                        self.var52.set(1)
+                        self.var53.set(1)
+                        self.var54.set(1)
+                        self.var55.set(1)
+                        self.var56.set(1)
+                        self.var57.set(1)
+                        self.var58.set(1)
+                        self.var59.set(1)
+                        self.var60.set(1)
+                        self.var61.set(1)
+                        self.var62.set(1)
+                        self.var63.set(1)
+                    except Exception as exception_applying_max_preset:
+                        print(exception_applying_max_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.preset_recyclebin_cleaning :
+                    try:
+                        uncheck_all_options()
+                        self.var0.set(1)
+                    except Exception as exception_applying_recyclebin_cleaning_preset :
+                        print(exception_applying_recyclebin_cleaning_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.preset_webbrowser_cleaning_with_cookies :
+                    try:
+                        uncheck_all_options()
+                        self.var5.set(1)
+                        self.var6.set(1)
+                        self.var33.set(1)
+                        self.var24.set(1)
+                        self.var25.set(1)
+                        self.var59.set(1)
+                        self.var60.set(1)
+                        self.var17.set(1)
+                        self.var18.set(1)
+                        self.var19.set(1)
+                        self.var8.set(1)
+                    except Exception as exception_applying_webbrowser_cookies_cleaning_preset:
+                        print(exception_applying_webbrowser_cookies_cleaning_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.preset_webbrowser_cleaning :
+                    try:
+                        uncheck_all_options()
+                        self.var8.set(1)
+                        self.var5.set(1)
+                        self.var24.set(1)
+                        self.var59.set(1)
+                        self.var18.set(1)
+                        self.var19.set(1)
+                    except Exception as exception_applying_webbrowser_cleaning_preset :
+                        print(exception_applying_webbrowser_cleaning_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.fix_roblox_error_preset :
+                    try:
+                        uncheck_all_options()
+                        self.var9.set(1)
+                        self.var3.set(1)
+                        self.var4.set(1)
+                        self.var41.set(1)
+                        self.var26.set(1)
+                    except Exception as exception_applying_rblxfix_preset :
+                        print(exception_applying_rblxfix_preset)
+                        pass
+                else: # if none of these options are selected.
+                    pass 
 
 
-        # main_canvas.configure(background='black')
-        # main_frame.configure(background='black')
-        # self.show_frame.configure(background='black')
-        # Defining some informative labels inside of the Temp_Cleaner GUI's Window.
-        # self.banner = PhotoImage(file="banner.png")
-        # self.banner_show = Label(self.show_frame, image=self.banner, width=1200, height=300)
-        # self.banner_show.grid(column=0, row=1, sticky='w')
+            elif str(GetConfig['ProgConfig']['languagesetting']) == "ar": # if program language is arabic.
+                print(str(self.preset_chooser.get()))
+                if str(self.preset_chooser.get()) == ar.preset_default :
+                    try:
+                        uncheck_all_options()
+                        self.var0.set(1)
+                        self.var2.set(1)
+                        self.var9.set(1)
+                        self.var3.set(1)
+                        self.var4.set(1)
+                        self.var8.set(1)
+                        self.var23.set(1)
+                    except Exception as exception_applying_preset:
+                        print(exception_applying_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == ar.preset_maximum_cleaning :
+                    try:
+                        uncheck_all_options()
+                        self.var0.set(1)
+                        self.var1.set(1)
+                        self.var2.set(1)
+                        self.var3.set(1)
+                        self.var4.set(1)
+                        self.var5.set(1)
+                        self.var6.set(1)
+                        self.var7.set(1)
+                        self.var8.set(1)
+                        self.var9.set(1)
+                        self.var10.set(1)
+                        self.var11.set(1)
+                        self.var12.set(1)
+                        self.var13.set(1)
+                        self.var14.set(1)
+                        self.var15.set(1)
+                        self.var16.set(1)
+                        self.var17.set(1)
+                        self.var18.set(1)
+                        self.var19.set(1)
+                        self.var20.set(1)
+                        self.var21.set(1)
+                        self.var22.set(1)
+                        self.var23.set(1)
+                        self.var24.set(1)
+                        self.var25.set(1)
+                        self.var26.set(1)
+                        self.var27.set(1)
+                        self.var28.set(1)
+                        self.var29.set(1)
+                        self.var30.set(1)
+                        self.var31.set(1)
+                        self.var32.set(1)
+                        self.var33.set(1)
+                        self.var34.set(1)
+                        self.var35.set(1)
+                        self.var36.set(1)
+                        self.var37.set(1)
+                        self.var38.set(1)
+                        self.var39.set(1)
+                        self.var40.set(1)
+                        self.var41.set(1)
+                        self.var42.set(1)
+                        self.var43.set(1)
+                        self.var44.set(1)
+                        self.var45.set(1)
+                        self.var46.set(1)
+                        self.var47.set(1)
+                        self.var48.set(1)
+                        self.var49.set(1)
+                        self.var50.set(1)
+                        self.var51.set(1)
+                        self.var52.set(1)
+                        self.var53.set(1)
+                        self.var54.set(1)
+                        self.var55.set(1)
+                        self.var56.set(1)
+                        self.var57.set(1)
+                        self.var58.set(1)
+                        self.var59.set(1)
+                        self.var60.set(1)
+                        self.var61.set(1)
+                        self.var62.set(1)
+                        self.var63.set(1)
+                    except Exception as exception_applying_max_preset:
+                        print(exception_applying_max_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == ar.preset_recyclebin_cleaning :
+                    try:
+                        uncheck_all_options()
+                        self.var0.set(1)
+                    except Exception as exception_applying_recyclebin_cleaning_preset :
+                        print(exception_applying_recyclebin_cleaning_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == ar.preset_webbrowser_cleaning_with_cookies :
+                    try:
+                        uncheck_all_options()
+                        self.var5.set(1)
+                        self.var6.set(1)
+                        self.var33.set(1)
+                        self.var24.set(1)
+                        self.var25.set(1)
+                        self.var59.set(1)
+                        self.var60.set(1)
+                        self.var17.set(1)
+                        self.var18.set(1)
+                        self.var19.set(1)
+                        self.var8.set(1)
+                    except Exception as exception_applying_webbrowser_cookies_cleaning_preset:
+                        print(exception_applying_webbrowser_cookies_cleaning_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == ar.preset_webbrowser_cleaning :
+                    try:
+                        uncheck_all_options()
+                        self.var8.set(1)
+                        self.var5.set(1)
+                        self.var24.set(1)
+                        self.var59.set(1)
+                        self.var18.set(1)
+                        self.var19.set(1)
+                    except Exception as exception_applying_webbrowser_cleaning_preset :
+                        print(exception_applying_webbrowser_cleaning_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == ar.fix_roblox_error_preset :
+                    try:
+                        uncheck_all_options()
+                        self.var9.set(1)
+                        self.var3.set(1)
+                        self.var4.set(1)
+                        self.var41.set(1)
+                        self.var26.set(1)
+                    except Exception as exception_applying_rblxfix_preset :
+                        print(exception_applying_rblxfix_preset)
+                        pass
+                else: # if none of these options are selected.
+                    pass 
+            else: # if undefined (returns to english).
+                print(str(self.preset_chooser.get())) # it prints out the str() value of the current combobox selection
+                if str(self.preset_chooser.get()) == en.preset_default :
+                    try:
+                        uncheck_all_options()
+                        self.var0.set(1)
+                        self.var2.set(1)
+                        self.var9.set(1)
+                        self.var3.set(1)
+                        self.var4.set(1)
+                        self.var8.set(1)
+                        self.var23.set(1)
+                    except Exception as exception_applying_preset:
+                        print(exception_applying_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.preset_maximum_cleaning :
+                    try:
+                        uncheck_all_options()
+                        self.var0.set(1)
+                        self.var1.set(1)
+                        self.var2.set(1)
+                        self.var3.set(1)
+                        self.var4.set(1)
+                        self.var5.set(1)
+                        self.var6.set(1)
+                        self.var7.set(1)
+                        self.var8.set(1)
+                        self.var9.set(1)
+                        self.var10.set(1)
+                        self.var11.set(1)
+                        self.var12.set(1)
+                        self.var13.set(1)
+                        self.var14.set(1)
+                        self.var15.set(1)
+                        self.var16.set(1)
+                        self.var17.set(1)
+                        self.var18.set(1)
+                        self.var19.set(1)
+                        self.var20.set(1)
+                        self.var21.set(1)
+                        self.var22.set(1)
+                        self.var23.set(1)
+                        self.var24.set(1)
+                        self.var25.set(1)
+                        self.var26.set(1)
+                        self.var27.set(1)
+                        self.var28.set(1)
+                        self.var29.set(1)
+                        self.var30.set(1)
+                        self.var31.set(1)
+                        self.var32.set(1)
+                        self.var33.set(1)
+                        self.var34.set(1)
+                        self.var35.set(1)
+                        self.var36.set(1)
+                        self.var37.set(1)
+                        self.var38.set(1)
+                        self.var39.set(1)
+                        self.var40.set(1)
+                        self.var41.set(1)
+                        self.var42.set(1)
+                        self.var43.set(1)
+                        self.var44.set(1)
+                        self.var45.set(1)
+                        self.var46.set(1)
+                        self.var47.set(1)
+                        self.var48.set(1)
+                        self.var49.set(1)
+                        self.var50.set(1)
+                        self.var51.set(1)
+                        self.var52.set(1)
+                        self.var53.set(1)
+                        self.var54.set(1)
+                        self.var55.set(1)
+                        self.var56.set(1)
+                        self.var57.set(1)
+                        self.var58.set(1)
+                        self.var59.set(1)
+                        self.var60.set(1)
+                        self.var61.set(1)
+                        self.var62.set(1)
+                        self.var63.set(1)
+                    except Exception as exception_applying_max_preset:
+                        print(exception_applying_max_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.preset_recyclebin_cleaning :
+                    try:
+                        uncheck_all_options()
+                        self.var0.set(1)
+                    except Exception as exception_applying_recyclebin_cleaning_preset :
+                        print(exception_applying_recyclebin_cleaning_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.preset_webbrowser_cleaning_with_cookies :
+                    try:
+                        uncheck_all_options()
+                        self.var5.set(1)
+                        self.var6.set(1)
+                        self.var33.set(1)
+                        self.var24.set(1)
+                        self.var25.set(1)
+                        self.var59.set(1)
+                        self.var60.set(1)
+                        self.var17.set(1)
+                        self.var18.set(1)
+                        self.var19.set(1)
+                        self.var8.set(1)
+                    except Exception as exception_applying_webbrowser_cookies_cleaning_preset:
+                        print(exception_applying_webbrowser_cookies_cleaning_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.preset_webbrowser_cleaning :
+                    try:
+                        uncheck_all_options()
+                        self.var8.set(1)
+                        self.var5.set(1)
+                        self.var24.set(1)
+                        self.var59.set(1)
+                        self.var18.set(1)
+                        self.var19.set(1)
+                    except Exception as exception_applying_webbrowser_cleaning_preset :
+                        print(exception_applying_webbrowser_cleaning_preset)
+                        pass
+                elif str(self.preset_chooser.get()) == en.fix_roblox_error_preset :
+                    try:
+                        uncheck_all_options()
+                        self.var9.set(1)
+                        self.var3.set(1)
+                        self.var4.set(1)
+                        self.var41.set(1)
+                        self.var26.set(1)
+                    except Exception as exception_applying_rblxfix_preset :
+                        print(exception_applying_rblxfix_preset)
+                        pass
+                else: # if none of these options are selected.
+                    pass 
+            
+            return None
+
+
         # Defining a sample get var functionaking a new checkbox.
         # Defining the ON-OFF Like variable
         self.var0 = StringVar()
@@ -748,9 +1233,49 @@ class MainWindowLightMode(Tk):
         self.var62 = StringVar()
         self.var63 = StringVar()
         self.var64 = StringVar()
-        # Defining the checkbox button.
 
-        # setting the proper language pack for the program's UI.
+        # ------------------------------
+        # getting widgets original direction according to the UI language
+        if str(GetConfig['ProgConfig']['languagesetting']) == 'en': # if UI lang is English.
+            components_direction = en.widgets_sticking_direction
+        elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar': # if UI lang is Arabic.
+            components_direction = ar.widgets_sticking_direction
+        else: # if UI lang is not specified.
+            components_direction = en.widgets_sticking_direction
+        # ------------------------------
+
+        
+        # defining the presets label frame.
+        # ---------------------------
+        if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
+            presets_text0 = en.dontknow_whattodo_presets_text
+        elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
+            presets_text0 = ar.dontknow_whattodo_presets_text
+        else:
+            presets_text0 = en.dontknow_whattodo_presets_text
+        self.presets_lblframe = ttk.LabelFrame(self.show_frame, text=presets_text0)
+        
+        
+
+
+        self.preset_chooser = ttk.Combobox(self.presets_lblframe, width=100)
+        # inserting values for the presets combobox.
+        if str(GetConfig['ProgConfig']['languagesetting']) == "en":
+            self.preset_chooser['values'] = (en.preset_default, en.preset_maximum_cleaning, en.preset_recyclebin_cleaning, en.preset_webbrowser_cleaning, en.preset_webbrowser_cleaning_with_cookies, en.fix_roblox_error_preset)
+        elif str(GetConfig['ProgConfig']['languagesetting']) == "ar":
+            self.preset_chooser['values'] = (ar.preset_default, ar.preset_maximum_cleaning, ar.preset_recyclebin_cleaning, ar.preset_webbrowser_cleaning, ar.preset_webbrowser_cleaning_with_cookies, ar.fix_roblox_error_preset)
+        else:
+            self.preset_chooser['values'] = (en.preset_default, en.preset_maximum_cleaning, en.preset_recyclebin_cleaning, en.preset_webbrowser_cleaning, en.preset_webbrowser_cleaning_with_cookies, en.fix_roblox_error_preset)
+        self.preset_chooser.grid(column=0, row=1, sticky=components_direction)
+
+        self.presets_lblframe.grid(column=0, row=2, sticky=components_direction)
+        self.preset_chooser.bind('<<ComboboxSelected>>', apply_cleaning_preset) # binding a function that gets called whenever the value of such a combobox is changed by the user.
+        # ---------------------------
+        
+
+
+        # Defining the checkbox buttons
+        # --------------------------
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text0 = en.recycle_bin_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -759,7 +1284,8 @@ class MainWindowLightMode(Tk):
             text0 = en.recycle_bin_text
 
         self.lblframe0 = ttk.Labelframe(self.show_frame, text=text0)
-        # --------------------------
+
+        
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text1 = en.windrv_recycle_bin_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -768,10 +1294,10 @@ class MainWindowLightMode(Tk):
             text1 = en.windrv_recycle_bin_text
 
         self.clr_recyclebin_sysdrive_btn = ttk.Checkbutton(self.lblframe0, text=text1, variable=self.var0, onvalue="1", offvalue="0", command=None)
-        self.clr_recyclebin_sysdrive_btn.grid(column=0, row=3, sticky='w')
+        self.clr_recyclebin_sysdrive_btn.grid(column=0, row=1, sticky=components_direction)
 
         # ---------------------------
-        self.lblframe0.grid(column=0, row=2, sticky='w')
+        self.lblframe0.grid(column=0, row=3, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text2 = en.dxdcache_text
@@ -783,9 +1309,9 @@ class MainWindowLightMode(Tk):
         self.lblframe1 = ttk.Labelframe(self.show_frame, text=text2)
         # ---------------------------
         self.clr_d3dscache_localappdata_btn = ttk.Checkbutton(self.lblframe1, text=text2, variable=self.var2, onvalue="1", offvalue="0", command=None)
-        self.clr_d3dscache_localappdata_btn.grid(column=0, row=5, sticky='w')
+        self.clr_d3dscache_localappdata_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe1.grid(column=0, row=4, sticky='w')
+        self.lblframe1.grid(column=0, row=4, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text3 = en.sys_user_specific_text
@@ -803,9 +1329,8 @@ class MainWindowLightMode(Tk):
             text4 = ar.prefw_text
         else:
             text4 = en.prefw_text
-        
         self.clr_prefetchw_windir_btn = ttk.Checkbutton(self.lblframe2, text=text4, variable=self.var1, onvalue="1", offvalue="0", command=None)
-        self.clr_prefetchw_windir_btn.grid(column=0, row=7, sticky='w')
+        self.clr_prefetchw_windir_btn.grid(column=0, row=1, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text5 = en.clipboard_text
@@ -813,9 +1338,8 @@ class MainWindowLightMode(Tk):
             text5 = ar.clipboard_text
         else:
             text5 = en.clipboard_text
-        
         self.clr_usrclipboard_content_btn = ttk.Checkbutton(self.lblframe2, text=text5, variable=self.var9, onvalue="1", offvalue="0", command=None)
-        self.clr_usrclipboard_content_btn.grid(column=0, row=8, sticky='w')
+        self.clr_usrclipboard_content_btn.grid(column=0, row=2, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text6 = en.windir_temp_text
@@ -824,7 +1348,8 @@ class MainWindowLightMode(Tk):
         else:
             text6 = en.windir_temp_text
         self.clr_windir_temp_btn = ttk.Checkbutton(self.lblframe2, text=text6, variable=self.var3, onvalue="1", offvalue="0", command=None)
-        self.clr_windir_temp_btn.grid(column=0, row=9, sticky='w')
+        self.clr_windir_temp_btn.grid(column=0, row=3, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text7 = en.user_temp_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -832,7 +1357,8 @@ class MainWindowLightMode(Tk):
         else:
             text7 = en.user_temp_text
         self.clr_localappdata_temp_btn = ttk.Checkbutton(self.lblframe2, text=text7, variable=self.var4, onvalue="1", offvalue="0", command=None)
-        self.clr_localappdata_temp_btn.grid(column=0, row=10, sticky='w')
+        self.clr_localappdata_temp_btn.grid(column=0, row=4, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text8 = en.defuser_temp_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -840,7 +1366,8 @@ class MainWindowLightMode(Tk):
         else:
             text8 = en.defuser_temp_text
         self.clr_default_usr_appdata_temp_btn = ttk.Checkbutton(self.lblframe2, text=text8, variable=self.var7, onvalue="1", offvalue="0", command=None)
-        self.clr_default_usr_appdata_temp_btn.grid(column=0, row=11, sticky='w')
+        self.clr_default_usr_appdata_temp_btn.grid(column=0, row=5, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text9 = en.iecache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -848,7 +1375,8 @@ class MainWindowLightMode(Tk):
         else:
             text9 = en.iecache_text
         self.clr_inet_cached_data_btn = ttk.Checkbutton(self.lblframe2, text=text9, variable=self.var8, onvalue="1", offvalue="0", command=None)
-        self.clr_inet_cached_data_btn.grid(column=0, row=12, sticky='w')
+        self.clr_inet_cached_data_btn.grid(column=0, row=6, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text10 = en.winexp_thumbcache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -856,7 +1384,8 @@ class MainWindowLightMode(Tk):
         else:
             text10 = en.winexp_thumbcache_text
         self.clr_msexplorer_thumbcacheddata_btn = ttk.Checkbutton(self.lblframe2, text=text10, variable=self.var10, onvalue="1", offvalue="0", command=None)
-        self.clr_msexplorer_thumbcacheddata_btn.grid(column=0, row=13, sticky='w')
+        self.clr_msexplorer_thumbcacheddata_btn.grid(column=0, row=7, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text11 = en.user_recents_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -864,7 +1393,8 @@ class MainWindowLightMode(Tk):
         else:
             text11 = en.user_recents_text
         self.clr_winrecentdocs_list_btn = ttk.Checkbutton(self.lblframe2, text=text11, variable=self.var11, onvalue="1", offvalue="0", command=None)
-        self.clr_winrecentdocs_list_btn.grid(column=0, row=14, sticky='w')
+        self.clr_winrecentdocs_list_btn.grid(column=0, row=8, sticky=components_direction)
+
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text12 = en.local_low_temp_text
@@ -872,11 +1402,10 @@ class MainWindowLightMode(Tk):
             text12 = ar.local_low_temp_text
         else:
             text12 = en.local_low_temp_text
-
         self.clr_locallow_temporary_data_btn = ttk.Checkbutton(self.lblframe2, text=text12, variable=self.var41, onvalue="1", offvalue="0", command=None)
-        self.clr_locallow_temporary_data_btn.grid(column=0, row=15, sticky='w')
+        self.clr_locallow_temporary_data_btn.grid(column=0, row=9, sticky=components_direction)
         # ---------------------------
-        self.lblframe2.grid(column=0, row=6, sticky='w')
+        self.lblframe2.grid(column=0, row=5, sticky=components_direction)
 
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
@@ -895,7 +1424,8 @@ class MainWindowLightMode(Tk):
         else:
             text14 = en.gchrome_webcache_text
         self.clr_gchrome_webcache_incl_gpucache_codecache_btn = ttk.Checkbutton(self.lblframe3, text=text14, variable=self.var5, onvalue="1", offvalue="0", command=None)
-        self.clr_gchrome_webcache_incl_gpucache_codecache_btn.grid(column=0, row=17, sticky='w')
+        self.clr_gchrome_webcache_incl_gpucache_codecache_btn.grid(column=0, row=1, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text15 = en.gchrome_cookies_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -903,7 +1433,8 @@ class MainWindowLightMode(Tk):
         else:
             text15 = en.gchrome_cookies_text
         self.clr_gchrome_browser_cookies_btn = ttk.Checkbutton(self.lblframe3, text=text15, variable=self.var6, onvalue="1", offvalue="0", command=None)
-        self.clr_gchrome_browser_cookies_btn.grid(column=0, row=18, sticky='w')
+        self.clr_gchrome_browser_cookies_btn.grid(column=0, row=2, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text16 = en.gchrome_extensions_cookies_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -911,7 +1442,8 @@ class MainWindowLightMode(Tk):
         else:
             text16 = en.gchrome_extensions_cookies_text
         self.clr_gchrome_extension_cookies_data_btn = ttk.Checkbutton(self.lblframe3, text=text16, variable=self.var33, onvalue="1", offvalue="0", command=None)
-        self.clr_gchrome_extension_cookies_data_btn.grid(column=0, row=19, sticky='w')
+        self.clr_gchrome_extension_cookies_data_btn.grid(column=0, row=3, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text17 = en.steam_htmlcache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -919,7 +1451,8 @@ class MainWindowLightMode(Tk):
         else:
             text17 = en.steam_htmlcache_text
         self.clr_steam_webclient_htmlcache_btn = ttk.Checkbutton(self.lblframe3, text=text17, variable=self.var14, onvalue="1", offvalue="0", command=None)
-        self.clr_steam_webclient_htmlcache_btn.grid(column=0, row=20, sticky='w')
+        self.clr_steam_webclient_htmlcache_btn.grid(column=0, row=4, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text18 = en.discord_webcache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -927,7 +1460,8 @@ class MainWindowLightMode(Tk):
         else:
             text18 = en.discord_webcache_text
         self.clr_discordwebclient_webcacheddata_btn = ttk.Checkbutton(self.lblframe3, text=text18, variable=self.var12, onvalue="1", offvalue="0", command=None)
-        self.clr_discordwebclient_webcacheddata_btn.grid(column=0, row=21, sticky='w')
+        self.clr_discordwebclient_webcacheddata_btn.grid(column=0, row=5, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text19 = en.chromium_based_edge_webcache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -935,7 +1469,8 @@ class MainWindowLightMode(Tk):
         else:
             text19 = en.chromium_based_edge_webcache_text
         self.clr_chromiumbased_msedge_webcached_data_btn = ttk.Checkbutton(self.lblframe3, text=text19, variable=self.var24, onvalue="1", offvalue="0", command=None)
-        self.clr_chromiumbased_msedge_webcached_data_btn.grid(column=0, row=22, sticky='w')
+        self.clr_chromiumbased_msedge_webcached_data_btn.grid(column=0, row=6, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text20 = en.chromium_based_edge_cookies_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -943,7 +1478,8 @@ class MainWindowLightMode(Tk):
         else:
             text20 = en.chromium_based_edge_cookies_text
         self.clr_chormiumbased_msedge_cookies_data_btn = ttk.Checkbutton(self.lblframe3, text=text20, variable=self.var25, onvalue="1", offvalue="0", command=None)
-        self.clr_chormiumbased_msedge_cookies_data_btn.grid(column=0, row=23, sticky='w')
+        self.clr_chormiumbased_msedge_cookies_data_btn.grid(column=0, row=7, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text21 = en.firefox_webcached_data_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -951,7 +1487,8 @@ class MainWindowLightMode(Tk):
         else:
             text21 = en.firefox_webcached_data_text
         self.clr_mozilla_firefox_webcached_data_btn = ttk.Checkbutton(self.lblframe3, text=text21, variable=self.var59, onvalue="1", offvalue="0", command=None)
-        self.clr_mozilla_firefox_webcached_data_btn.grid(column=0, row=24, sticky='w')
+        self.clr_mozilla_firefox_webcached_data_btn.grid(column=0, row=8, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text22 = en.mozilla_firefox_cookie_data_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -959,7 +1496,8 @@ class MainWindowLightMode(Tk):
         else:
             text22 = en.mozilla_firefox_cookie_data_text
         self.clr_mozilla_firefox_cookies_sqlite_file_btn = ttk.Checkbutton(self.lblframe3, text=text22, variable=self.var60, onvalue="1", offvalue="0", command=None)
-        self.clr_mozilla_firefox_cookies_sqlite_file_btn.grid(column=0, row=25, sticky='w')
+        self.clr_mozilla_firefox_cookies_sqlite_file_btn.grid(column=0, row=9, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text23 = en.discord_squirrel_temp
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -967,7 +1505,8 @@ class MainWindowLightMode(Tk):
         else:
             text23 = en.discord_squirrel_temp
         self.clr_discordapp_squirrel_temp_data_btn = ttk.Checkbutton(self.lblframe3, text=text23, variable=self.var40, onvalue="1", offvalue="0", command=None)
-        self.clr_discordapp_squirrel_temp_data_btn.grid(column=0, row=26, sticky='w')
+        self.clr_discordapp_squirrel_temp_data_btn.grid(column=0, row=10, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text24 = en.iecookies_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -975,7 +1514,8 @@ class MainWindowLightMode(Tk):
         else:
             text24 = en.iecookies_text
         self.clr_inetcookies_btn = ttk.Checkbutton(self.lblframe3, text=text24, variable=self.var17, onvalue="1", offvalue="0", command=None)
-        self.clr_inetcookies_btn.grid(column=0, row=27, sticky='w')
+        self.clr_inetcookies_btn.grid(column=0, row=11, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text25 = en.adds_ietemp_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -983,7 +1523,8 @@ class MainWindowLightMode(Tk):
         else:
             text25 = en.adds_ietemp_text
         self.clr_additionalinet_cacheddata_btn = ttk.Checkbutton(self.lblframe3, text=text25, variable=self.var18, onvalue="1", offvalue="0", command=None)
-        self.clr_additionalinet_cacheddata_btn.grid(column=0, row=28, sticky='w')
+        self.clr_additionalinet_cacheddata_btn.grid(column=0, row=12, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text26 = en.iedownloadhistory_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -991,9 +1532,10 @@ class MainWindowLightMode(Tk):
         else:
             text26 = en.iedownloadhistory_text
         self.clr_iedownload_history_data_btn = ttk.Checkbutton(self.lblframe3, text=text26, variable=self.var19, onvalue="1", offvalue="0", command=None)
-        self.clr_iedownload_history_data_btn.grid(column=0, row=29, sticky='w')
+        self.clr_iedownload_history_data_btn.grid(column=0, row=13, sticky=components_direction)
+
         # ---------------------------
-        self.lblframe3.grid(column=0, row=16, sticky='w')
+        self.lblframe3.grid(column=0, row=6, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text27 = en.photo_editors_text
@@ -1003,6 +1545,7 @@ class MainWindowLightMode(Tk):
             text27 = en.photo_editors_text
 
         self.lblframe4 = ttk.Labelframe(self.show_frame, text=text27)
+
         # ---------------------------
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text28 = en.gimp_tmp_text
@@ -1011,7 +1554,8 @@ class MainWindowLightMode(Tk):
         else:
             text28 = en.gimp_tmp_text
         self.clr_gimpstmps_btn = ttk.Checkbutton(self.lblframe4, text=text28, variable=self.var13, onvalue="1", offvalue="0", command=None)
-        self.clr_gimpstmps_btn.grid(column=0, row=31, sticky='w')
+        self.clr_gimpstmps_btn.grid(column=0, row=1, sticky=components_direction)
+
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text29 = en.gimp_recent_docs_list_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1019,7 +1563,8 @@ class MainWindowLightMode(Tk):
         else:
             text29 = en.gimp_recent_docs_list_text
         self.clr_gimp_recentdocs_btn = ttk.Checkbutton(self.lblframe4, text=text29, variable=self.var47, onvalue="1", offvalue="0", command=None)
-        self.clr_gimp_recentdocs_btn.grid(column=0, row=32, sticky='w')
+        self.clr_gimp_recentdocs_btn.grid(column=0, row=2, sticky=components_direction)
+        
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text30 = en.ps2020_webcache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1027,9 +1572,9 @@ class MainWindowLightMode(Tk):
         else:
             text30 = en.ps2020_webcache_text
         self.clr_adobephotoshop_webcached_data_btn = ttk.Checkbutton(self.lblframe4, text=text30, variable=self.var27, onvalue="1", offvalue="0", command=None)
-        self.clr_adobephotoshop_webcached_data_btn.grid(column=0, row=33, sticky='w')
+        self.clr_adobephotoshop_webcached_data_btn.grid(column=0, row=3, sticky=components_direction)
         # ---------------------------
-        self.lblframe4.grid(column=0, row=30, sticky='w')
+        self.lblframe4.grid(column=0, row=7, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text31 = en.winupdate_text
@@ -1047,9 +1592,9 @@ class MainWindowLightMode(Tk):
         else:
             text32 = en.winupdate_downloadedfiles_text
         self.clr_windowsupdate_downloaded_updates_btn = ttk.Checkbutton(self.lblframe5, text=text32, variable=self.var15, onvalue="1", offvalue="0", command=None)
-        self.clr_windowsupdate_downloaded_updates_btn.grid(column=0, row=35, sticky='w')
+        self.clr_windowsupdate_downloaded_updates_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe5.grid(column=0, row=34, sticky='w')
+        self.lblframe5.grid(column=0, row=8, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text33 = en.win10plus_cleaners_text
@@ -1067,7 +1612,7 @@ class MainWindowLightMode(Tk):
         else:
             text34 = en.win10plus_oscache_text
         self.clr_win10os_cached_data_btn = ttk.Checkbutton(self.lblframe6, text=text34, variable=self.var16, onvalue="1", offvalue="0", command=None)
-        self.clr_win10os_cached_data_btn.grid(column=0, row=37, sticky='w')
+        self.clr_win10os_cached_data_btn.grid(column=0, row=1, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text35 = en.actioncenter_cache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1075,7 +1620,7 @@ class MainWindowLightMode(Tk):
         else:
             text35 = en.actioncenter_cache_text
         self.clr_win10_action_center_cached_data_btn = ttk.Checkbutton(self.lblframe6, text=text35, variable=self.var20, onvalue="1", offvalue="0", command=None)
-        self.clr_win10_action_center_cached_data_btn.grid(column=0, row=38, sticky='w')
+        self.clr_win10_action_center_cached_data_btn.grid(column=0, row=2, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text36 = en.modern_apps_cache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1083,7 +1628,7 @@ class MainWindowLightMode(Tk):
         else:
             text36 = en.modern_apps_cache_text
         self.clr_winappux_cached_data_btn = ttk.Checkbutton(self.lblframe6, text=text36, variable=self.var21, onvalue="1", offvalue="0", command=None)
-        self.clr_winappux_cached_data_btn.grid(column=0, row=39, sticky='w')
+        self.clr_winappux_cached_data_btn.grid(column=0, row=3, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text37 = en.msedge_msstore_webcache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1091,7 +1636,7 @@ class MainWindowLightMode(Tk):
         else:
             text37 = en.msedge_msstore_webcache_text
         self.clr_msstore_based_edge_webcached_data_btn = ttk.Checkbutton(self.lblframe6, text=text37, variable=self.var22, onvalue="1", offvalue="0", command=None)
-        self.clr_msstore_based_edge_webcached_data_btn.grid(column=0, row=40, sticky='w')
+        self.clr_msstore_based_edge_webcached_data_btn.grid(column=0, row=4, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text38 = en.thumbcachetodelete_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1099,7 +1644,7 @@ class MainWindowLightMode(Tk):
         else:
             text38 = en.thumbcachetodelete_text
         self.clr_winexplorer_thumbcache_to_delete_files_btn = ttk.Checkbutton(self.lblframe6, text=text38, variable=self.var23, onvalue="1", offvalue="0", command=None)
-        self.clr_winexplorer_thumbcache_to_delete_files_btn.grid(column=0, row=41, sticky='w')
+        self.clr_winexplorer_thumbcache_to_delete_files_btn.grid(column=0, row=5, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text39 = en.cryptneturl_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1107,7 +1652,7 @@ class MainWindowLightMode(Tk):
         else:
             text39 = en.cryptneturl_text
         self.clr_cryptnet_urlcache_data_btn = ttk.Checkbutton(self.lblframe6, text=text39, variable=self.var30, onvalue="1", offvalue="0", command=None)
-        self.clr_cryptnet_urlcache_data_btn.grid(column=0, row=42, sticky='w')
+        self.clr_cryptnet_urlcache_data_btn.grid(column=0, row=6, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text40 = en.connecteddevicesplatform_cache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1115,7 +1660,7 @@ class MainWindowLightMode(Tk):
         else:
             text40 = en.connecteddevicesplatform_cache_text
         self.clr_connecteddevicesplatform_win10_cached_data_btn = ttk.Checkbutton(self.lblframe6, text=text40, variable=self.var34, onvalue="1", offvalue="0", command=None)
-        self.clr_connecteddevicesplatform_win10_cached_data_btn.grid(column=0, row=43, sticky='w')
+        self.clr_connecteddevicesplatform_win10_cached_data_btn.grid(column=0, row=7, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text41 = en.elevateddiagnostics_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1123,7 +1668,7 @@ class MainWindowLightMode(Tk):
         else:
             text41 = en.elevateddiagnostics_text
         self.clr_elevated_diagnostics_data_btn = ttk.Checkbutton(self.lblframe6, text=text41, variable=self.var42, onvalue="1", offvalue="0", command=None)
-        self.clr_elevated_diagnostics_data_btn.grid(column=0, row=44, sticky='w')
+        self.clr_elevated_diagnostics_data_btn.grid(column=0, row=8, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text42 = en.identitynexusintegration_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1131,7 +1676,7 @@ class MainWindowLightMode(Tk):
         else:
             text42 = en.identitynexusintegration_text
         self.clr_identitynexus_integration_folder_btn = ttk.Checkbutton(self.lblframe6, text=text42, variable=self.var49, onvalue="1", offvalue="0", command=None)
-        self.clr_identitynexus_integration_folder_btn.grid(column=0, row=45, sticky='w')
+        self.clr_identitynexus_integration_folder_btn.grid(column=0, row=9, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text43 = en.servicehub_identity_file_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1139,9 +1684,9 @@ class MainWindowLightMode(Tk):
         else:
             text43 = en.servicehub_identity_file_text
         self.clr_servicehub_identity_file_btn = ttk.Checkbutton(self.lblframe6, text=text43, variable=self.var56, onvalue="1", offvalue="0", command=None)
-        self.clr_servicehub_identity_file_btn.grid(column=0, row=46, sticky='w')
+        self.clr_servicehub_identity_file_btn.grid(column=0, row=10, sticky=components_direction)
         # ---------------------------
-        self.lblframe6.grid(column=0, row=36, sticky='w')
+        self.lblframe6.grid(column=0, row=9, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text44 = en.games_text
@@ -1158,7 +1703,7 @@ class MainWindowLightMode(Tk):
         else:
             text45 = en.roblox_textures_text
         self.clr_roblox_game_downloads_btn = ttk.Checkbutton(self.lblframe7, text=text45, variable=self.var26, onvalue="1", offvalue="0", command=None)
-        self.clr_roblox_game_downloads_btn.grid(column=0, row=48, sticky='w')
+        self.clr_roblox_game_downloads_btn.grid(column=0, row=1, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text46 = en.roblox_verbosed_logs_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1166,7 +1711,7 @@ class MainWindowLightMode(Tk):
         else:
             text46 = en.roblox_verbosed_logs_text
         self.clr_roblox_game_log_files_btn = ttk.Checkbutton(self.lblframe7, text=text46, variable=self.var51, onvalue="1", offvalue="0", command=None)
-        self.clr_roblox_game_log_files_btn.grid(column=0, row=49, sticky='w')
+        self.clr_roblox_game_log_files_btn.grid(column=0, row=2, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text47 = en.axolot_games_scrapmechanic_workshop_cache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1174,7 +1719,7 @@ class MainWindowLightMode(Tk):
         else:
             text47 = en.axolot_games_scrapmechanic_workshop_cache_text
         self.clr_scrapmechanic_axolot_games_workshop_items_cached_data_btn = ttk.Checkbutton(self.lblframe7, text=text47, variable=self.var50, onvalue="1", offvalue="0", command=None)
-        self.clr_scrapmechanic_axolot_games_workshop_items_cached_data_btn.grid(column=0, row=50, sticky='w')
+        self.clr_scrapmechanic_axolot_games_workshop_items_cached_data_btn.grid(column=0, row=3, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text48 = en.minecraft_webcache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1182,9 +1727,9 @@ class MainWindowLightMode(Tk):
         else:
             text48 = en.minecraft_webcache_text
         self.clr_minecraft_webcached_data_btn = ttk.Checkbutton(self.lblframe7, text=text48, variable=self.var58, onvalue="1", offvalue="0", command=None)
-        self.clr_minecraft_webcached_data_btn.grid(column=0, row=51, sticky='w')
+        self.clr_minecraft_webcached_data_btn.grid(column=0, row=4, sticky=components_direction)
         # ---------------------------
-        self.lblframe7.grid(column=0, row=47, sticky='w')
+        self.lblframe7.grid(column=0, row=10, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text49 = en.python_cleaners_text
@@ -1202,7 +1747,7 @@ class MainWindowLightMode(Tk):
         else:
             text50 = en.pypip_text
         self.clr_python_pip_cached_data_btn = ttk.Checkbutton(self.lblframe8, text=text50, variable=self.var31, onvalue="1", offvalue="0", command=None)
-        self.clr_python_pip_cached_data_btn.grid(column=0, row=53, sticky='w')
+        self.clr_python_pip_cached_data_btn.grid(column=0, row=1, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text51 = en.pyinstaller_bin_cache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1210,7 +1755,7 @@ class MainWindowLightMode(Tk):
         else:
             text51 = en.pyinstaller_bin_cache_text
         self.clr_pyinstaller_temporary_data_btn = ttk.Checkbutton(self.lblframe8, text=text51, variable=self.var45, onvalue="1", offvalue="0", command=None)
-        self.clr_pyinstaller_temporary_data_btn.grid(column=0, row=54, sticky='w')
+        self.clr_pyinstaller_temporary_data_btn.grid(column=0, row=2, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text52 = en.jedi_python_cache_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1218,9 +1763,9 @@ class MainWindowLightMode(Tk):
         else:
             text52 = en.jedi_python_cache_text
         self.clr_jedipython_additionals_btn = ttk.Checkbutton(self.lblframe8, text=text52, variable=self.var46, onvalue="1", offvalue="0", command=None)
-        self.clr_jedipython_additionals_btn.grid(column=0, row=55, sticky='w')
+        self.clr_jedipython_additionals_btn.grid(column=0, row=3, sticky=components_direction)
         # ---------------------------
-        self.lblframe8.grid(column=0, row=52, sticky='w')
+        self.lblframe8.grid(column=0, row=11, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text53 = en.ram_text
@@ -1238,9 +1783,9 @@ class MainWindowLightMode(Tk):
         else:
             text54 = en.empty_running_workingsets_rammap_text
         self.empty_winworkingsets_rammap_btn = ttk.Checkbutton(self.lblframe9, text=text54, variable=self.var32, onvalue="1", offvalue="0", command=None)
-        self.empty_winworkingsets_rammap_btn.grid(column=0, row=57, sticky='w')
+        self.empty_winworkingsets_rammap_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe9.grid(column=0, row=56, sticky='w')
+        self.lblframe9.grid(column=0, row=12, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text55 = en.video_editing_software_text
@@ -1258,7 +1803,7 @@ class MainWindowLightMode(Tk):
         else:
             text56 = en.vegaspro17_temp_text
         self.clr_sony_vegas_pro_temp_and_logs_data_btn = ttk.Checkbutton(self.lblframe10, text=text56, variable=self.var28, onvalue="1", offvalue="0", command=None)
-        self.clr_sony_vegas_pro_temp_and_logs_data_btn.grid(column=0, row=59, sticky='w')
+        self.clr_sony_vegas_pro_temp_and_logs_data_btn.grid(column=0, row=1, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text57 = en.vegaspro17_errorlogs_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1266,9 +1811,9 @@ class MainWindowLightMode(Tk):
         else:
             text57 = en.vegaspro17_errorlogs_text
         self.clr_sony_vegas_pro_error_reports_data_btn = ttk.Checkbutton(self.lblframe10, text=text57, variable=self.var61, onvalue="1", offvalue="0", command=None)
-        self.clr_sony_vegas_pro_error_reports_data_btn.grid(column=0, row=60, sticky='w')
+        self.clr_sony_vegas_pro_error_reports_data_btn.grid(column=0, row=2, sticky=components_direction)
         # ---------------------------
-        self.lblframe10.grid(column=0, row=58, sticky='w')
+        self.lblframe10.grid(column=0, row=13, sticky=components_direction)
 
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
@@ -1286,9 +1831,9 @@ class MainWindowLightMode(Tk):
         else:
             text59 = en.mcneel_rhinoceros_3d_temp_text
         self.clr_mcneel_rhinoceros_3d_moduling_soft_cached_data_btn = ttk.Checkbutton(self.lblframe11, text=text59, variable=self.var29, onvalue="1", offvalue="0", command=None)
-        self.clr_mcneel_rhinoceros_3d_moduling_soft_cached_data_btn.grid(column=0, row=62, sticky='w')
+        self.clr_mcneel_rhinoceros_3d_moduling_soft_cached_data_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe11.grid(column=0, row=61, sticky='w')
+        self.lblframe11.grid(column=0, row=14, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text60 = en.adds_software_text
@@ -1306,7 +1851,7 @@ class MainWindowLightMode(Tk):
         else:
             text61 = en.iconcachefile_text
         self.clr_iconcache_db_file_in_localappdata_dir_btn = ttk.Checkbutton(self.lblframe12, text=text61, variable=self.var35, onvalue="1", offvalue="0", command=None)
-        self.clr_iconcache_db_file_in_localappdata_dir_btn.grid(column=0, row=64, sticky='w')
+        self.clr_iconcache_db_file_in_localappdata_dir_btn.grid(column=0, row=1, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text62 = en.microvert_memu_logs_memdump_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1314,7 +1859,7 @@ class MainWindowLightMode(Tk):
         else:
             text62 = en.microvert_memu_logs_memdump_text
         self.clr_microvirt_memu_log_data_memdump_files_btn = ttk.Checkbutton(self.lblframe12, text=text62, variable=self.var36, onvalue="1", offvalue="0", command=None)
-        self.clr_microvirt_memu_log_data_memdump_files_btn.grid(column=0, row=65, sticky='w')
+        self.clr_microvirt_memu_log_data_memdump_files_btn.grid(column=0, row=2, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text63 = en.malwarebytes_adware_cleaner_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1322,7 +1867,7 @@ class MainWindowLightMode(Tk):
         else:
             text63 = en.malwarebytes_adware_cleaner_text
         self.clr_adwcleaner_log_files_btn = ttk.Checkbutton(self.lblframe12, text=text63, variable=self.var37, onvalue="1", offvalue="0", command=None)
-        self.clr_adwcleaner_log_files_btn.grid(column=0, row=66, sticky='w')
+        self.clr_adwcleaner_log_files_btn.grid(column=0, row=3, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text64 = en.perflogs_sysdrive_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1330,7 +1875,7 @@ class MainWindowLightMode(Tk):
         else:
             text64 = en.perflogs_sysdrive_text
         self.clr_perflogs_in_systemdrive_btn = ttk.Checkbutton(self.lblframe12, text=text64, variable=self.var38, onvalue="1", offvalue="0", command=None)
-        self.clr_perflogs_in_systemdrive_btn.grid(column=0, row=67, sticky='w')
+        self.clr_perflogs_in_systemdrive_btn.grid(column=0, row=4, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text65 = en.android_cached_data_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1338,7 +1883,7 @@ class MainWindowLightMode(Tk):
         else:
             text65 = en.android_cached_data_text
         self.clr_dotcache_folder_in_userprofile_path_btn = ttk.Checkbutton(self.lblframe12, text=text65, variable=self.var39, onvalue="1", offvalue="0", command=None)
-        self.clr_dotcache_folder_in_userprofile_path_btn.grid(column=0, row=68, sticky='w')
+        self.clr_dotcache_folder_in_userprofile_path_btn.grid(column=0, row=5, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text66 = en.vmware_downloads
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1346,7 +1891,7 @@ class MainWindowLightMode(Tk):
         else:
             text66 = en.vmware_downloads
         self.clr_vmware_downloads_folder_btn = ttk.Checkbutton(self.lblframe12, text=text66, variable=self.var43, onvalue="1", offvalue="0", command=None)
-        self.clr_vmware_downloads_folder_btn.grid(column=0, row=69, sticky='w')
+        self.clr_vmware_downloads_folder_btn.grid(column=0, row=6, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text67 = en.balenaitcher_webcache_files_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1354,7 +1899,7 @@ class MainWindowLightMode(Tk):
         else:
             text67 = en.balenaitcher_webcache_files_text
         self.clr_balena_itcher_webcached_data_btn = ttk.Checkbutton(self.lblframe12, text=text67, variable=self.var44, onvalue="1", offvalue="0", command=None)
-        self.clr_balena_itcher_webcached_data_btn.grid(column=0, row=70, sticky='w')
+        self.clr_balena_itcher_webcached_data_btn.grid(column=0, row=7, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text68 = en.lowlevelformattool_agreement_file_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1362,7 +1907,7 @@ class MainWindowLightMode(Tk):
         else:
             text68 = en.lowlevelformattool_agreement_file_text
         self.clr_lowlevelformattool_licenseagreement_confirmationfile_btn = ttk.Checkbutton(self.lblframe12, text=text68, variable=self.var48, onvalue="1", offvalue="0", command=None)
-        self.clr_lowlevelformattool_licenseagreement_confirmationfile_btn.grid(column=0, row=71, sticky='w')
+        self.clr_lowlevelformattool_licenseagreement_confirmationfile_btn.grid(column=0, row=8, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text69 = en.winxpe_creator_downloadsdir_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1370,7 +1915,7 @@ class MainWindowLightMode(Tk):
         else:
             text69 = en.winxpe_creator_downloadsdir_text
         self.clr_winxpe_app_downloads_folder_btn = ttk.Checkbutton(self.lblframe12, text=text69, variable=self.var55, onvalue="1", offvalue="0", command=None)
-        self.clr_winxpe_app_downloads_folder_btn.grid(column=0, row=72, sticky='w')
+        self.clr_winxpe_app_downloads_folder_btn.grid(column=0, row=9, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text70 = en.huawei_hisuite_logdata_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1378,7 +1923,7 @@ class MainWindowLightMode(Tk):
         else:
             text70 = en.huawei_hisuite_logdata_text
         self.clr_huawei_hisuite_log_data_btn = ttk.Checkbutton(self.lblframe12, text=text70, variable=self.var57, onvalue="1", offvalue="0", command=None)
-        self.clr_huawei_hisuite_log_data_btn.grid(column=0, row=73, sticky='w')
+        self.clr_huawei_hisuite_log_data_btn.grid(column=0, row=10, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text71 = en.huawei_hisuite_dnddata_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1386,9 +1931,9 @@ class MainWindowLightMode(Tk):
         else:
             text71 = en.huawei_hisuite_dnddata_text
         self.clr_huawei_hisuite_dnd_temp_btn = ttk.Checkbutton(self.lblframe12, text=text71, variable=self.var63, onvalue="1", offvalue="0", command=None)
-        self.clr_huawei_hisuite_dnd_temp_btn.grid(column=0, row=74, sticky='w')
+        self.clr_huawei_hisuite_dnd_temp_btn.grid(column=0, row=11, sticky=components_direction)
         # ---------------------------
-        self.lblframe12.grid(column=0, row=63, sticky='w')
+        self.lblframe12.grid(column=0, row=15, sticky=components_direction)
 
 
         
@@ -1407,7 +1952,7 @@ class MainWindowLightMode(Tk):
         else:
             text73 = en.vscode_webcache_text
         self.clr_vscode_webcached_data_btn = ttk.Checkbutton(self.lblframe13, text=text73, variable=self.var52, onvalue="1", offvalue="0", command=None)
-        self.clr_vscode_webcached_data_btn.grid(column=0, row=76, sticky='w')
+        self.clr_vscode_webcached_data_btn.grid(column=0, row=1, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text74 = en.vscode_cookies_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1415,7 +1960,7 @@ class MainWindowLightMode(Tk):
         else:
             text74 = en.vscode_cookies_text
         self.clr_vscode_cookie_data_btn = ttk.Checkbutton(self.lblframe13, text=text74, variable=self.var53, onvalue="1", offvalue="0", command=None)
-        self.clr_vscode_cookie_data_btn.grid(column=0, row=77, sticky='w')
+        self.clr_vscode_cookie_data_btn.grid(column=0, row=2, sticky=components_direction)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text75 = en.vscode_cached_extensions_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1423,9 +1968,9 @@ class MainWindowLightMode(Tk):
         else:
             text75 = en.vscode_cached_extensions_text
         self.clr_vscode_cached_extensions_data_btn = ttk.Checkbutton(self.lblframe13, text=text75, variable=self.var54, onvalue="1", offvalue="0", command=None)
-        self.clr_vscode_cached_extensions_data_btn.grid(column=0, row=78, sticky='w')
+        self.clr_vscode_cached_extensions_data_btn.grid(column=0, row=3, sticky=components_direction)
         # ---------------------------
-        self.lblframe13.grid(column=0, row=75, sticky='w')
+        self.lblframe13.grid(column=0, row=16, sticky=components_direction)
 
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
@@ -1444,9 +1989,9 @@ class MainWindowLightMode(Tk):
         else:
             text77 = en.javadeployment_text
         self.clr_java_deployment_cached_data_btn = ttk.Checkbutton(self.lblframe14, text=text77, variable=self.var62, onvalue="1", offvalue="0", command=None)
-        self.clr_java_deployment_cached_data_btn.grid(column=0, row=80, sticky='w')
+        self.clr_java_deployment_cached_data_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe14.grid(column=0, row=79, sticky='w')
+        self.lblframe14.grid(column=0, row=17, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             text78 = en.alldone_text
@@ -1463,9 +2008,9 @@ class MainWindowLightMode(Tk):
         else:
             text79 = en.alldone_chkbox_text
         self.destroy_activity_after_done_btn = ttk.Checkbutton(self.lblframe15, text=text79, variable=self.var64, onvalue="1", offvalue="0", command=None, cursor='hand2')
-        self.destroy_activity_after_done_btn.grid(column=0, row=82, sticky='w')
+        self.destroy_activity_after_done_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe15.grid(column=0, row=81, sticky='w')
+        self.lblframe15.grid(column=0, row=18, sticky=components_direction)
 
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
@@ -1476,7 +2021,7 @@ class MainWindowLightMode(Tk):
             about_btn_text = en.about_text
         # Defining the about button.
         self.about_window_btn = ttk.Button(self.show_frame, text=about_btn_text, command=self.show_about_window, cursor='@Hand.cur')
-        self.about_window_btn.place(x=10, y=2000, relwidth=0.3, relheight=0.035)
+        self.about_window_btn.place(x=10, y=2030, relwidth=0.3, relheight=0.035)
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             self.begin_cleaning_btn_text = en.execute_text
         elif str(GetConfig['ProgConfig']['languagesetting']) == 'ar':
@@ -1485,13 +2030,13 @@ class MainWindowLightMode(Tk):
             self.begin_cleaning_btn_text = en.execute_text
         # Defining the execute button.
         self.exec_btn = ttk.Button(self.show_frame, text=self.begin_cleaning_btn_text, command=multiprocessing_execute_btn_function, cursor='@Hand.cur')
-        self.exec_btn.place(x=400 ,y=2000, relwidth=0.3, relheight=0.035)
+        self.exec_btn.place(x=400 ,y=2030, relwidth=0.3, relheight=0.035)
 
         # declaring a space.
         self.space = Label(self.show_frame, text="", font=("Arial Bold", 50))
         if str(GetConfig['ProgConfig']['appearancemode']) == '2':
             self.space.configure(background=atk.DEFAULT_COLOR)
-        self.space.grid(column=0, row=83, sticky='w')
+        self.space.grid(column=0, row=83, sticky=components_direction)
 
         if str(GetConfig['ProgConfig']['languagesetting']) == 'en':
             go_settings_btn_text = en.settings_text
@@ -1501,14 +2046,14 @@ class MainWindowLightMode(Tk):
             go_settings_btn_text = en.settings_text
         # Defining the go to configuration page button.
         self.config_page_btn = ttk.Button(self.show_frame, text=go_settings_btn_text, command=self.StartConfigurationWindow, cursor='@Hand.cur')
-        self.config_page_btn.place(x=790 ,y=2000, relwidth=0.3, relheight=0.035)
+        self.config_page_btn.place(x=790 ,y=2030, relwidth=0.3, relheight=0.035)
 
 
         # another spacing
         self.another_space = Label(self.show_frame, text="", font=("Arial Bold", 30))
         if str(GetConfig['ProgConfig']['appearancemode']) == '2':
             self.another_space.configure(background=atk.DEFAULT_COLOR)
-        self.another_space.grid(column=0, row=84, sticky='w')
+        self.another_space.grid(column=0, row=84, sticky=components_direction)
 
 
         # declaring the clear console method/function.
@@ -1619,7 +2164,7 @@ class MainWindowLightMode(Tk):
         # disabling the state of the output_show widget to prevent the GUI from glitching
         self.output_show.configure(state='disabled')
         # ------------------------
-        self.lblframe16.grid(column=0, row=85, sticky='w')
+        self.lblframe16.grid(column=0, row=85, sticky=components_direction)
 
 
         def _on_mousewheel(event):
@@ -2201,10 +2746,3 @@ if __name__ == '__main__':
     main_process = MainWindowLightMode()
     main_process.mainloop()
 
-            
-        
-            
-    # # if program was executed as a Python 3.xx.x Script file.
-    # main_process = MainWindowLightMode()
-    # main_process.mainloop()
-    
