@@ -234,7 +234,16 @@
     text-decoration: overline;
     cursor: default;
 }
-
+.plusp{
+    font-size: 20px;
+}
+.majorgeekslink{
+    color: rgb(0, 255, 255);
+    text-decoration: none;
+}
+.majorgeekslink:hover{
+    text-decoration: underline;
+}
 
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
