@@ -66,39 +66,7 @@ About the module `WINTCMD`, you can download it from the source code files (**of
 <br/>
 
 **Once you have all the requirements on your computer/workstation, do all of the following :**
-
-1-**Choose the script file `temp_cleaner_gui_project_renewed_gui_sourcecode.py` as the script file you want to compile (If using `Pyinstaller` or `auto-py-to-exe`)** <br/>
-2-Choose the **icon** file as `icon0.ico` <br/>
-3-Choose the window mode as `Windowed` or to hide the console window. <br/>
-4-**Do not choose the output file as a single file, instead choose one directory.** <br/>
-5-**Choose to include all of the following files :** <br/>
-```bat
-banner.png
-Config.ini
-icon0.ico
-nul'
-```
-
-<br/>
-
-6-Enable the option to request Administrative privileges from the user `--uac-admin` <br/>
-7-**If you want to**, Create a **version file** and include it with the compiled version. <br/>
-8-**Choose all of the following modules to be imported using the `--hidden-import` option** <br/>
-```py
-PIL
-pillow
-awesometkinter
-```
-
-<br/>
-
-9-**About the option `--name`, name it whatever you want, Here is a suggestion `UltimateProgrammerCodePy`.** <br/>
-
-10-When you are done, choose to compile using `Pyinstaller` either by pressing the button `Convert py to exe` if using `auto-py-to-exe`, or by pressing the `enter` button in your keyboard if using the command line interface of `Pyinstaller` <br/>
-
-11-**Wait for the compiling process to be done, ignore the warnings, and you are done, Enjoy!** <br/>
-
-
+* Wait for me to release a good compiling guide.
 
 ## Copyrights <br/>
 
