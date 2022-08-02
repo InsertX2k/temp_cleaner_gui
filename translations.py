@@ -135,11 +135,13 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Console Output"
     about_window_txt = """The Temp_Cleaner GUI Project by Insertx2k Dev\n
-Version 4.9
+Version 5.0
 Written by Insertx2k Dev (Mr.X)
 Support Twitter : @insertplayztw
 Support Github : InsertX2k
 This release of Temp_Cleaner GUI is powered by "Minimal Accessibility Pack v1.0" by Insertx2k Dev (Mr.X).
+\n
+You can press F1 for help on using Minimal Acessibility Pack v1.0, or press F2 on your keyboard to get a messagebox containing information about your Windows drive.
 \n
 GitHub page : https://github.com/insertx2k/temp_cleaner_gui
 Better UI GitHub page : https://insertx2k.github.io/temp_cleaner_gui
@@ -147,7 +149,7 @@ Better UI GitHub page : https://insertx2k.github.io/temp_cleaner_gui
 This program is Free Software (FOSS), You are allowed to modify or redistribute it under the terms of GNU General Public License v2.0 or later @ Free Software Foundation.
 """
 
-    about_window_title = "About 'The Temp_Cleaner GUI Project (v4.9)'"
+    about_window_title = "About 'The Temp_Cleaner GUI Project (v5.0)'"
     cant_retrieve_config_fromfile_msgbox_content = "Unable to retrieve the configuration information, this can be due to a hard exception, or a something else, the settings window will close."
     cant_retrieve_config_fromfile_msgbox_title = "Runtime Exception"
     cant_read_config_frominside_file_msgbox_title = "A runtime exception"
@@ -157,9 +159,9 @@ This program is Free Software (FOSS), You are allowed to modify or redistribute 
     done_reboot_for_changes_to_apply_text = "All changes you did has been successfully saved, but for the changes to take effect, you will need to restart Temp_Cleaner GUI."
     changes_saved_text = "Saved your changes"
     unable_to_save_your_changes_text = "Unable to save your changes to the file 'Config.ini', Nothing has changed yet, and this window will not close."
-    prog_title_no_username = "Welcome to Temp_Cleaner GUI v4.9!"
+    prog_title_no_username = "Welcome to Temp_Cleaner GUI v5.0!"
     prog_title_1 = "Welcome "
-    prog_title_2 = " to Temp_Cleaner GUI v4.9!"
+    prog_title_2 = " to Temp_Cleaner GUI v5.0!"
     settings_window_title = "Temp_Cleaner GUI Settings"
     settings_hint_one = "Change the way Temp_Cleaner GUI behaves"
     rammap_path_settings_hint = "Where is the executable of RAMMap by Sysinternals :"
@@ -181,6 +183,15 @@ This program is Free Software (FOSS), You are allowed to modify or redistribute 
     widgets_sticking_direction = 'w'
     exception_reading_thememode_title = "An error has occured"
     exception_reading_thememode_content = "An error has occured causing the program to throw this error\nIf you see this error you can try checking if the file 'Config.ini' exists in the current directory where Temp_Cleaner GUI's executable is in, Or make sure to give Temp_Cleaner GUI the rights to access your Computer's Storage device if blocked by your antivirus\nIf the issue still presents, Consider sending a screenshot of the whole Temp_Cleaner's Window along with this messagebox\nException details are: "
+    used_systemdrive_space = "Used Disk Space: "
+    free_systemdrive_space = "Free Disk Space: "
+    total_systemdrive_space = "Total Disk Space: " 
+    usage_statistics_for_sysdrv = "Usage Statistics for "
+    usage_statistics_for_systemdrive_word = "Windows Drive Disk Usage Statistics"
+    press_ok_when_youre_done = "Press the 'OK' button to close this messagebox."
+    freed_up_diskspace_dialog = "Congratulations!, You have freed up: "
+    freed_up_diskspace_dialog_title = "Cleaned up your system!"
+    freed_up_nothing = "It seems like your PC is already clean!"
 
 
 
@@ -324,11 +335,15 @@ class ar:
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "إخراج وحدة التحكم"
     about_window_txt = """The Temp_Cleaner GUI Project من Insertx2k Dev\n
-الإصدار 4.9
+الإصدار 5.0
 تمت كتابته بواسطة: Insertx2k Dev (Mr.X)
 تويتر الدعم: @insertplayztw
 Github الدعم: InsertX2k
 مدعمة بواسطة حزمة ادوات امكانية الوصول الإدني الاصدار 1.0 Temp_Cleaner GUI هذه النسخة من برنامج 
+\n
+لموجود في لوحة المفاتيح الخاصة بجهازك للوصول إلي معلومات سريعة حول قرص النظام الخاص بك F2 ا قم بإستخدام الزر
+\n
+في لوحة المفاتيح F1 للحصول علي معلومات سريعة حول كيفية إستخدام حزمة إمكانيه الوصول الادني يمكنك النقر علي الزر  
 \n
 GitHub صفحة : https://github.com/insertx2k/temp_cleaner_gui
 صفحة ذو وجهة افضل : https://insertx2k.github.io/temp_cleaner_gui
@@ -336,7 +351,7 @@ GitHub صفحة : https://github.com/insertx2k/temp_cleaner_gui
 GNU General Public License v2.0 او احدث @ Free Software Foundation. هذا البرنامج هو برنامج مفتوح المصدر، وهذا يعني انه لديك الحق في ان تقوم بالتعديل عليه او إعادة توزيعه وفقا لشروط رخصة 
 """
 
-    about_window_title = "حول 'The Temp_Cleaner GUI Project (v4.9)'"
+    about_window_title = "حول 'The Temp_Cleaner GUI Project (v5.0)'"
     cant_retrieve_config_fromfile_msgbox_content = "خطأ في الحصول علي المعلومات من الضبط، هذا قد يكون بسبب خطأ كارثي او شئ اخر، شاشة الضبط سوف تغلق"
     cant_retrieve_config_fromfile_msgbox_title = "حدث خطأ في وقت التشغيل"
     cant_read_config_frominside_file_msgbox_title = "حدث خطأ في وقت التشغيل"
@@ -348,7 +363,7 @@ GNU General Public License v2.0 او احدث @ Free Software Foundation. هذا
     unable_to_save_your_changes_text = "لم يتغير اي شئ حتي الان، وهذه النافذة لن تغلق ،'Config.ini' فشل في حفظ التغييرات في ملف "
     prog_title_no_username = "Temp_Cleaner GUI! اهلا بك في برنامج"
     prog_title_1 = " مرحبا"
-    prog_title_2 = " Temp_Cleaner GUI v4.9 في "
+    prog_title_2 = " Temp_Cleaner GUI v5.0 في "
     settings_window_title = "Temp_Cleaner GUI ضبط"
     settings_hint_one = "Temp_Cleaner GUI قم بتغيير الطريقة التي يتصرف بها "
     rammap_path_settings_hint = "Sysinternals من RAMMap ماهو مسار الملف التنفيذي لبرنامج :"
@@ -370,5 +385,14 @@ GNU General Public License v2.0 او احدث @ Free Software Foundation. هذا
     widgets_sticking_direction = 'e'
     exception_reading_thememode_title = "حدث خطأ اثناء تشفيل البرنامج"
     exception_reading_thememode_content = "بعض التفاصيل عن الخطأ: \n إذا استمرت المشكلة يرجي اخذ لقطة شاشة لكامل نافذة البرنامج مع هذه النافذة المنبثقة  \n او التأكد من السماح لهذا البرنامج بالوصول إلي وحدة التخزين الخاصة بجهازك إذا كان ممنوع بإستخدام برنامج مضاد الفيروسات Temp_Cleaner GUI يمكنك محاولة إصلاح ذلك الخطأ يدويا عن طريق التحقق من تواجد هذا الملف في نفس مسار تواجد الملف التنفيذي لبرنامج  \n 'Config.ini' لقد حدث خطأ اثناء الحصول علي المعلومات من الملف "
+    used_systemdrive_space = " : مساحة التخزين المستخدمة"
+    free_systemdrive_space = " : مساحة التخزين الحرة "
+    total_systemdrive_space = " : مساحة التخزين الكلية "
+    usage_statistics_for_sysdrv = " إحصائيات الإستخدام ل "
+    usage_statistics_for_systemdrive_word = "إحصائيات الإستخدام لقرص نظام الويندوز"
+    press_ok_when_youre_done = "قم بالنقر علي الزر 'موافق' عندما تنتهي"
+    freed_up_diskspace_dialog_title = "تم الإنتهاء من التنظيف"
+    freed_up_diskspace_dialog = " : تهانينا، لقد قمت بتحرير "
+    freed_up_nothing = "يبدو ان جهازك نظيف بالفعل"
 
     
