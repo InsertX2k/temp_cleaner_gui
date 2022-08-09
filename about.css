@@ -12,10 +12,6 @@
     border-color: rgb(0, 173, 173);
 }
 
-.wtxt0:hover{
-    text-decoration: line-through;
-    color: rgb(0, 173, 173);
-}
 .col1{
     width: 8%;
     height: 3%;
@@ -27,30 +23,19 @@
 .col3{
     width: 8%;
     height: 3%;
-}
-.featuresli0{
-    color:white;
-    font-size: large;
-}
-.wnewtable0{
-    background-color: rgb(0, 173, 173);
-    border-color: yellowgreen;
-    opacity: 10%;
-}
-.wnewlist0{
-    color: white;
-    padding-left: 25px;
-    margin-right: 25px;
 }
 
 .col2{
     text-align: center;
+    cursor: pointer;
 }
 .col1{
     text-align: center;
+    cursor: pointer;
 }
 .col3{
     text-align: center;
+    cursor: pointer;
 }
 
 
@@ -58,23 +43,23 @@
 /* Let's remove the decoration of it*/
 .homeword0{
     text-decoration: none;
-    cursor: default;
+    cursor: pointer;
 }
 .homelinkword0{
     text-decoration: none;
-    cursor: default;
+    cursor: pointer;
 }
 .downloadslinkword0{
     text-decoration: none;
-    cursor: default;
+    cursor: pointer;
 }
 .downloadsword0{
     text-decoration: none;
-    cursor: default;
+    cursor: pointer;
 }
 .aboutword0{
     text-decoration: overline;
-    cursor: default;
+    cursor: pointer;
 }
 .header-link{
     text-decoration: none;
@@ -95,119 +80,29 @@
     text-decoration: overline;
 }
 
-/* Configuring the style of wnewtable0*/
-.wnewtable0{
-    margin-top: 15px;
-}
-
-.wnewtable0:hover{
-    opacity: 100%;
-}
-
-.featuresh1:hover{
-    text-decoration: line-through;
-    color: rgb(0, 173, 173);
-}
-
-.screenshotsh1:hover{
-    text-decoration: line-through;
-    color: rgb(0, 173, 173);
-}
-
-.downloadh1:hover{
-    text-decoration: line-through;
-    color: rgb(0, 173, 173);
-}
-
-.supporth1:hover{
-    text-decoration: line-through;
-    color: rgb(0, 173, 173);
-}
-
-.support_twlink{
-    text-decoration: none;
-}
-
-.support_twlink:hover{
-    text-decoration: underline;
-}
-
-.support_ghlink{
-    text-decoration: none;
-}
-.support_ghlink:hover{
-    text-decoration: underline;
-}
-
-.goto_downloads{
-    text-decoration: none;
-}
-
-.goto_downloads:hover{
-    text-decoration: underline;
-}
-
-
-/* Configuring the properties of the classes ss0, ss1, ss2 */
-
-.ss0{
-    opacity: 25%;
-    width:500px;
-    height:250px;
-    margin-left: 0px;
-}
-.ss1{
-    opacity: 25%;
-    width:500px;
-    height:250px;
-    margin-left: 0px;
-}
-.ss2{
-    opacity: 25%;
-    width:500px;
-    height:250px;
-    margin-left: 0px;
-}
-
-
-
-/*        END                        */
-
-
-
-/* Making their opacity go back again after we hover on them. */
-
-.ss0:hover{
-    opacity: 100%;
-}
-.ss1:hover{
-    opacity: 100%;
-}
-.ss2:hover{
-    opacity: 100%;
-}
-
-/*         END                   */
-
-
-.ssdiv{
-    display: inline-block;
-    width: 96%;
-    height: 300px;
-}
-
-
 /*  Defining the on_hover effect for cols 1,2,3  */
 .col1:hover{
     background-color: grey;
+}
+
+.col1:hover .homeword0{
+    text-decoration: overline;
 }
 
 .col2:hover{
     background-color: grey;
 }
 
+.col2:hover .downloadsword0{
+    text-decoration: overline;
+}
+
 .col3:hover{
     background-color: grey;
+}
+
+.col3:hover .aboutlnk{
+    text-decoration: overline;
 }
 
 /*        END                     */
@@ -221,84 +116,37 @@
     background-color: grey;
 }
 
-.imgtcg:hover{
-    opacity: 50%;
+.maincol0:hover .imgtcg{
+    opacity: 100%;
+    transform: rotate(-45deg);
 }
 
-.p0font{
-    font-size: 25px;
-    color: white;
-    text-decoration: none;
-}
-.p0font:hover{
-    text-decoration: line-through;
+.maincol0:hover .header-link{
+    text-decoration: overline;
     color: rgb(0, 173, 173);
 }
 
-.p1font{
-    color:white;
-    text-decoration: none;
-    font-size: 20px;
+.maincol0:hover{
+    cursor: pointer;
 }
-.p2font{
-    color: white;
-    text-decoration: none;
-    font-size: 20px;
-}
-.githublink{
-    text-decoration: none;
-    color: rgb(0, 173, 173);
-    font-size: 20px;
-}
-.githublink:hover{
-    text-decoration: underline;
-}
-.batchlinkwikipedia{
-    text-decoration: none;
-    color: rgb(0, 173, 173);
-    font-size: 20px;
-}
-.batchlinkwikipedia:hover{
-    text-decoration:underline;
-}
-.pythonorglink{
-    text-decoration: none;
-    color: rgb(0, 173, 173);
-    font-size: 20px;
-}
-.pythonorglink:hover{
-    text-decoration: underline;
-}
-.p3font{
-    color: white;
-    font-size: 20px;
-    text-decoration: none;
-}
-.tempcleanerguidatatable{
-    color: white;
-    font-size: 18px;
-    border-color: whitesmoke;
-    border-style: solid;
-    width: 100%;
-    border-width: 2px;
-    border-radius: 20px;
-}
-.insertlink{
-    color: rgb(0, 173, 173);
-    text-decoration: none;
-}
-.insertlink:hover{
-    text-decoration: underline;
-}
+
 .aboutlnk{
     color:rgb(0, 255, 255);
-    text-decoration: none;
-    cursor: default;
+    text-decoration: overline;
+    cursor: pointer;
 }
 .aboutlnk:hover{
     color: rgb(0, 255, 255);
     text-decoration: overline;
-    cursor: default;
+    cursor: pointer;
+}
+.plusp{
+    font-size: 20px;
+}
+.underconnote{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
 }
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
