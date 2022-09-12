@@ -1,5 +1,3 @@
-from threading import local
-
 
 class en:
     """
@@ -91,9 +89,9 @@ class en:
     alldone_text = "Are you done, mate?"
     alldone_chkbox_text = "Do you want me to automatically close myself when I'm done with cleaning up your PC?"
     settings_text = "Settings"
-    execute_text = "Clean Now!"
-    about_text = "About"
-    executing_text = "Cleaning..."
+    execute_text = "Start Cleaning"
+    about_text = "About & Tips"
+    executing_text = "Cleaning up..."
     restart_winupdate_window_title_text = "Restart Windows Update Service"
     restart_winupdate_window_content_text = "After you delete all downloaded files by Windows Update, you must restart it's service to ensure proper functionality after cleaning, Do you want me to do that for you now?"
     restarting_winupdate_service_text = "Restarting Windows Update Service..."
@@ -134,22 +132,26 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Console Output"
-    about_window_txt = """The Temp_Cleaner GUI Project by Insertx2k Dev\n
-Version 5.0
-Written by Insertx2k Dev (Mr.X)
-Support Twitter : @insertplayztw
-Support Github : InsertX2k
-This release of Temp_Cleaner GUI is powered by "Minimal Accessibility Pack v1.0" by Insertx2k Dev (Mr.X).
-\n
-You can press F1 for help on using Minimal Acessibility Pack v1.0, or press F2 on your keyboard to get a messagebox containing information about your Windows drive.
-\n
-GitHub page : https://github.com/insertx2k/temp_cleaner_gui
-Better UI GitHub page : https://insertx2k.github.io/temp_cleaner_gui
-\n
-This program is Free Software (FOSS), You are allowed to modify or redistribute it under the terms of GNU General Public License v2.0 or later @ Free Software Foundation.
+    about_window_txt = """Version: 5.1
+Release Channel: stable
+Additional features installed:
+1-Arabic Language Pack v1.1
+2-Minimal Accessibility Pack v1.0
+
+Developed by: Ziad Ahmed (Mr.X) aka. Insertx2k Dev
+Support website: https://insertx2k.github.io/temp_cleaner_gui
+Developer website: https://insertx2k.github.io/mrx
+Github Repository: https://github.com/insertx2k/temp_cleaner_gui
+
+Number of contributors to this version: 0
+
+Tips:
+You can press 'F6' on your keyboard to clear the list of all deleted files.
+You can also press 'F2' to show you a message box containing useful information about your Windows drive.
+You can press 'F1' to show you some help about using Minimal Accessibility Pack v1.0 or about increasing or decreasing screen font size.
 """
 
-    about_window_title = "About 'The Temp_Cleaner GUI Project (v5.0)'"
+    about_window_title = "About 'The Temp_Cleaner GUI Project (v5.1)'"
     cant_retrieve_config_fromfile_msgbox_content = "Unable to retrieve the configuration information, this can be due to a hard exception, or a something else, the settings window will close."
     cant_retrieve_config_fromfile_msgbox_title = "Runtime Exception"
     cant_read_config_frominside_file_msgbox_title = "A runtime exception"
@@ -159,9 +161,9 @@ This program is Free Software (FOSS), You are allowed to modify or redistribute 
     done_reboot_for_changes_to_apply_text = "All changes you did has been successfully saved, but for the changes to take effect, you will need to restart Temp_Cleaner GUI."
     changes_saved_text = "Saved your changes"
     unable_to_save_your_changes_text = "Unable to save your changes to the file 'Config.ini', Nothing has changed yet, and this window will not close."
-    prog_title_no_username = "Welcome to Temp_Cleaner GUI v5.0!"
+    prog_title_no_username = "Welcome to Temp_Cleaner GUI v5.1!"
     prog_title_1 = "Welcome "
-    prog_title_2 = " to Temp_Cleaner GUI v5.0!"
+    prog_title_2 = " to Temp_Cleaner GUI v5.1!"
     settings_window_title = "Temp_Cleaner GUI Settings"
     settings_hint_one = "Change the way Temp_Cleaner GUI behaves"
     rammap_path_settings_hint = "Where is the executable of RAMMap by Sysinternals :"
@@ -192,6 +194,9 @@ This program is Free Software (FOSS), You are allowed to modify or redistribute 
     freed_up_diskspace_dialog = "Congratulations!, You have freed up: "
     freed_up_diskspace_dialog_title = "Cleaned up your system!"
     freed_up_nothing = "It seems like your PC is already clean!"
+    use_custom_cursors_text = "Use Custom Cursors?"
+    use_custom_cursors_hint = "Disabling this can fix lags on really low-end PCs and can solve some issues if their cause is custom cursors."
+    use_custom_cursors_checkbox_text = "Enable Custom Home UI Cursors"
 
 
 
@@ -291,10 +296,10 @@ class ar:
     vscode_cached_extensions_text = "VS Code ملفات المكونات الإضافية المؤقتة"
     javadeployment_text = "ملفات توظيف الجافا المؤقتة"
     alldone_text = "هل انتهيت يا رفيق?"
-    alldone_chkbox_text = "هل تريدني ان اغلق نفسي تلقائيا عقب إنتهائي من تنظيف جهازك؟"
+    alldone_chkbox_text = "هل تريد الإغلاق تلقائيا عقب الإنتهاء من التنظيف؟"
     settings_text = "الضبط"
     execute_text = "ابدأ تنظيف!"
-    about_text = "حول"
+    about_text = "حول البرنامج ونصائح"
     executing_text = "جاري التنظيف..."
     restart_winupdate_window_title_text = "إعادة تشغيل خدمة تحديث ويندوز"
     restart_winupdate_window_content_text = "بعد مسح جميع الملفات  التي تم تنزيلها بواسطة برنامج تحديث ويندوز يجب عليك إعادة تشغيل الخدمة الخاصة به ، هل تريد مني القيام بذلك من اجلك؟"
@@ -334,24 +339,26 @@ class ar:
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "إخراج وحدة التحكم"
-    about_window_txt = """The Temp_Cleaner GUI Project من Insertx2k Dev\n
-الإصدار 5.0
-تمت كتابته بواسطة: Insertx2k Dev (Mr.X)
-تويتر الدعم: @insertplayztw
-Github الدعم: InsertX2k
-مدعمة بواسطة حزمة ادوات امكانية الوصول الإدني الاصدار 1.0 Temp_Cleaner GUI هذه النسخة من برنامج 
-\n
-لموجود في لوحة المفاتيح الخاصة بجهازك للوصول إلي معلومات سريعة حول قرص النظام الخاص بك F2 ا قم بإستخدام الزر
-\n
-في لوحة المفاتيح F1 للحصول علي معلومات سريعة حول كيفية إستخدام حزمة إمكانيه الوصول الادني يمكنك النقر علي الزر  
-\n
-GitHub صفحة : https://github.com/insertx2k/temp_cleaner_gui
-صفحة ذو وجهة افضل : https://insertx2k.github.io/temp_cleaner_gui
-\n
-GNU General Public License v2.0 او احدث @ Free Software Foundation. هذا البرنامج هو برنامج مفتوح المصدر، وهذا يعني انه لديك الحق في ان تقوم بالتعديل عليه او إعادة توزيعه وفقا لشروط رخصة 
+    about_window_txt = """الإصدار: 5.1
+قناة الإصدار : مستقرة
+:المميزات الإضافية المفعلة
+1-Arabic Language Pack v1.1 (حزمة اللغة العربية v1.1)
+2-Minimal Accessibility Pack v1.0 (حزمة إمكانية الوصول الادني)
+
+Insertx2k Dev المعروف ايضا بأسم (Mr.X) تمت برمجته بواسطة: زياد احمد 
+https://insertx2k.github.io/temp_cleaner_gui :رابط موقع الدعم
+https://insertx2k.github.io/mrx : رابط صفحة مطور البرنامج
+https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب 
+
+عدد المساهمين في هذا الإصدار : 0
+
+: نصائح 
+الموجود في لوحة المفاتيح لديك لمحو قائمة الملفات التي تم حذفها 'F6' يمكنك الضغط علي زر 
+لإظهار نافذة تحتوي علي معلومات مفيده عن قرص النظام لديك 'F2' يمكنك ايضا الضغط علي زر   
+لإظهار معلومات عن كيفية إستخدام حزمة امكانية الوصول او كيفية تكبير وتصغير الكتابه في الشاشة 'F1' يمكنك الضغط علي زر   
 """
 
-    about_window_title = "حول 'The Temp_Cleaner GUI Project (v5.0)'"
+    about_window_title = "حول 'The Temp_Cleaner GUI Project (v5.1)'"
     cant_retrieve_config_fromfile_msgbox_content = "خطأ في الحصول علي المعلومات من الضبط، هذا قد يكون بسبب خطأ كارثي او شئ اخر، شاشة الضبط سوف تغلق"
     cant_retrieve_config_fromfile_msgbox_title = "حدث خطأ في وقت التشغيل"
     cant_read_config_frominside_file_msgbox_title = "حدث خطأ في وقت التشغيل"
@@ -363,7 +370,7 @@ GNU General Public License v2.0 او احدث @ Free Software Foundation. هذا
     unable_to_save_your_changes_text = "لم يتغير اي شئ حتي الان، وهذه النافذة لن تغلق ،'Config.ini' فشل في حفظ التغييرات في ملف "
     prog_title_no_username = "Temp_Cleaner GUI! اهلا بك في برنامج"
     prog_title_1 = " مرحبا"
-    prog_title_2 = " Temp_Cleaner GUI v5.0 في "
+    prog_title_2 = " Temp_Cleaner GUI v5.1 في "
     settings_window_title = "Temp_Cleaner GUI ضبط"
     settings_hint_one = "Temp_Cleaner GUI قم بتغيير الطريقة التي يتصرف بها "
     rammap_path_settings_hint = "Sysinternals من RAMMap ماهو مسار الملف التنفيذي لبرنامج :"
@@ -394,5 +401,8 @@ GNU General Public License v2.0 او احدث @ Free Software Foundation. هذا
     freed_up_diskspace_dialog_title = "تم الإنتهاء من التنظيف"
     freed_up_diskspace_dialog = " : تهانينا، لقد قمت بتحرير "
     freed_up_nothing = "يبدو ان جهازك نظيف بالفعل"
+    use_custom_cursors_text = "إستخدام المؤشرات المخصصة؟"
+    use_custom_cursors_hint = "إيقاف تشغيل هذا الإعداد سوف يساعد في تقليل التقطيع في الواجهة الرئيسية في بعض الاجهزة الضعيفة او حل بعض المشاكل"
+    use_custom_cursors_checkbox_text = "تمكين المؤشرات المخصصة للشاشة الرئيسية"
 
     
