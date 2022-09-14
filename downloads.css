@@ -318,6 +318,29 @@
     height: 70px;
 }
 
+.changelog_link{
+    color: white;
+    font-size: 18px;
+}
+.release_notes_link{
+    color: cyan;
+    text-decoration: none;
+}
+.release_notes_link:hover{
+    text-decoration: underline;
+}
+.release_notes_logo{
+    width: 50px;
+    height: 50px;
+    margin: 0%;
+    padding: 0%;
+    float: left;
+}
+.changelog_link{
+    margin-left: 70px;
+}
+
+
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;
