@@ -1,12 +1,41 @@
 # Temp_Cleaner GUI Project
 **A Free and Open-Source Alternative to all PC Cleaning Software available that is a way more powerful than you might think it is.**<br/>
 
-# Note!
-**This IS NOT Where you are supposed to download a distributable version of the program, if you want to download a distributable version, consider clicking [here](https://insertx2k.github.io/temp_cleaner_gui/downloads.html)**
+# Features:
+* Free and Open-Source
+* Written in Python 3
+* Supports older versions of Windows
+* Uses cross-platform APIs (and modules)
+* Offers pre-made cleaning presets.
+* Easy to use
+* Small in size.
+* Portable (as all configuration is only stored on a `Config.ini` file on the root directory of the program)
+* Offers an easy to use Installer
+* The development of it is still active (which means it gets updated every few days or so)
+* Doesn't consume a lot of resources **(20MB of RAM, and 0% of CPU usage)**
+![It just consumes 16MBs of RAM on a 12GB of RAM System!](https://user-images.githubusercontent.com/62176660/192512228-9043a97a-3e4e-4487-b7a7-73cd80860f96.png)
+* Trusted by a few popular Software listing websites and thousands of users.
+* Safely cleans up your computer, unlike others, they can cause problems with other programs
+* Runs in native **64-bit mode** (for **64-bit** releases of the program)
+* Supports **32-bit** operating systems in **native 32-bit mode**!
 
-**Have fun!**
+## What's the appropriate binary release for my operating system?
 
-## Screenshots: <br/>
+| Windows Desktop Operating System Version | Appropriate release to download |
+| ---------------------------------------- | ------------------------------- |
+| **Windows 7 (64-bit)**, requires the **Service Pack 1 Update due to a Python 3.9 requirement** | Download the **Windows 7 64-bit** release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
+| **Windows 8 (32-bit and 64-bit)** | Download the **Windows 10 32-bit** (or **64-bit according to your OS architecture**) release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
+| **Windows 8.1 (32-bit and 64-bit)** | Download the **Windows 10 32-bit** (or **64-bit according to your OS architecture**) release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
+| **Windows 10 (32-bit and 64-bit)** | Download the **Windows 10 32-bit** (or **64-bit according to your OS architecture**) release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
+| **Windows 11** | Download the **Windows 11** release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
+
+| Windows Server Operating System Version | Appropriate release to download |
+| --------------------------------------- | ------------------------------- |
+| **Windows Server 2012** to **Windows Server 2019** | Download the **Windows 10 64-bit** release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
+| **Windows Server 2022** onwards | Download the **Windows 11** release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
+
+
+## Promotional Image: <br/>
 **Might not always be up-to-date.**
 <br/>
 ![Temp_Cleaner GUI v5.0-stable in both Dark and Light Modes](https://user-images.githubusercontent.com/62176660/183703908-f2198aeb-e530-4652-88be-9b9746500ea6.png)
@@ -51,7 +80,7 @@ Here are some standards that you must keep in mind if you want to make one by yo
 **This page is not where you are supposed to find any compiled releases of such software, consider going to [This link](https://insertx2k.github.io/temp_cleaner_gui) for official downloads.**
 
 
-## Additional Downloadable banners for **The Temp_Cleaner GUI Project v1.52 Update 2 & 3 & 4** <br/>
+## Additional Downloadable banners for **The Temp_Cleaner GUI** <br/>
 If you feel bored of the default banner, and you don't have any suggestions for a new cool banner, or you even don't know how to create a new one for yourself, simply click [here](https://github.com/InsertX2k/temp_cleaner_gui/tree/main/additional-downloadable-banners), for some awesome additional downloadable banners for the program! <br/>
 
 **Please keep in mind that it also includes the installation guide, simply in the README.md** <br/>
