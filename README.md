@@ -29,6 +29,8 @@
 | **Windows 10 (32-bit and 64-bit)** | Download the **Windows 10 32-bit** (or **64-bit according to your OS architecture**) release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
 | **Windows 11** | Download the **Windows 11** release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
 
+Below is a table containing the appropriate releases for Server Operating Systems, ***use at your own risk***
+
 | Windows Server Operating System Version | Appropriate release to download |
 | --------------------------------------- | ------------------------------- |
 | **Windows Server 2012** to **Windows Server 2019** | Download the **Windows 10 64-bit** release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
