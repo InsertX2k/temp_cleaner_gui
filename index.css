@@ -146,13 +146,13 @@
 
 .largebanner{
     width: 100%;
-    height: 405px;
+    height: 365px;
     background-color: rgba(0, 0, 255, 0);
     border-style: none;
 }
 .bannerimg{
-    width: 98%;
-    height: 400px;
+    width: 99%;
+    height: 340px;
     position: absolute;
     z-index: 1;
 }
@@ -163,17 +163,17 @@
     z-index: 2;
     margin-top: 70px;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
     font-family: Helvetica, Arial,  sans-serif;
-    margin-left: 200px;
+    margin-left: 19%;
 }
 .greeting2{
     color: rgb(255, 255, 255);
     z-index: 3;
     position: absolute;
     margin-top: 120px;
-    margin-left: 270px;
-    font-size: 20px;
+    margin-left: 20%;
+    font-size: 18px;
 }
 .go_to_downloads_button{
     z-index: 4;
@@ -183,7 +183,7 @@
     background-color: #333333;
     border-color: #333333;
     border-style: solid;
-    margin-top: 180px;
+    margin-top: 160px;
     margin-left: 45%;
     cursor:pointer;
     border-width: 6px;
@@ -210,7 +210,73 @@
     cursor: pointer;
     color: white;
 }
-
+.whytcg{
+    color: white;
+    font-size: 30px;
+    margin-top: 0px;
+}
+.freeos{
+    width: 80px;
+    height: 80px;
+    margin-left: 30px;
+    float: left;
+}
+.text0{
+    float: left;
+    color: white;
+    font-size: 18px;
+    margin-left: 30px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+.freediv{
+    margin-top: 15px;
+    border-style: solid;
+    border-color: rgb(139, 139, 139);
+    border-radius: 30px;
+    border-width: 2px;
+}
+.text01{
+    margin-left: 30px;
+    color: white;
+    font-size: 15px;
+    margin-top: 15px;
+    float: left;
+}
+.freediv:hover{
+    background-color: rgb(139, 139, 139);
+}
+.freediv:hover > .text01{
+    color: black;
+}
+.freediv:hover > .text0{
+    color: black;
+}
+.link_w_onhover_effect{
+    color: deepskyblue;
+    text-decoration: none;
+    cursor: pointer;
+}
+.link_w_onhover_effect:hover{
+    text-decoration: underline;
+}
+.screenshotscenter{
+    color: white;
+    font-size: 30px;
+    margin-top: 25px;
+}
+.screenshots_div{
+    background-color: #424242;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap; 
+    margin-top: 15px;  
+}
+.screenshotfirst{
+    margin-right: 70px;
+    cursor: pointer;
+}
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;

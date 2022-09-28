@@ -339,7 +339,28 @@
 .changelog_link{
     margin-left: 70px;
 }
-
+.server_small_logo{
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
+    
+    padding: 0%;
+    float: left;
+}
+.didyouknow{
+    color: white;
+    font-size: 18px;
+    margin-left: 60px;
+    margin-top: 30px;
+}
+.server_support_table_link{
+    color: rgb(0, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+.server_support_table_link:hover{
+    text-decoration: underline;
+}
 
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
