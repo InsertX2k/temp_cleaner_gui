@@ -1,3 +1,5 @@
+<a href="https://www.buymeacoffee.com/insertx2kdev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 # Temp_Cleaner GUI Project
 **A Free and Open-Source Alternative to all PC Cleaning Software available that is a way more powerful than you might think it is.**<br/>
 
