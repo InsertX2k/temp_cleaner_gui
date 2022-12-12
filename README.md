@@ -4,7 +4,7 @@
 **A Free and Open-Source Alternative to all PC Cleaning Software available that is a way more powerful than you might think it is.**<br/>
 
 ## Hey there, I'd like to say Thanks for your support
-**I'd like to say Thank you all for supporting my program, What I've really seen in the past 2 years is something I will never forget in my entire life, it was a dream for me to become a software developer, and with your help, that dream became reality, so If you think that I deserve a donation (ya know, if you think my program did a good job in cleaning up your computer, and you really want to help me) consider giving donation a try, it really makes me happy and encourages me to push updates even faster.**
+**I'd like to say Thank you for supporting my program, What I've seen in the past 2 years is something I will never forget in my entire life, it was a dream for me to become a software developer, and with your help, that dream became reality, so If you think that I deserve a donation (ya know, if you think my program did a good job in cleaning up your computer, and you really want to help me) consider giving donation a try, it really makes me happy and encourages me to push updates even faster.**
 
 
 <a href="https://www.buymeacoffee.com/insertx2kdev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
