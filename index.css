@@ -38,7 +38,26 @@
     cursor: pointer;
 }
 
-
+.donatediv{
+    width: 100%;
+    background-color: orange;
+    
+}
+.hearticon{
+    width: 45px;
+    height: 45px;
+    float: left;
+}
+.tyword{
+    float: left;
+    margin-top: 13px;
+    margin-left: 5px;
+    font-size: 22px;
+}
+.donateword{
+    margin-top: 0px;
+    display: inline-block;
+}
 /* Somewhat configuring the style of the main-header's navigation buttons. */
 /* Let's remove the decoration of it*/
 .homeword0{

@@ -361,6 +361,26 @@
 .server_support_table_link:hover{
     text-decoration: underline;
 }
+.donatediv{
+    width: 100%;
+    background-color: orange;
+    
+}
+.hearticon{
+    width: 45px;
+    height: 45px;
+    float: left;
+}
+.tyword{
+    float: left;
+    margin-top: 13px;
+    margin-left: 5px;
+    font-size: 22px;
+}
+.donateword{
+    margin-top: 0px;
+    display: inline-block;
+}
 
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
