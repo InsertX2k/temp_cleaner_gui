@@ -17,10 +17,12 @@
 * Offers pre-made cleaning presets.
 * Easy to use
 * Small in size.
+* Supports **Dark** and **Light** User Interface color modes.
 * Portable (as all configuration is only stored on a `Config.ini` file on the root directory of the program)
 * Offers an easy to use Installer
 * The development of it is still active (which means it gets updated every few days or so)
-* Doesn't consume a lot of resources **(20MB of RAM, and 0% of CPU usage)**
+* **[New in v5.6-stable]** Offers an Updater program, **Now you no longer need to go to the website of this program just to check if there is an update, It will inform you immediately when there is an update** ***(Just make sure to enable the "Automatic Update Check on program startup" Setting in Temp_Cleaner GUI's Settings)***
+* Doesn't consume a lot of resources **(20MB of RAM ***(60 as of v5.6-stable)***, and 0% of CPU usage)**
 ![It just consumes 16MBs of RAM on a 12GB of RAM System!](https://user-images.githubusercontent.com/62176660/192512228-9043a97a-3e4e-4487-b7a7-73cd80860f96.png)
 * Trusted by a few popular Software listing websites and thousands of users.
 * Safely cleans up your computer, unlike others, they can cause problems with other programs
@@ -45,10 +47,13 @@ Below is a table containing the appropriate releases for Server Operating System
 | **Windows Server 2022** onwards | Download the **Windows 11** release from [Downloads page](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) |
 
 
-## Promotional Image: <br/>
-**Might not always be up-to-date.**
-<br/>
-![Temp_Cleaner GUI v5.0-stable in both Dark and Light Modes](https://user-images.githubusercontent.com/62176660/183703908-f2198aeb-e530-4652-88be-9b9746500ea6.png)
+## Screenshots
+**Might not always be up to date.**
+* The main Home Screen User Interface ![Main Home Screen User Interface on Temp_Cleaner GUI v5.6-stable](https://user-images.githubusercontent.com/62176660/215827901-062bf5b7-17ba-462f-8333-d38701fba5f4.png)
+* Second Screenshot ![Screenshot 2](https://user-images.githubusercontent.com/62176660/215829660-68c0874a-41a9-4751-b629-b668ea4e6eeb.png)
+* The new About window (Introduced in v5.6-stable) ![The new About window (Introduced in v5.6-stable)](https://user-images.githubusercontent.com/62176660/215829665-7b150372-ccb5-46c8-b2ce-1a427929bcca.png)
+* Temp_Cleaner GUI's Settings Window ![Temp_Cleaner GUI's Settings Window](https://user-images.githubusercontent.com/62176660/215829677-91d6c728-9891-4f92-b9ba-8953d1db9bd3.png)
+
 
 <br/>
 
@@ -87,7 +92,7 @@ Here are some standards that you must keep in mind if you want to make one by yo
 <br/>
 
 ## Download an already compiled release with installer: <br/>
-**This page is not where you are supposed to find any compiled releases of such software, consider going to [This link](https://insertx2k.github.io/temp_cleaner_gui) for official downloads.**
+**This page is not where you are supposed to find any compiled releases of such software, consider going to [This link](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) for official downloads.**
 
 
 ## Additional Downloadable banners for **The Temp_Cleaner GUI** <br/>
