@@ -151,6 +151,7 @@
 .normaltext{
     color: white;
     font-size: 18px;
+    margin-bottom: 1px;
 }
 
 .windows_logo{
@@ -380,6 +381,21 @@
 .donateword{
     margin-top: 0px;
     display: inline-block;
+}
+.donate_logo{
+    width: 70px;
+    height: 70px;
+    margin: 0%;
+    margin-left: 0px;
+    padding: 0%;
+    padding-left: 0px;
+    float: left;
+}
+.donatetext{
+    color: white;
+    font-size: 18px;
+    margin-left: 75px;
+    margin-top: 25px;
 }
 
 /* Applying the best overflow configuration to all 'dev' elements to this website  */

@@ -41,7 +41,7 @@
 .donatediv{
     width: 100%;
     background-color: orange;
-    
+    margin-top: 15px;
 }
 .hearticon{
     width: 45px;
@@ -54,10 +54,11 @@
     margin-left: 5px;
     font-size: 22px;
 }
-.donateword{
-    margin-top: 0px;
-    display: inline-block;
+.donatword{
+    color: black;
+    font-size: 16px;
 }
+
 /* Somewhat configuring the style of the main-header's navigation buttons. */
 /* Let's remove the decoration of it*/
 .homeword0{
@@ -296,6 +297,84 @@
     margin-right: 70px;
     cursor: pointer;
 }
+.whatusersthinkcenter{
+    color: white;
+    font-size: 30px;
+    margin-top: 40px;
+}
+.yassoss{
+    margin-top: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.yassenss{
+    text-align: center;
+}
+.yassenwords{
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    margin-top: 15px;
+}
+.customerreviewdiv{
+    text-align: center;
+}
+.customerss{
+    margin-top: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.customerreviewwords{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 15px;
+}
+.yossefreviewdiv{
+    text-align: center;
+}
+.yossefss{
+    margin-top: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.yossefreviewwords{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 15px;
+}
+.donateword{
+    color: white;
+    font-size: 30px;
+    margin-top: 40px;
+    display: block;
+}
+.donthavemoneyword{
+    color: white;
+    margin-top: 15px;
+    font-size: 23px;
+}
+.communitysupportdiv{
+    background-color: #424242;
+    width: 100%;
+}
+.communitysupportword0{
+    color: white;
+    font-size: 16px;
+}
+.listelement1{
+    color: white;
+    
+}
+.listelement1:hover{
+    color: brown;
+    background-color: #212121;
+}
+
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;
