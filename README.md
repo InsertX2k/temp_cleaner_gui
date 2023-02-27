@@ -1,7 +1,7 @@
 
 
 # Temp_Cleaner GUI Project
-**A Free and Open-Source Alternative to all PC Cleaning Software available that is a way more powerful than you might think it is.**<br/>
+**A Free and Open-Source program to help you free up disk space on your PC that is a way more powerful than you might expect**<br/>
 
 ## Hey there, I'd like to say Thanks for your support
 **I'd like to say Thank you for supporting my program, What I've seen in the past 2 years was something that I will never forget in my entire life, it was a dream for me to become a software developer, and with your help, that dream became a reality, so If you think that I deserve a donation (ya know, if you think my program did a good job in cleaning up your computer, and you really want to help me) consider giving donation a try, it would really make me happy and encourage me to push updates even faster.**
