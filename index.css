@@ -374,7 +374,26 @@
     color: brown;
     background-color: #212121;
 }
-
+.bigwebsitessays{
+    color: white;
+    font-size: 30px;
+    margin-top: 40px;
+    display: block;
+}
+.softpediasentence{
+    color: white;
+    font-size: 18px;
+    margin-top: 35px;
+    display: block;
+    margin-left: 10px;
+}
+.softpediaword{
+    color: white;
+    font-size: 23px;
+}
+.complementdot{
+    color: white;
+}
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;

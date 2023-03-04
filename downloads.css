@@ -192,13 +192,15 @@
     border-width: 5px;
     border-style: solid;
     width: 200px;
-    height: 40px;
+    height: 120px;
     background-color: #333333;
-    /* margin-left: 370px; */
-    /* float: left; */
     display: table-cell;
-    margin-left: 50px;
+    /* margin-left: 100px;
+    margin-right: 100px; */
+    /* border-spacing: 200px;
+    border-collapse: separate; */
     text-align: center;
+    
     cursor: pointer;
 }
 .win1032downloadbutton:hover{
@@ -397,7 +399,22 @@
     margin-left: 75px;
     margin-top: 25px;
 }
-
+.modernosdownloadbuttonsholder{
+    display: table-cell;
+    border-spacing: 10px;
+}
+.oldosesdownloadbuttonsholder{
+    display: table-cell;
+    border-spacing: 10px;
+}
+.sourcecodedownloadbuttonsholder{
+    display: table-cell;
+    border-spacing: 10px;
+}
+.othertrustedsourcesbuttonsholder{
+    display: table-cell;
+    border-spacing: 10px;
+}
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;
