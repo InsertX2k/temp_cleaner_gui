@@ -394,6 +394,14 @@
 .complementdot{
     color: white;
 }
+.introductionvideo{
+    color: white;
+    font-size: 30px;
+    margin-top: 25px;
+}
+.introvideocenter{
+    margin-top: 25px;
+}
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;
