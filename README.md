@@ -1,13 +1,8 @@
 
 
-# Temp_Cleaner GUI Project
+# Temp_Cleaner GUI Project  [![Download Temp_Cleaner GUI](https://img.shields.io/sourceforge/dt/temp-cleaner-gui.svg)](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) <a href="https://www.buymeacoffee.com/insertx2kdev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 117px !important;" ></a> 
+
 **A Free and Open-Source program to help you free up disk space on your PC that is a way more powerful than you might expect**<br/>
-
-## Hey there, I'd like to say Thanks for your support
-**I'd like to say Thank you for supporting my program, What I've seen in the past 2 years was something that I will never forget in my entire life, it was a dream for me to become a software developer, and with your help, that dream became a reality, so If you think that I deserve a donation (ya know, if you think my program did a good job in cleaning up your computer, and you really want to help me) consider giving donation a try, it would really make me happy and encourage me to push updates even faster.**
-
-
-<a href="https://www.buymeacoffee.com/insertx2kdev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 # Features:
 * Free and Open-Source
