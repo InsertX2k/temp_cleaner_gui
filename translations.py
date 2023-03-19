@@ -134,7 +134,7 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Cleaning Progress"
-    about_window_txt = """Version: 5.8
+    about_window_txt = """Version: 6.0
 Release Channel: stable
 Additional features installed:
 1-Arabic Language Pack v1.1
@@ -153,7 +153,7 @@ You can also press 'F2' to show you a message box containing useful information 
 You can press 'F1' to show you some help about using Minimal Accessibility Pack v1.0 or about increasing or decreasing screen font size.
 """
 
-    about_window_title = "About 'The Temp_Cleaner GUI Project (v5.8)'"
+    about_window_title = "About 'The Temp_Cleaner GUI Project (v6.0)'"
     cant_retrieve_config_fromfile_msgbox_content = "Unable to retrieve the configuration information, this can be due to a catastrophic failure, or a something else, the settings window will close."
     cant_retrieve_config_fromfile_msgbox_title = "Runtime Exception"
     cant_read_config_frominside_file_msgbox_title = "A runtime exception"
@@ -163,9 +163,9 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     done_reboot_for_changes_to_apply_text = "All changes you did has been successfully saved, but for the changes to take effect, you will need to restart Temp_Cleaner GUI."
     changes_saved_text = "Saved your changes"
     unable_to_save_your_changes_text = "Unable to save your changes to the file 'Config.ini', Nothing has been changed yet, and this window will not close."
-    prog_title_no_username = "Welcome to Temp_Cleaner GUI v5.8!"
+    prog_title_no_username = "Welcome to Temp_Cleaner GUI v6.0!"
     prog_title_1 = "Welcome "
-    prog_title_2 = " to Temp_Cleaner GUI v5.8!"
+    prog_title_2 = " to Temp_Cleaner GUI v6.0!"
     settings_window_title = "Temp_Cleaner GUI Settings"
     settings_hint_one = "Change the way Temp_Cleaner GUI behaves"
     rammap_path_settings_hint = "Where is the executable of RAMMap by Sysinternals :"
@@ -218,6 +218,11 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     couldntcheckforupdates = "Couldn't check for updates"
     couldnt_download = "Couldn't check for updates\nThis can happen because you don't have an active internet connection on your PC, Please check the internet connection on your PC and try again"
     couldnt_save_downloaded_version_file_with_error_details = "Couldn't save downloaded file from the server on your PC\nPlease make sure to give Temp_Cleaner GUI the sufficient permissions to do, Maybe allowing it to access your disks via your Antivirus program can help\nError details are:"
+    stop_cleaning = "Stop..."
+    you_dont_need_anything = "You are all set!"
+    wer_cleaner = "Windows Error Report (WER) Files"
+    delivery_optimization = "Windows Delivery Optimization Files"
+    windows_log_files = "Windows Logs"
     
 
 
@@ -368,7 +373,7 @@ class ar:
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "تقدم التنظيف"
-    about_window_txt = """ الإصدار: 5.8
+    about_window_txt = """ الإصدار: 6.0
 قناة الإصدار : مستقرة
 :المميزات الإضافية المفعلة
 1-Arabic Language Pack v1.1 (حزمة اللغة العربية v1.1)
@@ -387,7 +392,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
 لإظهار معلومات عن كيفية إستخدام حزمة امكانية الوصول او كيفية تكبير وتصغير الكتابه في الشاشة 'F1' يمكنك الضغط علي زر   
 """
 
-    about_window_title = "حول 'The Temp_Cleaner GUI Project (v5.8)'"
+    about_window_title = "حول 'The Temp_Cleaner GUI Project (v6.0)'"
     cant_retrieve_config_fromfile_msgbox_content = "خطأ في الحصول علي المعلومات من الضبط، هذا قد يكون بسبب خطأ كارثي او شئ اخر، شاشة الضبط سوف تغلق"
     cant_retrieve_config_fromfile_msgbox_title = "حدث خطأ في وقت التشغيل"
     cant_read_config_frominside_file_msgbox_title = "حدث خطأ في وقت التشغيل"
@@ -399,7 +404,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     unable_to_save_your_changes_text = "لم يتغير اي شئ حتي الان، وهذه النافذة لن تغلق ،'Config.ini' فشل في حفظ التغييرات في ملف "
     prog_title_no_username = "Temp_Cleaner GUI! اهلا بك في برنامج"
     prog_title_1 = " مرحبا"
-    prog_title_2 = " Temp_Cleaner GUI v5.8 في "
+    prog_title_2 = " Temp_Cleaner GUI v6.0 في "
     settings_window_title = "Temp_Cleaner GUI ضبط"
     settings_hint_one = "Temp_Cleaner GUI قم بتغيير الطريقة التي يتصرف بها "
     rammap_path_settings_hint = "Sysinternals من RAMMap ماهو مسار الملف التنفيذي لبرنامج :"
@@ -452,6 +457,11 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     couldntcheckforupdates = "فشل التحقق من التحديثات"
     couldnt_download = "فشل عملية التحقق من وجود تحديثات، برجاء التحقق من إتصال جهازك بالإنترنت"
     couldnt_save_downloaded_version_file_with_error_details = "فشل في حفظ الملف الذي تم تنزيله من الخادم الخاص بالتحقق من وجود تحديثات\nبالرجاء التحقق من إعطاء البرنامج الصلاحيات الكافية للوصول إلي التخزين عن طريق السماح له خلال برنامج الحماية الخاص بك\nمعلومات إضافية للخطأ:\n"
+    stop_cleaning = "...ﻑﺎﻘﻳﺇ"
+    you_dont_need_anything = "انت جاهز"
+    wer_cleaner = " ﺞﻣﺍﺮﺒﻟﺍ ﺀﺎﻄﺧﺍ ﻞﺠﺳ ﻒﻴﻈﻨﺗ"
+    delivery_optimization = "ﺯﻭﺪﻨﻳﻭ ﻲﻓ ﻢﻴﻠﺴﺘﻟﺍ ﻦﻴﺴﺤﺗ ﺓﺰﻴﻣ"
+    windows_log_files = "ﺯﻭﺪﻨﻳﻮﻟﺍ ﺕﺍﺰﻴﻤﻣ ﺕﻼﺠﺳ"
 
 
 
