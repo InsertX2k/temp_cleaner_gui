@@ -175,6 +175,7 @@ class updaterProgramUI(Toplevel):
     def __init__(self):
         super().__init__()
         global versionNumber, application_path
+        deactivate_automatic_dpi_awareness() # deactivating automatic dpi awareness in updater program.
         self.title(getCurrentLanguage().updater_title)
         try: # attempt to load the icon bitmap for this window.
             self.iconbitmap(f"{application_path}\\updater.ico")
