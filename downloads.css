@@ -415,6 +415,40 @@
     display: table-cell;
     border-spacing: 10px;
 }
+.oldergeeksdownloadsbutton{
+    color: rgb(0, 0, 0);
+    border-color: #333333;
+    border-width: 5px;
+    border-style: solid;
+    width: 200px;
+    height: 121px;
+    background-color: #333333;
+    display: table-cell;
+    margin-left: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+.oldergeeksdownloadsbutton:hover{
+    border-color: #727272;
+}
+.tydonatorsword{
+    color: white;
+    font-size: 18px;
+    display: inline-block;
+    margin-top: 0px;
+    margin-left: 75px;
+}
+.donatorsul{
+    color: white;
+    font-size: 16px;
+    margin-top: 0px;
+    display: block;
+    margin-left: 75px;
+}
+.donatorsul:hover{
+    color: cyan;
+    list-style-type: square;
+}
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;
