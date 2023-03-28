@@ -13,7 +13,6 @@
 * Easy to use
 * Small in size.
 * Supports **Dark** and **Light** User Interface color modes.
-* Portable (as all configuration is only stored on a `Config.ini` file on the root directory of the program)
 * Offers an easy to use Installer
 * The development of it is still active (which means it gets updated every few days or so)
 * **[New in v5.6-stable]** Offers an Updater program, **Now you no longer need to go to the website of this program just to check if there is an update, It will inform you immediately when there is an update** ***(Just make sure to enable the "Automatic Update Check on program startup" Setting in Temp_Cleaner GUI's Settings)***
