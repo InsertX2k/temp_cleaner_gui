@@ -402,6 +402,30 @@
 .introvideocenter{
     margin-top: 25px;
 }
+
+/* applying footer element configuration */
+footer{
+    font-size: 14px;
+    color: white;
+    background-color: #727272;
+    text-align: center;
+    margin-top: 15px;
+}
+.infolist{
+    list-style-type: none;
+    text-align: center;
+}
+.infolistelement{
+    display: inline;
+}
+.link0{
+    color: cyan;
+    text-decoration: none;
+}
+.link0:hover{
+    text-decoration: underline;
+}
+
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;

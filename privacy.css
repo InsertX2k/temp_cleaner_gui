@@ -1,9 +1,6 @@
 /*Defining the background image properties*/
 .bdy{
     background-color: #212121;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 .table-header{
     font-size: xx-large;
@@ -61,7 +58,7 @@
     cursor: pointer;
 }
 .aboutword0{
-    text-decoration: overline;
+    text-decoration: none;
     cursor: pointer;
 }
 .header-link{
@@ -135,7 +132,7 @@
 
 .aboutlnk{
     color:rgb(0, 255, 255);
-    text-decoration: overline;
+    text-decoration: none;
     cursor: pointer;
 }
 .aboutlnk:hover{
@@ -146,18 +143,66 @@
 .plusp{
     font-size: 20px;
 }
-.underconnote{
+
+/*                      END                         */
+/*  applying configuration related to elements in the privacy policy page.  */
+.privheader{
     color: white;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 18px;
+    font-size: 36px;
+    margin-top: 12px;
 }
 
+.yourprivacyimportantword{
+    color: white;
+    font-size: 20px;
+    margin-top: 15px;
+}
+.tcgcollects{
+    color: white;
+    font-size: 18px;
+    margin-top: 0px;
+}
+.datacollectiontcgtable{
+    color: white;
+    font-size: 15px;
+    border-radius: none;
+    border-color: white;
+    border-style: solid;
+    border-width: 3px;
+    width: 100%;
+    border-collapse: collapse;
+}
+.th0{
+    border-style: solid;
+    border-color: white;
+    border-width: 3px;
+    font-size: 16px;
+}
+.th1{
+    border-style: solid;
+    border-color: white;
+    border-width: 3px;
+    font-size: 20px;
+}
 .link0{
     color: cyan;
     text-decoration: none;
 }
 .link0:hover{
     text-decoration: underline;
+}
+kbd{
+    color: white;
+    background-color: #727272;
+    border-radius: 5px;
+}
+.tcgsitecollects{
+    color: white;
+    margin-top: 25px;
+    font-size: 18px;
+}
+.li2{
+    margin-top: 10px;
 }
 
 /* applying footer element configuration */
@@ -166,7 +211,7 @@ footer{
     color: white;
     background-color: #727272;
     text-align: center;
-    margin-top: auto;
+    margin-top: 15px;
 }
 .infolist{
     list-style-type: none;
@@ -175,8 +220,12 @@ footer{
 .infolistelement{
     display: inline;
 }
+
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;
 }
 /*       END         */
+.test{
+    color: rgb(0, 247, 255);
+}
