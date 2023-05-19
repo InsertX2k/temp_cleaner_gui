@@ -652,7 +652,7 @@ class MainWindowLightMode(CTk):
                 try:
                     uncheck_all_options()
                     for i in range(0,64):
-                        getattr(self, f"var{i}").set(0)
+                        getattr(self, f"var{i}").set(1)
                 except Exception as exception_applying_max_preset:
                     print(f"[ERROR]: couldn't apply max preset due to exception: {exception_applying_max_preset}")
                     pass
