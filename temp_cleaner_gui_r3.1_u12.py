@@ -53,7 +53,6 @@ from tkinter import messagebox
 from tkinter import ttk
 import os
 from PIL import Image, ImageTk
-import sys
 import time
 import configparser
 from tkinter import filedialog
@@ -808,10 +807,74 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
 
 # Defining a sample get var functionaking a new checkbox.
 # Defining the ON-OFF Like variable
-
-for i in range(0,65):
-    setattr(sys.modules[__name__], f"var{i}", StringVar())
+var0 = StringVar()
+var1 = StringVar()
+var2 = StringVar()
+var3 = StringVar()
+var4 = StringVar()
+var5 = StringVar()
+var6 = StringVar()
+var7 = StringVar()
+var8 = StringVar()
+var9 = StringVar()
+var10 = StringVar()
+var11 = StringVar()
+var12 = StringVar()
+var13 = StringVar()
+var14 = StringVar()
+var15 = StringVar()
+var16 = StringVar()
+var17 = StringVar()
+var18 = StringVar()
+var19 = StringVar()
+var20 = StringVar()
+var21 = StringVar()
+var22 = StringVar()
+var23 = StringVar()
+var24 = StringVar()
+var25 = StringVar()
+var26 = StringVar()
+var27 = StringVar()
+var28 = StringVar()
+var29 = StringVar()
+var30 = StringVar()
+var31 = StringVar()
+var32 = StringVar()
+var33 = StringVar()
+var34 = StringVar()
+var35 = StringVar()
+var36 = StringVar()
+var37 = StringVar()
+var38 = StringVar()
+var39 = StringVar()
+var40 = StringVar()
+var41 = StringVar()
+var42 = StringVar()
+var43 = StringVar()
+var44 = StringVar()
+var45 = StringVar()
+var46 = StringVar()
+var47 = StringVar()
+var48 = StringVar()
+var49 = StringVar()
+var50 = StringVar()
+var51 = StringVar()
+var52 = StringVar()
+var53 = StringVar()
+var54 = StringVar()
+var55 = StringVar()
+var56 = StringVar()
+var57 = StringVar()
+var58 = StringVar()
+var59 = StringVar()
+var60 = StringVar()
+var61 = StringVar()
+var62 = StringVar()
+var63 = StringVar()
+var64 = StringVar()
 # Defining the checkbox button.
+
+
 
 lblframe0 = ttk.Labelframe(show_frame, text="Recycle Bin Cleanup")
 # --------------------------
