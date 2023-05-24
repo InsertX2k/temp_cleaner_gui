@@ -303,7 +303,7 @@ class updaterProgramUI(Toplevel):
         self.lbl0.place(x=170, y=5)
         self.lbl1 = Label(self, text=f"{getCurrentLanguage().new_version_is}{getServerVersionNumber()}{getCurrentLanguage().current_version_is}{versionNumber}", background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 9))
         self.lbl1.place(x=170, y=35)
-        self.release_notes_widget = scrolledtext.ScrolledText(self, background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], selectbackground='blue', state='disabled', font=("Arial", 12))
+        self.release_notes_widget = scrolledtext.ScrolledText(self, background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], selectbackground='blue', state='disabled', font=("Arial", 10))
         self.release_notes_widget.place(x=170, y=55, relwidth=0.7, relheight=0.63)
         self.closebtn = CTkButton(self, text=getCurrentLanguage().close_btn_updater, command=dontUpdateAndCloseProgram, cursor='hand2')
         self.closebtn.place(x=170, y=260)

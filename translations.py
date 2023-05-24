@@ -1,4 +1,6 @@
-
+"""
+Provides strings for use with Temp_Cleaner GUI's UI elements.
+"""
 class en:
     """
     Provides English translations for program Temp_Cleaner GUI by Ziad Ahmed (Mr.X)
@@ -10,7 +12,7 @@ class en:
     2-THE TRANSLATIONS MUST BE ACCURATE FOR USE IN PUBLIC.
     """
     recycle_bin_text = "Recycle Bin"
-    windrv_recycle_bin_text = "Windows Drive Recycle Bin"
+    windrv_recycle_bin_text = "Recycle Bin (for all drives)"
     dxdcache_text = "D3DCache (Windows 10 or newer only)"
     dxdcache_text_chkbox = "D3DCache (Windows 10 or newer only)"
     sys_user_specific_text = "System and User specific"
@@ -42,7 +44,7 @@ class en:
     gimp_recent_docs_list_text = "GIMP's recent documents list"
     ps2020_webcache_text = "Photoshop 2020 Web Cache"
     winupdate_text = "Windows Update"
-    winupdate_downloadedfiles_text = "Windows Update Downloadeds"
+    winupdate_downloadedfiles_text = "Windows Update Downloads"
     win10plus_cleaners_text = "Windows 10 or newer only"
     win10plus_oscache_text = "Windows 10/11 OS Temporary Files"
     actioncenter_cache_text = "Action Center Temporary Files"
@@ -134,7 +136,7 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Cleaning Progress"
-    about_window_txt = """Version: 6.1
+    about_window_txt = """Version: 6.4
 Release Channel: stable
 Additional features installed:
 1-Arabic Language Pack v1.1
@@ -153,7 +155,7 @@ You can also press 'F2' to show you a message box containing useful information 
 You can press 'F1' to show you some help about using Minimal Accessibility Pack v1.0 or about increasing or decreasing screen font size.
 """
 
-    about_window_title = "About 'The Temp_Cleaner GUI Project (v6.1)'"
+    about_window_title = "About 'The Temp_Cleaner GUI Project (v6.4)'"
     cant_retrieve_config_fromfile_msgbox_content = "Unable to retrieve the configuration information, this can be due to a catastrophic failure, or a something else, the settings window will close."
     cant_retrieve_config_fromfile_msgbox_title = "Runtime Exception"
     cant_read_config_frominside_file_msgbox_title = "A runtime exception"
@@ -163,9 +165,9 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     done_reboot_for_changes_to_apply_text = "All changes you did has been successfully saved, but for the changes to take effect, you will need to restart Temp_Cleaner GUI."
     changes_saved_text = "Saved your changes"
     unable_to_save_your_changes_text = "Unable to save your changes to the file 'Config.ini', Nothing has been changed yet, and this window will not close."
-    prog_title_no_username = "Welcome to Temp_Cleaner GUI v6.1!"
+    prog_title_no_username = "Welcome to Temp_Cleaner GUI v6.4!"
     prog_title_1 = "Welcome "
-    prog_title_2 = " to Temp_Cleaner GUI v6.1!"
+    prog_title_2 = " to Temp_Cleaner GUI v6.4!"
     settings_window_title = "Temp_Cleaner GUI Settings"
     settings_hint_one = "Change the way Temp_Cleaner GUI behaves"
     rammap_path_settings_hint = "Where is the executable of RAMMap by Sysinternals :"
@@ -223,9 +225,31 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     wer_cleaner = "Windows Error Report (WER) Files"
     delivery_optimization = "Windows Delivery Optimization Files"
     windows_log_files = "Windows Logs"
-    
-
-
+    cancel_pending_updates = "Cancel Pending Windows Update"
+    recyclebin_of = "Recycle bin of drive: "
+    no_recyclebin_enabled = "There is no recycle bin enabled for drive: "
+    couldnt_get_other_drives_will_clean_windrv = "Couldn't retrieve available volumes in this PC, will continue using default recovery option: Clean Windows Drive Recycle Bin"
+    windows_update_rebooter_exit_code = "Restart Windows Update Service Command completed with the following output: "
+    offline_web_pages = "Offline Web Pages"
+    attempting_to_take_folder_ownership = "Temp_Cleaner GUI must take the ownership of the folder before cleaning it."
+    donators = "Temp_Cleaner GUI's Supporters"
+    donate = "Donate..."
+    thx_donators = "Ziad (Mr.X) wants to thank all of those donators for choosing to\n support the development of Temp_Cleaner GUI!"
+    list_of_donators_is_loading = "Loading a list of all donators, please wait..."
+    couldnt_download_donators_list = "Couldn't load the list of all donators, Maybe try later when you get a stable internet connection?"
+    donators_btn = "Donators"
+    finish_cleaning = "Cleaning process completed, You may now press the 'F6' button in your keyboard to clear this list."
+    deleted_files = "Deleted Files:"
+    error_in_cleaning = "An error has occured while this cleaner has been running, therefore this section will be skipped"
+    special_cleaners = "Special Cleaners (Will take a very long time)"
+    winsxs = "Windows Component Store (WinSxS) Temporary Files"
+    cleaner_will_take_lot_of_time = "This cleaner will take a lot of time to continue, therefore a Console Window will appear on your screen showing you an indicator of this cleaner's progress."
+    cleaner_has_finished = "This cleaner has completed!"
+    winsxs_warning = "Deleting WinSxS (Windows Component Store) will prevent you from uninstalling any previously installed updates"
+    winsp_cleaner = "Windows Service Pack Unnecessary Files"
+    winsp_cleaner_warning = "By cleaning Service Pack Unnecessary files, you will no longer be able to uninstall the current service pack."
+    winold = "Previous Windows Installations"
+    winold_warning = "By deleting the Windows.old folder, You will no longer be able to roll back to a previous version of Windows"
 
     
 
@@ -251,7 +275,7 @@ class ar:
     2-يجب ان تكون الترجمة دقيقة حيث انها سوف تستخدم في العامة وانت المسئول عنها
     """
     recycle_bin_text = "سلة المهملات"
-    windrv_recycle_bin_text = "ﻡﺎﻈﻨﻟﺍ ﺹﺮﻗ ﺕﻼﻤﻬﻣ ﺔﻠﺳ"
+    windrv_recycle_bin_text = "ﺕﻼﻤﻬﻤﻟﺍ ﺔﻠﺳ"
     dxdcache_text = "(ويندوز 10 او اعلي فقط) D3D Shader Cacheذاكرة التخزين المؤقتة ل"
     dxdcache_text_chkbox = "ﻂﻘﻓ ﺙﺪﺣﺍ ﻭﺍ 10 ﺯﻭﺪﻨﻳﻭ ﻱﺩ ﻱﺮﺛ ﺖﻛﺮﻳﺍﺩ ﺞﻟﺎﻌﻤﻟ ﺔﺘﻗﺆﻤﻟﺍ ﻦﻳﺰﺨﺘﻟﺍ ﺓﺮﻛﺍﺫ"
     sys_user_specific_text = "ملفات خاصة بالنظام او المستخدم غير ضرورية"
@@ -373,7 +397,7 @@ class ar:
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "تقدم التنظيف"
-    about_window_txt = """ الإصدار: 6.1
+    about_window_txt = """ الإصدار: 6.4
 قناة الإصدار : مستقرة
 :المميزات الإضافية المفعلة
 1-Arabic Language Pack v1.1 (حزمة اللغة العربية v1.1)
@@ -392,7 +416,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
 لإظهار معلومات عن كيفية إستخدام حزمة امكانية الوصول او كيفية تكبير وتصغير الكتابه في الشاشة 'F1' يمكنك الضغط علي زر   
 """
 
-    about_window_title = "حول 'The Temp_Cleaner GUI Project (v6.1)'"
+    about_window_title = "حول 'The Temp_Cleaner GUI Project (v6.4)'"
     cant_retrieve_config_fromfile_msgbox_content = "خطأ في الحصول علي المعلومات من الضبط، هذا قد يكون بسبب خطأ كارثي او شئ اخر، شاشة الضبط سوف تغلق"
     cant_retrieve_config_fromfile_msgbox_title = "حدث خطأ في وقت التشغيل"
     cant_read_config_frominside_file_msgbox_title = "حدث خطأ في وقت التشغيل"
@@ -404,7 +428,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     unable_to_save_your_changes_text = "لم يتغير اي شئ حتي الان، وهذه النافذة لن تغلق ،'Config.ini' فشل في حفظ التغييرات في ملف "
     prog_title_no_username = "Temp_Cleaner GUI! اهلا بك في برنامج"
     prog_title_1 = " مرحبا"
-    prog_title_2 = " Temp_Cleaner GUI v6.1 في "
+    prog_title_2 = " Temp_Cleaner GUI v6.4 في "
     settings_window_title = "Temp_Cleaner GUI ضبط"
     settings_hint_one = "Temp_Cleaner GUI قم بتغيير الطريقة التي يتصرف بها "
     rammap_path_settings_hint = "Sysinternals من RAMMap ماهو مسار الملف التنفيذي لبرنامج :"
@@ -462,9 +486,28 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     wer_cleaner = " ﺞﻣﺍﺮﺒﻟﺍ ﺀﺎﻄﺧﺍ ﻞﺠﺳ ﻒﻴﻈﻨﺗ"
     delivery_optimization = "ﺯﻭﺪﻨﻳﻭ ﻲﻓ ﻢﻴﻠﺴﺘﻟﺍ ﻦﻴﺴﺤﺗ ﺓﺰﻴﻣ"
     windows_log_files = "ﺯﻭﺪﻨﻳﻮﻟﺍ ﺕﺍﺰﻴﻤﻣ ﺕﻼﺠﺳ"
-
-
-
-
-
-    
+    cancel_pending_updates = "ﺭﺎﻈﺘﻧﻹﺍ ﺪﻴﻗ ﺚﻳﺪﺤﺘﻟﺍ ﺀﺎﻐﻟﺇ"
+    recyclebin_of = "سلة مهملات : "
+    no_recyclebin_enabled = "سلة المهملات غير مفعلة للقرص : "
+    couldnt_get_other_drives_will_clean_windrv = "فشل في الحصول علي عنوانين الاقراص المتاحة علي هذا الجهاز، سوف يتم الإستمرار بالخيار الإفتراضي: تنظيف سله مهملات قرص النظام"
+    windows_update_rebooter_exit_code = "أمر إعادة تشغيل خدمة ترقية ويندوز أنتهي بالمخرجات التالية : "
+    offline_web_pages = "ﺔﻠﺼﺘﻣ ﺮﻴﻐﻟﺍ ﺐﻳﻮﻟﺍ ﺕﺎﺤﻔﺻ"
+    attempting_to_take_folder_ownership = "اخذ ملكية المجلد قبل البدأ في تنظيفه Temp_Cleaner GUI يجب علي برنامج "
+    donators = "Temp_Cleaner GUI داعمي "
+    donate = "...ﻉﺮﺒﺗ"
+    thx_donators = "Temp_Cleaner GUI زياد مستر اكس يريد ان يشكر هؤلاء علي إختيارهم لدعم برنامج"
+    list_of_donators_is_loading = "جاري تحميل قائمة المتبرعين، يرجي الإنتظار..."
+    couldnt_download_donators_list = "لم يتم تحميل لائحة المتبرعين، ربما قد تريد المحاولة لاحقا عندما يتوفر لديك الإتصال المستقر بالإنترنت؟"
+    donators_btn = "ﻦﻴﻋﺮﺒﺘﻤﻟﺍ"
+    finish_cleaning = "لمحو هذه اللائحة 'F6' عملية التنظيف قد إنتهت، يمكنك الأن الضغط علي الزر "
+    deleted_files = "الملفات المحذوفة:"
+    error_in_cleaning = "حدث خطأ أثناء تنظيف هذا القسم ، لذلك سيتم تخطيه."
+    special_cleaners = "المنظفات الخاصة (سوف تستغرق الكثير من الوقت)"
+    winsxs = "ﺔﺘﻗﺆﻤﻟﺍ ﺯﻭﺪﻨﻳﻮﻟﺍ ﺕﺎﻧﻮﻜﻣ ﻥﺰﺨﻣ ﺕﺎﻔﻠﻣ"
+    cleaner_will_take_lot_of_time = "هذا المنظف سوف يستغرق فترة طويلة جدا من الوقت،لذلك سوف تظهر شاشة موجه اوامر امامك علي الشاشة لكي تري تقدم العملية"
+    cleaner_has_finished = "لقد انتهت هذه العملية"
+    winsxs_warning = "مسح الملفات المؤقتة الخاصة بمخزن مكونات الويندوز سوف يمنعك من إلغاء تثبيت أي تحديثات تم تثبيتها مسبقا"
+    winsp_cleaner = "ﺔﻳﺭﻭﺮﺿ ﺮﻴﻐﻟﺍ ﺯﻭﺪﻨﻳﻮﺑ ﺔﺻﺎﺨﻟﺍ ﺕﺎﻣﺪﺨﻟﺍ ﺔﻣﺰﺣ ﺕﺎﻔﻠﻣ"
+    winsp_cleaner_warning = "بحذفك لملفات حزمة الخدمات الغير الضرورية لن تسطيع مجددا ان تحذف حزمة الخدمات هذه"
+    winold = "ﺔﻤﻳﺪﻘﻟﺍ ﺯﻭﺪﻨﻳﻮﻟﺍ ﺔﺨﺴﻧ ﺕﺎﻔﻠﻣ"
+    winold_warning = "سوف تخسر إمكانية الرجوع إلي النسخة السابقة من ويندوز ، Windows.old بمسحك لمجلد "
