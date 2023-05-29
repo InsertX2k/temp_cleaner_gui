@@ -22,6 +22,10 @@
 * Safely cleans up your computer, unlike others, they can cause problems with other programs
 * Runs in native **64-bit mode** (for **64-bit** releases of the program)
 * Supports **32-bit** operating systems in **native 32-bit mode**!
+* Available on **winget**!
+  ```bat
+  winget install Ziad.TCG
+  ```
 
 ## What's the appropriate binary release for my operating system?
 
