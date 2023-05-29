@@ -457,6 +457,33 @@
     color: cyan;
     list-style-type: square;
 }
+.wingetlogo{
+    width: 64px;
+    height: 64px;
+    float: left;
+    margin-top: 2px;
+}
+.wingetword0{
+    font-size: 18px;
+    color: white;
+    display: block;
+    margin-top: 25px;
+    margin-left: 79px;
+    margin-bottom: 23px;
+}
+.downloadline{
+    width: 100%;
+    background-color: #727272;
+    color: white;
+    display: block;
+    height: 62px;
+    font-size: 18px;
+}
+.downloadline2{
+    font-size: 18px;
+    color: white;
+    display: block;
+}
 
 
 /* applying footer element configuration */
