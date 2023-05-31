@@ -185,14 +185,14 @@
     color: white;
     font-size: 20px;
     font-family: Helvetica, Arial,  sans-serif;
-    margin-left: 19%;
+    padding-left: 37%;
 }
 .greeting2{
     color: rgb(255, 255, 255);
     z-index: 3;
     position: absolute;
     margin-top: 120px;
-    margin-left: 20%;
+    margin-left: 25%;
     font-size: 18px;
 }
 .go_to_downloads_button{
