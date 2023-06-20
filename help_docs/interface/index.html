@@ -1,0 +1,198 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <title>Understanding the interface of Temp_Cleaner GUI</title>
+        <link rel="icon" href="icon.png">
+        <link rel="stylesheet" href="index.css">
+        <meta charset="utf-8">
+        <meta name="description" content="Temp_Cleaner GUI Help document">
+    </head>
+    <div class="header">
+        <img src="icon.png" alt="Temp_Cleaner GUI's icon" id="headerico">
+        <p id="headerp">
+            Temp_Cleaner GUI Help
+        </p>
+    </div>
+    <h2>
+        Understanding the Interface of Temp_Cleaner GUI
+    </h2>
+    <p>
+        Temp_Cleaner GUI, features an easy to use and an easily understandable and far from complication graphical user interface (GUI)
+    </p>
+    <img src="ui0.png" alt="couldn't load help document, please reload this page.">
+    <p>
+        Below is a table containing more information about what each number means
+    </p>
+    <table class="table0">
+        <tr>
+            <th>
+                Number
+            </th>
+            <th>
+                Information
+            </th>
+        </tr>
+        <tr>
+            <td>
+                #1
+            </td>
+            <td>
+                The cleaning preset chooser combobox (Dropdown) <br>
+                Click on the down arrow button on the right (or left side, according to your UI language) to choose a cleaning preset. <br>
+                A cleaning preset is an option that allows you to automatically select multiple cleaning options just by choosing how you want this program to work. <br>
+                <br>
+                Usually the most selected preset for everyday cleaning is: <br>
+                <ul>
+                    <li>
+                        Default Preset (Recommended for Everyday use)
+                    </li>
+                </ul>
+                More cleaning presets are also available: <br>
+                <ul>
+                    <li>
+                        Maximum Cleaning (Cleans up all sections, thus giving you more disk space)
+                    </li>
+                    <li>
+                        Empty Recycle Bin Only
+                    </li>
+                    <li>
+                        Web Browser Cleaning
+                    </li>
+                    <li>
+                        Web Browser Cleaning + Cookies
+                    </li>
+                    <li>
+                        Cancel Pending Windows Update
+                    </li>
+                </ul>
+                First time users (those who probably has their PC hogged with tons of Temporary files) tend to choose this preset:
+                <ul>
+                    <li>
+                        Maximum Cleaning (Cleans up all sections, thus giving you more disk space)
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                #2
+            </td>
+            <td>
+                Available cleaning options. <br>
+                Every cleaning option in Temp_Cleaner GUI is basically a checkbox, as you probably hinted, all you need to do is just checking (clicking) the option you want to clean. <br>
+                This puts the selected option in the queue of options to clean, and that option will be cleaned when you start the cleaning process.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                #3
+            </td>
+            <td>
+                Window title <br>
+                This is the title of Temp_Cleaner GUI's Window <br>
+                This usually shows "Welcome [username] to Temp_Cleaner GUI v[version number]!" <br>
+                and if it fails to get the current user name, the title will be only "Welcome to Temp_Cleaner GUI v[version number]!"
+            </td>
+        </tr>
+        <tr>
+            <td>
+                #4
+            </td>
+            <td>
+                Banner image <br>
+                This is basically a banner that sits on top of even the first widget, I put it here because it makes the program looks prettier. <br>
+                <i><strong>This banner image is changable (can be changed by you)</strong></i> <br>
+                There are two variants of the file of this banner image: <br>
+                <ul>
+                    <li>
+                        <strong>banner.png</strong> and this is the default banner file that will appear <strong>when you are using Temp_Cleaner GUI on a display with a resolution of 1152x864 or higher</strong>.
+                    </li>
+                    <li>
+                        <strong>bannerlowres.png</strong> and this is the banner file that will appear <strong>when you are using Temp_Cleaner GUI on a display with a resolution of 1024x768 or 800x600</strong>.
+                    </li>
+                </ul>
+                So basically, if you need to modify the banner, you will need to <strong>edit one or all of these files which will be stored in the installation folder of Temp_Cleaner GUI</strong>. (for example: <strong>C:\Program Files\Temp_Cleaner GUI</strong>) <br>
+                <br>
+                <strong id="warn0">Edit them as they are (don't change their resolution or file extension or bit depth or file name)</strong>
+            </td>
+        </tr>
+    </table>
+    <strong><p>
+        When you scroll down (using mouse wheel or the scrollbar on the right or left side of the window, depending on the UI language) <br>
+        You will see the following new interface elements (widgets).
+    </p></strong>
+    <img src="ui1.png" alt="couldn't load help document, please reload this page.">
+    <strong><p>
+        I will also explain what each button and thing does:
+    </p></strong>
+    <table>
+        <tr>
+            <th>
+                Number
+            </th>
+            <th>
+                Information
+            </th>
+        </tr>
+        <tr>
+            <td>
+                #1
+            </td>
+            <td>
+                The "Start cleaning" (may vary between other UI languages) button <br>
+                This button is probably the most used button in the history of this program, basically because of what it does, it simply <strong>executes the cleaner to clean all the options you checked previously</strong> <br>
+                <strong>This is the button you will need to click after you choose a cleaning preset or check a cleaning option.</strong> <br>
+                <br>
+                After the cleaning process is complete, Temp_Cleaner GUI will show you a small window (named a messagebox) showing you how many disk space you have just freed up.
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                #2
+            </td>
+            <td>
+                The "About & Tips" (may vary between other UI languages) button <br>
+                When you click this button, it will basically spawn another window in front of you that shows you basic information about your current Temp_Cleaner GUI installation, such as current version, number of contributors to this version, release channel, and support information. <br>
+                It also allows you to use various functions, like: <br>
+                <ul>
+                    <li>
+                        Showing the license of Temp_Cleaner GUI
+                    </li>
+                    <li>
+                        Opening Temp_Cleaner GUI's official website
+                    </li>
+                    <li>
+                        Checking for program updates
+                    </li>
+                    <li>
+                        Showing a list of all donators to this program
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                #3
+            </td>
+            <td>
+                The "Settings" (may vary between other UI languages) button <br>
+                It basically launches the settings window that allows you to configure Temp_Cleaner GUI the way you like.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                #4
+            </td>
+            <td>
+                This is a widget showing you what has been cleaned and what hasn't. <br>
+                You can clear that list (delete all text written in it) by pressing the <kbd>F6</kbd> key on your keyboard.
+            </td>
+        </tr>
+    </table>
+
+    
+    <p style="font-size: 12px;opacity: 75%;">
+        This document is provided to you by Insertx2k Dev aka. Ziad Ahmed (Mr.X)
+    </p>
+</html>
