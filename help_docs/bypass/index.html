@@ -1,0 +1,114 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <title>Bypassing a forced Windows Update that prevents you from rebooting</title>
+        <link rel="icon" href="icon.png">
+        <link rel="stylesheet" href="index.css">
+        <meta charset="utf-8">
+        <meta name="description" content="Temp_Cleaner GUI Help document">
+    </head>
+    <div class="header">
+        <img src="icon.png" alt="Temp_Cleaner GUI's icon" id="headerico">
+        <p id="headerp">
+            Temp_Cleaner GUI Help
+        </p>
+    </div>
+    <h2>
+        Using Temp_Cleaner GUI to bypass a forced Windows Update that prevents you from rebooting
+    </h2>
+    <p>
+        Temp_Cleaner GUI gives you the ability to bypass the forced Windows Update that prevents you from rebooting your PC, doing this might seem a bit hard to accomplish, but it is really easy to do, I will do my best in making steps more clear to you.
+    </p>
+    <h3>
+        First Step: Launch Temp_Cleaner GUI and choose the cleaning preset
+    </h3>
+    <ul>
+        <li>
+            Close and save all your important work, as you will be rebooting your PC/laptop <strong style="color:red;">(This is important)</strong>
+        </li>
+        <li>
+            Launch Temp_Cleaner GUI
+        </li>
+        <li>
+            From the cleaning preset dropdown (combobox) (see <a href="../interface/index.html" target="_blank">Understanding the interface of Temp_Cleaner GUI</a>) choose the preset <strong>Cancel Pending Windows Update</strong>
+        </li>
+        <li>
+            Scroll down til there is no more space to scroll to and click the <strong>Start cleaning</strong> button.
+        </li>
+        <li>
+            A small window (dialog box) asking you whether you want to restart the Windows Update service, Click <strong>No</strong> <strong style="color:red;">(This is important)</strong>
+        </li>
+        <li>
+            Wait for it to finish cleaning (this might take several minutes, depending on your PC speed and other factors)
+        </li>
+        <li>
+            When finished, a small window (messagebox) must appear showing you how many disk space you've freed up, press <strong>OK</strong> and close the window of Temp_Cleaner GUI
+        </li>
+    </ul>
+    <h3>
+        Second Step: Rebooting your PC
+    </h3>
+    <p>
+        This step is where we will see how Temp_Cleaner GUI has removed the pending update completely and allowed you to safely reboot without the need to install that pending update.
+    </p>
+    <ul>
+        <li>
+            Open Start menu
+        </li>
+        <li>
+            Click the power options button (usually that small button that has the power icon in it)
+        </li>
+        <li>
+            Click "Update and Restart"
+        </li>
+        <li>
+            Now your PC should reboot normally, without showing you these "Applying Update" or anything related to applying updates, it might take a bit more time than the usual reboot time, but that's fine, just be patient.
+        </li>
+    </ul>
+    <h3>
+        Third Step: Troubleshooting
+    </h3>
+    <p>
+        <strong>You will only need this step when your PC doesn't seem to reboot normally after you try all of the steps above.</strong>
+    </p>
+    <h4>
+        Troubleshooting: My PC is stuck at the restarting screen for longer than 15 minutes.
+    </h4>
+    <p>
+        When your PC is stuck at the restarting screen for longer than 15 minutes, it is usually an indicator that you might need to restart your PC manually (via hardware restart or power off buttons), <strong><i>But don't worry, all your data is still there, none of your important files has been touched</i></strong> 
+    </p>
+    <p>
+        Please follow this troubleshooting guide to ensure you won't stay another 15 minutes waiting for it to reboot by itself while it won't.
+    </p>
+    <ul>
+        <li>
+            Check if there is a disk activity, This can be done by looking at the disk activity LED in your computer or laptop, this LED usually looks like a Cylinder or sits on top of a small printed Cylinder icon. <strong><i>(You may refer to your PC's user manual the section that explains how to check for disk activity for more information)</i></strong>
+        </li>
+        <li>
+            If there is no disk activity, like the LED only blanks every 2 seconds or more, then it is safe to reboot your PC or laptop manually, Press and hold the Power off button for 15 seconds or more until your PC turns off and turn it on again, You will see everything working fine.
+        </li>
+        <li>
+            If there is a disk activity, like the LED is always blanking (is always on), that's a good indicator, you just need to wait for more time and it will reboot automatically, probably you forgot something working in the background and Windows is saving your work.
+        </li>
+    </ul>
+    <h4>
+        Troubleshooting: Windows doesn't let me restart (or The <strong>Update and Restart</strong> button doesn't seem to be working)
+    </h4>
+    <p>
+        This is normal, you can always reboot your PC via command line.
+    </p>
+    <ul>
+        <li>
+            Press <kbd>Win</kbd> + <kbd>R</kbd> to open <strong>Run</strong>
+        </li>
+        <li>
+            Type <strong>shutdown /r /f /t 00</strong>
+        </li>
+        <li>
+            Press <kbd>Enter</kbd>, your PC should now be rebooting
+        </li>
+    </ul>
+    <p style="font-size: 12px;opacity: 75%;">
+        This document is provided to you by Insertx2k Dev aka. Ziad Ahmed (Mr.X)
+    </p>
+</html>
