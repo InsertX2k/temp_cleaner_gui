@@ -1,0 +1,53 @@
+body{
+    background-color: #333;
+    color: white;
+}
+p{
+    font-size: 16px;
+}
+li{
+    color: white;
+    font-size: 17px;
+}
+li:hover{
+    color: aqua;
+    cursor: pointer;
+    list-style-type: square;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+a:hover{
+    color: cyan;
+    text-decoration: underline;
+}
+.header{
+    width: 100%;
+    background-color: #4b4b4b;
+    display: inline-block;
+}
+#headerico{
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+#headerp{
+    font-size: 18px;
+    color: white;
+    margin-top: 20px;
+    margin-left: 10px;
+    float: left;
+}
+#headerico:hover{
+    rotate: -40deg;
+}
+kbd{
+    background-color: #6e6e6e;
+    color: white;
+    border-radius: 10%;
+}
+code{
+    background-color: #6e6e6e;
+    color: white;
+}
