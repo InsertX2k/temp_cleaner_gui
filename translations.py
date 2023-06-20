@@ -136,7 +136,7 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Cleaning Progress"
-    about_window_txt = """Version: 6.4
+    about_window_txt = """Version: 6.6
 Release Channel: stable
 Additional features installed:
 1-Arabic Language Pack v1.1
@@ -155,7 +155,7 @@ You can also press 'F2' to show you a message box containing useful information 
 You can press 'F1' to show you some help about using Minimal Accessibility Pack v1.0 or about increasing or decreasing screen font size.
 """
 
-    about_window_title = "About 'The Temp_Cleaner GUI Project (v6.4)'"
+    about_window_title = "About 'The Temp_Cleaner GUI Project (v6.6)'"
     cant_retrieve_config_fromfile_msgbox_content = "Unable to retrieve the configuration information, this can be due to a catastrophic failure, or a something else, the settings window will close."
     cant_retrieve_config_fromfile_msgbox_title = "Runtime Exception"
     cant_read_config_frominside_file_msgbox_title = "A runtime exception"
@@ -165,15 +165,15 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     done_reboot_for_changes_to_apply_text = "All changes you did has been successfully saved, but for the changes to take effect, you will need to restart Temp_Cleaner GUI."
     changes_saved_text = "Saved your changes"
     unable_to_save_your_changes_text = "Unable to save your changes to the file 'Config.ini', Nothing has been changed yet, and this window will not close."
-    prog_title_no_username = "Welcome to Temp_Cleaner GUI v6.4!"
+    prog_title_no_username = "Welcome to Temp_Cleaner GUI v6.6!"
     prog_title_1 = "Welcome "
-    prog_title_2 = " to Temp_Cleaner GUI v6.4!"
+    prog_title_2 = " to Temp_Cleaner GUI v6.6!"
     settings_window_title = "Temp_Cleaner GUI Settings"
     settings_hint_one = "Change the way Temp_Cleaner GUI behaves"
-    rammap_path_settings_hint = "Where is the executable of RAMMap by Sysinternals :"
-    adwcleaner_working_path_settings_hint = "Where is the path of MalwareBytes Adware Cleaner Logs (Check it's settings):"
-    winxpe_prog_path_settings_hint = "Where WinXPE is installed?:"
-    userid_folder_winactivitiescache_settings_hint = "Enter the name of the User ID folder inside the WindowsActivitiesCache Folder (Optional) :"
+    rammap_path_settings_hint = "RAMMap Executable Path:"
+    adwcleaner_working_path_settings_hint = "MalwareBytes Adware Cleaner data folder (Check it's settings):"
+    winxpe_prog_path_settings_hint = "WinXPE Installation path:"
+    userid_folder_winactivitiescache_settings_hint = "Name of the User ID folder inside the WindowsActivitiesCache Folder (Optional) :"
     appearance_mode_settings_hint = "Choose the appearance mode: "
     license_window_title = "License for Temp_Cleaner GUI"
     open_license_window_btn_text = "License"
@@ -250,10 +250,14 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     winsp_cleaner_warning = "By cleaning Service Pack Unnecessary files, you will no longer be able to uninstall the current service pack."
     winold = "Previous Windows Installations"
     winold_warning = "By deleting the Windows.old folder, You will no longer be able to roll back to a previous version of Windows"
-
-    
-
-
+    gchrome_history = "Google Chrome Browsing History"
+    chromium_based_edge_history = "Chromium-based Microsoft Edge Browsing History"
+    mozilla_firefox_history = "Mozilla Firefox Browsing and downloads History and Bookmarks"
+    warning_win10os_caches = "This will reset your Start menu layout, Please make sure to take a backup of it first."
+    playnite_browser_webcache = "Playnite Browser Cache"
+    opera_browser_cookies = "Opera Web Browser Cookies"
+    opera_browser_history = "Opera Web Browser History"
+    opera_browser_caches = "Opera Web Browser Cache"
 
 
 class ar:
@@ -397,7 +401,7 @@ class ar:
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "تقدم التنظيف"
-    about_window_txt = """ الإصدار: 6.4
+    about_window_txt = """ الإصدار: 6.6
 قناة الإصدار : مستقرة
 :المميزات الإضافية المفعلة
 1-Arabic Language Pack v1.1 (حزمة اللغة العربية v1.1)
@@ -416,7 +420,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
 لإظهار معلومات عن كيفية إستخدام حزمة امكانية الوصول او كيفية تكبير وتصغير الكتابه في الشاشة 'F1' يمكنك الضغط علي زر   
 """
 
-    about_window_title = "حول 'The Temp_Cleaner GUI Project (v6.4)'"
+    about_window_title = "حول 'The Temp_Cleaner GUI Project (v6.6)'"
     cant_retrieve_config_fromfile_msgbox_content = "خطأ في الحصول علي المعلومات من الضبط، هذا قد يكون بسبب خطأ كارثي او شئ اخر، شاشة الضبط سوف تغلق"
     cant_retrieve_config_fromfile_msgbox_title = "حدث خطأ في وقت التشغيل"
     cant_read_config_frominside_file_msgbox_title = "حدث خطأ في وقت التشغيل"
@@ -428,7 +432,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     unable_to_save_your_changes_text = "لم يتغير اي شئ حتي الان، وهذه النافذة لن تغلق ،'Config.ini' فشل في حفظ التغييرات في ملف "
     prog_title_no_username = "Temp_Cleaner GUI! اهلا بك في برنامج"
     prog_title_1 = " مرحبا"
-    prog_title_2 = " Temp_Cleaner GUI v6.4 في "
+    prog_title_2 = " Temp_Cleaner GUI v6.6 في "
     settings_window_title = "Temp_Cleaner GUI ضبط"
     settings_hint_one = "Temp_Cleaner GUI قم بتغيير الطريقة التي يتصرف بها "
     rammap_path_settings_hint = "Sysinternals من RAMMap ماهو مسار الملف التنفيذي لبرنامج :"
@@ -511,3 +515,11 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     winsp_cleaner_warning = "بحذفك لملفات حزمة الخدمات الغير الضرورية لن تسطيع مجددا ان تحذف حزمة الخدمات هذه"
     winold = "ﺔﻤﻳﺪﻘﻟﺍ ﺯﻭﺪﻨﻳﻮﻟﺍ ﺔﺨﺴﻧ ﺕﺎﻔﻠﻣ"
     winold_warning = "سوف تخسر إمكانية الرجوع إلي النسخة السابقة من ويندوز ، Windows.old بمسحك لمجلد "
+    gchrome_history = "ﻡﻭﺮﻛ ﻞﺟﻮﺟ ﺢﻔﺼﺘﻤﺑ ﺹﺎﺨﻟﺍ ﺢﻔﺼﺘﻟﺍ ﻞﺠﺳ"
+    chromium_based_edge_history = "ﻡﻮﻴﻣﻭﺮﻛ ﻲﻠﻋ ﻲﻨﺒﻤﻟﺍ ﻲﺟﺩﺍ ﺖﻓﻮﺳﻭﺮﻜﻴﻣ ﺢﻔﺼﺘﻤﺑ ﺹﺎﺨﻟﺍ ﺢﻔﺼﺘﻟﺍ ﻞﺠﺳ"
+    mozilla_firefox_history = " ﺲﻛﻮﻓﺮﻳﺎﻓ ﻼﻳﺯﻮﻣ ﺢﻔﺼﺘﻣ ﺕﻼﻀﻔﻣﻭ ﺕﻼﻳﺰﻨﺗﻭ ﺢﻔﺼﺗ ﻞﺠﺳ"
+    warning_win10os_caches = "هذا سوف يعيد تعيين ترتيب قائمة ابدأ المخصص لديك، يرجي أخذ نسخة إحتياطية قبل المتابعة"
+    playnite_browser_webcache = "Playnite ﺞﻣﺎﻧﺮﺒﺑ ﺔﺻﺎﺨﻟﺍ ﺔﺘﻗﺆﻤﻟﺍ ﺢﻔﺼﺘﻤﻟﺍ ﺕﺎﻔﻠﻣ "
+    opera_browser_cookies = "ﺍﺮﻴﺑﻭﺍ ﺢﻔﺼﺘﻣ ﺕﺎﻜﻌﻛ"
+    opera_browser_history = "ﺍﺮﻴﺑﻭﺍ ﺢﻔﺼﺘﻣ ﺢﻔﺼﺗ ﺕﻼﺠﺳ"
+    opera_browser_caches = "ﺔﺘﻗﺆﻤﻟﺍ ﺍﺮﻴﺑﻭﺍ ﺢﻔﺼﺘﻣ ﺕﺎﻔﻠﻣ"

@@ -51,7 +51,6 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 import os
-from xmlrpc.client import Boolean
 from PIL import Image, ImageTk
 import configparser
 from tkinter import filedialog
@@ -61,12 +60,14 @@ from subprocess import PIPE
 import awesometkinter as atk
 import sys
 import threading
-import platform
 from translations import *
 from customtkinter import *
 import webbrowser
 import updater
-import multiprocessing
+import ctypes
+import win32api
+import donators
+import psutil
 
 # initializing a variable containing the path where application files are stored.
 application_path = ''
@@ -163,7 +164,7 @@ class MainWindowLightMode(CTk):
             self.main_canvas.create_window((0,0), window=self.show_frame, anchor="nw")
             self.banner = PhotoImage(file=f"{application_path}\\banner.png")
             self.banner_show = Label(self.show_frame, image=self.banner, width=1200, height=300)
-            self.banner_show.grid(column=0, row=1, sticky='w')
+            self.banner_show.grid(column=0, row=2, sticky='w')
             set_appearance_mode("light")
         elif str(GetConfig['ProgConfig']['appearancemode']) == '2': # dark mode.
             # making a full screen scrollable frame.
@@ -184,7 +185,7 @@ class MainWindowLightMode(CTk):
             self.main_canvas.create_window((0,0), window=self.show_frame, anchor="nw")
             self.banner = PhotoImage(file=f"{application_path}\\banner.png")
             self.banner_show = Label(self.show_frame, image=self.banner, width=1200, height=300, background=atk.DEFAULT_COLOR)
-            self.banner_show.grid(column=0, row=1, sticky='w')
+            self.banner_show.grid(column=0, row=2, sticky='w')
             self.style.configure('TLabelframe.Label', background=atk.DEFAULT_COLOR, foreground='white')
             self.style.configure('Label', background=atk.DEFAULT_COLOR)
             self.style.configure('Label', foreground='white')
@@ -214,12 +215,45 @@ class MainWindowLightMode(CTk):
             self.main_canvas.create_window((0,0), window=self.show_frame, anchor="nw")
             self.banner = PhotoImage(file=f"{application_path}\\banner.png")
             self.banner_show = Label(self.show_frame, image=self.banner, width=1200, height=300)
-            self.banner_show.grid(column=0, row=1, sticky='w')
+            self.banner_show.grid(column=0, row=2, sticky='w')
             set_appearance_mode("light")
+
+        # # defining an informative frame on top of other widgets
+        # self.InformationFrame = CTkFrame(self.show_frame, width=1200, height=60, corner_radius=15, fg_color='green')
+        # self.InformationFrame.grid(column=0, row=1, sticky='w')
+        # self.InformationFrame.grid_propagate(0) # fix to ensure the frame remains at the specified width and height even after placing
+        # # widgets into it.
+        # def isRecycleBinEnabledInDrive(driveLetter): -> no longer needed as of v6.6-stable
+        #     """
+        #     A function for checking whether if a recycle bin folder exists in the specified drive(s) or no.
+
+        #     Parameters: driveLetter -> str
+            
+        #     Return values: False if not found, True if found, None if there was an error found.
+        #     """
+        #     # declaring an array for available recycle bin names.
+        #     recyclebin_folder_names = ["$Recycle.bin", "$RECYCLE.BIN", "$recycle.bin"]
+        #     # checking if $Recycle.bin folder exists.
+        #     try:
+        #         folders = os.listdir(driveLetter)
+        #     except Exception as exception_details:
+        #         return None
+        #     # print(folders)
+        #     for folder_name_recyclebin in recyclebin_folder_names:
+        #         if folder_name_recyclebin in folders:
+        #             print(f"Recycle bin folder {folder_name_recyclebin} found in drive : {driveLetter}")
+        #             # returning True as the loop has found the recycle bin folder in the specified drive(s)
+        #             return True
+        #         else:
+        #             pass
+        #     # returning False as the loop has completed without finding any appropriate recycle bin folder in the specified drive(s)
+        #     return False
 
         def execute_theprogram():
             """
             The function for cleaning the computer using the "Start Cleaning" button
+
+            **THIS FUNCTION MUST BE RUNNING IN A SEPARATE THREAD, OTHER THAN THE MAIN PROGRAM THREAD**
             """
             self.ShowNotificationDone = True
 
@@ -227,7 +261,7 @@ class MainWindowLightMode(CTk):
             self.exec_btn.configure(command=empty_function)
             self.exec_btn.configure(state='disabled')
             # show_output() # Calling the show output method so you can actually see what's happening inside.
-            self.output_show.configure(state='normal')
+            self.output_show.configure(state='disabled')
             
             try:
                 # getting the systemdrive letter.
@@ -240,165 +274,346 @@ class MainWindowLightMode(CTk):
 
             self.selection = self.var0.get()
             if self.selection == '1':
-                self.process = subprocess.getoutput('rmdir /s /q "%systemdrive%\\$Recycle.bin"')
-                self.output_show.insert(END, f"\n {self.process}")
+                # implement other drives recycle bin cleaning feature.
+                # getting a list of all drives and their pathes.
+                windrv = str(os.getenv("systemdrive"))
+                try:
+                    disks = psutil.disk_partitions(all=False)
+                    volumes = []
+                    for disk in disks:
+                        if "fixed" in str(disk[3]): # filter them to only return fixed disks
+                            volume = str(disk[0])
+                            volumes.append(volume)
+                except Exception as exceptionFindingAvailableDrives:
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"An error has occured while trying to access the drives in this PC\nError details are:\n{exceptionFindingAvailableDrives}\n\nIf you see this error message as a user of Temp_Cleaner GUI please make sure to report it as an issue in Temp_Cleaner GUI's github repository (https://github.com/insertx2k/temp_cleaner_gui) or create a support ticket in our sourceforge project page.")
+                    self.output_show.configure(state='disabled')
+                # assuming you have a list of all available drives in this pc, let's continue.
+                try:
+                    if volumes:
+                        for drive in volumes:
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n{getCurrentLanguage().recyclebin_of} {drive}")
+                            self.output_show.configure(state='disabled')
+                            self.process = subprocess.getoutput(f'rmdir /s /q "{drive}$Recycle.bin"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+                except NameError:
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().couldnt_get_other_drives_will_clean_windrv}\n")
+                    self.output_show.configure(state='disabled')
+                    self.process = subprocess.getoutput('rmdir /s /q "%systemdrive%\\$Recycle.bin"')
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n {self.process}")
+                    self.output_show.configure(state='disabled')
             self.selection1 = self.var1.get()
             if self.selection1 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%windir%\\prefetch"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().prefw_text}:\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection2 = self.var2.get()
             if self.selection2 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\D3DSCache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().dxdcache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection3 = self.var3.get()
             if self.selection3 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%windir%\\Temp"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().windir_temp_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection4 = self.var4.get()
             if self.selection4 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Temp"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().user_temp_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection5 = self.var5.get()
             if self.selection5 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Google\\Chrome\\User Data\\Default\\GPUCache"&erase /s /f /q "%localappdata%\\Google\\Chrome\\User Data\\Default\\Cache"&erase /s /f /q "%localappdata%\\Google\\Chrome\\User Data\\Default\\Code Cache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().gchrome_webcache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
+                try:
+                    # getting localappdata value in a variable
+                    localappdata = str(os.getenv('localappdata'))
+                    # multi profile chrome cleaning
+                    listdirs = os.listdir(f"{localappdata}\\Google\\Chrome\\User Data")
+                except:
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().error_in_cleaning}\n")
+                for dir in listdirs:
+                    if "Profile" in dir:
+                        if dir == "Guest Profile":
+                            self.process = subprocess.getoutput(f'erase /s /f /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\GPUCache"&erase /s /f /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Cache"&erase /s /f /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Code Cache"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+                        elif dir == "System Profile": # DON'T CLEAN SYSTEM PROFILE
+                            pass
+                        else:
+                            self.process = subprocess.getoutput(f'erase /s /f /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\GPUCache"&erase /s /f /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Cache"&erase /s /f /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Code Cache"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
             self.selection6 = self.var6.get()
             if self.selection6 == '1':
                 self.process = subprocess.getoutput('del /s /q "%localappdata%\\Google\\Chrome\\User Data\\Default\\Cookies"&del /s /q "%localappdata%\\Google\\Chrome\\User Data\\Default\\Cookies-journal"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().gchrome_cookies_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
+                try:
+                    # getting localappdata value in a variable
+                    localappdata = str(os.getenv('localappdata'))
+                    # multi profile chrome cleaning
+                    listdirs = os.listdir(f"{localappdata}\\Google\\Chrome\\User Data")
+                except:
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().error_in_cleaning}\n")
+                for dir in listdirs:
+                    if "Profile" in dir:
+                        if dir == "Guest Profile":
+                            self.process = subprocess.getoutput(f'del /s /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Cookies"&del /s /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Cookies-journal"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+                        elif dir == "System Profile": # DON'T CLEAN SYSTEM PROFILE
+                            pass
+                        else:
+                            self.process = subprocess.getoutput(f'del /s /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Cookies"&del /s /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Cookies-journal"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
             self.selection9 = self.var7.get()
             if self.selection9 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%systemdrive%\\Users\\Default\\AppData\\Local\\Temp"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().defuser_temp_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection10 = self.var8.get()
             if self.selection10 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Windows\\INetCache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().iecache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection11 = self.var9.get()
             if self.selection11 == '1':
                 self.process = subprocess.getoutput('@echo off | clip')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().clipboard_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection12 = self.var10.get()
             if self.selection12 == '1':
-                self.process = subprocess.getoutput(' cd /d %localappdata%&cd microsoft&cd windows&cd explorer&del /s /q *thumbcache*&cd /d %localappdata%\microsoft\windows\explorer&del /s /q *thumb*')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.process = subprocess.getoutput(' del /s /f /q "%localappdata%\microsoft\windows\explorer\*thumbcache*"&del /s /f /q "%localappdata%\microsoft\windows\explorer\*thumb*"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().winexp_thumbcache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection13 = self.var11.get()
             if self.selection13 == '1':
-                self.process = subprocess.getoutput('erase /s /f /q "%userprofile%\\AppData\\Roaming\\Microsoft\\Windows\\Recent"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.process = subprocess.getoutput('erase /s /f /q "%userprofile%\\AppData\\Roaming\\Microsoft\\Windows\\Recent"&del /F /S /Q "%localappdata%\\Microsoft\\Windows\\History"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().user_recents_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection14 = self.var12.get()
             if self.selection14 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%userprofile%\\AppData\\Roaming\\discord\\Cache"&erase /s /f /q "%userprofile%\\AppData\\Roaming\\discord\\Code Cache"&erase /s /f /q "%userprofile%\\AppData\\Roaming\\discord\\GPUCache"&erase /s /f /q "%userprofile%\\AppData\\Roaming\\discord\\Local Storage"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().discord_webcache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection15 = self.var13.get()
             if self.selection15 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%userprofile%\\AppData\\Roaming\\GIMP\\2.10\\tmp"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().gimp_tmp_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection16 = self.var14.get()
             if self.selection16 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Steam\\htmlcache\\Cache"&erase /s /f /q "%localappdata%\\Steam\\htmlcache\\Code Cache"&erase /s /f /q "%localappdata%\\Steam\\htmlcache\\GPUCache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().steam_htmlcache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection17 = self.var15.get()
             if self.selection17 == '1':
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().winupdate_downloadedfiles_text}")
+                self.output_show.insert(END, f"\n{getCurrentLanguage().attempting_to_take_folder_ownership}\n")
+                self.process = subprocess.getoutput('takeown /F "%windir%\\SoftwareDistribution\\Download" /A /R /D Y&icacls "%windir%\\SoftwareDistribution\\Download" /grant *S-1-5-32-544:F /T /C /Q')
+                self.output_show.configure(state='normal')
+                # self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput('takeown /F "%windir%\\Installer" /A /R /D Y&icacls "%windir%\\Installer" /grant *S-1-5-32-544:F /T /C /Q')
+                self.output_show.configure(state='normal')
+                # self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
                 self.process = subprocess.getoutput('del /f /s /q "%windir%\\SoftwareDistribution\\Download"')
+                self.output_show.configure(state='normal')
                 self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput('del /f /s /q "%windir%\\Installer"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='disabled')
+
 
                 self.reboot_uwp = messagebox.askquestion(getCurrentLanguage().restart_winupdate_window_title_text, getCurrentLanguage().restart_winupdate_window_content_text)
                 if self.reboot_uwp == "yes":
-                    self.self_2 = Tk()
-                    self.self_2.title(getCurrentLanguage().restart_winupdate_window_title_text)
-                    self.self_2.geometry('500x90')
-                    self.self_2.resizable(False,False)
-
-                    try:
-                        self.self_2.iconbitmap(f"{application_path}\\icon0.ico")
-                    except Exception as excpt24:
-                        messagebox.showerror("ERROR 1 in ICONBITMAP process", f"Unable to load the icon file for this window due to Exception:\n{excpt24}")
-                        pass
-
-                    # Defining some labels used to show the user that something is happening inside.
-                    self.lbl0x = Label(self.self_2, text=getCurrentLanguage().restarting_winupdate_service_text, font=("Arial", 19))
-                    self.lbl0x.place(x=25 ,y=20)
-                    # Defining the actions used to restart the Windows update service.
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().restarting_winupdate_service_text}\n")
+                    self.output_show.configure(state='disabled')
                     self.process = subprocess.getoutput('net start wuauserv')
-                    # Defining the commands used to show the user that all pending operations has been successfully completed!
-                    messagebox.showinfo(getCurrentLanguage().restarting_winupdate_service_text, getCurrentLanguage().restart_winupdate_service_done_text)
-                    # Defining the mainloop destroy once the execution is done.
-                    self.self_2.destroy()
-                    self.self_2.mainloop()
-                    messagebox.showinfo(getCurrentLanguage().restarting_winupdate_service_text, getCurrentLanguage().restart_winupdate_service_done_text)
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END,f"\n{getCurrentLanguage().windows_update_rebooter_exit_code}\n{self.process}")
+                    self.output_show.configure(state='disabled')
+                    # messagebox.showinfo(getCurrentLanguage().restarting_winupdate_service_text, getCurrentLanguage().restart_winupdate_service_done_text) -> unnecessary, was really annoying.
                 else:
-                    messagebox.showinfo(getCurrentLanguage().restart_winupdate_window_title_text, getCurrentLanguage().not_restarting_winupdate_service_warning_text)
+                    # messagebox.showinfo(getCurrentLanguage().restart_winupdate_window_title_text, getCurrentLanguage().not_restarting_winupdate_service_warning_text)
+                    # removed due to a suggestion, see: https://www.askwoody.com/forums/topic/temp_cleaner-gui-just-what-i-was-looking-for/
+                    pass
             self.selection18 = self.var16.get()
             if self.selection18 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Windows\\Caches"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().win10plus_oscache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection19 = self.var17.get()
             if self.selection19 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Windows\\INetCookies"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().iecookies_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection20 = self.var18.get()
             if self.selection20 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Windows\\IECompatCache"&erase /s /f /q "%localappdata%\\Microsoft\\Windows\\IECompatUaCache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().adds_ietemp_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection21 = self.var19.get()
             if self.selection21 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Windows\\IEDownloadHistory"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().iedownloadhistory_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection22 = self.var20.get()
             if self.selection22 == '1':
                 self.process =  subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Windows\\ActionCenterCache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().actioncenter_cache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection23 = self.var21.get()
             if self.selection23 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Windows\\AppCache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().modern_apps_cache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection24 = self.var22.get()
             if self.selection24 == '1':
                 self.conf1 = messagebox.askquestion(getCurrentLanguage().clean_ms_store_based_edge_cache_window_title, getCurrentLanguage().clean_ms_store_based_edge_cache_dialog_one_content)
                 if self.conf1 == "yes":
                     messagebox.showinfo(getCurrentLanguage().clean_ms_store_based_edge_cache_window_title, getCurrentLanguage().clean_ms_store_based_edge_cache_dialog_two_content)
                     self.process = subprocess.getoutput(' explorer.exe "%localappdata%\\Packages\\"')
-                    self.output_show.insert(END, f"\n {self.process}")
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().msedge_msstore_webcache_text}\n {self.process}")
+                    self.output_show.configure(state='disabled')
                     messagebox.showinfo(getCurrentLanguage().clean_ms_store_based_edge_cache_window_title, getCurrentLanguage().done_text)
                 else:
                     messagebox.showinfo(getCurrentLanguage().clean_ms_store_based_edge_cache_window_title, getCurrentLanguage().operation_interrupted_by_user)
             self.selection25 = self.var23.get()
             if self.selection25 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Windows\\Explorer\\ThumbCacheToDelete"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().thumbcachetodelete_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection26 = self.var24.get()
             if self.selection26 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Edge\\User Data\\Default\\GPUCache"&erase /s /f /q "%localappdata%\\Microsoft\\Edge\\User Data\\Default\\Cache"&erase /s /f /q "%localappdata%\\Microsoft\\Edge\\User Data\\Default\\Code Cache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().chromium_based_edge_webcache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
+                try:
+                    # getting localappdata env var
+                    localappdata = str(os.getenv('localappdata'))
+                    # multiprofile edge cleaning
+                    listdirs = os.listdir(f"{localappdata}\\Microsoft\\Edge\\User Data")
+                except:
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().error_in_cleaning}\n")
+                for dir in listdirs:
+                    if "Profile" in dir:
+                        if dir == "Guest Profile":
+                            self.process = subprocess.getoutput(f'erase /s /f /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\GPUCache"&erase /s /f /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\Cache"&erase /s /f /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\Code Cache"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+                        elif dir == "System Profile":
+                            pass
+                        else:
+                            self.process = subprocess.getoutput(f'erase /s /f /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\GPUCache"&erase /s /f /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\Cache"&erase /s /f /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\Code Cache"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
             self.selection27 = self.var25.get()
             if self.selection27 == '1':
                 self.process = subprocess.getoutput('del /s /q "%localappdata%\\Microsoft\\Edge\\User Data\\Default\\Cookies"&del /s /q "%localappdata%\\Microsoft\\Edge\\User Data\\Default\\Cookies-journal"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().chromium_based_edge_cookies_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
+                try:
+                    # getting localappdata env var
+                    localappdata = str(os.getenv('localappdata'))
+                    # multiprofile edge cleaning
+                    listdirs = os.listdir(f"{localappdata}\\Microsoft\\Edge\\User Data")
+                except:
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().error_in_cleaning}\n")
+                for dir in listdirs:
+                    if "Profile" in dir:
+                        if dir == "Guest Profile":
+                            self.process = subprocess.getoutput(f'del /s /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\Cookies"&del /s /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\Cookies-journal"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+                        elif dir == "System Profile":
+                            pass
+                        else:
+                            self.process = subprocess.getoutput(f'del /s /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\Cookies"&del /s /q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\Cookies-journal"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
             self.selection28 = self.var26.get()
             if self.selection28 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Roblox\\Downloads"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().roblox_textures_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection29 = self.var27.get()
             if self.selection29 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%appdata%\\Adobe\\Adobe Photoshop 2020\\Adobe Photoshop 2020 Settings\\web-cache-temp\\GPUCache"&erase /s /f /q "%appdata%\\Adobe\\Adobe Photoshop 2020\\Adobe Photoshop 2020 Settings\\web-cache-temp\\Code Cache"&del /s /f /q "%appdata%\\Adobe\\Adobe Photoshop 2020\\Adobe Photoshop 2020 Settings\\web-cache-temp\\Visited Links"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().ps2020_webcache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection30 = self.var28.get()
             if self.selection30 == '1':
-                self.process = subprocess.getoutput(' cd /d "%localappdata%\\VEGAS Pro\\17.0"&erase /s /f /q "File Explorer Thumbnails"&erase /s /f /q "Device Explorer Thumbnails"&del /s /f /q "*.autosave.veg.bak"&del /s /f /q "svfx_Ofx*.log"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.process = subprocess.getoutput(' erase /S /F /Q "%localappdata%\VEGAS Pro\17.0\File Explorer Thumbnails"&erase /S /F /Q "%localappdata%\VEGAS Pro\17.0\Device Explorer Thumbnails"&erase /S /F /Q "%localappdata%\VEGAS Pro\17.0\*.autosave.veg.bak"&erase /S /F /Q "%localappdata%\VEGAS Pro\17.0\svfx_Ofx*.log"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().vegaspro17_temp_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection31 = self.var29.get()
             if self.selection31 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\McNeel\\Rhinoceros\\temp"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().mcneel_rhinoceros_3d_temp_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection32 = self.var30.get()
             if self.selection32 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q /A:S "%userprofile%\\AppData\\LocalLow\\Microsoft\\CryptnetUrlCache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().cryptneturl_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection33 = self.var31.get()
             if self.selection33 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\pip\\cache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().pypip_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection34 = self.var32.get()
             if self.selection34 == '1':
                 self.conf2 = messagebox.askquestion(getCurrentLanguage().erase_rammap_title, getCurrentLanguage().erase_rammap_content)
@@ -407,119 +622,210 @@ class MainWindowLightMode(CTk):
                     if self.RAMMAPpath_var == '$DEFAULT':
                         messagebox.showinfo(getCurrentLanguage().default_path_msgbox_title, getCurrentLanguage().default_path_rammap)
                         self.process = subprocess.getoutput(r'"%systemdrive%\RAMMap\RAMMap.exe" -Ew')
-                        self.output_show.insert(END, f"\n {self.process}")
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{getCurrentLanguage().empty_running_workingsets_rammap_text}\n {self.process}")
+                        self.output_show.configure(state='disabled')
                         messagebox.showinfo(getCurrentLanguage().erase_rammap_title, getCurrentLanguage().commandsent_to_rammap_text)
                     else:
                         self.process = subprocess.getoutput(rf'""{self.RAMMAPpath_var}"\RAMMap.exe" -Ew')
-                        self.output_show.insert(END, f"\n {self.process}")
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{getCurrentLanguage().empty_running_workingsets_rammap_text}\n {self.process}")
+                        self.output_show.configure(state='disabled')
                         messagebox.showinfo(getCurrentLanguage().erase_rammap_title, getCurrentLanguage().commandsent_to_rammap_text)
                 else:
                     messagebox.showinfo(getCurrentLanguage().erase_rammap_title, getCurrentLanguage().operation_interrupted_by_user)
             self.selection35 = self.var33.get()
             if self.selection35 == '1':
                 self.process = subprocess.getoutput('del /s /q "%localappdata%\\Google\\Chrome\\User Data\\Default\\Extension Cookies"&del /s /q "%localappdata%\\Google\\Chrome\\User Data\\Default\\Extension Cookies-journal"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().gchrome_extensions_cookies_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
+                try:
+                    # getting localappdata value in a variable
+                    localappdata = str(os.getenv('localappdata'))
+                except:
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().error_in_cleaning}\n")
+                # multi profile chrome cleaning
+                try:
+                    listdirs = os.listdir(f"{localappdata}\\Google\\Chrome\\User Data")
+                except:
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().error_in_cleaning}\n")
+                for dir in listdirs:
+                    if "Profile" in dir:
+                        if dir == "Guest Profile":
+                            self.process = subprocess.getoutput(f'del /s /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Extension Cookies"&del /s /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Extension Cookies-journal"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+                        elif dir == "System Profile": # DON'T CLEAN SYSTEM PROFILE
+                            pass
+                        else:
+                            self.process = subprocess.getoutput(f'del /s /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Extension Cookies"&del /s /q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\Extension Cookies-journal"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
             self.selection36 = self.var34.get()
             if self.selection36 == '1':
                 self.CDPCCPATH_var = GetConfig['ProgConfig']['CDPCCPATH']
                 if self.CDPCCPATH_var == '$DEFAULT':
                     messagebox.showinfo(getCurrentLanguage().default_path_msgbox_title, getCurrentLanguage().default_path_winactivities_cache_text)
-                    self.process = subprocess.getoutput(' cd /d "%localappdata%\\ConnectedDevicesPlatform"&erase /s /f /q *')
-                    self.output_show.insert(END, f"\n {self.process}")
+                    self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\ConnectedDevicesPlatform\\*"')
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().connecteddevicesplatform_cache_text}\n {self.process}")
+                    self.output_show.configure(state='disabled')
                 else:
                     self.process = subprocess.getoutput(rf' cd /d "%localappdata%\\ConnectedDevicesPlatform"&erase /s /f /q "{self.CDPCCPATH_var}"')
-                    self.output_show.insert(END, f"\n {self.process}")
-            self.selection37 = self.var35.get()
-            if self.selection37 == '1':
-                self.conf3 = messagebox.askquestion(getCurrentLanguage().clear_icon_cache_dialog_text, getCurrentLanguage().iconcache_dialog_text)
-                if self.conf3 == "yes":
-                    self.process = subprocess.getoutput('%windir%\\explorer.exe "%localappdata%"')
-                    self.output_show.insert(END, f"\n {self.process}")
-                    messagebox.showinfo(getCurrentLanguage().clear_icon_cache_dialog_text, getCurrentLanguage().done_text)
-                else:
-                    pass
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().connecteddevicesplatform_cache_text}\n {self.process}")
+                    self.output_show.configure(state='disabled')
+            # self.selection37 = self.var35.get()
+            # if self.selection37 == '1':
+            #     self.conf3 = messagebox.askquestion(getCurrentLanguage().clear_icon_cache_dialog_text, getCurrentLanguage().iconcache_dialog_text)
+            #     if self.conf3 == "yes":
+            #         self.process = subprocess.getoutput('%windir%\\explorer.exe "%localappdata%"')
+            #         self.output_show.configure(state='normal')
+            #         self.output_show.insert(END, f"\n {self.process}")
+            #         self.output_show.configure(state='disabled')
+            #         messagebox.showinfo(getCurrentLanguage().clear_icon_cache_dialog_text, getCurrentLanguage().done_text)
+            #     else:
+            #         pass
             self.selection38 = self.var36.get()
             if self.selection38 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microvirt"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().microvert_memu_logs_memdump_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection39 = self.var37.get()
             if self.selection39 == '1':
                 self.ADWCLRPATH_var = GetConfig['ProgConfig']['ADWCLRPath']
                 if self.ADWCLRPATH_var == '$DEFAULT':
                     messagebox.showinfo(getCurrentLanguage().default_path_msgbox_title, getCurrentLanguage().nocustom_path_foradwcleaner_text)
                     self.process = subprocess.getoutput(' erase /s /f /q "%systemdrive%\\AdwCleaner\\Logs"')
-                    self.output_show.insert(END, f"\n {self.process}")
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().malwarebytes_adware_cleaner_text}\n {self.process}")
+                    self.output_show.configure(state='disabled')
                 else:
                     self.process = subprocess.getoutput(rf' erase /s /f /q "{self.ADWCLRPATH_var}\Logs"')
-                    self.output_show.insert(END, f"\n {self.process}")
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().malwarebytes_adware_cleaner_text}\n {self.process}")
+                    self.output_show.configure(state='disabled')
             self.selection40 = self.var38.get()
             if self.selection40 == '1':
                 self.process = subprocess.getoutput(' %systemdrive%&cd /d \\.\\&erase /s /f /q "PerfLogs"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().perflogs_sysdrive_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection41 = self.var39.get()
             if self.selection41 == '1':
                 self.process = subprocess.getoutput('rmdir /s /q "%userprofile%\\.cache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().android_cached_data_text} \n{self.process}")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput('rmdir /S /Q "%userprofile%\\.android"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
             self.selection42 = self.var40.get()
             if self.selection42 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\SquirrelTemp"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().discord_squirrel_temp}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection43 = self.var41.get()
             if self.selection43 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%userprofile%\\AppData\\LocalLow\\Temp"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().local_low_temp_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection44 = self.var42.get()
             if self.selection44 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\ElevatedDiagnostics"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().elevateddiagnostics_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection45 = self.var43.get()
-            if self.selection45 == '1':
-                self.process = subprocess.getoutput('cd /d "%localappdata%\\VMware"&erase /s /f /q "vmware-download*"')
-                self.output_show.insert(END, f"\n {self.process}")
+            if self.selection45 == '1': # fix for vmware downloads cleaner.
+                # self.process = subprocess.getoutput('cd /d "%localappdata%\\VMware"&erase /s /f /q "vmware-download*"')
+                self.output_show.configure(state='disabled')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().vmware_downloads}")
+                try:
+                    localappdata = str(os.getenv("localappdata")) # storing localappdata path in a variable
+                    dirs = os.listdir(f"{localappdata}\\VMware") # listing directory of vmware files.
+                    for dir in dirs:
+                        if "vmware-download" in dir:
+                            self.process = subprocess.getoutput(f'erase /s /f /q "%localappdata%\\VMware\\{dir}"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n{self.process}\n")
+                            self.output_show.configure(state='disabled')
+                        else:
+                            pass
+                except Exception:
+                    pass
+                self.output_show.configure(state='disabled')
             self.selection46 = self.var44.get()
             if self.selection46 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%userprofile%\\appdata\\roaming\\balena-etcher\\blob_storage"&erase /s /f /q "%userprofile%\\appdata\\roaming\\balena-etcher\\Code Cache"&erase /s /f /q "%userprofile%\\appdata\\roaming\\balena-etcher\\GPUCache"&erase /s /f /q "%userprofile%\\appdata\\roaming\\balena-etcher\\Local Storage"&erase /s /f /q "%userprofile%\\appdata\\roaming\\balena-etcher\\Session Storage"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().balenaitcher_webcache_files_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection47 = self.var45.get()
             if self.selection47 == '1':
                 self.process = subprocess.getoutput(' cd /d "%appdata%"&erase /s /f /q "%userprofile%\\AppData\\Roaming\\pyinstaller"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().pyinstaller_bin_cache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection48 = self.var46.get()
             if self.selection48 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Jedi"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().jedi_python_cache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection49 = self.var47.get()
             if self.selection49 == '1':
                 self.process = subprocess.getoutput('del /s /q "%localappdata%\\recently-used.xbel"')
-                self.output_show.insert(END, f"\n {self.process}")
-            self.selection50 = self.var48.get()
-            if self.selection50 == '1':
-                self.process = subprocess.getoutput('cd /d "%localappdata%"&del /s /q "llftool.*.agreement"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().gimp_recent_docs_list_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
+            # self.selection50 = self.var48.get()
+            # if self.selection50 == '1':
+            #     self.process = subprocess.getoutput('cd /d "%localappdata%"&del /s /q "llftool.*.agreement"')
+            #     self.output_show.insert(END, f"\n {self.process}")
             self.selection51 = self.var49.get()
             if self.selection51 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\IdentityNexusIntegration"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().identitynexusintegration_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection52 = self.var50.get()
             if self.selection52 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Axolot Games\\Scrap Mechanic\\Temp\\WorkshopIcons"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().axolot_games_scrapmechanic_workshop_cache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection53 = self.var51.get()
             if self.selection53 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Roblox\\logs"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().roblox_verbosed_logs_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection54 = self.var52.get()
             if self.selection54 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%userprofile%\\AppData\\Roaming\\Code\\GPUCache"&erase /s /f /q "%userprofile%\\AppData\\Roaming\\Code\\Code Cache"&erase /s /f /q "%userprofile%\\AppData\\Roaming\\Code\\CachedData"&erase /s /f /q "%userprofile%\\AppData\\Roaming\\Code\\Cache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().vscode_webcache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection55 = self.var53.get()
             if self.selection55 == '1':
                 self.process = subprocess.getoutput('del /s /q "%userprofile%\\AppData\\Roaming\\Code\\Cookies"&del /s /q "%userprofile%\\AppData\\Roaming\\Code\\Cookies-journal"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().vscode_cookies_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection56 = self.var54.get()
             if self.selection56 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%userprofile%\\AppData\\Roaming\\Code\\CachedExtensions"&erase /s /f /q "%userprofile%\\AppData\\Roaming\\Code\\CachedExtensionVSIXs"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().vscode_cached_extensions_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection57 = self.var55.get()
             if self.selection57 == '1':
                 self.WINXPEPATH_var = GetConfig['ProgConfig']['WINXPEPATH']
@@ -527,43 +833,311 @@ class MainWindowLightMode(CTk):
                     messagebox.showinfo(getCurrentLanguage().an_error_has_occured_text, getCurrentLanguage().no_path_winxpe_text)
                 else:
                     self.process = subprocess.getoutput(rf' erase /s /f /q "{self.WINXPEPATH_var}\Temp"')
-                    self.output_show.insert(END, f"\n {self.process}")
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().winxpe_creator_downloadsdir_text}\n {self.process}")
+                    self.output_show.configure(state='disabled')
                     messagebox.showinfo(getCurrentLanguage().note_text, getCurrentLanguage().winxpe_after_clean_note_text)
                     
             self.selection58 = self.var56.get()
             if self.selection58 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\ServiceHub"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().servicehub_identity_file_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection59 = self.var57.get()
             if self.selection59 == '1':
                 self.process = subprocess.getoutput(' erase /s /f /q "%localappdata%\\HiSuite\\log"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().huawei_hisuite_logdata_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection60 = self.var58.get()
             if self.selection60 == '1':
                 self.process = subprocess.getoutput(' erase /s /f /q "%userprofile%\\AppData\\Roaming\\.minecraft\\webcache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().minecraft_webcache_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection61 = self.var59.get()
             if self.selection61 == '1':
-                self.process = subprocess.getoutput(' cd /d "%localappdata%\\Mozilla\\Firefox\\Profiles"&cd *.default-release&erase /s /f /q "cache2"&erase /s /f /q "jumpListCache"&cd /d "%userprofile%\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles"&cd *.default-release&erase /s /f /q "shader-cache"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().firefox_webcached_data_text}")
+                self.output_show.configure(state='disabled')
+                # print(dirs)
+                try:
+                    localappdata = str(os.getenv("localappdata"))
+                    dirs = os.listdir(f"{localappdata}\\Mozilla\\Firefox\\Profiles")
+                    for dir in dirs:
+                        self.process = subprocess.getoutput(f'erase /s /f /q "%localappdata%\\Mozilla\\Firefox\\Profiles\\{dir}\\cache2"')
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{self.process}\n")
+                        self.output_show.configure(state='disabled')
+                        self.process = subprocess.getoutput(f'erase /s /f /q "%localappdata%\\Mozilla\\Firefox\\Profiles\\{dir}\\jumpListCache"')
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{self.process}\n")
+                        self.output_show.configure(state='disabled')
+                        self.process = subprocess.getoutput(f'erase /s /f /q "%localappdata%\\Mozilla\\Firefox\\Profiles\\{dir}\\shader-cache"')
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{self.process}\n")
+                        self.output_show.configure(state='disabled')
+                except Exception:
+                    pass
+                self.output_show.configure(state='disabled')
             self.selection62 = self.var60.get()
             if self.selection62 == '1':
-                self.process = subprocess.getoutput(' cd /d "%userprofile%\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles"&cd *.default-release&del /s /q "cookies.sqlite"')
-                self.output_show.insert(END, f"\n {self.process}")
+                # self.process = subprocess.getoutput('del /s /q "cookies.sqlite"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().mozilla_firefox_cookie_data_text}")
+                self.output_show.configure(state='disabled')
+                try:
+                    localappdata = str(os.getenv("localappdata"))
+                    dirs = os.listdir(f"{localappdata}\\Mozilla\\Firefox\\Profiles")
+                    # print(dirs)
+                    for dir in dirs:
+                        self.process = subprocess.getoutput(f'del /s /q "%localappdata%\\Mozilla\\Firefox\\Profiles\\{dir}\\cookies.sqlite"')
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{self.process}\n")
+                        self.output_show.configure(state='disabled')
+                except Exception:
+                    pass
+                self.output_show.configure(state='disabled')
             self.selection63 = self.var61.get()
             if self.selection63 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\VEGAS\\ErrorReport"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().vegaspro17_errorlogs_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection64 = self.var62.get()
             if self.selection64 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%userprofile%\\AppData\\LocalLow\\Sun\\Java\\Deployment\\tmp"')
-                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().javadeployment_chkbox_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
             self.selection65 = self.var63.get()
             if self.selection65 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\HiSuite\\userdata\\DropTemp"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().huawei_hisuite_dnddata_text}\n {self.process}")
+                self.output_show.configure(state='disabled')
+            self.selection67 = self.var65.get()
+            if self.selection67 == '1':
+                self.process = subprocess.getoutput('erase /s /f /q "%systemdrive%\\ProgramData\\Microsoft\\Windows\\WER\\ReportQueue"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().wer_cleaner}\n {self.process}")
+                self.output_show.configure(state='disabled')
+            self.selection68 = self.var66.get()
+            if self.selection68 == '1': # delivery optimization cleaning
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().delivery_optimization}\n{getCurrentLanguage().attempting_to_take_folder_ownership}\n")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput('takeown /F "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Cache" /A /R /D Y&icacls "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Cache" /grant *S-1-5-32-544:F /T /C /Q')
+                self.output_show.configure(state='normal')
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput('erase /s /f /q "%windir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Microsoft\\Windows\\DeliveryOptimization\\Cache"')
+                self.output_show.configure(state='normal')
                 self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='disabled')
+                # self.process = subprocess.getoutput('erase /s /f /q "%windir%\\DeliveryOptimization"')
+                # self.output_show.insert(END, f"\n {self.process}")
+            self.selection69 = self.var67.get()
+            if self.selection69 == '1':
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().windows_log_files}\n{getCurrentLanguage().attempting_to_take_folder_ownership}\n")
+                self.process = subprocess.getoutput('takeown /F "%windir%\Logs" /A /R /D Y&icacls "%windir%\Logs" /grant *S-1-5-32-544:F /T /C /Q')
+                # self.output_show.insert(END, f"\n{self.process}\n")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput('erase /s /f /q "%windir%\\Logs"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n {self.process}")
+                self.output_show.configure(state='disabled')
+            self.selection70 = self.var68.get()
+            if self.selection70 == "1":
+                self.process = subprocess.getoutput('del /F /S /Q "%windir%\Offline Web Pages"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().offline_web_pages}:\n{self.process}")
+                self.output_show.configure(state='disabled')
+            self.selection71 = self.var69.get()
+            if self.selection71 == "1":
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().winsxs}\n{getCurrentLanguage().cleaner_will_take_lot_of_time}\n")
+                self.output_show.configure(state='disabled')
+                os.system("Dism.exe /online /Cleanup-Image /StartComponentCleanup /ResetBase")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().cleaner_has_finished}")
+                self.output_show.configure(state='disabled')
+            self.selection72 = self.var70.get()
+            if self.selection72 == "1":
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().winsp_cleaner}\n{getCurrentLanguage().cleaner_will_take_lot_of_time}\n")
+                self.output_show.configure(state='disabled')
+                os.system("Dism.exe /online /Cleanup-Image /SPSuperseded")
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().cleaner_has_finished}")
+                self.output_show.configure(state='disabled')
+            self.selection73 = self.var71.get()
+            if self.selection73 == "1":
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().winold}\n{getCurrentLanguage().cleaner_will_take_lot_of_time}\n")
+                self.output_show.configure(state='disabled')
+                # declaring a list to store the names of Windows.old folders in.
+                winold_names = []
+                try:
+                    systemdrive = os.getenv("systemdrive")
+                    listdirs = os.listdir(systemdrive)
+                    for dir in listdirs:
+                        if "Windows.old" in dir:
+                            winold_names.append(dir)
+                        elif "windows.old" in dir:
+                            winold_names.append(dir)
+                        elif "Windows.Old" in dir:
+                            winold_names.append(dir)
+                        else:
+                            pass
+                    for winolddir in winold_names:
+                        self.process = subprocess.getoutput(f'takeown /F "%systemdrive%\\{winolddir}" /A /R /D Y&icacls "%systemdrive%\\{winolddir}" /grant *S-1-5-32-544:F /T /C /Q')
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{self.process}")
+                        self.output_show.configure(state='disabled')
+                        self.process = subprocess.getoutput(f'rmdir /S /Q "%SystemDrive%\\{winolddir}"')
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{self.process}")
+                        self.output_show.configure(state='disabled')
+                except:
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().error_in_cleaning}\n")
+                    self.output_show.configure(state='disabled')
+            self.selection74 = self.var72.get()
+            if self.selection74 == "1":
+                # perform google chrome history cleaning.
+                self.process = subprocess.getoutput('del /F /S /Q "%localappdata%\\Google\\Chrome\\User Data\\Default\\History"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().gchrome_history}\n {self.process}")
+                self.output_show.configure(state='disabled')
+                try:
+                    # getting localappdata value in a variable
+                    localappdata = str(os.getenv('localappdata'))
+                    # multi profile chrome cleaning
+                    listdirs = os.listdir(f"{localappdata}\\Google\\Chrome\\User Data")
+                except:
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().error_in_cleaning}\n")
+                for dir in listdirs:
+                    if "Profile" in dir:
+                        if dir == "Guest Profile":
+                            self.process = subprocess.getoutput(f'del /F /S /Q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\History"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+                        elif dir == "System Profile": # DON'T CLEAN SYSTEM PROFILE
+                            pass
+                        else:
+                            self.process = subprocess.getoutput(f'del /F /S /Q "%localappdata%\\Google\\Chrome\\User Data\\{dir}\\History"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+            self.selection75 = self.var73.get()
+            if self.selection75 == "1":
+                # perform chromium-based ms edge history cleaning.
+                self.process = subprocess.getoutput('del /F /S /Q "%localappdata%\\Microsoft\\Edge\\User Data\\Default\\History"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().chromium_based_edge_history}\n {self.process}")
+                self.output_show.configure(state='disabled')
+                try:
+                    # getting localappdata env var
+                    localappdata = str(os.getenv('localappdata'))
+                    # multiprofile edge cleaning
+                    listdirs = os.listdir(f"{localappdata}\\Microsoft\\Edge\\User Data")
+                except:
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().error_in_cleaning}\n")
+                for dir in listdirs:
+                    if "Profile" in dir:
+                        if dir == "Guest Profile":
+                            self.process = subprocess.getoutput(f'del /F /S /Q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\History"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+                        elif dir == "System Profile": # DON'T CLEAN SYSTEM PROFILE.
+                            pass
+                        else:
+                            self.process = subprocess.getoutput(f'del /F /S /Q "%localappdata%\\Microsoft\\Edge\\User Data\\{dir}\\History"')
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n {self.process}")
+                            self.output_show.configure(state='disabled')
+            self.selection76 = self.var74.get()
+            if self.selection76 == "1":
+                # perform mozilla firefox history cleaning.
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().mozilla_firefox_history}")
+                self.output_show.configure(state='disabled')
+                # print(dirs)
+                try:
+                    localappdata = str(os.getenv("localappdata"))
+                    dirs = os.listdir(f"{localappdata}\\Mozilla\\Firefox\\Profiles")
+                    for dir in dirs:
+                        self.process = subprocess.getoutput(f'del /F /S /Q "%localappdata%\\Mozilla\\Firefox\\Profiles\\{dir}\\places.sqlite"')
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{self.process}\n")
+                        self.output_show.configure(state='disabled')
+                except Exception:
+                    pass
+                self.output_show.configure(state='disabled')
+            self.selection77 = self.var75.get()
+            if self.selection77 == "1":
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().playnite_browser_webcache}\n")
+                self.output_show.configure(state='disabled')
+                # now let's do the real cleaning process.
+                self.process = subprocess.getoutput(f'erase /S /F /Q /A "%userprofile%\\AppData\\Roaming\\Playnite\\browsercache\\Cache"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput(f'erase /S /F /Q /A "%userprofile%\\AppData\\Roaming\\Playnite\\browsercache\\Code Cache"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput(f'erase /S /F /Q /A "%userprofile%\\AppData\\Roaming\\Playnite\\browsercache\\GPUCache"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
+                # that's it
+            self.selection78 = self.var76.get()
+            if self.selection78 == "1":
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().opera_browser_cookies}")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput(f'del /F /S /Q /A "%AppData%\\Roaming\\Opera Software\\Opera Stable\\cookies.sqlite"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput(f'del /F /S /Q /A "%AppData%\\Roaming\\Opera Software\\Opera Stable\\cookies-journal.sqlite"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
+                # that's it
+            self.selection79 = self.var77.get()
+            if self.selection79 == "1":
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().opera_browser_history}")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput(f'del /S /F /Q /A "%appdata%\\Opera Software\\Opera Stable\\History"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
+                # that's it
+            self.selection80 = self.var78.get()
+            if self.selection80 == "1":
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{getCurrentLanguage().opera_browser_caches}")
+                self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput(f'erase /S /F /Q /A "%localappdata%\\Opera Software\\Opera Stable\\Cache"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
+                # that's it
+                
+            
+            
             self.selection66 = self.var64.get()
-            self.output_show.insert(END, "\n\n\nYou may press the 'F6' button in your keyboard to clear this list.\n\n\n")
+
+            self.output_show.configure(state='normal')
+            self.output_show.insert(END, f"\n\n\n{getCurrentLanguage().finish_cleaning}\n\n\n")
             self.output_show.configure(state='disabled')
 
             if self.selection66 == '1':
@@ -646,7 +1220,7 @@ class MainWindowLightMode(CTk):
                 self.var32.set(0)
                 self.var33.set(0)
                 self.var34.set(0)
-                self.var35.set(0)
+                # self.var35.set(0)
                 self.var36.set(0)
                 self.var37.set(0)
                 self.var38.set(0)
@@ -659,7 +1233,7 @@ class MainWindowLightMode(CTk):
                 self.var45.set(0)
                 self.var46.set(0)
                 self.var47.set(0)
-                self.var48.set(0)
+                # self.var48.set(0)
                 self.var49.set(0)
                 self.var50.set(0)
                 self.var51.set(0)
@@ -676,6 +1250,20 @@ class MainWindowLightMode(CTk):
                 self.var62.set(0)
                 self.var63.set(0)
                 self.var64.set(0)
+                self.var65.set(0)
+                self.var66.set(0)
+                self.var67.set(0)
+                self.var68.set(0)
+                self.var69.set(0)
+                self.var70.set(0)
+                self.var71.set(0)
+                self.var72.set(0)
+                self.var73.set(0)
+                self.var74.set(0)
+                self.var75.set(0)
+                self.var76.set(0)
+                self.var77.set(0)
+                self.var78.set(0)
             except Exception as unable_to_uncheck_all_exception:
                 print(f"[ERROR]: Unable to execute the function uncheck_all_options() due to this exception\n{unable_to_uncheck_all_exception}")
                 return False
@@ -698,6 +1286,16 @@ class MainWindowLightMode(CTk):
                 messagebox.showerror("An ERROR has occured",f"Couldn't read from 'Config.ini'\nException details:\n{exception_reading_config_file}\nPress OK to close this program")
                 raise SystemExit(169) # Exit code 169 is for unreadable config file or untreatable getCurrentLanguage exceptions.
                 # This is needed to make sure the program doesn't act weirdly.
+        
+        def showWarnings():
+            """
+            A function used to show all warnings of all available cleaning options
+            """
+            tempWarning0()
+            tempWarning1()
+            tempWarning2()
+            tempWarning3()
+            return None
         
         def apply_cleaning_preset(user_choice):
             print(f"[DEBUG]: Chosen cleaning preset is: {str(self.preset_chooser.get())}")
@@ -752,7 +1350,7 @@ class MainWindowLightMode(CTk):
                     self.var32.set(1)
                     self.var33.set(1)
                     self.var34.set(1)
-                    self.var35.set(1)
+                    # self.var35.set(1)
                     self.var36.set(1)
                     self.var37.set(1)
                     self.var38.set(1)
@@ -765,7 +1363,7 @@ class MainWindowLightMode(CTk):
                     self.var45.set(1)
                     self.var46.set(1)
                     self.var47.set(1)
-                    self.var48.set(1)
+                    # self.var48.set(1)
                     self.var49.set(1)
                     self.var50.set(1)
                     self.var51.set(1)
@@ -781,6 +1379,22 @@ class MainWindowLightMode(CTk):
                     self.var61.set(1)
                     self.var62.set(1)
                     self.var63.set(1)
+                    self.var65.set(1)
+                    self.var66.set(1)
+                    self.var67.set(1)
+                    self.var68.set(1)
+                    self.var69.set(1)
+                    self.var70.set(1)
+                    self.var71.set(1)
+                    self.var72.set(1)
+                    self.var73.set(1)
+                    self.var74.set(1)
+                    self.var75.set(1)
+                    self.var76.set(1)
+                    self.var77.set(1)
+                    self.var78.set(1)
+                    # showing warnings
+                    showWarnings()
                 except Exception as exception_applying_max_preset:
                     print(f"[ERROR]: couldn't apply max preset due to exception: {exception_applying_max_preset}")
                     pass
@@ -805,6 +1419,12 @@ class MainWindowLightMode(CTk):
                     self.var18.set(1)
                     self.var19.set(1)
                     self.var8.set(1)
+                    self.var72.set(1)
+                    self.var73.set(1)
+                    self.var74.set(1)
+                    self.var76.set(1)
+                    self.var77.set(1)
+                    self.var78.set(1)
                 except Exception as exception_applying_webbrowser_cookies_cleaning_preset:
                     print(f"[ERROR]: couldn't apply webbrowser with cookies cleaning preset due to exception: {exception_applying_webbrowser_cookies_cleaning_preset}")
                     pass
@@ -817,19 +1437,42 @@ class MainWindowLightMode(CTk):
                     self.var59.set(1)
                     self.var18.set(1)
                     self.var19.set(1)
+                    self.var72.set(1)
+                    self.var73.set(1)
+                    self.var74.set(1)
+                    self.var77.set(1)
+                    self.var78.set(1)
                 except Exception as exception_applying_webbrowser_cleaning_preset :
                     print(f"[ERROR]: couldn't apply webbrowser cleaning preset due to exception: {exception_applying_webbrowser_cleaning_preset}")
                     pass
-            elif str(self.preset_chooser.get()) == getCurrentLanguage().fix_roblox_error_preset :
+            # elif str(self.preset_chooser.get()) == getCurrentLanguage().fix_roblox_error_preset :
+            #     try:
+            #         uncheck_all_options()
+            #         self.var9.set(1)
+            #         self.var3.set(1)
+            #         self.var4.set(1)
+            #         self.var41.set(1)
+            #         self.var26.set(1)
+            #     except Exception as exception_applying_rblxfix_preset :
+            #         print(f"[ERROR]: couldn't apply rblxfix cleaning preset due to exception: {exception_applying_rblxfix_preset}")
+            #         pass
+            # removed as of v6.4-stable.
+            elif str(self.preset_chooser.get()) == getCurrentLanguage().cancel_pending_updates :
                 try:
                     uncheck_all_options()
+                    # applying default preset
+                    self.var0.set(1)
+                    self.var2.set(1)
                     self.var9.set(1)
                     self.var3.set(1)
                     self.var4.set(1)
-                    self.var41.set(1)
-                    self.var26.set(1)
-                except Exception as exception_applying_rblxfix_preset :
-                    print(f"[ERROR]: couldn't apply rblxfix cleaning preset due to exception: {exception_applying_rblxfix_preset}")
+                    self.var8.set(1)
+                    self.var23.set(1)
+                    # alongwith windows update cleaning sections.
+                    self.var15.set(1)
+                    self.var66.set(1)
+                except Exception as exception_applying_webbrowser_cleaning_preset :
+                    print(f"[ERROR]: couldn't apply cancel pending updates cleaning preset due to exception: {exception_applying_webbrowser_cleaning_preset}")
                     pass
             else: # if none of these options are selected.
                 pass 
@@ -851,6 +1494,7 @@ class MainWindowLightMode(CTk):
             A function to be executed when the user closes the window of the Home Screen UI.
             """
             print("[DEBUG]: User has sent the command WM_DESTROY_WINDOW, will safely terminate the process of this program.")
+            self.destroy()
             raise SystemExit(0) # exiting python interpreter.
             return None
 
@@ -920,7 +1564,7 @@ class MainWindowLightMode(CTk):
         self.var32 = StringVar()
         self.var33 = StringVar()
         self.var34 = StringVar()
-        self.var35 = StringVar()
+        # self.var35 = StringVar()
         self.var36 = StringVar()
         self.var37 = StringVar()
         self.var38 = StringVar()
@@ -933,7 +1577,7 @@ class MainWindowLightMode(CTk):
         self.var45 = StringVar()
         self.var46 = StringVar()
         self.var47 = StringVar()
-        self.var48 = StringVar()
+        # self.var48 = StringVar()
         self.var49 = StringVar()
         self.var50 = StringVar()
         self.var51 = StringVar()
@@ -950,6 +1594,20 @@ class MainWindowLightMode(CTk):
         self.var62 = StringVar()
         self.var63 = StringVar()
         self.var64 = StringVar()
+        self.var65 = StringVar() # for wer cleaner
+        self.var66 = StringVar() # for delivery optimization cleaning
+        self.var67 = StringVar() # for windows logs cleaning
+        self.var68 = StringVar() # for offline pages cleaning
+        self.var69 = StringVar() # for winsxs store cleanup
+        self.var70 = StringVar() # for windows sp cleanup
+        self.var71 = StringVar() # for windows old cleanup
+        self.var72 = StringVar() # for gchrome history cleaner
+        self.var73 = StringVar() # for chromium-based ms edge history cleaner
+        self.var74 = StringVar() # for mozilla firefox history cleaner
+        self.var75 = StringVar() # for playnite web browser cache cleaner
+        self.var76 = StringVar() # for opera web browser cookies cleaner
+        self.var77 = StringVar() # for opera web browser history cleaner
+        self.var78 = StringVar() # for opera web browser caches cleaner
 
         # ----------------------------
         # a fix for 1024x768 or lower screen resolutions:
@@ -1027,18 +1685,28 @@ class MainWindowLightMode(CTk):
         else: # if UI lang is not specified.
             components_direction = en.widgets_sticking_direction
         # ------------------------------
+
+        # placing widgets inside the information frame
+        # ===============================================
         
+        # self.infoframelbl0 = Label(self.InformationFrame, text=getCurrentLanguage().you_dont_need_anything, font=("Arial", 15), foreground='white', background='green')
+        # self.infoframelbl0.grid(column=0, row=1, sticky=components_direction)
+        # self.InformationFrame.pack_propagate(0) -> does not work.
+        # ===============================================
+
+
+
         
         # defining the presets label frame.
         self.presets_lblframe = ttk.LabelFrame(self.show_frame, text=getCurrentLanguage().dontknow_whattodo_presets_text)
         
         
-        self.preset_chooser = CTkComboBox(self.presets_lblframe, width=500, values=(getCurrentLanguage().preset_default, getCurrentLanguage().preset_maximum_cleaning, getCurrentLanguage().preset_recyclebin_cleaning, getCurrentLanguage().preset_webbrowser_cleaning, getCurrentLanguage().preset_webbrowser_cleaning_with_cookies, getCurrentLanguage().fix_roblox_error_preset), command=apply_cleaning_preset)
+        self.preset_chooser = CTkComboBox(self.presets_lblframe, width=500, values=(getCurrentLanguage().preset_default, getCurrentLanguage().preset_maximum_cleaning, getCurrentLanguage().preset_recyclebin_cleaning, getCurrentLanguage().preset_webbrowser_cleaning, getCurrentLanguage().preset_webbrowser_cleaning_with_cookies, getCurrentLanguage().cancel_pending_updates), command=apply_cleaning_preset)
         self.preset_chooser.set('')
         # inserting values for the presets combobox.
         self.preset_chooser.grid(column=0, row=1, sticky=components_direction)
 
-        self.presets_lblframe.grid(column=0, row=2, sticky=components_direction)
+        self.presets_lblframe.grid(column=0, row=3, sticky=components_direction)
         self.preset_chooser.bind('<<ComboboxSelected>>', apply_cleaning_preset) # binding a function that gets called whenever the value of such a combobox is changed by the user.
         # ---------------------------
         
@@ -1052,14 +1720,14 @@ class MainWindowLightMode(CTk):
         self.clr_recyclebin_sysdrive_btn.grid(column=0, row=1, sticky=components_direction)
 
         # ---------------------------
-        self.lblframe0.grid(column=0, row=3, sticky=components_direction)
+        self.lblframe0.grid(column=0, row=4, sticky=components_direction)
 
         self.lblframe1 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().dxdcache_text)
         # ---------------------------
         self.clr_d3dscache_localappdata_btn = CTkCheckBox(self.lblframe1, text=getCurrentLanguage().dxdcache_text_chkbox, variable=self.var2, onvalue="1", offvalue="0", command=None)
         self.clr_d3dscache_localappdata_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe1.grid(column=0, row=4, sticky=components_direction)
+        self.lblframe1.grid(column=0, row=5, sticky=components_direction)
 
         self.lblframe2 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().sys_user_specific_text)
         # ---------------------------
@@ -1089,8 +1757,18 @@ class MainWindowLightMode(CTk):
 
         self.clr_locallow_temporary_data_btn = CTkCheckBox(self.lblframe2, text=getCurrentLanguage().local_low_temp_text, variable=self.var41, onvalue="1", offvalue="0", command=None)
         self.clr_locallow_temporary_data_btn.grid(column=0, row=9, sticky=components_direction)
+
+        self.wercleanup = CTkCheckBox(self.lblframe2, text=getCurrentLanguage().wer_cleaner, variable=self.var65, onvalue="1", offvalue="0", command=None)
+        self.wercleanup.grid(column=0, row=10, sticky=components_direction)
+
+        self.windows_logs_cleanup = CTkCheckBox(self.lblframe2, text=getCurrentLanguage().windows_log_files, variable=self.var67, onvalue="1", offvalue="0", command=None)
+        self.windows_logs_cleanup.grid(column=0, row=11, sticky=components_direction)
+
+        self.offline_webpages_cleanup = CTkCheckBox(self.lblframe2, text=getCurrentLanguage().offline_web_pages, variable=self.var68, onvalue="1", offvalue="0", command=None)
+        self.offline_webpages_cleanup.grid(column=0, row=12, sticky=components_direction)
+
         # ---------------------------
-        self.lblframe2.grid(column=0, row=5, sticky=components_direction)
+        self.lblframe2.grid(column=0, row=6, sticky=components_direction)
 
         self.lblframe3 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().webbrowsers_text)
         # ---------------------------
@@ -1100,41 +1778,62 @@ class MainWindowLightMode(CTk):
         self.clr_gchrome_browser_cookies_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().gchrome_cookies_text, variable=self.var6, onvalue="1", offvalue="0", command=None)
         self.clr_gchrome_browser_cookies_btn.grid(column=0, row=2, sticky=components_direction)
 
+        self.gchrome_browser_history_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().gchrome_history, variable=self.var72, onvalue="1", offvalue="0", command=None)
+        self.gchrome_browser_history_btn.grid(column=0, row=3, sticky=components_direction)
+
         self.clr_gchrome_extension_cookies_data_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().gchrome_extensions_cookies_text, variable=self.var33, onvalue="1", offvalue="0", command=None)
-        self.clr_gchrome_extension_cookies_data_btn.grid(column=0, row=3, sticky=components_direction)
+        self.clr_gchrome_extension_cookies_data_btn.grid(column=0, row=4, sticky=components_direction)
 
         self.clr_steam_webclient_htmlcache_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().steam_htmlcache_text, variable=self.var14, onvalue="1", offvalue="0", command=None)
-        self.clr_steam_webclient_htmlcache_btn.grid(column=0, row=4, sticky=components_direction)
+        self.clr_steam_webclient_htmlcache_btn.grid(column=0, row=5, sticky=components_direction)
 
         self.clr_discordwebclient_webcacheddata_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().discord_webcache_text, variable=self.var12, onvalue="1", offvalue="0", command=None)
-        self.clr_discordwebclient_webcacheddata_btn.grid(column=0, row=5, sticky=components_direction)
+        self.clr_discordwebclient_webcacheddata_btn.grid(column=0, row=6, sticky=components_direction)
 
         self.clr_chromiumbased_msedge_webcached_data_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().chromium_based_edge_webcache_text, variable=self.var24, onvalue="1", offvalue="0", command=None)
-        self.clr_chromiumbased_msedge_webcached_data_btn.grid(column=0, row=6, sticky=components_direction)
+        self.clr_chromiumbased_msedge_webcached_data_btn.grid(column=0, row=7, sticky=components_direction)
+
+        self.clr_chromiumbased_msedge_browsing_history_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().chromium_based_edge_history, variable=self.var73, onvalue="1", offvalue="0", command=None)
+        self.clr_chromiumbased_msedge_browsing_history_btn.grid(column=0, row=8, sticky=components_direction)
 
         self.clr_chormiumbased_msedge_cookies_data_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().chromium_based_edge_cookies_text, variable=self.var25, onvalue="1", offvalue="0", command=None)
-        self.clr_chormiumbased_msedge_cookies_data_btn.grid(column=0, row=7, sticky=components_direction)
+        self.clr_chormiumbased_msedge_cookies_data_btn.grid(column=0, row=9, sticky=components_direction)
 
         self.clr_mozilla_firefox_webcached_data_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().firefox_webcached_data_text, variable=self.var59, onvalue="1", offvalue="0", command=None)
-        self.clr_mozilla_firefox_webcached_data_btn.grid(column=0, row=8, sticky=components_direction)
+        self.clr_mozilla_firefox_webcached_data_btn.grid(column=0, row=10, sticky=components_direction)
+
+        self.clr_mozilla_firefox_history_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().mozilla_firefox_history, variable=self.var74, onvalue="1", offvalue="0", command=None)
+        self.clr_mozilla_firefox_history_btn.grid(column=0, row=11, sticky=components_direction)
 
         self.clr_mozilla_firefox_cookies_sqlite_file_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().mozilla_firefox_cookie_data_text, variable=self.var60, onvalue="1", offvalue="0", command=None)
-        self.clr_mozilla_firefox_cookies_sqlite_file_btn.grid(column=0, row=9, sticky=components_direction)
+        self.clr_mozilla_firefox_cookies_sqlite_file_btn.grid(column=0, row=12, sticky=components_direction)
 
         self.clr_discordapp_squirrel_temp_data_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().discord_squirrel_temp, variable=self.var40, onvalue="1", offvalue="0", command=None)
-        self.clr_discordapp_squirrel_temp_data_btn.grid(column=0, row=10, sticky=components_direction)
+        self.clr_discordapp_squirrel_temp_data_btn.grid(column=0, row=13, sticky=components_direction)
 
         self.clr_inetcookies_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().iecookies_text, variable=self.var17, onvalue="1", offvalue="0", command=None)
-        self.clr_inetcookies_btn.grid(column=0, row=11, sticky=components_direction)
+        self.clr_inetcookies_btn.grid(column=0, row=14, sticky=components_direction)
 
         self.clr_additionalinet_cacheddata_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().adds_ietemp_text, variable=self.var18, onvalue="1", offvalue="0", command=None)
-        self.clr_additionalinet_cacheddata_btn.grid(column=0, row=12, sticky=components_direction)
+        self.clr_additionalinet_cacheddata_btn.grid(column=0, row=15, sticky=components_direction)
 
         self.clr_iedownload_history_data_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().iedownloadhistory_text, variable=self.var19, onvalue="1", offvalue="0", command=None)
-        self.clr_iedownload_history_data_btn.grid(column=0, row=13, sticky=components_direction)
+        self.clr_iedownload_history_data_btn.grid(column=0, row=16, sticky=components_direction)
+
+        self.clr_playnite_webbrowser_cache_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().playnite_browser_webcache, variable=self.var75, onvalue="1", offvalue="0", command=None)
+        self.clr_playnite_webbrowser_cache_btn.grid(column=0, row=17, sticky=components_direction)
+
+        self.clr_opera_browser_cookies_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().opera_browser_cookies, variable=self.var76, onvalue="1", offvalue="0", command=None)
+        self.clr_opera_browser_cookies_btn.grid(column=0, row=18, sticky=components_direction)
+
+        self.clr_opera_browser_history_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().opera_browser_history, variable=self.var77, onvalue="1", offvalue="0", command=None)
+        self.clr_opera_browser_history_btn.grid(column=0, row=19, sticky=components_direction)
+
+        self.clr_opera_browser_cache_btn = CTkCheckBox(self.lblframe3, text=getCurrentLanguage().opera_browser_caches, variable=self.var78, onvalue="1", offvalue="0", command=None)
+        self.clr_opera_browser_cache_btn.grid(column=0, row=20, sticky=components_direction)
 
         # ---------------------------
-        self.lblframe3.grid(column=0, row=6, sticky=components_direction)
+        self.lblframe3.grid(column=0, row=7, sticky=components_direction)
 
 
         self.lblframe4 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().photo_editors_text)
@@ -1149,18 +1848,34 @@ class MainWindowLightMode(CTk):
         self.clr_adobephotoshop_webcached_data_btn = CTkCheckBox(self.lblframe4, text=getCurrentLanguage().ps2020_webcache_text, variable=self.var27, onvalue="1", offvalue="0", command=None)
         self.clr_adobephotoshop_webcached_data_btn.grid(column=0, row=3, sticky=components_direction)
         # ---------------------------
-        self.lblframe4.grid(column=0, row=7, sticky=components_direction)
+        self.lblframe4.grid(column=0, row=8, sticky=components_direction)
 
         self.lblframe5 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().winupdate_text)
         # ---------------------------
         self.clr_windowsupdate_downloaded_updates_btn = CTkCheckBox(self.lblframe5, text=getCurrentLanguage().winupdate_downloadedfiles_text, variable=self.var15, onvalue="1", offvalue="0", command=None)
         self.clr_windowsupdate_downloaded_updates_btn.grid(column=0, row=1, sticky=components_direction)
+        
+        self.delivery_optimization_cleaning = CTkCheckBox(self.lblframe5, text=getCurrentLanguage().delivery_optimization, variable=self.var66, onvalue="1", offvalue="0", command=None)
+        self.delivery_optimization_cleaning.grid(column=0, row=2, sticky=components_direction)
         # ---------------------------
-        self.lblframe5.grid(column=0, row=8, sticky=components_direction)
+        self.lblframe5.grid(column=0, row=9, sticky=components_direction)
 
         self.lblframe6 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().win10plus_cleaners_text)
         # ---------------------------
-        self.clr_win10os_cached_data_btn = CTkCheckBox(self.lblframe6, text=getCurrentLanguage().win10plus_oscache_text, variable=self.var16, onvalue="1", offvalue="0", command=None)
+
+        # declaring a function to warn the user about their choice of cleaning windows 10 os cached data.
+        def tempWarning0():
+            """
+            A function for showing the warning messagebox when the user checks the option to clean Windows 10 OS Caches.
+            """
+            value = self.var16.get()
+            if value == "1":
+                messagebox.showwarning(getCurrentLanguage().win10plus_oscache_text, getCurrentLanguage().warning_win10os_caches)
+            else:
+                return True
+            return None
+
+        self.clr_win10os_cached_data_btn = CTkCheckBox(self.lblframe6, text=getCurrentLanguage().win10plus_oscache_text, variable=self.var16, onvalue="1", offvalue="0", command=tempWarning0)
         self.clr_win10os_cached_data_btn.grid(column=0, row=1, sticky=components_direction)
 
         self.clr_win10_action_center_cached_data_btn = CTkCheckBox(self.lblframe6, text=getCurrentLanguage().actioncenter_cache_text, variable=self.var20, onvalue="1", offvalue="0", command=None)
@@ -1190,7 +1905,7 @@ class MainWindowLightMode(CTk):
         self.clr_servicehub_identity_file_btn = CTkCheckBox(self.lblframe6, text=getCurrentLanguage().servicehub_identity_file_text, variable=self.var56, onvalue="1", offvalue="0", command=None)
         self.clr_servicehub_identity_file_btn.grid(column=0, row=10, sticky=components_direction)
         # ---------------------------
-        self.lblframe6.grid(column=0, row=9, sticky=components_direction)
+        self.lblframe6.grid(column=0, row=10, sticky=components_direction)
 
         self.lblframe7 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().games_text)
         # ---------------------------
@@ -1206,7 +1921,7 @@ class MainWindowLightMode(CTk):
         self.clr_minecraft_webcached_data_btn = CTkCheckBox(self.lblframe7, text=getCurrentLanguage().minecraft_webcache_text, variable=self.var58, onvalue="1", offvalue="0", command=None)
         self.clr_minecraft_webcached_data_btn.grid(column=0, row=4, sticky=components_direction)
         # ---------------------------
-        self.lblframe7.grid(column=0, row=10, sticky=components_direction)
+        self.lblframe7.grid(column=0, row=11, sticky=components_direction)
 
 
         self.lblframe8 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().python_cleaners_text)
@@ -1220,7 +1935,7 @@ class MainWindowLightMode(CTk):
         self.clr_jedipython_additionals_btn = CTkCheckBox(self.lblframe8, text=getCurrentLanguage().jedi_python_cache_text, variable=self.var46, onvalue="1", offvalue="0", command=None)
         self.clr_jedipython_additionals_btn.grid(column=0, row=3, sticky=components_direction)
         # ---------------------------
-        self.lblframe8.grid(column=0, row=11, sticky=components_direction)
+        self.lblframe8.grid(column=0, row=12, sticky=components_direction)
 
 
         self.lblframe9 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().ram_text)
@@ -1228,7 +1943,7 @@ class MainWindowLightMode(CTk):
         self.empty_winworkingsets_rammap_btn = CTkCheckBox(self.lblframe9, text=getCurrentLanguage().empty_running_workingsets_rammap_text, variable=self.var32, onvalue="1", offvalue="0", command=None)
         self.empty_winworkingsets_rammap_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe9.grid(column=0, row=12, sticky=components_direction)
+        self.lblframe9.grid(column=0, row=13, sticky=components_direction)
 
         self.lblframe10 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().video_editing_software_text)
         # ---------------------------
@@ -1238,7 +1953,7 @@ class MainWindowLightMode(CTk):
         self.clr_sony_vegas_pro_error_reports_data_btn = CTkCheckBox(self.lblframe10, text=getCurrentLanguage().vegaspro17_errorlogs_text, variable=self.var61, onvalue="1", offvalue="0", command=None)
         self.clr_sony_vegas_pro_error_reports_data_btn.grid(column=0, row=2, sticky=components_direction)
         # ---------------------------
-        self.lblframe10.grid(column=0, row=13, sticky=components_direction)
+        self.lblframe10.grid(column=0, row=14, sticky=components_direction)
 
 
         self.lblframe11 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().threed_moduling_software_text)
@@ -1246,12 +1961,62 @@ class MainWindowLightMode(CTk):
         self.clr_mcneel_rhinoceros_3d_moduling_soft_cached_data_btn = CTkCheckBox(self.lblframe11, text=getCurrentLanguage().mcneel_rhinoceros_3d_temp_text, variable=self.var29, onvalue="1", offvalue="0", command=None)
         self.clr_mcneel_rhinoceros_3d_moduling_soft_cached_data_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe11.grid(column=0, row=14, sticky=components_direction)
+        self.lblframe11.grid(column=0, row=15, sticky=components_direction)
+
+        self.lblframe17 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().special_cleaners)
+        # ---------------------------
+        # defining a function that shows a warning to the user that it is going to delete backup files used to delete windows updates.
+        def tempWarning1():
+            """
+            Shows a warning about WinSxS cleaner.
+            """
+            value = self.var69.get()
+            if value == "1":
+                messagebox.showinfo(getCurrentLanguage().default_path_msgbox_title, getCurrentLanguage().winsxs_warning)
+            else:
+                return True
+            return None
+        
+        self.wincomponent_store_cleanup_btn = CTkCheckBox(self.lblframe17, text=getCurrentLanguage().winsxs, variable=self.var69, onvalue="1", offvalue="0", command=tempWarning1)
+        self.wincomponent_store_cleanup_btn.grid(column=0, row=1, sticky=components_direction)
+
+        # defining a function that shows a warning to the user that it is going to delete files used to uninstall current sp update.
+        def tempWarning2():
+            """
+            Shows a warning about Windows service pack cleaner.
+            """
+            value = self.var70.get()
+            if value == "1":
+                messagebox.showinfo(getCurrentLanguage().default_path_msgbox_title, getCurrentLanguage().winsp_cleaner_warning)
+            else:
+                return True
+            return None
+
+        self.winsp_cleanup_btn = CTkCheckBox(self.lblframe17, text=getCurrentLanguage().winsp_cleaner, variable=self.var70, onvalue="1", offvalue="0", command=tempWarning2)
+        self.winsp_cleanup_btn.grid(column=0, row=2, sticky=components_direction)
+
+        # defining a function that will show a warning about Windows.old cleaner.
+        def tempWarning3():
+            """
+            Shows a warning about windows.old cleaner
+            """
+            value = self.var71.get()
+            if value == "1":
+                messagebox.showinfo(getCurrentLanguage().default_path_msgbox_title, getCurrentLanguage().winold_warning)
+            else:
+                return True
+            return None
+
+        self.winold_cleanup_btn = CTkCheckBox(self.lblframe17, text=getCurrentLanguage().winold, variable=self.var71, onvalue="1", offvalue="0", command=tempWarning3)
+        self.winold_cleanup_btn.grid(column=0, row=3, sticky=components_direction)
+        # ---------------------------
+        self.lblframe17.grid(column=0, row=16, sticky=components_direction)
+
 
         self.lblframe12 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().adds_software_text)
         # ---------------------------
-        self.clr_iconcache_db_file_in_localappdata_dir_btn = CTkCheckBox(self.lblframe12, text=getCurrentLanguage().iconcachefile_text, variable=self.var35, onvalue="1", offvalue="0", command=None)
-        self.clr_iconcache_db_file_in_localappdata_dir_btn.grid(column=0, row=1, sticky=components_direction)
+        # self.clr_iconcache_db_file_in_localappdata_dir_btn = CTkCheckBox(self.lblframe12, text=getCurrentLanguage().iconcachefile_text, variable=self.var35, onvalue="1", offvalue="0", command=None, state='disabled')
+        # self.clr_iconcache_db_file_in_localappdata_dir_btn.grid(column=0, row=1, sticky=components_direction)
 
         self.clr_microvirt_memu_log_data_memdump_files_btn = CTkCheckBox(self.lblframe12, text=getCurrentLanguage().microvert_memu_logs_memdump_text, variable=self.var36, onvalue="1", offvalue="0", command=None)
         self.clr_microvirt_memu_log_data_memdump_files_btn.grid(column=0, row=2, sticky=components_direction)
@@ -1271,8 +2036,8 @@ class MainWindowLightMode(CTk):
         self.clr_balena_itcher_webcached_data_btn = CTkCheckBox(self.lblframe12, text=getCurrentLanguage().balenaitcher_webcache_files_text, variable=self.var44, onvalue="1", offvalue="0", command=None)
         self.clr_balena_itcher_webcached_data_btn.grid(column=0, row=7, sticky=components_direction)
 
-        self.clr_lowlevelformattool_licenseagreement_confirmationfile_btn = CTkCheckBox(self.lblframe12, text=getCurrentLanguage().lowlevelformattool_agreement_file_text, variable=self.var48, onvalue="1", offvalue="0", command=None)
-        self.clr_lowlevelformattool_licenseagreement_confirmationfile_btn.grid(column=0, row=8, sticky=components_direction)
+        # self.clr_lowlevelformattool_licenseagreement_confirmationfile_btn = CTkCheckBox(self.lblframe12, text=getCurrentLanguage().lowlevelformattool_agreement_file_text, variable=self.var48, onvalue="1", offvalue="0", command=None)
+        # self.clr_lowlevelformattool_licenseagreement_confirmationfile_btn.grid(column=0, row=8, sticky=components_direction)
 
         self.clr_winxpe_app_downloads_folder_btn = CTkCheckBox(self.lblframe12, text=getCurrentLanguage().winxpe_creator_downloadsdir_text, variable=self.var55, onvalue="1", offvalue="0", command=None)
         self.clr_winxpe_app_downloads_folder_btn.grid(column=0, row=9, sticky=components_direction)
@@ -1282,8 +2047,10 @@ class MainWindowLightMode(CTk):
 
         self.clr_huawei_hisuite_dnd_temp_btn = CTkCheckBox(self.lblframe12, text=getCurrentLanguage().huawei_hisuite_dnddata_text, variable=self.var63, onvalue="1", offvalue="0", command=None)
         self.clr_huawei_hisuite_dnd_temp_btn.grid(column=0, row=11, sticky=components_direction)
+
+        
         # ---------------------------
-        self.lblframe12.grid(column=0, row=15, sticky=components_direction)
+        self.lblframe12.grid(column=0, row=17, sticky=components_direction)
 
 
         self.lblframe13 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().vscode_text)
@@ -1297,7 +2064,7 @@ class MainWindowLightMode(CTk):
         self.clr_vscode_cached_extensions_data_btn = CTkCheckBox(self.lblframe13, text=getCurrentLanguage().vscode_cached_extensions_text, variable=self.var54, onvalue="1", offvalue="0", command=None)
         self.clr_vscode_cached_extensions_data_btn.grid(column=0, row=3, sticky=components_direction)
         # ---------------------------
-        self.lblframe13.grid(column=0, row=16, sticky=components_direction)
+        self.lblframe13.grid(column=0, row=18, sticky=components_direction)
 
 
         self.lblframe14 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().javadeployment_text)
@@ -1305,48 +2072,58 @@ class MainWindowLightMode(CTk):
         self.clr_java_deployment_cached_data_btn = CTkCheckBox(self.lblframe14, text=getCurrentLanguage().javadeployment_chkbox_text, variable=self.var62, onvalue="1", offvalue="0", command=None)
         self.clr_java_deployment_cached_data_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe14.grid(column=0, row=17, sticky=components_direction)
+        self.lblframe14.grid(column=0, row=19, sticky=components_direction)
 
         self.lblframe15 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().alldone_text)
         # ---------------------------
         self.destroy_activity_after_done_btn = CTkCheckBox(self.lblframe15, text=getCurrentLanguage().alldone_chkbox_text, variable=self.var64, onvalue="1", offvalue="0", command=None, cursor='hand2')
         self.destroy_activity_after_done_btn.grid(column=0, row=1, sticky=components_direction)
         # ---------------------------
-        self.lblframe15.grid(column=0, row=18, sticky=components_direction)
+        self.lblframe15.grid(column=0, row=20, sticky=components_direction)
 
-
+        # declaring a container frame to place main buttons in.
+        self.mainButtonsContainerFrame = CTkFrame(self.show_frame, bg_color="transparent", fg_color="transparent")
+        self.mainButtonsContainerFrame.grid(column=0, row=83, sticky='w', pady=20)
+        # changing background color of the container frame to something more useful.
+        # if str(GetConfig["ProgConfig"]['appearancemode']) == "1": # light mode
+        #     pass
+        # elif str(GetConfig["ProgConfig"]['appearancemode']) == "2": # dark mode
+        #     self.mainButtonsContainerFrame.configure(bg_color=atk.DEFAULT_COLOR)
+        # else:
+        #     pass
+        # placing main buttons into the main buttons container frame.
         # Defining the about button.
-        self.about_window_btn = CTkButton(self.show_frame, text=getCurrentLanguage().about_text, command=startAboutWindow)
-        self.about_window_btn.place(x=10, y=2240, relwidth=0.3, relheight=0.035)
+        self.about_window_btn = CTkButton(self.mainButtonsContainerFrame, text=getCurrentLanguage().about_text, command=startAboutWindow)
+        self.about_window_btn.grid(column=0, row=1, sticky='w', ipadx=120, ipady=40)
 
         # Defining the execute button.
-        self.exec_btn = CTkButton(self.show_frame, text=getCurrentLanguage().execute_text, command=multiprocessing_execute_btn_function)
-        self.exec_btn.place(x=400 ,y=2240, relwidth=0.3, relheight=0.035)
+        self.exec_btn = CTkButton(self.mainButtonsContainerFrame, text=getCurrentLanguage().execute_text, command=multiprocessing_execute_btn_function)
+        self.exec_btn.grid(column=1, row=1, ipadx=120, ipady=40, padx=10)
 
         # declaring a space.
-        self.space = Label(self.show_frame, text="", font=("Arial Bold", 50))
-        if str(GetConfig['ProgConfig']['appearancemode']) == '2':
-            self.space.configure(background=atk.DEFAULT_COLOR)
-        self.space.grid(column=0, row=83, sticky=components_direction)
-
+        # self.space = Label(self.show_frame, text="", font=("Arial Bold", 50))
+        # if str(GetConfig['ProgConfig']['appearancemode']) == '2':
+        #     self.space.configure(background=atk.DEFAULT_COLOR)
+        # self.space.grid(column=0, row=83, sticky=components_direction)
+        
         # Defining the go to configuration page button.
-        self.config_page_btn = CTkButton(self.show_frame, text=getCurrentLanguage().settings_text, command=self.StartConfigurationWindow)
-        self.config_page_btn.place(x=790 ,y=2240, relwidth=0.3, relheight=0.035)
+        self.config_page_btn = CTkButton(self.mainButtonsContainerFrame, text=getCurrentLanguage().settings_text, command=self.StartConfigurationWindow)
+        self.config_page_btn.grid(column=2, row=1, ipadx=120, ipady=40)
 
 
         # another spacing
-        self.another_space = Label(self.show_frame, text="", font=("Arial Bold", 30))
-        if str(GetConfig['ProgConfig']['appearancemode']) == '2':
-            self.another_space.configure(background=atk.DEFAULT_COLOR)
-        self.another_space.grid(column=0, row=84, sticky=components_direction)
+        # self.another_space = Label(self.show_frame, text="", font=("Arial Bold", 30))
+        # if str(GetConfig['ProgConfig']['appearancemode']) == '2':
+        #     self.another_space.configure(background=atk.DEFAULT_COLOR)
+        # self.another_space.grid(column=0, row=84, sticky=components_direction)
 
         # ----------------------------
         # a fix for 1024x768 or lower screen resolutions: (fix #2)
         # ----------------------------
         if int(self.winfo_screenwidth()) <= 1024 and int(self.winfo_screenheight()) <= 768:
-            self.about_window_btn.place(x=10, y=2240, relwidth=0.29, relheight=0.035)
-            self.exec_btn.place(x=260 ,y=2240, relwidth=0.29, relheight=0.035)
-            self.config_page_btn.place(x=510 ,y=2240, relwidth=0.29, relheight=0.035)
+            self.about_window_btn.grid(ipady=40, ipadx=50)
+            self.exec_btn.grid(ipady=40, ipadx=50)
+            self.config_page_btn.grid(ipady=40, ipadx=50)
             self.banner_show.configure(width=775)
             self.banner = PhotoImage(file=f"{application_path}\\bannerlowres.png")
             self.banner_show.configure(image=self.banner)
@@ -1360,7 +2137,7 @@ class MainWindowLightMode(CTk):
             """
             self.output_show.configure(state='normal')
             self.output_show.delete(1.0, END)
-            self.output_show.insert(END, "Deleted Files:")
+            self.output_show.insert(END, f"{getCurrentLanguage().deleted_files}")
             self.output_show.insert(END, "\n")
             self.output_show.configure(state='disabled')
 
@@ -1507,6 +2284,22 @@ class MainWindowLightMode(CTk):
         
         def _unbind_from_mousewheel(event):
             self.main_canvas.unbind_all("<MouseWheel>")
+        
+
+        def activate_autodpi_scaling(event):
+            """
+            Reactivates AutoDpi scaling that got disabled by the `deactivate_automatic_dpi_awareness()` function
+            """
+            print("[DEBUG]: Window or any of it's widgets took focus, Enabling autodpi awareness")
+            try: # Windows 8.1 and later
+                ctypes.windll.shcore.SetProcessDpiAwareness(2)
+            except Exception as e:
+                print(f"[WARNING]: couldn't apply fix #1 to enable HiDPi scaling support: maybe user is not running Windows 8.1 or later: details are: {e}")
+            try: # Before Windows 8.1
+                ctypes.windll.user32.SetProcessDPIAware()
+            except: # Windows 8 or before
+                print(f"[ERROR]: couldn't apply HiDPi automatic scaling: maybe the user might need to restart the computer or Temp_Cleaner GUI")
+            return None
         # calling the clr_console method with keybinding_arg = 1
         clr_console(1)
 
@@ -1543,6 +2336,8 @@ class MainWindowLightMode(CTk):
         self.bind("<F2>", show_used_systemdrive_space)
         # executing a command to terminate the program's interpreter upon pressing the [X] button on top of the window.
         self.protocol("WM_DELETE_WINDOW", close_main_screen)
+        # self.bind('<Enter>', activate_autodpi_scaling)
+        self.bind("<FocusIn>", activate_autodpi_scaling)
 
         # calling the check for updates (in multithreading mode) function to check whether if auto updates check at startup is running or not.
         # try:
@@ -1586,6 +2381,7 @@ class SettingsWindow(Toplevel):
         This function is no longer experiemental.
         """
         super().__init__()
+        deactivate_automatic_dpi_awareness() # deactivating automatic api awareness
     
 
         global font_size, GetConfig, application_path
@@ -1638,6 +2434,7 @@ class SettingsWindow(Toplevel):
         def BrowseFour():
             BrowseForDirectory(self.cdpccpath_input)
             return None
+        
 
         # a variable for the check status of the checkforupdatesautomatically check box.
         self.autocheckboxvalue = IntVar()
@@ -1663,9 +2460,9 @@ class SettingsWindow(Toplevel):
                 self.cdpccpath_input.insert(INSERT, self.RetrieveConfig_Init['ProgConfig']['CDPCCPATH'])
                 
                 if str(self.RetrieveConfig_Init['ProgConfig']['appearancemode']) == '1': # light mode
-                    self.appearance_chooser_combo.set('Light')
+                    self.appearance_chooser_combo.set(getCurrentLanguage().light_mode)
                 elif str(self.RetrieveConfig_Init['ProgConfig']['appearancemode']) == '2': # dark mode
-                    self.appearance_chooser_combo.set('Dark') # you get it using it's index according to 0
+                    self.appearance_chooser_combo.set(getCurrentLanguage().dark_mode) # you get it using it's index according to 0
                 
                 if str(self.RetrieveConfig_Init['ProgConfig']['languagesetting']) == 'ar':
                     self.language_chooser_combo.set("العربية (مدعمة بواسطة حزمة اللغة العربية الاصدار 1.1)")
@@ -1711,9 +2508,9 @@ class SettingsWindow(Toplevel):
                 self.ConfigFileSaveProcess['ProgConfig']['CDPCCPATH'] = self.cdpccpath_input.get()
 
                 print(f"[DEBUG]: current appearance mode as set in settings window is: {str(self.appearance_chooser_combo.get())}")
-                if str(self.appearance_chooser_combo.get()) == 'Dark':
+                if str(self.appearance_chooser_combo.get()) == getCurrentLanguage().dark_mode:
                     self.ConfigFileSaveProcess['ProgConfig']['appearancemode'] = '2'
-                elif str(self.appearance_chooser_combo.get()) == 'Light':
+                elif str(self.appearance_chooser_combo.get()) == getCurrentLanguage().light_mode:
                     self.ConfigFileSaveProcess['ProgConfig']['appearancemode'] = '1'
                 else:
                     cantsaveconfig_combostyle_content = f"{getCurrentLanguage().cant_save_config_file_text} {self.appearance_chooser_combo}"
@@ -1781,7 +2578,27 @@ class SettingsWindow(Toplevel):
                 messagebox.showerror("An ERROR has occured", f"{exception_reading_appearance_mode}")
                 raise SystemExit(6969) # exit code 6969 is for unhandled appearance mode exceptions
             return False
+
+
+        def setDefaultRAMMapPath():
+            self.rammappath_input.delete(0, END)
+            self.rammappath_input.insert(END, "$DEFAULT")
+            return None
     
+        def setDefaultAdwCleanerPath():
+            self.adwcleanerwpath_input.delete(0, END)
+            self.adwcleanerwpath_input.insert(END, "$DEFAULT")
+            return None
+    
+        def setDefaultWinXPEPath():
+            self.winxpeapppath_input.delete(0, END)
+            self.winxpeapppath_input.insert(END, "$NONE")
+            return None
+
+        def setDefaultCDPCCPath():
+            self.cdpccpath_input.delete(0, END)
+            self.cdpccpath_input.insert(END, "$DEFAULT")
+            return None
         
         # Defining the root properties.
         self.title(getCurrentLanguage().settings_window_title)
@@ -1808,38 +2625,46 @@ class SettingsWindow(Toplevel):
         self.side_banner.image = self.side_banner_loader
         self.side_banner.place(x=0, y=0)
 
-        # Defining some informative labels (Basically some bla bla blas).
+        # Defining some informative labels.
         self.lbl0_config = Label(self, text=getCurrentLanguage().settings_window_title, font=("Arial Bold", 32), background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1])
         self.lbl0_config.place(x=260, y=7)
         self.lbl1_config = Label(self, text=getCurrentLanguage().settings_hint_one, foreground=getCurrentAppearanceMode()[1], background=getCurrentAppearanceMode()[0], font=("Arial", 12))
         self.lbl1_config.place(x=260, y=70)
         self.lbl2_config = Label(self, text=getCurrentLanguage().rammap_path_settings_hint, foreground=getCurrentAppearanceMode()[1], background=getCurrentAppearanceMode()[0], font=("Arial",12))
         self.lbl2_config.place(x=260, y=100)
-        self.rammappath_input = CTkEntry(self, width=900, height=10)
+        self.rammappath_input = CTkEntry(self, width=860, height=10)
         self.rammappath_input.place(x=260, y=130)
         self.rammappath_input_browsebtn = CTkButton(self, text="...", command=BrowseOne)
         self.rammappath_input_browsebtn.place(x=1164, y=131, relwidth=0.031, relheight=0.033)
+        self.rammappath_defaultbtn = CTkButton(self, text="X", command=setDefaultRAMMapPath)
+        self.rammappath_defaultbtn.place(y=131, relwidth=0.031, relheight=0.033, x=1125)
         self.lbl3_config = Label(self, text=getCurrentLanguage().adwcleaner_working_path_settings_hint, foreground=getCurrentAppearanceMode()[1], background=getCurrentAppearanceMode()[0], font=("Arial",12))
         self.lbl3_config.place(x=260, y=155)
-        self.adwcleanerwpath_input = CTkEntry(self, width=900, height=10)
+        self.adwcleanerwpath_input = CTkEntry(self, width=860, height=10)
         self.adwcleanerwpath_input.place(x=260, y=180)
         self.adwcleanerwpath_input_browsebtn = CTkButton(self, text="...", command=BrowseTwo)
         self.adwcleanerwpath_input_browsebtn.place(x=1164, y=180, relwidth=0.031, relheight=0.033)
+        self.adwcleanerwpath_defaultbtn = CTkButton(self, text="X", command=setDefaultAdwCleanerPath)
+        self.adwcleanerwpath_defaultbtn.place(x=1125, y=180, relwidth=0.031, relheight=0.033)
         self.lbl4_config = Label(self, text=getCurrentLanguage().winxpe_prog_path_settings_hint, foreground=getCurrentAppearanceMode()[1], background=getCurrentAppearanceMode()[0], font=("Arial", 12))
         self.lbl4_config.place(x=260, y=205)
-        self.winxpeapppath_input = CTkEntry(self, width=900, height=10)
+        self.winxpeapppath_input = CTkEntry(self, width=860, height=10)
         self.winxpeapppath_input.place(x=260, y=230)
         self.winxpeapppath_input_browsebtn = CTkButton(self, text="...", command=BrowseThree)
         self.winxpeapppath_input_browsebtn.place(x=1164, y=230, relwidth=0.031, relheight=0.033)
+        self.winxpeapppath_defaultbtn = CTkButton(self, text="X", command=setDefaultWinXPEPath)
+        self.winxpeapppath_defaultbtn.place(x=1125, y=230, relwidth=0.031, relheight=0.033)
         self.lbl5_config = Label(self, text=getCurrentLanguage().userid_folder_winactivitiescache_settings_hint, foreground=getCurrentAppearanceMode()[1], background=getCurrentAppearanceMode()[0], font=("Arial",12))
         self.lbl5_config.place(x=260, y=257)
-        self.cdpccpath_input = CTkEntry(self, width=900, height=10)
+        self.cdpccpath_input = CTkEntry(self, width=860, height=10)
         self.cdpccpath_input.place(x=260, y=283)
         self.cdpccpath_input_browsebtn = CTkButton(self, text="...", command=BrowseFour)
         self.cdpccpath_input_browsebtn.place(x=1164, y=283, relwidth=0.031, relheight=0.033)
+        self.cdpccpath_defaultbtn = CTkButton(self, text="X", command=setDefaultCDPCCPath)
+        self.cdpccpath_defaultbtn.place(x=1125, y=283, relwidth=0.031, relheight=0.033)
         self.lbl6_config = Label(self, text=getCurrentLanguage().appearance_mode_settings_hint, foreground=getCurrentAppearanceMode()[1], background=getCurrentAppearanceMode()[0], font=("Arial", 12))
         self.lbl6_config.place(x=260, y=310)
-        self.appearance_chooser_combo = CTkComboBox(self, values=('Light', 'Dark'))
+        self.appearance_chooser_combo = CTkComboBox(self, values=(getCurrentLanguage().light_mode, getCurrentLanguage().dark_mode))
         self.appearance_chooser_combo.place(x=260, y=335, relheight=0.050, relwidth=0.780)
 
         self.lbl7_config = Label(self, text="Choose your language/اختار لغتك:", foreground=getCurrentAppearanceMode()[1], background=getCurrentAppearanceMode()[0], font=("Arial", 12))
@@ -1883,10 +2708,10 @@ class SettingsWindow(Toplevel):
             self.minsize(900,540)
             self.maxsize(900,540)
             self.geometry('900x540')
-            self.rammappath_input.configure(width=600)
-            self.adwcleanerwpath_input.configure(width=600)
-            self.winxpeapppath_input.configure(width=600)
-            self.cdpccpath_input.configure(width=600)
+            self.rammappath_input.configure(width=568)
+            self.adwcleanerwpath_input.configure(width=568)
+            self.winxpeapppath_input.configure(width=568)
+            self.cdpccpath_input.configure(width=568)
             self.appearance_chooser_combo.place(x=260, y=335, relheight=0.050, relwidth=0.667)
             self.language_chooser_combo.place(relheight=0.050, relwidth=0.667, x=260, y=396)
             self.lbl5_config.configure(font=("Arial",10))
@@ -1895,12 +2720,17 @@ class SettingsWindow(Toplevel):
             self.applychangesandclose_btn.place(x=742, y=500, relwidth=0.12, relheight=0.060)
             # declaring a variable to contain the x position of browse buttons.
             x_browse_btns = 865
+            x_default_btns = 832
             new_width = 0.033
             # ------------------------
             self.rammappath_input_browsebtn.place(x=x_browse_btns, y=131, relwidth=new_width, relheight=0.033)
+            self.rammappath_defaultbtn.place(x=x_default_btns, y=131, relwidth=new_width, relheight=0.033)
             self.adwcleanerwpath_input_browsebtn.place(x=x_browse_btns, y=180, relwidth=new_width, relheight=0.033)
+            self.adwcleanerwpath_defaultbtn.place(x=x_default_btns, y=180, relwidth=new_width, relheight=0.033)
             self.winxpeapppath_input_browsebtn.place(x=x_browse_btns, y=230, relwidth=new_width, relheight=0.033)
+            self.winxpeapppath_defaultbtn.place(x=x_default_btns, y=230, relwidth=new_width, relheight=0.033)
             self.cdpccpath_input_browsebtn.place(x=x_browse_btns, y=283, relwidth=new_width, relheight=0.033)
+            self.cdpccpath_defaultbtn.place(x=x_default_btns, y=283, relwidth=new_width, relheight=0.033)
         # ----------------------------
 
 
@@ -2072,6 +2902,7 @@ class AboutWindow(Toplevel):
     def __init__(self):
         super().__init__()
         global application_path
+        deactivate_automatic_dpi_awareness() # deactivating automatic dpi awareness
         # applying style file 'style.json'
         try:
             set_default_color_theme(f"{application_path}\\style.json")
@@ -2165,8 +2996,18 @@ class AboutWindow(Toplevel):
             updaterProgramUIProcess.mainloop()
             return None
 
+
+        def showDonatorsWindow():
+            """
+            A function for the donators button in the About screen.
+            """
+            donators.DonatorsWindow().mainloop()
+
+
+        w_width = 830
+        w_height = 410
         self.title(getCurrentLanguage().about_window_title)
-        self.geometry('830x370')
+        self.geometry(f'{w_width}x{w_height}')
         self.resizable(False, False) # not resizable
         self.wm_resizable(False, False) # not resizable (Fix 2 - WM MANAGER CLASS)
 
@@ -2223,6 +3064,9 @@ class AboutWindow(Toplevel):
         self.runupdater_btn = CTkButton(self, text=getCurrentLanguage().check_for_updates, command=updateCheckFunction)
         self.runupdater_btn.place(x=10, y=320)
 
+        self.donatorswindow_btn = CTkButton(self, text=getCurrentLanguage().donators_btn, command=showDonatorsWindow)
+        self.donatorswindow_btn.place(x=10, y=360)
+
         # the about tcg icon.
         self.tcgiconabout = Label(self, text='', background=getCurrentAppearanceMode()[0])
         self.tcgiconabout.place(x=0, y=30)
@@ -2242,8 +3086,6 @@ class AboutWindow(Toplevel):
         self.photoimageloader = ImageTk.PhotoImage(image=self.imageloader)
         self.tcgiconabout.configure(image=self.photoimageloader)
 
-        
-
 
 
 
@@ -2254,6 +3096,8 @@ if __name__ == '__main__':
     # attempting to start the main program UI
     main_process = MainWindowLightMode()
     main_process.mainloop()
+    # test = AboutWindow()
+    # test.mainloop()
     # ensuring the program closes properly.
     raise SystemExit(0)
 

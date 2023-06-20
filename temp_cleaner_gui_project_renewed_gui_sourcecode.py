@@ -48,6 +48,9 @@ from PIL import Image, ImageTk
 import time
 import configparser
 from tkinter import filedialog
+from tkinter import scrolledtext
+import subprocess
+from subprocess import PIPE
 
 # Defining the function that will get the current values of an configparser values.
 GetConfig = configparser.ConfigParser()
@@ -394,6 +397,38 @@ def ShowNotificationAllDone():
     # Now, let's send the user a message telling them that everything had done.
     messagebox.showinfo("Complete", "All pending operations has been completed!")
 
+
+def show_output():
+    # Configuring the root.
+    output_root = Tk()
+    output_root.title("Console Output @ Temp_Cleaner GUI")
+    output_root.geometry('600x200')
+    output_root.minsize(600, 300)
+    output_root.resizable(True, True)
+    try:
+        output_root.iconbitmap('icon0.ico')
+    except Exception as excpt462:
+        print(f"\nUnable to load the icon file 'icon0.ico' due to the following exception : \n {excpt462}")
+    # Trying to change the theme.
+    try:
+        # Changing the root's theme.
+        output_root.style = ttk.Style()
+        output_root.style.theme_use("clam")
+    except Exception as excpt:
+       print(f"The following exception had occured while trying to apply the theme 'clam' \n {excpt}")
+    
+    # Creating a scrolledtext widget.
+    output_show = scrolledtext.ScrolledText(output_root, cursor='arrow', background='#282c34', foreground='white', selectbackground='orange', state='disabled', font=("Arial", 14))
+    output_show.pack(fill=BOTH, expand=1)
+
+    output_show.configure(state='normal')
+    output_show.delete(1.0, END)
+    output_show.insert(END, "The Temp_Cleaner GUI Project\nDebugging Console\n\n# The console output will appear here as soon as any process begins.")
+    output_show.insert(END, "\n")
+    output_show.configure(state='disabled')
+
+    # Calling the tk mainloop.
+    output_root.mainloop()
 
 # Defining the function that calls the configuration window of this program.
 def StartConfigurationWindow():
@@ -781,6 +816,6 @@ config_page_btn = ttk.Button(show_frame, text="Settings", command=StartConfigura
 config_page_btn.place(x=790 ,y=1670, relwidth=0.3, relheight=0.039)
 
 
-
+show_output()
 # Calling the mainloop of the Tkinter window root.
 root.mainloop()
