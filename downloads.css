@@ -362,7 +362,7 @@
     color: white;
     font-size: 18px;
     margin-left: 60px;
-    margin-top: 30px;
+    margin-top: 37px;
 }
 .server_support_table_link{
     color: rgb(0, 255, 255);
@@ -490,7 +490,12 @@
     color: white;
     display: block;
 }
-
+.ver_text_dev{
+    color: white;
+    font-size: 18px;
+    margin-left: 70px;
+    margin-top: 23px;
+}
 
 /* applying footer element configuration */
 footer{
