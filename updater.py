@@ -35,15 +35,17 @@ else: # if program is running as a python script via python terminal
 
 
 # a variable containing text file name and path.
-versionFilePath = f'{application_path}\\progver.txt'
-releaseNotesSaveFilePath = f'{application_path}\\releaseNotes.txt'
+# versionFilePath = f'{application_path}\\progver.txt'
+# releaseNotesSaveFilePath = f'{application_path}\\releaseNotes.txt'
 mrxTCGFilePath = "https://raw.githubusercontent.com/InsertX2k/software-versions/main/tcg.txt"
 releaseNotesFilePath = "https://raw.githubusercontent.com/InsertX2k/software-versions/main/release_notes_tcg.txt"
+downloadLink = "https://insertx2k.github.io/temp_cleaner_gui/downloads.html"
 
 # a variable containing a string of the current version.
 versionNumber = configparser.ConfigParser()
 versionNumber.read(f"{application_path}\\Config.ini")
-versionNumber = versionNumber['ProgConfig']['version']
+currentVersion = str(versionNumber['ProgConfig']['version'])
+print(f"[DEBUG]: Current version is:{currentVersion}")
 # ------------------------
 
 # opening a configparser session for reading from the file 'Config.ini'
@@ -69,114 +71,116 @@ def getCurrentLanguage(currentLanguageStr=GetConfig["ProgConfig"]["languagesetti
         messagebox.showerror("An ERROR has occured",f"Couldn't read from 'Config.ini'\nException details:\n{exception_reading_config_file}\nPress OK to close this program")
         return None
 # ------------------------
+def latestVersionNumber():
+    """
+    Gets the latest version number from server, then returns it.
 
-def downloadAndSaveVersionFile():
+    If it fails for some reason, it only returns None
     """
-    A function used to download and save the text file containing the latest version number.
-    """
-    global versionFilePath, mrxTCGFilePath
     try:
         with urllib.request.urlopen(mrxTCGFilePath) as file:
-            text = file.read().decode('utf-8')
+            text = file.read().decode('utf-8')[0:6].replace(' ', '').replace('\n', '')
+            return str(text)
     except Exception:
-        return False
+        print("[ERROR]: couldn't download from the server.")
+        return None
+# ------------------------
+# Attempting to get the latest version number.
 
-    try:
-        with open(versionFilePath, mode='w', encoding='utf-8') as saveFile:
-            saveFile.write(text)
-        saveFile.close()
-    except Exception:
-        return False
+# ------------------------
 
-    return None
+# def downloadAndSaveVersionFile():
+#     """
+#     A function used to download and save the text file containing the latest version number.
+#     """
+#     global versionFilePath, mrxTCGFilePath
+#     try:
+#         with urllib.request.urlopen(mrxTCGFilePath) as file:
+#             text = file.read().decode('utf-8')
+#     except Exception:
+#         return False
 
-def downloadAndSaveReleaseNotesFile():
-    """
-    A function used to download and save the text file containing the release notes.
-    """
-    global versionFilePath, mrxTCGFilePath, releaseNotesFilePath, releaseNotesSaveFilePath
+#     try:
+#         with open(versionFilePath, mode='w', encoding='utf-8') as saveFile:
+#             saveFile.write(text)
+#         saveFile.close()
+#     except Exception:
+#         return False
 
-    try:
-        with urllib.request.urlopen(releaseNotesFilePath) as file:
-            text = file.read().decode('utf-8')
-    except Exception:
-        return False
+#     return None
+
+# def downloadAndSaveReleaseNotesFile():
+#     """
+#     A function used to download and save the text file containing the release notes.
+#     """
+#     global versionFilePath, mrxTCGFilePath, releaseNotesFilePath, releaseNotesSaveFilePath
+
+#     try:
+#         with urllib.request.urlopen(releaseNotesFilePath) as file:
+#             text = file.read().decode('utf-8')
+#     except Exception:
+#         return False
     
-    try:
-        with open(releaseNotesSaveFilePath, mode='w', encoding='utf-8') as saveFile:
-            saveFile.write(text)
-        saveFile.close()
-    except Exception as savingDownloadedReleaseNotesFileError:
-        return False
-    return None
+#     try:
+#         with open(releaseNotesSaveFilePath, mode='w', encoding='utf-8') as saveFile:
+#             saveFile.write(text)
+#         saveFile.close()
+#     except Exception as savingDownloadedReleaseNotesFileError:
+#         return False
+#     return None
 
 
 def readVersion():
     """
-    Reads the version number from the downloaded text file, and compares it with the current version
+    Reads the version number from the variable text and compares it with the current version.
 
     If the current version is the latest one, it returns None
 
     If there is an update, it should return True
     """
-    global versionNumber
+    global versionNumber, latestVersionNumber, currentVersion
 
-    try:
-        with open(versionFilePath, mode='r', encoding='utf-8') as readFile:
-            version = str(readFile.read()[0:6]).replace(' ', '').replace('\n', '')
-            print(f"[DEBUG]: Current version in server is: {version}")
-    except Exception as readingFromDownloadedVersionFileError:
-        messagebox.showerror("Couldn't check for updates", f"Couldn't read from the downloaded version file 'progver.txt'\nDouble check that the file 'progver.txt' exists in the same directory as Temp_Cleaner GUI and try again\nMore details:\n{readingFromDownloadedVersionFileError}")
-        return False
-
-    if str(version) == versionNumber:
-        readFile.close()
-        # print("You are currently running the latest version of the program.")
-        return None
+    version = latestVersionNumber()
+    if version is not None:
+        if version == currentVersion:
+            # readFile.close()
+            print(f"[DEBUG]: Server version is : {str(version)}")
+            print("You are currently running the latest version of the program. from readVersion func")
+            return None
+        else:
+            # readFile.close()
+            print(f"[DEBUG]: Server version is : {str(version)}")
+            print("There is an update available. from readVersion func")
+            return True
     else:
-        readFile.close()
-        # print("There is an update available.")
-        return True
+        return None
 
 
-def getServerVersionNumber():
-    """
-    Reads the available version number from the file downloaded from Mr.X's Github server and returns it as a string.
-    """
-    try:
-        with open(versionFilePath, mode='r', encoding='utf-8') as readFile:
-            version = str(readFile.read()[0:6]).replace(' ', '').replace('\n', '')
-            print(f"[DEBUG]: current version in server is: {version}")
-        readFile.close()
-    except Exception as readingVersionNumberFromVersionFileError:
-        messagebox.showerror("couldn't read version file", f"Couldn't read the version number from the version file 'progver.txt'\nDouble check that the file 'progver.txt' exists in the same directory as Temp_Cleaner GUI and try again\nMore details:\n{readingVersionNumberFromVersionFileError}")
-        return False
-    
-    return version
 
 
-def readReleaseNotesFromFile():
-    """
-    Reads the release notes file and returns the text in it.
-    """
-    global versionFilePath, mrxTCGFilePath, releaseNotesFilePath, releaseNotesSaveFilePath
-    try:
-        with open(releaseNotesSaveFilePath, 'r', encoding='utf-8') as releaseNotesTextFile:
-            releaseNotesTextInMemory = releaseNotesTextFile.read()
-            releaseNotesTextFile.close()
-            return releaseNotesTextInMemory
-    except Exception as reading_release_notes_file_error:
-        messagebox.showerror("Runtime error", f"Couldn't read the release notes file due to the error:\n{reading_release_notes_file_error}\nThe program will close.")
-        return False
+# def readReleaseNotesFromFile():
+#     """
+#     Reads the release notes file and returns the text in it.
+#     """
+#     global mrxTCGFilePath, releaseNotesFilePath
+#     try:
+#         with open(releaseNotesSaveFilePath, 'r', encoding='utf-8') as releaseNotesTextFile:
+#             releaseNotesTextInMemory = releaseNotesTextFile.read()
+#             releaseNotesTextFile.close()
+#             return releaseNotesTextInMemory
+#     except Exception as reading_release_notes_file_error:
+#         messagebox.showerror("Runtime error", f"Couldn't read the release notes file due to the error:\n{reading_release_notes_file_error}\nThe program will close.")
+#         return False
 
 
 # class for updater program ui window.
 class updaterProgramUI(Toplevel):
     def __init__(self):
         super().__init__()
-        global versionNumber, application_path
+        global versionNumber, application_path, downloadLink, readVersion, latestVersionNumber, currentVersion
         deactivate_automatic_dpi_awareness() # deactivating automatic dpi awareness in updater program.
         self.title(getCurrentLanguage().updater_title)
+        self.attributes('-topmost',True)
         try: # attempt to load the icon bitmap for this window.
             self.iconbitmap(f"{application_path}\\updater.ico")
         except Exception as load_iconbitmap_error:
@@ -257,25 +261,25 @@ class updaterProgramUI(Toplevel):
             The function for "Don't Update" button.
             """
             self.destroy() # destroying window
-            try:
-                os.remove(f"{application_path}\\progver.txt")
-                os.remove(f"{application_path}\\releaseNotes.txt")
-            except Exception as exception_deleting_unneeded_downloads: # couldn't delete them.
-                messagebox.showerror("An error has occured", f"Couldn't delete the unnecessary files 'releaseNotes.txt' and 'progver.txt' due to a runtime error\nError details are:\n{exception_deleting_unneeded_downloads}\n\nIf you are a user and you see this message please create an issue on Temp_Cleaner GUI's official Github page and MAKE SURE to provide a screenshot of this messagebox\nPress OK to continue.")
+            # try:
+            #     os.remove(f"{application_path}\\progver.txt")
+            #     os.remove(f"{application_path}\\releaseNotes.txt")
+            # except Exception as exception_deleting_unneeded_downloads: # couldn't delete them.
+            #     messagebox.showerror("An error has occured", f"Couldn't delete the unnecessary files 'releaseNotes.txt' and 'progver.txt' due to a runtime error\nError details are:\n{exception_deleting_unneeded_downloads}\n\nIf you are a user and you see this message please create an issue on Temp_Cleaner GUI's official Github page and MAKE SURE to provide a screenshot of this messagebox\nPress OK to continue.")
             return None
         
         def openWebBrowserWindow():
             """
             Opens a new tab on your default browser that contains the official website for Temp_Cleaner GUI
             """
-            webbrowser.open_new("https://insertx2k.github.io/temp_cleaner_gui/downloads.html")
+            webbrowser.open_new(downloadLink)
             messagebox.showinfo(getCurrentLanguage().update_btn_updater, getCurrentLanguage().opened_webbrowser_dialog)
             self.destroy()
-            try:
-                os.remove(f"{application_path}\\progver.txt")
-                os.remove(f"{application_path}\\releaseNotes.txt")
-            except Exception as exception_deleting_unneeded_downloads: # couldn't delete them.
-                messagebox.showerror("An error has occured", f"Couldn't delete the unnecessary files 'releaseNotes.txt' and 'progver.txt' due to a runtime error\nError details are:\n{exception_deleting_unneeded_downloads}\n\nIf you are a user and you see this message please create an issue on Temp_Cleaner GUI's official Github page and MAKE SURE to provide a screenshot of this messagebox\nPress OK to continue.")
+            # try:
+            #     os.remove(f"{application_path}\\progver.txt")
+            #     os.remove(f"{application_path}\\releaseNotes.txt")
+            # except Exception as exception_deleting_unneeded_downloads: # couldn't delete them.
+            #     messagebox.showerror("An error has occured", f"Couldn't delete the unnecessary files 'releaseNotes.txt' and 'progver.txt' due to a runtime error\nError details are:\n{exception_deleting_unneeded_downloads}\n\nIf you are a user and you see this message please create an issue on Temp_Cleaner GUI's official Github page and MAKE SURE to provide a screenshot of this messagebox\nPress OK to continue.")
             return None
 
 
@@ -284,14 +288,27 @@ class updaterProgramUI(Toplevel):
             A function used to get the content of the release notes file and insert it into the scrolledtext.ScrolledText widget of the release notes.
             """
             self.release_notes_widget.configure(state='normal') # i want it to be editable.
-            if downloadAndSaveReleaseNotesFile() == False:
-                messagebox.showerror("Runtime exception", "Couldn't read from release notes file")
-                return False
-            else:
-                pass
+            # if downloadAndSaveReleaseNotesFile() == False:
+            #     messagebox.showerror("Runtime exception", "Couldn't read from release notes file")
+            #     return False
+            # else:
+            #     pass
             self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
-            self.release_notes_widget.insert(END, readReleaseNotesFromFile())
+            self.release_notes_widget.insert(END, getCurrentLanguage().checking_for_updates)
             self.release_notes_widget.configure(state='disabled')
+            try:
+                with urllib.request.urlopen(releaseNotesFilePath) as file:
+                    releaseNotesText = file.read().decode('utf-8')
+                    self.release_notes_widget.configure(state='normal')
+                    self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
+                    self.release_notes_widget.insert(END, releaseNotesText)
+                    self.release_notes_widget.configure(state='disabled')
+            except Exception:
+                self.release_notes_widget.configure(state='normal')
+                self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
+                self.release_notes_widget.insert(END, getCurrentLanguage().couldnt_download)
+                self.release_notes_widget.configure(state='disabled')
+            
             return None
 
         # a label for showing the updater icon
@@ -301,7 +318,7 @@ class updaterProgramUI(Toplevel):
         # other informative labels.
         self.lbl0 = Label(self, text=getCurrentLanguage().new_update_tcg, background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 14))
         self.lbl0.place(x=170, y=5)
-        self.lbl1 = Label(self, text=f"{getCurrentLanguage().new_version_is}{getServerVersionNumber()}{getCurrentLanguage().current_version_is}{versionNumber}", background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 9))
+        self.lbl1 = Label(self, text=f"{getCurrentLanguage().new_version_is}{latestVersionNumber()}{getCurrentLanguage().current_version_is}{currentVersion}", background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 9))
         self.lbl1.place(x=170, y=35)
         self.release_notes_widget = scrolledtext.ScrolledText(self, background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], selectbackground='blue', state='disabled', font=("Arial", 10))
         self.release_notes_widget.place(x=170, y=55, relwidth=0.7, relheight=0.63)
@@ -313,15 +330,20 @@ class updaterProgramUI(Toplevel):
         # Checking if there is an available update or not
         # if there is one, the window will continue to appear, otherwise, the window will close.
         if readVersion() == None:
+            self.attributes('-topmost',False)
             messagebox.showwarning(getCurrentLanguage().update_btn_updater, getCurrentLanguage().running_latest_version_dialog)
+            self.attributes('-topmost',True)
             self.destroy()
+            return # exiting program
         elif readVersion() == False:
             self.destroy()
+            return 
         else:
             pass
 
         if getReleaseNotes() == False:
             self.destroy()
+            return
         else:
             pass
 
@@ -331,22 +353,16 @@ class updaterProgramUI(Toplevel):
 
 
 if __name__ == '__main__': # if program wasn't imported as a Python 3.x.x Module file.
-    downloadAndSaveVersionFile()
-    downloadAndSaveReleaseNotesFile()
     if len(argv) == 1:
         print(f"[DEBUG]: sys.argv is: {argv}")
         # run the gui updater program normally, the program was executed with no arguments.
-        downloadAndSaveVersionFile()
-        downloadAndSaveReleaseNotesFile()
         guiProcess = updaterProgramUI()
         guiProcess.mainloop()
-        exit(0) # gui program ran very well.
+        raise SystemExit(0) # gui program ran very well.
     elif len(argv) == 2:
         if str(argv[1]) == "--silent":
             # don't inform user if program is on latest version, if it isn't, show the updater ui.
             try:
-                downloadAndSaveVersionFile()
-                downloadAndSaveReleaseNotesFile()
                 isThereAnyUpdatesAvailable = readVersion()
                 if isThereAnyUpdatesAvailable == True:
                     guiProcess = updaterProgramUI()
@@ -355,21 +371,19 @@ if __name__ == '__main__': # if program wasn't imported as a Python 3.x.x Module
                 else:
                     # there are no updates available, don't run gui program.
                     print(f"{Fore.GREEN}{Style.BRIGHT}[INFO]: you are running the latest version of the program, no need to update it.")
-                    exit(0) # exit code 0 means there is no update available.
+                    raise SystemExit(0) # exit code 0 means there is no update available.
             except Exception as reading_server_version_error:
                 print(f"{Fore.RED}{Style.BRIGHT}[ERROR]: couldn't download from Mr.X's github server due to an error\nerror details:\n{reading_server_version_error}")
-                exit(20) # exit code 20 is for errors downloading version text file.
-            exit(1111111111) # error code 1111111111 is for unhandled or unexpected statement end
+                raise SystemExit(20) # exit code 20 is for errors downloading version text file.
+            raise SystemExit(1111111111) # error code 1111111111 is for unhandled or unexpected statement end
         else:
             print(f"{Fore.RED}{Style.BRIGHT}[ERROR]: invalid argument: {str(argv[1])}, the only valid option is: --silent")
-            exit(2) # exit code 2 is for invalid argument.
+            raise SystemExit(2) # exit code 2 is for invalid argument.
     else:
         print(f"{Fore.YELLOW}{Style.BRIGHT}[WARNING]: one or more unnecessary command line arguments found\nother options will be ignored'")
         if str(argv[1]) == "--silent":
             # don't inform user if program is on latest version, if it isn't, show the updater ui.
             try:
-                downloadAndSaveVersionFile()
-                downloadAndSaveReleaseNotesFile()
                 isThereAnyUpdatesAvailable = readVersion()
                 if isThereAnyUpdatesAvailable == True:
                     guiProcess = updaterProgramUI()
@@ -378,13 +392,13 @@ if __name__ == '__main__': # if program wasn't imported as a Python 3.x.x Module
                 else:
                     # there are no updates available, don't run gui program.
                     print(f"{Fore.GREEN}{Style.BRIGHT}[INFO]: you are running the latest version of the program, no need to update it.")
-                    exit(0) # exit code 0 means there is no update available.
+                    raise SystemExit(0) # exit code 0 means there is no update available.
             except Exception as reading_server_version_error:
                 print(f"{Fore.RED}{Style.BRIGHT}[ERROR]: couldn't download from Mr.X's github server due to an error\nerror details:\n{reading_server_version_error}")
-                exit(20) # exit code 20 is for errors downloading version text file.
-            exit(1111111111) # error code 1111111111 is for unhandled or unexpected statement end
+                raise SystemExit(20) # exit code 20 is for errors downloading version text file.
+            raise SystemExit(1111111111) # error code 1111111111 is for unhandled or unexpected statement end
         else:
             print(f"{Fore.RED}{Style.BRIGHT}[ERROR]: invalid argument: {str(argv[1])}, the only valid option is: --silent")
-            exit(2) # exit code 2 is for invalid argument.
+            raise SystemExit(2) # exit code 2 is for invalid argument.
 
 

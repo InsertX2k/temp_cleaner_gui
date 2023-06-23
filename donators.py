@@ -69,7 +69,8 @@ class DonatorsWindow(Toplevel):
         self.wm_resizable(False, False) # instructing wm that window isn't resizable.
         # disabling HiDPi awareness (see <https://sourceforge.net/p/temp-cleaner-gui/tickets/1/>)
         deactivate_automatic_dpi_awareness()
-        set_appearance_mode("dark") # theme mode is always dark.
+        self.attributes('-topmost',True)
+        # set_appearance_mode("dark") # theme mode is always dark.
 
         try:
             self.iconbitmap(f"{application_path}\\donators.ico")
