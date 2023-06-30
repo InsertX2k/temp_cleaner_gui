@@ -136,7 +136,7 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Cleaning Progress"
-    about_window_txt = """Version: 6.7
+    about_window_txt = """Version: 6.7 (Update 1)
 Release Channel: dev
 Additional features installed:
 1-Arabic Language Pack v1.1
@@ -401,7 +401,7 @@ class ar:
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "تقدم التنظيف"
-    about_window_txt = """ الإصدار: 6.7
+    about_window_txt = """ (التحديث 1) الإصدار: 6.7
 قناة الإصدار : التطوير
 :المميزات الإضافية المفعلة
 1-Arabic Language Pack v1.1 (حزمة اللغة العربية v1.1)

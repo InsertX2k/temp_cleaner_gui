@@ -86,7 +86,7 @@ def latestVersionNumber():
         return None
 # ------------------------
 # Attempting to get the latest version number.
-
+latestVerNum = latestVersionNumber()
 # ------------------------
 
 # def downloadAndSaveVersionFile():
@@ -287,22 +287,28 @@ class updaterProgramUI(Toplevel):
             """
             A function used to get the content of the release notes file and insert it into the scrolledtext.ScrolledText widget of the release notes.
             """
-            self.release_notes_widget.configure(state='normal') # i want it to be editable.
             # if downloadAndSaveReleaseNotesFile() == False:
             #     messagebox.showerror("Runtime exception", "Couldn't read from release notes file")
             #     return False
             # else:
             #     pass
-            self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
-            self.release_notes_widget.insert(END, getCurrentLanguage().checking_for_updates)
-            self.release_notes_widget.configure(state='disabled')
+            try:
+                self.release_notes_widget.configure(state='normal') # i want it to be editable.
+                self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
+                self.release_notes_widget.insert(END, getCurrentLanguage().checking_for_updates)
+                self.release_notes_widget.configure(state='disabled')
+            except:
+                pass
             try:
                 with urllib.request.urlopen(releaseNotesFilePath) as file:
                     releaseNotesText = file.read().decode('utf-8')
-                    self.release_notes_widget.configure(state='normal')
-                    self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
-                    self.release_notes_widget.insert(END, releaseNotesText)
-                    self.release_notes_widget.configure(state='disabled')
+                    try:
+                        self.release_notes_widget.configure(state='normal')
+                        self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
+                        self.release_notes_widget.insert(END, releaseNotesText)
+                        self.release_notes_widget.configure(state='disabled')
+                    except:
+                        pass
             except Exception:
                 self.release_notes_widget.configure(state='normal')
                 self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
@@ -318,7 +324,7 @@ class updaterProgramUI(Toplevel):
         # other informative labels.
         self.lbl0 = Label(self, text=getCurrentLanguage().new_update_tcg, background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 14))
         self.lbl0.place(x=170, y=5)
-        self.lbl1 = Label(self, text=f"{getCurrentLanguage().new_version_is}{latestVersionNumber()}{getCurrentLanguage().current_version_is}{currentVersion}", background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 9))
+        self.lbl1 = Label(self, text=f"{getCurrentLanguage().new_version_is}{latestVerNum}{getCurrentLanguage().current_version_is}{currentVersion}", background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 9))
         self.lbl1.place(x=170, y=35)
         self.release_notes_widget = scrolledtext.ScrolledText(self, background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], selectbackground='blue', state='disabled', font=("Arial", 10))
         self.release_notes_widget.place(x=170, y=55, relwidth=0.7, relheight=0.63)

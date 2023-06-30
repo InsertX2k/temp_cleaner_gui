@@ -56,7 +56,6 @@ import configparser
 from tkinter import filedialog
 from tkinter import scrolledtext
 import subprocess
-from subprocess import PIPE
 import awesometkinter as atk
 import sys
 import threading
@@ -65,7 +64,6 @@ from customtkinter import *
 import webbrowser
 import updater
 import ctypes
-import win32api
 import donators
 import psutil
 
@@ -515,9 +513,9 @@ class MainWindowLightMode(CTk):
                     self.output_show.configure(state='normal')
                     self.output_show.insert(END, f"\n{getCurrentLanguage().msedge_msstore_webcache_text}\n {self.process}")
                     self.output_show.configure(state='disabled')
-                    messagebox.showinfo(getCurrentLanguage().clean_ms_store_based_edge_cache_window_title, getCurrentLanguage().done_text)
+                    # messagebox.showinfo(getCurrentLanguage().clean_ms_store_based_edge_cache_window_title, getCurrentLanguage().done_text)
                 else:
-                    messagebox.showinfo(getCurrentLanguage().clean_ms_store_based_edge_cache_window_title, getCurrentLanguage().operation_interrupted_by_user)
+                    pass
             self.selection25 = self.var23.get()
             if self.selection25 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Microsoft\\Windows\\Explorer\\ThumbCacheToDelete"')
@@ -616,24 +614,17 @@ class MainWindowLightMode(CTk):
                 self.output_show.configure(state='disabled')
             self.selection34 = self.var32.get()
             if self.selection34 == '1':
-                self.conf2 = messagebox.askquestion(getCurrentLanguage().erase_rammap_title, getCurrentLanguage().erase_rammap_content)
-                if self.conf2 == "yes":
-                    self.RAMMAPpath_var = GetConfig['ProgConfig']['RAMMapPath']
-                    if self.RAMMAPpath_var == '$DEFAULT':
-                        messagebox.showinfo(getCurrentLanguage().default_path_msgbox_title, getCurrentLanguage().default_path_rammap)
-                        self.process = subprocess.getoutput(r'"%systemdrive%\RAMMap\RAMMap.exe" -Ew')
-                        self.output_show.configure(state='normal')
-                        self.output_show.insert(END, f"\n{getCurrentLanguage().empty_running_workingsets_rammap_text}\n {self.process}")
-                        self.output_show.configure(state='disabled')
-                        messagebox.showinfo(getCurrentLanguage().erase_rammap_title, getCurrentLanguage().commandsent_to_rammap_text)
-                    else:
-                        self.process = subprocess.getoutput(rf'""{self.RAMMAPpath_var}"\RAMMap.exe" -Ew')
-                        self.output_show.configure(state='normal')
-                        self.output_show.insert(END, f"\n{getCurrentLanguage().empty_running_workingsets_rammap_text}\n {self.process}")
-                        self.output_show.configure(state='disabled')
-                        messagebox.showinfo(getCurrentLanguage().erase_rammap_title, getCurrentLanguage().commandsent_to_rammap_text)
+                self.RAMMAPpath_var = GetConfig['ProgConfig']['RAMMapPath']
+                if self.RAMMAPpath_var == '$DEFAULT':
+                    self.process = subprocess.getoutput(r'"%systemdrive%\RAMMap\RAMMap.exe" -Ew')
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().empty_running_workingsets_rammap_text}\n{getCurrentLanguage().default_path_rammap}\n{self.process}\n\n{getCurrentLanguage().commandsent_to_rammap_text}")
+                    self.output_show.configure(state='disabled')
                 else:
-                    messagebox.showinfo(getCurrentLanguage().erase_rammap_title, getCurrentLanguage().operation_interrupted_by_user)
+                    self.process = subprocess.getoutput(rf'""{self.RAMMAPpath_var}"\RAMMap.exe" -Ew')
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().empty_running_workingsets_rammap_text}\n {self.process}\n\n{getCurrentLanguage().commandsent_to_rammap_text}")
+                    self.output_show.configure(state='disabled')
             self.selection35 = self.var33.get()
             if self.selection35 == '1':
                 self.process = subprocess.getoutput('del /s /q "%localappdata%\\Google\\Chrome\\User Data\\Default\\Extension Cookies"&del /s /q "%localappdata%\\Google\\Chrome\\User Data\\Default\\Extension Cookies-journal"')
@@ -668,10 +659,9 @@ class MainWindowLightMode(CTk):
             if self.selection36 == '1':
                 self.CDPCCPATH_var = GetConfig['ProgConfig']['CDPCCPATH']
                 if self.CDPCCPATH_var == '$DEFAULT':
-                    messagebox.showinfo(getCurrentLanguage().default_path_msgbox_title, getCurrentLanguage().default_path_winactivities_cache_text)
                     self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\ConnectedDevicesPlatform\\*"')
                     self.output_show.configure(state='normal')
-                    self.output_show.insert(END, f"\n{getCurrentLanguage().connecteddevicesplatform_cache_text}\n {self.process}")
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().connecteddevicesplatform_cache_text}\n{getCurrentLanguage().default_path_winactivities_cache_text}\n{self.process}")
                     self.output_show.configure(state='disabled')
                 else:
                     self.process = subprocess.getoutput(rf' cd /d "%localappdata%\\ConnectedDevicesPlatform"&erase /s /f /q "{self.CDPCCPATH_var}"')
@@ -699,10 +689,9 @@ class MainWindowLightMode(CTk):
             if self.selection39 == '1':
                 self.ADWCLRPATH_var = GetConfig['ProgConfig']['ADWCLRPath']
                 if self.ADWCLRPATH_var == '$DEFAULT':
-                    messagebox.showinfo(getCurrentLanguage().default_path_msgbox_title, getCurrentLanguage().nocustom_path_foradwcleaner_text)
                     self.process = subprocess.getoutput(' erase /s /f /q "%systemdrive%\\AdwCleaner\\Logs"')
                     self.output_show.configure(state='normal')
-                    self.output_show.insert(END, f"\n{getCurrentLanguage().malwarebytes_adware_cleaner_text}\n {self.process}")
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().malwarebytes_adware_cleaner_text}\n{getCurrentLanguage().nocustom_path_foradwcleaner_text}\n {self.process}")
                     self.output_show.configure(state='disabled')
                 else:
                     self.process = subprocess.getoutput(rf' erase /s /f /q "{self.ADWCLRPATH_var}\Logs"')
@@ -830,14 +819,14 @@ class MainWindowLightMode(CTk):
             if self.selection57 == '1':
                 self.WINXPEPATH_var = GetConfig['ProgConfig']['WINXPEPATH']
                 if self.WINXPEPATH_var == "$NONE":
-                    messagebox.showinfo(getCurrentLanguage().an_error_has_occured_text, getCurrentLanguage().no_path_winxpe_text)
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, getCurrentLanguage().no_path_winxpe_text)
+                    self.output_show.configure(state='disabled')
                 else:
                     self.process = subprocess.getoutput(rf' erase /s /f /q "{self.WINXPEPATH_var}\Temp"')
                     self.output_show.configure(state='normal')
-                    self.output_show.insert(END, f"\n{getCurrentLanguage().winxpe_creator_downloadsdir_text}\n {self.process}")
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().winxpe_creator_downloadsdir_text}\n{getCurrentLanguage().winxpe_after_clean_note_text}\n{self.process}")
                     self.output_show.configure(state='disabled')
-                    messagebox.showinfo(getCurrentLanguage().note_text, getCurrentLanguage().winxpe_after_clean_note_text)
-                    
             self.selection58 = self.var56.get()
             if self.selection58 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\ServiceHub"')
@@ -941,9 +930,9 @@ class MainWindowLightMode(CTk):
             if self.selection69 == '1':
                 self.output_show.configure(state='normal')
                 self.output_show.insert(END, f"\n{getCurrentLanguage().windows_log_files}\n{getCurrentLanguage().attempting_to_take_folder_ownership}\n")
+                self.output_show.configure(state='disabled')
                 self.process = subprocess.getoutput('takeown /F "%windir%\Logs" /A /R /D Y&icacls "%windir%\Logs" /grant *S-1-5-32-544:F /T /C /Q')
                 # self.output_show.insert(END, f"\n{self.process}\n")
-                self.output_show.configure(state='disabled')
                 self.process = subprocess.getoutput('erase /s /f /q "%windir%\\Logs"')
                 self.output_show.configure(state='normal')
                 self.output_show.insert(END, f"\n {self.process}")
@@ -983,14 +972,8 @@ class MainWindowLightMode(CTk):
                     systemdrive = os.getenv("systemdrive")
                     listdirs = os.listdir(systemdrive)
                     for dir in listdirs:
-                        if "Windows.old" in dir:
+                        if "Windows.old".upper() in dir.upper():
                             winold_names.append(dir)
-                        elif "windows.old" in dir:
-                            winold_names.append(dir)
-                        elif "Windows.Old" in dir:
-                            winold_names.append(dir)
-                        else:
-                            pass
                     for winolddir in winold_names:
                         self.process = subprocess.getoutput(f'takeown /F "%systemdrive%\\{winolddir}" /A /R /D Y&icacls "%systemdrive%\\{winolddir}" /grant *S-1-5-32-544:F /T /C /Q')
                         self.output_show.configure(state='normal')
@@ -1641,7 +1624,7 @@ class MainWindowLightMode(CTk):
                 else: # auto check for updates is disabled
                     return None
             except Exception as readingFromConfigFileError:
-                messagebox.showerror(f"{getCurrentLanguage().cant_read_config_frominside_file_msgbox_title}", f"{getCurrentLanguage().cant_read_config_frominside_file_msgbox_content}")
+                # messagebox.showerror(f"{getCurrentLanguage().cant_read_config_frominside_file_msgbox_title}", f"{getCurrentLanguage().cant_read_config_frominside_file_msgbox_content}")
                 return False
 
 
