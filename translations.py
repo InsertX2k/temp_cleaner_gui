@@ -136,8 +136,8 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Cleaning Progress"
-    about_window_txt = """Version: 6.7 (Update 1)
-Release Channel: dev
+    about_window_txt = """Version: 6.8
+Release Channel: stable
 Additional features installed:
 1-Arabic Language Pack v1.1
 2-Minimal Accessibility Pack v1.0
@@ -155,7 +155,7 @@ You can also press 'F2' to show you a message box containing useful information 
 You can press 'F1' to show you some help about using Minimal Accessibility Pack v1.0 or about increasing or decreasing screen font size.
 """
 
-    about_window_title = "About 'The Temp_Cleaner GUI Project (v6.7)'"
+    about_window_title = "About 'The Temp_Cleaner GUI Project (v6.8)'"
     cant_retrieve_config_fromfile_msgbox_content = "Unable to retrieve the configuration information, this can be due to a catastrophic failure, or a something else, the settings window will close."
     cant_retrieve_config_fromfile_msgbox_title = "Runtime Exception"
     cant_read_config_frominside_file_msgbox_title = "A runtime exception"
@@ -165,9 +165,9 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     done_reboot_for_changes_to_apply_text = "All changes you did has been successfully saved, but for the changes to take effect, you will need to restart Temp_Cleaner GUI."
     changes_saved_text = "Saved your changes"
     unable_to_save_your_changes_text = "Unable to save your changes to the file 'Config.ini', Nothing has been changed yet, and this window will not close."
-    prog_title_no_username = "Welcome to Temp_Cleaner GUI v6.7!"
+    prog_title_no_username = "Welcome to Temp_Cleaner GUI v6.8!"
     prog_title_1 = "Welcome "
-    prog_title_2 = " to Temp_Cleaner GUI v6.7!"
+    prog_title_2 = " to Temp_Cleaner GUI v6.8!"
     settings_window_title = "Temp_Cleaner GUI Settings"
     settings_hint_one = "Change the way Temp_Cleaner GUI behaves"
     rammap_path_settings_hint = "RAMMap Executable Path:"
@@ -258,6 +258,13 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     opera_browser_cookies = "Opera Web Browser Cookies"
     opera_browser_history = "Opera Web Browser History"
     opera_browser_caches = "Opera Web Browser Cache"
+    startup_tips_hint = "Startup Tips (Tip of The Day) Settings"
+    show_startup_tips = "Show Tips at startup (Tip of the day)"
+    tips = "Tips"
+    tips_folder_missing = "Couldn't read the 'tips' folder\nProbably it got deleted by other utilities or your antivirus software blocked Temp_Cleaner GUI from accessing it\nError details are:"
+    tips_next = "Another Tip"
+    tip_of_the_day = "Tip of the Day"
+    error_unsupported_lang_in_tips = "Unsupported language in Tips window\nPress OK to close this window."
 
 
 class ar:
@@ -401,8 +408,8 @@ class ar:
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "تقدم التنظيف"
-    about_window_txt = """ (التحديث 1) الإصدار: 6.7
-قناة الإصدار : التطوير
+    about_window_txt = """ الإصدار: 6.8
+قناة الإصدار : مستقرة
 :المميزات الإضافية المفعلة
 1-Arabic Language Pack v1.1 (حزمة اللغة العربية v1.1)
 2-Minimal Accessibility Pack v1.0 (حزمة إمكانية الوصول الادني)
@@ -420,7 +427,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
 لإظهار معلومات عن كيفية إستخدام حزمة امكانية الوصول او كيفية تكبير وتصغير الكتابه في الشاشة 'F1' يمكنك الضغط علي زر   
 """
 
-    about_window_title = "حول 'The Temp_Cleaner GUI Project (v6.7)'"
+    about_window_title = "حول 'The Temp_Cleaner GUI Project (v6.8)'"
     cant_retrieve_config_fromfile_msgbox_content = "خطأ في الحصول علي المعلومات من الضبط، هذا قد يكون بسبب خطأ كارثي او شئ اخر، شاشة الضبط سوف تغلق"
     cant_retrieve_config_fromfile_msgbox_title = "حدث خطأ في وقت التشغيل"
     cant_read_config_frominside_file_msgbox_title = "حدث خطأ في وقت التشغيل"
@@ -432,7 +439,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     unable_to_save_your_changes_text = "لم يتغير اي شئ حتي الان، وهذه النافذة لن تغلق ،'Config.ini' فشل في حفظ التغييرات في ملف "
     prog_title_no_username = "Temp_Cleaner GUI! اهلا بك في برنامج"
     prog_title_1 = " مرحبا"
-    prog_title_2 = " Temp_Cleaner GUI v6.7 في "
+    prog_title_2 = " Temp_Cleaner GUI v6.8 في "
     settings_window_title = "Temp_Cleaner GUI ضبط"
     settings_hint_one = "Temp_Cleaner GUI قم بتغيير الطريقة التي يتصرف بها "
     rammap_path_settings_hint = "Sysinternals من RAMMap ماهو مسار الملف التنفيذي لبرنامج :"
@@ -523,3 +530,10 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     opera_browser_cookies = "ﺍﺮﻴﺑﻭﺍ ﺢﻔﺼﺘﻣ ﺕﺎﻜﻌﻛ"
     opera_browser_history = "ﺍﺮﻴﺑﻭﺍ ﺢﻔﺼﺘﻣ ﺢﻔﺼﺗ ﺕﻼﺠﺳ"
     opera_browser_caches = "ﺔﺘﻗﺆﻤﻟﺍ ﺍﺮﻴﺑﻭﺍ ﺢﻔﺼﺘﻣ ﺕﺎﻔﻠﻣ"
+    startup_tips_hint = "نصيحة وقت البداية (نصيحة اليوم)"
+    show_startup_tips = " ﺞﻣﺎﻧﺮﺒﻟﺍ ﻞﻴﻐﺸﺗ ﺀﺪﺑ ﺪﻨﻋ ﺢﺋﺎﺼﻧ ﻲﻟ ﺮﻬﻇﺃ"
+    tips = "نصائح"
+    tips_folder_missing = "فشل في قراءة مجلد النصائح، ربما قد تم حذفه بواسطة برنامج خارجي او ان برنامج مضاد الفيروسات الخاص بك قد منع هذا البرنامج من الوصول إليه\nتفاصيل الخطأ"
+    tips_next = "ﻱﺮﺧﺃ ﺔﺤﻴﺼﻧ"
+    tip_of_the_day = "ﻡﻮﻴﻟﺍ ﺔﺤﻴﺼﻧ"
+    error_unsupported_lang_in_tips = "لغة غير مدعومة في شاشة النصائح اليومية\nبرجاء الضغط علي زر الخروج لإغلاق النافذة"
