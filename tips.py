@@ -16,7 +16,12 @@ from customtkinter import *
 from translations import *
 import sys
 import os
-from tkinterweb import HtmlFrame
+try:    
+    from tkinterweb import HtmlFrame
+except Exception as errorImportingTkWebLib:
+    print(f"[ERROR]: Couldn't import Tkinterweb\n{errorImportingTkWebLib}")
+    messagebox.showerror("Unhandled runtime exception", f"Couldn't load TkWeb library necessary for displaying tips to the user\nError details are:\n{errorImportingTkWebLib}\n\nPressing OK will make the program continue to function despite this error.")
+    pass
 import random
 
 # initializing a variable containing the path where program executable is stored.
@@ -31,12 +36,16 @@ if getattr(sys, 'frozen', False):
 else: # if program is running as a python script via python terminal
     application_path = os.path.dirname(os.path.abspath(__file__))
 
-print(f"{application_path}")
+print(f"[DEBUG]: Tips module located at: {application_path}")
 
-# opening a configparser session for reading from the file 'Config.ini'
-GetConfig = configparser.ConfigParser()
-GetConfig.read(f"{application_path}\\Config.ini")
-# ------------------------
+try:
+    # opening a configparser session for reading from the file 'Config.ini'
+    GetConfig = configparser.ConfigParser()
+    GetConfig.read(f"{application_path}\\Config.ini")
+    # ------------------------
+except Exception as errorReadingConfigFile:
+    messagebox.showerror("Runtime error", f"It seems like one of the necessary files to make Temp_Cleaner GUI work are missing, double check that the file 'Config.ini' exists in the directory where this program exists and try again\n\nError details for technical support:\n{errorReadingConfigFile}")
+    raise SystemExit(255)
 
 # attempts to get the current language for the ui mode of the updater program.
 def getCurrentLanguage(currentLanguageStr=GetConfig["ProgConfig"]["languagesetting"]):
@@ -148,7 +157,10 @@ class TipsWindow(Toplevel):
 
             Parameters: link -> the target url of the link the user presses
             """
-            self.tipswebview.load_url(f"file:///{tips_folder_path}\\{str(link).replace('file:///', '')}")
+            try:
+                self.tipswebview.load_url(f"file:///{tips_folder_path}\\{str(link).replace('file:///', '')}")
+            except:
+                pass
             return None
         
         
@@ -177,7 +189,10 @@ class TipsWindow(Toplevel):
                 self.destroy()
                 return False
             tipfile_chosen = random.choice(tips_files)
-            self.tipswebview.load_url(f"file:///{tips_folder_path}\\{tipfile_chosen}")
+            try:
+                self.tipswebview.load_url(f"file:///{tips_folder_path}\\{tipfile_chosen}")
+            except:
+                self.destroy()
             return None
 
         # frame for web view widget.
@@ -188,10 +203,17 @@ class TipsWindow(Toplevel):
 
 
         # webview widget declaration.
-        self.tipswebview = HtmlFrame(self.viewframe)
-        self.tipswebview.pack(fill=BOTH, expand=True)
-        self.tipswebview.on_link_click(tipsLinkClicked)
-        openRandomTip()
+        try:
+            self.tipswebview = HtmlFrame(self.viewframe)
+            self.tipswebview.pack(fill=BOTH, expand=True)
+            self.tipswebview.on_link_click(tipsLinkClicked)
+        except Exception as errorDeclaringWebViewWidget:
+            messagebox.showerror("Runtime Error", f"Couldn't display the webview widget that displays tips for you because of the error:\n{errorDeclaringWebViewWidget}\n\nPressing OK will close the tips window")
+            self.destroy()
+        try:
+            openRandomTip()
+        except:
+            self.destroy()
 
 
 

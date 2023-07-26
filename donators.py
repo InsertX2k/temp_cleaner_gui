@@ -33,10 +33,13 @@ else: # if program is running as a python script via python terminal
 donators_list_mrx_server = "https://raw.githubusercontent.com/InsertX2k/software-versions/main/donators.txt"
 donators_list_file_local_path = f"{application_path}\\donators.txt"
 
-
-# Defining the function that will get the current values of an configparser values.
-GetConfig = configparser.ConfigParser()
-GetConfig.read(f'{application_path}\\Config.ini')
+try:
+    # Defining the function that will get the current values of an configparser values.
+    GetConfig = configparser.ConfigParser()
+    GetConfig.read(f'{application_path}\\Config.ini')
+except Exception as _errorReadingCFGParser:
+    print(f"[ERROR]: from donators module: couldn't load from configparser:error details are\n{_errorReadingCFGParser}")
+    raise SystemExit(255)
 
 def getCurrentLanguage(CurrentLanguageStr=GetConfig['ProgConfig']['languagesetting']):
     """

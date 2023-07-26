@@ -15,9 +15,14 @@ from translations import *
 from PIL import ImageTk, Image
 import webbrowser
 import os
+import threading
 
-# initializing colorama
-init(autoreset=True)
+try:
+    # initializing colorama
+    init(autoreset=True)
+except Exception as _errorColoramaInit:
+    print(f"[ERROR]: updater module: failed to initialize colorama:{_errorColoramaInit}")
+    pass
 
 
 
@@ -41,17 +46,28 @@ mrxTCGFilePath = "https://raw.githubusercontent.com/InsertX2k/software-versions/
 releaseNotesFilePath = "https://raw.githubusercontent.com/InsertX2k/software-versions/main/release_notes_tcg.txt"
 downloadLink = "https://insertx2k.github.io/temp_cleaner_gui/downloads.html"
 
-# a variable containing a string of the current version.
-versionNumber = configparser.ConfigParser()
-versionNumber.read(f"{application_path}\\Config.ini")
-currentVersion = str(versionNumber['ProgConfig']['version'])
-print(f"[DEBUG]: Current version is:{currentVersion}")
-# ------------------------
 
-# opening a configparser session for reading from the file 'Config.ini'
-GetConfig = configparser.ConfigParser()
-GetConfig.read(f"{application_path}\\Config.ini")
+# a global variable for return values of multithreaded functions.
+_RetVal = None
+
+
+try:
+    # a variable containing a string of the current version.
+    versionNumber = configparser.ConfigParser()
+    versionNumber.read(f"{application_path}\\Config.ini")
+    currentVersion = str(versionNumber['ProgConfig']['version'])
+    print(f"[DEBUG]: Current version is:{currentVersion}")
+except Exception as _errorReadingFromCFGFile:
+    print(f"[ERROR]: updater module: Couldn't read from Config.ini due to this error:\n{_errorReadingFromCFGFile}")
 # ------------------------
+try:
+    # opening a configparser session for reading from the file 'Config.ini'
+    GetConfig = configparser.ConfigParser()
+    GetConfig.read(f"{application_path}\\Config.ini")
+    # ------------------------
+except Exception as _errorReadingCFGParser:
+    print(f"[ERROR]: updater module: couldn't read from Config.ini file\nerror details are:\n{_errorReadingCFGParser}")
+    raise SystemExit(255)
 
 # attempts to get the current language for the ui mode of the updater program.
 def getCurrentLanguage(currentLanguageStr=GetConfig["ProgConfig"]["languagesetting"]):
@@ -73,20 +89,33 @@ def getCurrentLanguage(currentLanguageStr=GetConfig["ProgConfig"]["languagesetti
 # ------------------------
 def latestVersionNumber():
     """
-    Gets the latest version number from server, then returns it.
+    Gets the latest version number from server, then returns it. (with a timeout of 25 seconds)
 
     If it fails for some reason, it only returns None
     """
+    global _RetVal
     try:
-        with urllib.request.urlopen(mrxTCGFilePath) as file:
+        with urllib.request.urlopen(mrxTCGFilePath, timeout=25) as file:
             text = file.read().decode('utf-8')[0:6].replace(' ', '').replace('\n', '')
+            _RetVal = text
             return str(text)
     except Exception:
         print("[ERROR]: couldn't download from the server.")
+        _RetVal = None
         return None
 # ------------------------
 # Attempting to get the latest version number.
-latestVerNum = latestVersionNumber()
+# threading.Thread(target=latestVersionNumber).start()
+# latestVerNum = None
+# def multiThreadedlatestVer3Up7():
+#     """
+#     A function for updating the global variable `latestVerNum` using multithreading to avoid long time imports
+#     """
+#     global latestVerNum
+#     latestVerNum = latestVersionNumber()
+
+# threading.Thread(target=latestVerNum).start()
+
 # ------------------------
 
 # def downloadAndSaveVersionFile():
@@ -138,7 +167,7 @@ def readVersion():
 
     If there is an update, it should return True
     """
-    global versionNumber, latestVersionNumber, currentVersion
+    global versionNumber, latestVersionNumber, currentVersion, _RetVal
 
     version = latestVersionNumber()
     if version is not None:
@@ -176,8 +205,16 @@ def readVersion():
 # class for updater program ui window.
 class updaterProgramUI(Toplevel):
     def __init__(self):
-        super().__init__()
         global versionNumber, application_path, downloadLink, readVersion, latestVersionNumber, currentVersion
+        # a variable containing the latest version number from the server.
+        _SrvrVerNum = latestVersionNumber()
+        # a simple check cuz if it is None the window should close.
+        if _SrvrVerNum == None:
+            # messagebox.showerror(getCurrentLanguage().updater_title, getCurrentLanguage().couldnt_download)
+            self.destroy()
+        else:
+            pass
+        super().__init__()
         deactivate_automatic_dpi_awareness() # deactivating automatic dpi awareness in updater program.
         self.title(getCurrentLanguage().updater_title)
         self.attributes('-topmost',True)
@@ -186,6 +223,7 @@ class updaterProgramUI(Toplevel):
         except Exception as load_iconbitmap_error:
             messagebox.showerror("Runtime error", f"Couldn't load iconbitmap for this window due to the following error\n{load_iconbitmap_error}\nThe window will continue to appear but without an icon bitmap")
             pass
+        
         
         
         # trying to load the style.json file to apply customtkinter styles.
@@ -246,10 +284,10 @@ class updaterProgramUI(Toplevel):
         try:
             if str(GetConfig["ProgConfig"]['appearancemode']) == '2': # dark mode ui  
                 # loading the 'updater.png' file in memory.
-                self.updaterLoader = Image.open(f"{application_path}\\updater_dark.png").resize((image_width,image_height), Image.ANTIALIAS)
+                self.updaterLoader = Image.open(f"{application_path}\\updater_dark.png").resize((image_width,image_height), Image.LANCZOS)
                 self.updaterLoader = ImageTk.PhotoImage(self.updaterLoader)
             else: # light mode ui
-                self.updaterLoader = Image.open(f"{application_path}\\updater.png").resize((image_width,image_height), Image.ANTIALIAS)
+                self.updaterLoader = Image.open(f"{application_path}\\updater.png").resize((image_width,image_height), Image.LANCZOS)
                 self.updaterLoader = ImageTk.PhotoImage(self.updaterLoader)
         except Exception as loading_updater_logo_error:
             messagebox.showerror("Runtime error", f"Couldn't load the updater logo due to the following error\n{loading_updater_logo_error}\nThe program will close.")
@@ -286,6 +324,8 @@ class updaterProgramUI(Toplevel):
         def getReleaseNotes():
             """
             A function used to get the content of the release notes file and insert it into the scrolledtext.ScrolledText widget of the release notes.
+
+            the timeout for the download packet sent is 25 seconds.
             """
             # if downloadAndSaveReleaseNotesFile() == False:
             #     messagebox.showerror("Runtime exception", "Couldn't read from release notes file")
@@ -300,7 +340,7 @@ class updaterProgramUI(Toplevel):
             except:
                 pass
             try:
-                with urllib.request.urlopen(releaseNotesFilePath) as file:
+                with urllib.request.urlopen(releaseNotesFilePath, timeout=25) as file:
                     releaseNotesText = file.read().decode('utf-8')
                     try:
                         self.release_notes_widget.configure(state='normal')
@@ -316,6 +356,8 @@ class updaterProgramUI(Toplevel):
                 self.release_notes_widget.configure(state='disabled')
             
             return None
+        
+
 
         # a label for showing the updater icon
         self.updaterIcon = Label(self, text='', background=getCurrentAppearanceMode()[0], image=self.updaterLoader)
@@ -324,7 +366,7 @@ class updaterProgramUI(Toplevel):
         # other informative labels.
         self.lbl0 = Label(self, text=getCurrentLanguage().new_update_tcg, background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 14))
         self.lbl0.place(x=170, y=5)
-        self.lbl1 = Label(self, text=f"{getCurrentLanguage().new_version_is}{latestVerNum}{getCurrentLanguage().current_version_is}{currentVersion}", background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 9))
+        self.lbl1 = Label(self, text=f"{getCurrentLanguage().new_version_is}{_SrvrVerNum}{getCurrentLanguage().current_version_is}{currentVersion}", background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], font=("Arial", 9))
         self.lbl1.place(x=170, y=35)
         self.release_notes_widget = scrolledtext.ScrolledText(self, background=getCurrentAppearanceMode()[0], foreground=getCurrentAppearanceMode()[1], selectbackground='blue', state='disabled', font=("Arial", 10))
         self.release_notes_widget.place(x=170, y=55, relwidth=0.7, relheight=0.63)
@@ -347,11 +389,13 @@ class updaterProgramUI(Toplevel):
         else:
             pass
 
-        if getReleaseNotes() == False:
-            self.destroy()
-            return
-        else:
-            pass
+        # if getReleaseNotes() == False:
+        #     self.destroy()
+        #     return
+        # else:
+        #     pass
+        # updating release notes.
+        threading.Thread(target=getReleaseNotes).start()
 
 
 # ----------------------
