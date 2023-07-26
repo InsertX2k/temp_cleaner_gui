@@ -519,7 +519,21 @@ footer{
 .link0:hover{
     text-decoration: underline;
 }
-
+.warnbanner{
+    background-color: orangered;
+    width: 100%;
+    height: fit-content;
+}
+.warnbanner p{
+    color: white;
+    font-size: 16px;
+}
+.warnbanner ul{
+    color: white;
+}
+.warnbanner li{
+    color: white;
+}
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;
