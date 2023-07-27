@@ -1,0 +1,541 @@
+/*Defining the background image properties*/
+.bdy{
+    background-color: #212121;
+}
+.table-header{
+    font-size: xx-large;
+}
+/*Somewhat configuring the main header properties*/
+.main-header{
+    border-color: whitesmoke;
+    border-style: hidden;
+    border-color: rgb(0, 173, 173);
+}
+
+.col1{
+    width: 8%;
+    height: 3%;
+}
+.col2{
+    width: 8%;
+    height: 3%;
+}
+.col3{
+    width: 8%;
+    height: 3%;
+}
+
+.col2{
+    text-align: center;
+    cursor: pointer;
+}
+.col1{
+    text-align: center;
+    cursor: pointer;
+}
+.col3{
+    text-align: center;
+    cursor: pointer;
+}
+
+
+/* Somewhat configuring the style of the main-header's navigation buttons. */
+/* Let's remove the decoration of it*/
+.homeword0{
+    text-decoration: none;
+    cursor: pointer;
+}
+.homelinkword0{
+    text-decoration: none;
+    cursor: pointer;
+}
+.downloadslinkword0{
+    text-decoration: overline;
+    cursor: pointer;
+}
+.downloadsword0{
+    text-decoration: overline;
+    cursor: pointer;
+}
+.aboutword0{
+    text-decoration: none;
+    cursor: pointer;
+}
+.header-link{
+    text-decoration: none;
+    color: white;
+}
+.header-link:hover{
+    text-decoration: overline;
+    color: rgb(0, 173, 173);
+}
+
+.homeword0:hover{
+    text-decoration: overline;
+}
+.downloadsword0:hover{
+    text-decoration: overline;
+}
+.aboutword0:hover{
+    text-decoration: overline;
+}
+
+/*  Defining the on_hover effect for cols 1,2,3  */
+.col1:hover{
+    background-color: grey;
+}
+
+.col1:hover .homeword0{
+    text-decoration: overline;
+}
+
+.col2:hover{
+    background-color: grey;
+}
+
+.col2:hover .downloadsword0{
+    text-decoration: overline;
+}
+
+.col3:hover{
+    background-color: grey;
+}
+
+.col3:hover .aboutlnk{
+    text-decoration: overline;
+}
+
+/*        END                     */
+
+.maincol0{
+    background-color: black;
+    height: 3%;
+}
+
+.maincol0:hover{
+    background-color: grey;
+}
+
+.maincol0:hover .imgtcg{
+    opacity: 100%;
+    transform: rotate(-45deg);
+}
+
+.maincol0:hover .header-link{
+    text-decoration: overline;
+    color: rgb(0, 173, 173);
+}
+
+.maincol0:hover{
+    cursor: pointer;
+}
+
+.aboutlnk{
+    color:rgb(0, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+.aboutlnk:hover{
+    color: rgb(0, 255, 255);
+    text-decoration: overline;
+    cursor: pointer;
+}
+.plusp{
+    font-size: 20px;
+}
+
+.downloadtcgh1{
+    color: white;
+    font-size: 24px;
+}
+.normaltext{
+    color: white;
+    font-size: 18px;
+    margin-bottom: 1px;
+}
+
+.windows_logo{
+    width: 65px;
+    height: 65px;
+    margin-top: 25px;
+    float: left;
+}
+
+.osheader{
+    color: white;
+    font-size: 20px;
+    float: left;
+    margin-top: 45px;
+    margin-left: 15px;
+}
+.win1064downloadbutton{
+    color: rgb(0, 0, 0);
+    border-color: #333333;
+    border-width: 5px;
+    border-style: solid;
+    width: 350px;
+    height: 30px;
+    background-color: #333333;
+    /* margin-left: 50px; */
+    /* float: left; */
+    display: table-cell;
+    margin-left: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+.win1064downloadbutton:hover{
+    border-color: #727272;
+}
+.win64logosmall{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    padding-top: 5px;
+    display: inline;
+    float: left;
+}
+.win1032downloadbutton{
+    color: rgb(0, 0, 0);
+    border-color: #333333;
+    border-width: 5px;
+    border-style: solid;
+    width: 350px;
+    height: 30px;
+    background-color: #333333;
+    display: table-cell;
+    /* margin-left: 100px;
+    margin-right: 100px; */
+    /* border-spacing: 200px;
+    border-collapse: separate; */
+    text-align: center;
+    
+    cursor: pointer;
+}
+.win1032downloadbutton:hover{
+    border-color: #727272;
+}
+.win11downloadbutton{
+    color: rgb(0, 0, 0);
+    border-color: #333333;
+    border-width: 5px;
+    border-style: solid;
+    width: 200px;
+    height: 40px;
+    background-color: #333333;
+    display: table-cell;
+    margin-left: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+.win11downloadbutton:hover{
+    border-color: #727272;
+}
+.winlogo_small{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    padding-top: 5px;
+}
+.textwindows{
+    float: none;
+    color: white;
+    cursor: pointer;
+    margin-top: 0%;
+}
+.version_logo{
+    width: 50px;
+    height: 50px;
+    margin: 0%;
+    padding: 0%;
+    float: left;
+}
+.ver_text{
+    color: white;
+    font-size: 18px;
+    margin-left: 70px;
+}
+.win7sp1downloadbutton{
+    color: rgb(0, 0, 0);
+    border-color: #333333;
+    border-width: 5px;
+    border-style: solid;
+    width: 200px;
+    height: 40px;
+    background-color: #333333;
+    display: table-cell;
+    margin-left: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+.win7sp1downloadbutton:hover{
+    border-color: #727272;
+}
+.githubdownloadsbutton{
+    color: rgb(0, 0, 0);
+    border-color: #333333;
+    border-width: 5px;
+    border-style: solid;
+    width: 220px;
+    height: 40px;
+    background-color: #333333;
+    display: table-cell;
+    margin-left: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+.githubdownloadsbutton:hover{
+    border-color: #727272;
+}
+.softpediadownloadbutton{
+    color: rgb(0, 0, 0);
+    border-color: #333333;
+    border-width: 5px;
+    border-style: solid;
+    width: 200px;
+    height: 121px;
+    background-color: #333333;
+    display: table-cell;
+    margin-left: 50px;
+    text-align: center;
+    cursor: pointer;
+    border-style: solid;
+}
+.softpediadownloadbutton:hover{
+    border-color: #727272;
+}
+.winlogo_small_wide{
+    width: 170px;
+    height: 25px;
+    margin-top: 25%;
+}
+.majorgeeksdownloadsbutton{
+    color: rgb(0, 0, 0);
+    border-color: #333333;
+    border-width: 5px;
+    border-style: solid;
+    width: 200px;
+    height: 121px;
+    background-color: #333333;
+    display: table-cell;
+    margin-left: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+.majorgeeksdownloadsbutton:hover{
+    border-color: #727272;
+}
+.winlogo_small_square{
+    width: 70px;
+    height: 70px;
+}
+
+.changelog_link{
+    color: white;
+    font-size: 18px;
+}
+.release_notes_link{
+    color: cyan;
+    text-decoration: none;
+}
+.release_notes_link:hover{
+    text-decoration: underline;
+}
+.release_notes_logo{
+    width: 50px;
+    height: 50px;
+    margin: 0%;
+    padding: 0%;
+    float: left;
+}
+.changelog_link{
+    margin-left: 70px;
+}
+.server_small_logo{
+    width: 50px;
+    height: 50px;
+    margin-top: 15px;
+    
+    padding: 0%;
+    float: left;
+}
+.didyouknow{
+    color: white;
+    font-size: 18px;
+    margin-left: 60px;
+    margin-top: 37px;
+}
+.server_support_table_link{
+    color: rgb(0, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+.server_support_table_link:hover{
+    text-decoration: underline;
+}
+.donatediv{
+    width: 100%;
+    background-color: orange;
+    
+}
+.hearticon{
+    width: 45px;
+    height: 45px;
+    float: left;
+}
+.tyword{
+    float: left;
+    margin-top: 13px;
+    margin-left: 5px;
+    font-size: 22px;
+}
+.donateword{
+    margin-top: 0px;
+    display: inline-block;
+}
+.donate_logo{
+    width: 70px;
+    height: 70px;
+    margin: 0%;
+    margin-left: 0px;
+    padding: 0%;
+    padding-left: 0px;
+    float: left;
+}
+.donatetext{
+    color: white;
+    font-size: 18px;
+    margin-left: 75px;
+    margin-top: 25px;
+}
+.modernosdownloadbuttonsholder{
+    display: table-cell;
+    border-spacing: 10px;
+}
+.oldosesdownloadbuttonsholder{
+    display: table-cell;
+    border-spacing: 10px;
+}
+.sourcecodedownloadbuttonsholder{
+    display: table-cell;
+    border-spacing: 10px;
+}
+.othertrustedsourcesbuttonsholder{
+    display: table-cell;
+    border-spacing: 10px;
+}
+.oldergeeksdownloadsbutton{
+    color: rgb(0, 0, 0);
+    border-color: #333333;
+    border-width: 5px;
+    border-style: solid;
+    width: 200px;
+    height: 121px;
+    background-color: #333333;
+    display: table-cell;
+    margin-left: 50px;
+    text-align: center;
+    cursor: pointer;
+}
+.oldergeeksdownloadsbutton:hover{
+    border-color: #727272;
+}
+.tydonatorsword{
+    color: white;
+    font-size: 18px;
+    display: inline-block;
+    margin-top: 0px;
+    margin-left: 75px;
+}
+.donatorsul{
+    color: white;
+    font-size: 16px;
+    margin-top: 0px;
+    display: block;
+    margin-left: 75px;
+}
+.donatorsul:hover{
+    color: cyan;
+    list-style-type: square;
+}
+.wingetlogo{
+    width: 64px;
+    height: 64px;
+    float: left;
+    margin-top: 2px;
+}
+.wingetword0{
+    font-size: 18px;
+    color: white;
+    display: block;
+    margin-top: 25px;
+    margin-left: 79px;
+    margin-bottom: 23px;
+}
+.downloadline{
+    width: 70%;
+    background-color: #727272;
+    color: white;
+    display: block;
+    height: 62px;
+    font-size: 16px;
+    border-style: solid;
+    border-width: 4px;
+    border-color: #333333;
+    padding-left: 12px;
+    border-radius: 3px;
+    font-family: 'Consolas', 'Arial';
+}
+.downloadline2{
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+.ver_text_dev{
+    color: white;
+    font-size: 18px;
+    margin-left: 70px;
+    margin-top: 23px;
+}
+
+/* applying footer element configuration */
+footer{
+    font-size: 14px;
+    color: white;
+    background-color: #727272;
+    text-align: center;
+    margin-top: 15px;
+}
+.infolist{
+    list-style-type: none;
+    text-align: center;
+}
+.infolistelement{
+    display: inline;
+}
+.link0{
+    color: cyan;
+    text-decoration: none;
+}
+.link0:hover{
+    text-decoration: underline;
+}
+.warnbanner{
+    background-color: orangered;
+    width: 100%;
+    height: fit-content;
+}
+.warnbanner p{
+    color: white;
+    font-size: 16px;
+}
+.warnbanner ul{
+    color: white;
+}
+.warnbanner li{
+    color: white;
+}
+/* Applying the best overflow configuration to all 'dev' elements to this website  */
+div{
+    overflow: auto;
+}
+/*       END         */

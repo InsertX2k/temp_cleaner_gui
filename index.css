@@ -1,0 +1,436 @@
+/*Defining the background image properties*/
+.bdy{
+    background-color: #212121;
+}
+.table-header{
+    font-size: xx-large;
+}
+/*Somewhat configuring the main header properties*/
+.main-header{
+    border-color: whitesmoke;
+    border-style: hidden;
+    border-color: rgb(0, 173, 173);
+}
+
+.col1{
+    width: 8%;
+    height: 3%;
+}
+.col2{
+    width: 8%;
+    height: 3%;
+}
+.col3{
+    width: 8%;
+    height: 3%;
+}
+
+.col2{
+    text-align: center;
+    cursor: pointer;
+}
+.col1{
+    text-align: center;
+    cursor: pointer;
+}
+.col3{
+    text-align: center;
+    cursor: pointer;
+}
+
+.donatediv{
+    width: 100%;
+    background-color: orange;
+    margin-top: 15px;
+}
+.hearticon{
+    width: 45px;
+    height: 45px;
+    float: left;
+}
+.tyword{
+    float: left;
+    margin-top: 13px;
+    margin-left: 5px;
+    font-size: 22px;
+}
+.donatword{
+    color: black;
+    font-size: 16px;
+}
+
+/* Somewhat configuring the style of the main-header's navigation buttons. */
+/* Let's remove the decoration of it*/
+.homeword0{
+    text-decoration: overline;
+    cursor: pointer;
+}
+.homelinkword0{
+    text-decoration: none;
+    cursor: pointer;
+}
+.downloadslinkword0{
+    text-decoration: none;
+    cursor: pointer;
+}
+.downloadsword0{
+    text-decoration: none;
+    cursor: pointer;
+}
+.aboutword0{
+    text-decoration: none;
+    cursor: pointer;
+}
+.header-link{
+    text-decoration: none;
+    color: white;
+}
+.header-link:hover{
+    text-decoration: overline;
+    color: rgb(0, 173, 173);
+}
+
+.homeword0:hover{
+    text-decoration: overline;
+}
+.downloadsword0:hover{
+    text-decoration: overline;
+}
+.aboutword0:hover{
+    text-decoration: overline;
+}
+
+/*  Defining the on_hover effect for cols 1,2,3  */
+.col1:hover{
+    background-color: grey;
+}
+
+.col1:hover .homeword0{
+    text-decoration: overline;
+}
+
+.col2:hover{
+    background-color: grey;
+}
+
+.col2:hover .downloadsword0{
+    text-decoration: overline;
+}
+
+.col3:hover{
+    background-color: grey;
+}
+
+.col3:hover .aboutlnk{
+    text-decoration: overline;
+}
+
+/*        END                     */
+
+.maincol0{
+    background-color: black;
+    height: 3%;
+}
+
+.maincol0:hover{
+    background-color: grey;
+}
+
+.maincol0:hover .imgtcg{
+    opacity: 100%;
+    transform: rotate(-45deg);
+}
+
+.maincol0:hover .header-link{
+    text-decoration: overline;
+    color: rgb(0, 173, 173);
+}
+
+.maincol0:hover{
+    cursor: pointer;
+}
+
+.aboutlnk{
+    color:rgb(0, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+}
+.aboutlnk:hover{
+    color: rgb(0, 255, 255);
+    text-decoration: overline;
+    cursor: pointer;
+}
+.plusp{
+    font-size: 20px;
+}
+
+.largebanner{
+    width: 100%;
+    height: 365px;
+    background-color: rgba(0, 0, 255, 0);
+    border-style: none;
+}
+.bannerimg{
+    width: 99%;
+    height: 340px;
+    position: absolute;
+    z-index: 1;
+}
+.greeting{
+    position: absolute;
+    margin-top: 0px;
+    padding-top: 0px;
+    z-index: 2;
+    margin-top: 70px;
+    color: white;
+    font-size: 20px;
+    font-family: Helvetica, Arial,  sans-serif;
+    padding-left: 37%;
+}
+.greeting2{
+    color: rgb(255, 255, 255);
+    z-index: 3;
+    position: absolute;
+    margin-top: 120px;
+    margin-left: 25%;
+    font-size: 18px;
+}
+.go_to_downloads_button{
+    z-index: 4;
+    position: absolute;
+    width: 140px;
+    height: 45px;
+    background-color: #333333;
+    border-color: #333333;
+    border-style: solid;
+    margin-top: 160px;
+    margin-left: 45%;
+    cursor:pointer;
+    border-width: 6px;
+}
+.go_to_downloads_button:hover{
+    border-color: #727272;
+}
+.head_to_downloads_text{
+    color: white;
+    font-size: 14px;
+    text-align: center;
+}
+.welcometotcgweb{
+    color: white;
+    font-size: 24px;
+}
+.underconstruction_note{
+    color: white;
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.hidden_link{
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+}
+.whytcg{
+    color: white;
+    font-size: 30px;
+    margin-top: 0px;
+}
+.freeos{
+    width: 80px;
+    height: 80px;
+    margin-left: 30px;
+    float: left;
+}
+.text0{
+    float: left;
+    color: white;
+    font-size: 18px;
+    margin-left: 30px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+.freediv{
+    margin-top: 15px;
+    border-style: solid;
+    border-color: rgb(139, 139, 139);
+    border-radius: 30px;
+    border-width: 2px;
+}
+.text01{
+    margin-left: 30px;
+    color: white;
+    font-size: 15px;
+    margin-top: 15px;
+    float: left;
+}
+.freediv:hover{
+    background-color: rgb(139, 139, 139);
+}
+.freediv:hover > .text01{
+    color: black;
+}
+.freediv:hover > .text0{
+    color: black;
+}
+.link_w_onhover_effect{
+    color: deepskyblue;
+    text-decoration: none;
+    cursor: pointer;
+}
+.link_w_onhover_effect:hover{
+    text-decoration: underline;
+}
+.screenshotscenter{
+    color: white;
+    font-size: 30px;
+    margin-top: 25px;
+}
+.screenshots_div{
+    background-color: #424242;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap; 
+    margin-top: 15px;  
+}
+.screenshotfirst{
+    margin-right: 70px;
+    cursor: pointer;
+}
+.whatusersthinkcenter{
+    color: white;
+    font-size: 30px;
+    margin-top: 40px;
+}
+.yassoss{
+    margin-top: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.yassenss{
+    text-align: center;
+}
+.yassenwords{
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    margin-top: 15px;
+}
+.customerreviewdiv{
+    text-align: center;
+}
+.customerss{
+    margin-top: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.customerreviewwords{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 15px;
+}
+.yossefreviewdiv{
+    text-align: center;
+}
+.yossefss{
+    margin-top: 25px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.yossefreviewwords{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    margin-top: 15px;
+}
+.donateword{
+    color: white;
+    font-size: 30px;
+    margin-top: 40px;
+    display: block;
+}
+.donthavemoneyword{
+    color: white;
+    margin-top: 15px;
+    font-size: 23px;
+}
+.communitysupportdiv{
+    background-color: #424242;
+    width: 100%;
+}
+.communitysupportword0{
+    color: white;
+    font-size: 16px;
+}
+.listelement1{
+    color: white;
+    
+}
+.listelement1:hover{
+    color: brown;
+    background-color: #212121;
+}
+.bigwebsitessays{
+    color: white;
+    font-size: 30px;
+    margin-top: 40px;
+    display: block;
+}
+.softpediasentence{
+    color: white;
+    font-size: 18px;
+    margin-top: 35px;
+    display: block;
+    margin-left: 10px;
+}
+.softpediaword{
+    color: white;
+    font-size: 23px;
+}
+.complementdot{
+    color: white;
+}
+.introductionvideo{
+    color: white;
+    font-size: 30px;
+    margin-top: 25px;
+}
+.introvideocenter{
+    margin-top: 25px;
+}
+
+/* applying footer element configuration */
+footer{
+    font-size: 14px;
+    color: white;
+    background-color: #727272;
+    text-align: center;
+    margin-top: 15px;
+}
+.infolist{
+    list-style-type: none;
+    text-align: center;
+}
+.infolistelement{
+    display: inline;
+}
+.link0{
+    color: cyan;
+    text-decoration: none;
+}
+.link0:hover{
+    text-decoration: underline;
+}
+
+/* Applying the best overflow configuration to all 'dev' elements to this website  */
+div{
+    overflow: auto;
+}
+/*       END         */
+.test{
+    color: rgb(0, 247, 255);
+}
