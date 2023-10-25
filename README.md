@@ -1,6 +1,6 @@
 
 
-# Temp_Cleaner GUI Project  [![Download Temp_Cleaner GUI](https://img.shields.io/sourceforge/dt/temp-cleaner-gui.svg)](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) <a href="https://www.buymeacoffee.com/insertx2kdev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 117px !important;" ></a> 
+# <img src='https://github.com/InsertX2k/temp_cleaner_gui/assets/62176660/59af8e66-abd7-45cd-bd9e-07c5c4b3d42b' width='30' height='30' style="padding-bottom: 0px;"></img> Temp_Cleaner GUI  [![Download Temp_Cleaner GUI](https://img.shields.io/sourceforge/dt/temp-cleaner-gui.svg)](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) <a href="https://www.buymeacoffee.com/insertx2kdev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-red.png" alt="Buy Me A Coffee" style="height: 30px !important;width: 117px !important;" ></a> 
 
 **A Free and Open-Source program to help you free up disk space on your PC that is a way more powerful than you might expect**<br/>
 
