@@ -439,19 +439,114 @@
 .oldergeeksdownloadsbutton:hover{
     border-color: #727272;
 }
+
+  
 .tydonatorsword{
     color: white;
     font-size: 18px;
     display: inline-block;
     margin-top: 0px;
+    background-color: #333333;
+    width: -webkit-fill-available;
+    cursor: help;
+    user-select: none;
+    border-color: #727272;
+    border-style: solid;
+    border-width: 2px;
+    
     margin-left: 75px;
+}
+.tydonatorsword summary::-webkit-details-marker {
+    display: none;
+}
+.tydonatorsword summary{
+    list-style: none;
+    padding: 1em;
+    cursor: help;
+    border: 1px solid;
+    /* background: #fafafa; */
+    padding-right: 1.5em;
+    position: relative;
+    margin-bottom: 0%;
+    &::after {
+        content: '';
+        border-right: 4px solid;
+        border-bottom: 4px solid;
+        position: absolute;
+        right: .75em;
+        height: .75em;
+        width: .75em;
+        transform: rotate(45deg) translatey(-.1em);
+    }
+  
+  /* &:focus { */
+    /* outline: 2px solid; */
+    /* outline-offset: 1px; */
+  /* } */
+}
+
+
+details[open].tydonatorsword > summary::after {
+    transform: rotate(-135deg) translatey(-.3em);
+}
+  
+@keyframes invisiblyGrowFontSize {
+    0% {
+      font-size: 0;
+      opacity: 0;
+    }
+    100% {
+      font-size: 1em;
+      opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.tydonatorsword[open] > ul {
+    animation-name: invisiblyGrowFontSize, fadeIn;
+    animation-duration: 500ms, 200ms;
+    animation-delay: 0ms, 500ms;
+}
+.tydonatorsword[open] > summary {
+    animation-name: invisiblyGrowFontSize, fadeIn;
+    animation-duration: 500ms, 200ms;
+    animation-delay: 0ms, 500ms;
+}
+
+.tydonatorsword details {
+    margin: 1em 0;
+}
+
+
+.donlogosmall{
+    float: left;
+    width: 25px;
+    height: 25px;
+    margin-top: -3px;
+    margin-right: 5px;
+    position: sticky;
+    display: inline;
+}
+.summaryword{
+    display: inline;
 }
 .donatorsul{
     color: white;
     font-size: 16px;
-    margin-top: 0px;
+    margin-top: 20px;
     display: block;
     margin-left: 75px;
+}
+.donatorsul > li {
+    margin-top: 15px;
 }
 .donatorsul:hover{
     color: cyan;
