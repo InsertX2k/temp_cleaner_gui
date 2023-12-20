@@ -425,7 +425,35 @@ footer{
 .link0:hover{
     text-decoration: underline;
 }
-
+.delayinfobanner{
+    background-color: rgb(0, 10, 70);
+    width: 100%;
+    height: fit-content;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(66, 87, 207);
+}
+.dinfobanh1{
+    color: white;
+    float: left;
+    font-size: 24px;
+    margin-top: 1px;
+    margin-bottom: 2px;
+}
+.dinfop{
+    color: white;
+    float: left;
+    margin-top: 0px;
+}
+.link_w_onhover_effect_ban1{
+    color: deepskyblue;
+    text-decoration: none;
+    cursor: pointer;
+    float: left;
+}
+.link_w_onhover_effect_ban1:hover{
+    text-decoration: underline;
+}
 /* Applying the best overflow configuration to all 'dev' elements to this website  */
 div{
     overflow: auto;
