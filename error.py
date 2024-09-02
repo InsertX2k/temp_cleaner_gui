@@ -122,7 +122,6 @@ class ErrorWindow(Tk):
             self.errIcoDisp.pack(anchor=W, side=LEFT)
         except Exception as errloadingimg:
             print(f"[ERROR]: An error has occured preventing the error image from properly loading, will continue without loading it\nerror details are:\n{errloadingimg}")
-            messagebox.showerror("Runtime error", f"Couldn't load 'err.png' for this window\nIt's either missing or there is something wrong with your PC\nError details are:\n{errloadingimg}\n\nPress OK to continue")
             pass
 
         # defining the label that tells the user that something is wrong
@@ -154,10 +153,16 @@ class ErrorWindow(Tk):
         # updating and inserting the error information in the scrolledtext widget that holds them. 
         updateErrorInfoWidget()
 
+class UserInitiatedThreadStop(Exception):
+    def __init__(self, *args) -> None:
+        """
+        A class for the exception raised when the user attempts to terminate/stop a specific program thread.
+        """
+        super().__init__(*args)
 
 
 if __name__ == '__main__':
-    # test = ErrorWindow()
-    # test.mainloop()
-    # raise SystemExit(0)
+    test = ErrorWindow()
+    test.mainloop()
+    raise SystemExit(0)
     pass

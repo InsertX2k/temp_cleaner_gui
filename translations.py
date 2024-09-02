@@ -136,8 +136,8 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Cleaning Progress"
-    about_window_txt = """Version: 6.9
-Release Channel: stable
+    about_window_txt = """Version: 7.0
+Release Channel: dev
 Additional features installed:
 1-Arabic Language Pack v1.1
 2-Minimal Accessibility Pack v1.0
@@ -155,7 +155,7 @@ You can also press 'F2' to show you a message box containing useful information 
 You can press 'F1' to show you some help about using Minimal Accessibility Pack v1.0 or about increasing or decreasing screen font size.
 """
 
-    about_window_title = "About 'The Temp_Cleaner GUI Project (v6.9)'"
+    about_window_title = "About 'The Temp_Cleaner GUI Project (v7.0)'"
     cant_retrieve_config_fromfile_msgbox_content = "Unable to retrieve the configuration information, this can be due to a catastrophic failure, or a something else, the settings window will close."
     cant_retrieve_config_fromfile_msgbox_title = "Runtime Exception"
     cant_read_config_frominside_file_msgbox_title = "A runtime exception"
@@ -165,9 +165,9 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     done_reboot_for_changes_to_apply_text = "All changes you did has been successfully saved, but for the changes to take effect, you will need to restart Temp_Cleaner GUI."
     changes_saved_text = "Saved your changes"
     unable_to_save_your_changes_text = "Unable to save your changes to the file 'Config.ini', Nothing has been changed yet, and this window will not close."
-    prog_title_no_username = "Welcome to Temp_Cleaner GUI v6.9!"
+    prog_title_no_username = "Temp_Cleaner GUI"
     prog_title_1 = "Welcome "
-    prog_title_2 = " to Temp_Cleaner GUI v6.9!"
+    prog_title_2 = " to Temp_Cleaner GUI v7.0!"
     settings_window_title = "Temp_Cleaner GUI Settings"
     settings_hint_one = "Change the way Temp_Cleaner GUI behaves"
     rammap_path_settings_hint = "RAMMap Executable Path:"
@@ -269,7 +269,59 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     error_window_warning = "An unhandled error has occured causing this window to appear, for you as a user, all you need\n to do is just contacting the support of Temp_Cleaner GUI, or pressing the OK button and\n choosing to continue with this error as it is (Not recommended in most cases), Error\n details available below:"
     close_app = "Exit Program"
     continue_app = "Continue and Ignore"
+    change_power_state_after_cleaning = "Change this PC's power state to: "
+    shutdown = "Power off (Shutdown)"
+    reboot = "Reboot (Restart)"
+    hibernate = "Suspend to Disk (Hibernate)"
+    sleep = "Suspend to RAM (Sleep)"
+    error_changing_pwrstate = "Couldn't change the power state of This PC to the one specified in the post-cleaning options"
+    connect_phone_to_pc = "Connect Phone to PC via USB Cable"
+    connect_phone_via_cable = "Connect to Phone via Cable"
+    adb_instructions_header = "To connect your phone properly, Please follow these instructions:"
+    instructions_for_adb_connection = """1-Open Settings app on your phone.
+2-Click 'About Phone', then 'Software version', then tap the 'Build number' 7 times or
+more until you see a message that says 'Developer mode enabled' or something equavilent.
+3-Go 'back' and open 'Developer Options'
+4-Enable 'USB Debugging', Click Yes to the window that will appear.
+5-Connect phone to PC via a USB cable.
+6-In case a window appears on your phone asking for authentication,
+check 'Always allow from this computer', then click 'Allow'
+7-Press 'Continue' button on this window. 
+"""
+    continue_connection_window_btn = "Continue"
+    beamng_drive_cache_cleaner = "BeamNG Drive Temporary Data"
+    running_on = "Running On "
+    running_as = "Running as "
+    connected_devices = "Connected Devices"
+    clear_android_userpkgs_cache = "Wipe caches of User packages on connected Android smartphone"
+    usb_adb = "Via USB Debugging"
+    wifi_adb = "Via Wi-Fi Debugging (Android 11+ only)"
+    unsupported_adb_cleaning_method = "Unsupported connection method chosen, will skip this cleaning section..."
+    connect_phone_to_pc_via_wifi_debugging = "Connect Phone to PC via Wi-Fi Debugging (Android 11+ Only)"
+    connect_phone_to_pc_via_wifi_debugging_lbl = "Connect Phone to PC via Wi-Fi debugging"
+    connect_phone_to_pc_via_wifi_debugging_header = "To connect your Phone to PC via Wi-Fi debugging properly, Please follow these instructions:"
+    connect_phone_to_pc_via_wifi_debugging_instructions = """1-Open Settings app on your phone.
+2-Scroll down til the end until you find 'Developer options', click on it.
+3-Enable 'USB Debugging', and click OK on the dialog box that will appear.
+4-Connect to the same network as this PC on your phone.
+5-Enable 'Wireless debugging'
+6-On the window that appears, check/enable 'Always allow on this network', then click 'Allow'
+7-Click on 'Wireless debugging'
 
+8-If you don't see your computer's name there, Click on 'Pair device with pairing code'
+8.1-A window will appear, Enter the shown 'Wi-Fi pairing code' into the respective text box.
+8.2-Do the same for the text below the label 'IP address & port'.
+8.3-Then click on Continue.
+
+
+9-If you see it just write the text below 'IP address & port' in the specified text box, and leave the 'Pairing code' text box empty.
+9.1-Click on Continue.
+"""
+
+    ip_address_and_port = "IP address & port:"
+    pairing_code = "Pairing Code:"
+    
+    
 
 class ar:
     """
@@ -412,8 +464,8 @@ class ar:
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "تقدم التنظيف"
-    about_window_txt = """ الإصدار: 6.9
-قناة الإصدار : مستقرة
+    about_window_txt = """ الإصدار: 7.0
+قناة الإصدار : التطوير
 :المميزات الإضافية المفعلة
 1-Arabic Language Pack v1.1 (حزمة اللغة العربية v1.1)
 2-Minimal Accessibility Pack v1.0 (حزمة إمكانية الوصول الادني)
@@ -431,7 +483,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
 لإظهار معلومات عن كيفية إستخدام حزمة امكانية الوصول او كيفية تكبير وتصغير الكتابه في الشاشة 'F1' يمكنك الضغط علي زر   
 """
 
-    about_window_title = "حول 'The Temp_Cleaner GUI Project (v6.9)'"
+    about_window_title = "حول 'The Temp_Cleaner GUI Project (v7.0)'"
     cant_retrieve_config_fromfile_msgbox_content = "خطأ في الحصول علي المعلومات من الضبط، هذا قد يكون بسبب خطأ كارثي او شئ اخر، شاشة الضبط سوف تغلق"
     cant_retrieve_config_fromfile_msgbox_title = "حدث خطأ في وقت التشغيل"
     cant_read_config_frominside_file_msgbox_title = "حدث خطأ في وقت التشغيل"
@@ -441,9 +493,9 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     changes_saved_text = "تم حفظ تعديلاتك"
     done_reboot_for_changes_to_apply_text = "Temp_Cleaner GUI جميع التغييرات التي قمت بها تم حفظها بنجاح، ولاكن لكي يتم تطبيقها يجب عليك إعادة تشغيل برنامج"
     unable_to_save_your_changes_text = "لم يتغير اي شئ حتي الان، وهذه النافذة لن تغلق ،'Config.ini' فشل في حفظ التغييرات في ملف "
-    prog_title_no_username = "Temp_Cleaner GUI! اهلا بك في برنامج"
+    prog_title_no_username = "Temp_Cleaner GUI"
     prog_title_1 = " مرحبا"
-    prog_title_2 = " Temp_Cleaner GUI v6.9 في "
+    prog_title_2 = " Temp_Cleaner GUI v7.0 في "
     settings_window_title = "Temp_Cleaner GUI ضبط"
     settings_hint_one = "Temp_Cleaner GUI قم بتغيير الطريقة التي يتصرف بها "
     rammap_path_settings_hint = "Sysinternals من RAMMap ماهو مسار الملف التنفيذي لبرنامج :"
@@ -548,3 +600,47 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
 يمكنك التواصل مع الدعم او الإستمرار في إستخدام البرنامج كما هو Temp_Cleaner GUI كمستخدم لبرنامج 
 معلومات الخطأ موجودة بالأسفل  
 """
+    change_power_state_after_cleaning = ":ﻲﻟﺇ ﺮﺗﻮﻴﺒﻤﻜﻟﺍ ﺔﻗﺎﻃ ﺔﻟﺎﺣ ﺮﻴﻴﻐﺗ"
+    shutdown = "ﻞﻴﻐﺸﺘﻟﺍ ﻑﺎﻘﻳﺇ"
+    reboot = "ﻞﻴﻐﺸﺘﻟﺍ ﺓﺩﺎﻋﺇ"
+    hibernate = "ﺕﺎﺒﺴﻟﺍ"
+    sleep = "ﻥﻮﻜﺴﻟﺍ ﻊﺿﻭ"
+    error_changing_pwrstate = "فشل في تغيير حالة طاقة الجهاز إلي الحالة المعرفة في خيارات ما بعد التنظيف"
+    connect_phone_to_pc = "الإتصال بالهاتف عبر الكابل"
+    connect_phone_via_cable = "ﻞﺑﺎﻜﻟﺍ ﻖﻳﺮﻃ ﻦﻋ ﻒﺗﺎﻬﻟﺎﺑ ﻝﺎﺼﺗﻹﺍ"
+    adb_instructions_header = "ﺕﺎﻤﻴﻠﻌﺘﻟﺍ ﻩﺬﻫ ﺬﻴﻔﻨﺗ ﻲﺟﺮﻳ ﺢﻴﺤﺻ ﻞﻜﺸﺑ ﻚﻔﺗﺎﻫ ﻞﻴﺻﻮﺘﻟ"
+    instructions_for_adb_connection = """
+ﻚﻔﺗﺎﻫ ﻲﻓ ﻂﺒﻀﻟﺍ ﻖﻴﺒﻄﺗ ﺢﺘﻔﺑ ﻢﻗ1-
+'ﺞﻣﺍﺮﺒﻟﺍ ﺭﺍﺪﺻﺇ' ﻢﺛ 'ﻒﺗﺎﻬﻟﺍ ﻝﻮﺣ' ﺭﺎﻴﺘﺧﺈﺑ ﻢﻗ2-
+'ﺞﻣﺍﺮﺑ ﺭﻮﻄﻣ ﺖﺤﺒﺻﺍ ﺪﻘﻟ' ﻝﻮﻘﺗ ﺔﻟﺎﺳﺭ ﻚﻟ ﺮﻬﻈﺗ ﻲﺘﺣ ﺕﺍﺮﻣ ﻊﺒﺳ 'ﺀﺎﻨﺒﻟﺍ ﺭﺍﺪﺻﺇ' ﻲﻠﻋ ﻂﻐﻀﻟﺎﺑ ﻢﻗ3-
+ﻞﺑﺎﻜﻟﺍ ﻖﻳﺮﻃ ﻦﻋ ﺮﺗﻮﻴﺒﻤﻜﻟﺎﺑ ﻒﺗﺎﻬﻟﺍ ﻞﻴﺻﻮﺘﺑ ﻢﻗ4-
+.ﺡﺎﻤﺳ ﺭﺰﻟﺍ ﻲﻠﻋ ﻂﻐﺿﺍ ﻢﺛ 'ﺮﺗﻮﻴﺒﻤﻜﻟﺍ ﺍﺬﻫ ﻦﻣ ﺎﻤﺋﺍﺩ ﺡﺎﻤﺴﻟﺍ' ﺪﻳﺪﺤﺘﻟﺍ ﻊﺑﺮﻣ ﻲﻠﻋ ﺩﺪﺣ ،ﺔﻗﺩﺎﺼﻤﻟﺍ ﺐﻠﻄﺗ ﺓﺬﻓﺎﻧ ﻚﻟ ﺕﺮﻬﻇ ﺍﺫﺇ5-
+ ﺓﺬﻓﺎﻨﻟﺍ ﻩﺬﻫ ﻲﻓ ﺭﺍﺮﻤﺘﺳﺇ ﺭﺰﻟﺍ ﻲﻠﻋ ﻂﻐﺿﺇ6-
+"""
+    continue_connection_window_btn = "ﺭﺍﺮﻤﺘﺳﺇ"
+    beamng_drive_cache_cleaner = "BeamNG.Drive ﺏ ﺔﺻﺎﺨﻟﺍ ﺔﺘﻗﺆﻤﻟﺍ ﺕﺎﻔﻠﻤﻟﺍ"
+    running_on = " ﺯﺎﻬﺠﻟﺍ ﻲﻠﻋ ﻞﻤﻌﻳ"
+    running_as = " ﻡﺪﺨﺘﺴﻤﻟﺍ ﺕﺎﻴﺣﻼﺼﺑ ﻞﻤﻌﻳ"
+    connected_devices = "الأجهزة المتصلة"
+    clear_android_userpkgs_cache = "ﻞﺼﺘﻤﻟﺍ ﺪﻳﻭﺭﺪﻧﺃ ﻒﺗﺎﻫ ﻲﻓ ﻡﺪﺨﺘﺴﻤﻟﺍ ﺞﻣﺍﺮﺒﺑ ﺔﺻﺎﺨﻟﺍ ﺔﺘﻗﺆﻤﻟﺍ ﺕﺎﻔﻠﻤﻟﺍ ﺢﺴﻣ"
+    usb_adb = "USB ﺮﺒﻋ ﺀﺎﻄﺧﻷﺍ ﺢﻴﺤﺼﺗ ﺮﺒﻋ"
+    wifi_adb = "ﻲﻜﻠﺳﻼﻟﺍ ﺀﺎﻄﺧﻷﺍ ﺢﻴﺤﺼﺗ ﺮﺒﻋ"
+    unsupported_adb_cleaning_method = "...ﻲﻄﺨﺘﻟﺍ ﻢﺘﻳ ﻑﻮﺳ ،ﻡﻮﻋﺪﻣ ﺮﻴﻏ ﻞﻴﺻﻮﺗ ﻊﺿﻭ ﺭﺎﻴﺘﺧﺇ ﻢﺗ"
+    connect_phone_to_pc_via_wifi_debugging = "إتصال بالكمبيوتر عبر تصحيح الأخطاء اللاسلكي (نظام أندرويد 11 فيما فوق فقط)"
+    connect_phone_to_pc_via_wifi_debugging_lbl = "ﻲﻜﻠﺳﻼﻟﺍ ﺀﺎﻄﺧﻷﺍ ﺢﻴﺤﺼﺗ ﺮﺒﻋ ﺮﺗﻮﻴﺒﻤﻜﻟﺎﺑ ﻒﺗﺎﻬﻟﺍ ﻞﻴﺻﻮﺗ"
+    connect_phone_to_pc_via_wifi_debugging_header = ":ﺕﺎﻤﻴﻠﻌﺘﻟﺍ ﻩﺬﻫ ﻉﺎﺒﺗﺇ ﻲﺟﺮﻳ ،ﻲﻜﻠﺳﻼﻟﺍ ﺀﺎﻄﺧﻷﺍ ﺢﻴﺤﺼﺗ ﺮﺒﻋ ﺮﺗﻮﻴﺒﻤﻜﻟﺎﺑ ﻚﻔﺗﺎﻫ ﻞﻴﺻﻮﺘﻟ"
+    connect_phone_to_pc_via_wifi_debugging_instructions = """ﺕﺍﺩﺍﺪﻋﻹﺍ ﻖﻴﺒﻄﺗ ﺢﺘﻓﺇ-1
+ﺞﻣﺍﺮﺒﻟﺍ ﺭﻮﻄﻣ ﺕﺍﺭﺎﻴﺧ ﺮﺘﺧﺍ-2
+ﺮﻬﻈﺗ ﻑﻮﺳ ﻲﺘﻟﺍ ﺔﺷﺎﺸﻠﻟ ﻖﻓﺍﻮﻣ ﻲﻠﻋ ﻂﻐﻀﻟﺎﺑ ﻢﻗ ﻢﺛ USB ﺀﺎﻄﺧﺍ ﺢﻴﺤﺼﺗ ﻞﻴﻌﻔﺘﺑ ﻢﻗ-3
+.Always Allow from this network ﺪﻳﺪﺤﺘﺑ ﻢﻗ ،ﺓﺬﻓﺎﻧ ﻚﻟ ﺮﻬﻈﺗ ﻑﻮﺳ ،ﻲﻜﻠﺳﻼﻟﺍ ﺀﺎﻄﺧﻷﺍ ﺢﻴﺤﺼﺗ ﻞﻴﻌﻔﺘﺑ ﻢﻗ-4
+.ﻲﻜﻠﺳﻼﻟﺍ ﺀﺎﻄﺧﻷﺍ ﺢﻴﺤﺼﺗ ﻲﻠﻋ ﻂﻐﺿﺇ-5
+ﻥﺍﺮﻗﻹﺍ ﺰﻣﺭ ﻡﺍﺪﺨﺘﺳﺈﺑ ﺯﺎﻬﺠﻟﺍ ﻥﺍﺮﻗﺇ ﻲﻠﻋ ﻂﻐﺿﺈﻓ ﺔﺷﺎﺸﻟﺍ ﻩﺬﻫ ﻲﻓ ﺮﻫﺎﻇ ﻚﺑ ﺹﺎﺨﻟﺍ ﺮﺗﻮﻴﺒﻤﻜﻟﺍ ﺯﺎﻬﺟ ﻢﺳﺇ ﻦﻜﻳ ﻢﻟ ﺍﺫﺇ-6
+ﺓﺬﻓﺎﻨﻟﺍ ﻩﺬﻫ ﻲﻓ ﻪﺑ ﺔﺻﺎﺨﻟﺍ ﺔﻧﺎﺨﻟﺍ ﻲﻓ ﻚﻣﺎﻣﺍ ﺮﻫﺎﻈﻟﺍ Wi-Fi ﻥﺍﺮﻗﺇ ﺰﻣﺭ ﻝﺎﺧﺩﺈﺑ ﻢﻗ-1.6
+ﻢﻬﺑ ﺔﺼﺼﺨﻤﻟﺍ ﺔﻧﺎﺨﻟﺍ ﻲﻓ ﻢﻫ ﺎﻤﻛ "ﺬﻔﻨﻤﻟﺍﻭ IP ﻥﺍﻮﻨﻋ" ﺔﻤﻠﻜﻟﺍ ﻞﻔﺳﺍ ﻡﺎﻗﺭﻻﺍ ﻝﺎﺧﺩﺈﺑ ﻢﻗ-2.6
+ﺓﺬﻓﺎﻨﻟﺍ ﻩﺬﻫ ﻲﻓ ﺔﻌﺑﺎﺘﻣ ﺭﺰﻟﺍ ﻲﻠﻋ ﻂﻐﺿﺇ-3.6
+.ﻢﻬﺑ ﺔﺼﺼﺨﻤﻟﺍ ﺔﻧﺎﺨﻟﺍ ﻲﻓ ﻢﻫ ﺎﻤﻛ "ﺬﻔﻨﻤﻟﺍﻭ IP ﻥﺍﻮﻨﻋ" ﺔﻤﻠﻛ ﻞﻔﺳﺍ ﺓﺩﻮﺟﻮﻤﻟﺍ ﻡﺎﻗﺭﻻﺍ ﺔﺑﺎﺘﻜﺑ ﻂﻘﻓ ﻢﻘﻓ ﺔﺷﺎﺸﻟﺍ ﻩﺬﻫ ﻲﻓ ﺮﻫﺎﻇ ﻙﺯﺎﻬﺟ ﻢﺳﺇ ﻥﺎﻛ ﺍﺫﺇ
+.ﺓﺬﻓﺎﻨﻟﺍ ﻩﺬﻫ ﻲﻓ ﺔﻌﺑﺎﺘﻤﻟﺍ ﺭﺯ ﻲﻠﻋ ﻂﻐﺿﺇ-1.7
+"""
+
+    ip_address_and_port = "ﺬﻔﻨﻤﻟﺍﻭ IP ﻥﺍﻮﻨﻋ"
+    pairing_code = "Wi-Fi ﻥﺍﺮﻗﺇ ﺰﻣﺭ"
