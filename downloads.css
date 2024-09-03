@@ -591,7 +591,27 @@ details[open].tydonatorsword > summary::after {
     margin-left: 70px;
     margin-top: 23px;
 }
-
+.betabanner{
+    width: 100%;
+    background-color: #821131;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #C7253E;
+}
+.h3betabanner{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    font-size: 25px;
+    color: white;
+}
+.betabannerp{
+    color: white;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    font-size: 18px;
+}
 /* applying footer element configuration */
 footer{
     font-size: 14px;
