@@ -4,6 +4,10 @@
 
 **A Free and Open-Source program to help you free up disk space on your PC that is a way more powerful than you might expect**<br/>
 
+## ⚠ Attention users: Please update your copy of Temp_Cleaner GUI to v7.0
+**This copy of Temp_Cleaner GUI includes minor bug fixes and the new cleaner that cleans up temporary files on your Android smartphone, so please update your current copy of Temp_Cleaner GUI to this release, despite it's name that ends with `-testing` or `beta`, this is stable for everyday use and I can confirm that myself!** <br>
+Please tell me what do you think about this feature in the discussions of this release [here](https://github.com/InsertX2k/temp_cleaner_gui/releases/tag/v7.0-testing)
+
 # Features:
 * Free and Open-Source
 * Written in Python 3
