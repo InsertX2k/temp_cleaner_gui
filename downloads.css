@@ -612,6 +612,34 @@ details[open].tydonatorsword > summary::after {
     margin-left: 20px;
     font-size: 18px;
 }
+.hashesh1{
+    color: white;
+    font-size: 23px;
+    margin-top: 25px;
+}
+.hashesp{
+    color: white;
+    font-size: 18px;
+    margin-top: 3px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+.hashesholder{
+    background-color: #333333;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #727272;
+    width: 100%;
+    display: inline-block;
+    height: max-content;
+    color: white;
+    margin-top: 15px;
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 0px;
+}
 /* applying footer element configuration */
 footer{
     font-size: 14px;
