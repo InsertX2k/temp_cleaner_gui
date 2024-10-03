@@ -182,10 +182,34 @@ def connectViaWiFiDebugging(ip_addr_and_port: str, auth_code=None):
     
     return out
 
+def getConnectedDevicesNamesWithSNs(userDevList: list=None):
+    """
+    Returns a list with list representing each connected debugging mode device's Name and SN
+    
+    Syntax for each device tuple is: (devNameSN,devType)
+    
+    Output is usually like this: [(dev1NameSN,dev1Type),(dev2NameSN,dev2Type),(dev3NameSN,dev3Type),...]
+    """
+    # userDevList is an optional devices list passed by the user in rare circumstances.
+    if userDevList is not None:
+        devList = userDevList
+    else:
+        devList: list = listADBDevices()
+    devsWithSNs: list = []
+    for dev in devList:
+        devInLst: list = dev.split("\t")
+        devInLst: tuple = tuple(devInLst)
+        devsWithSNs.append(devInLst)
+    return devsWithSNs
+
 if __name__ == '__main__':
+    # for testing
     # killADBDaemon()
     # requestADBConnection()
-
+    # requestADBConnection()
+    # connectViaWiFiDebugging(ip_addr_and_port='192.168.1.7:36765')
+    # print(listADBDevices())
+    # print(getConnectedDevicesNamesWithSNs())
     # print(f"{listADBDevices()}, len:{len(listADBDevices())}")
     # print(needToShowInstructionsWindow())
     # print(cleanCachesViaADB())

@@ -11,6 +11,7 @@ from PIL import Image, ImageTk
 import time
 import threading
 from subprocess import getoutput
+from . import adb_processor
 # initializing a variable containing the path where program executable is stored.
 application_path = ''
 
@@ -337,8 +338,107 @@ class ConnectPhoneToPCViaWiFiWindow(Toplevel):
         return (self.ipaddr_and_port, self.authcode)
         
 
+chosen_dev = ''
+
+class ChooseADeviceWindow(Toplevel):
+    global getTextJustification, killADBDaemon, requestADBConnection, ipaddr_and_port, authcode, chosen_dev
+    def __init__(self):
+        global chosen_dev
+        super().__init__()
+        self.wm_attributes("-topmost", True)
+        # trying to apply some styling as well.
+        try:
+            set_default_color_theme(f"{application_path}\\..\\style.json")
+        except Exception as style_json_file_loader_tryone_error:
+            print(f"[ERROR]: couldn't read from file 'style.json' in the current directory due to the error:\n{style_json_file_loader_tryone_error}")
+            self.destroy()
+            return # error 299 is for error loading style.json file from current and previous directories.
+        def getCurrentAppearanceMode():
+            """
+            Gets the current appearance mode to apply to the background of the widgets.
+            
+            Returns a tuple containing the values of text color and background color for widgets.
+
+            Order goes like that:
+
+            ```py
+            (background_color, text_color)
+            ```
+            """
+            global GetConfig
+            try:
+                if str(GetConfig["ProgConfig"]['appearancemode']) == "1": # 1 is for light mode
+                    return (None, 'black')
+                elif str(GetConfig["ProgConfig"]['appearancemode']) == "2": # 2 is for dark mode
+                    return ('#333', "white")
+                else:
+                    return (None, "black")
+            except Exception as exception_reading_appearance_mode:
+                messagebox.showerror("An ERROR has occured", f"{exception_reading_appearance_mode}")
+                return False
+            return False
+        
+        
+        def closeWindowAndReturnChoice():
+            """
+            Closes this window and saves the chosen value into the variable `chosen_dev`
+            """
+            global chosen_dev
+            if str(self.devchoosercombobox.get()) == getCurrentLanguage().chooser_choose_a_device: # all devices are chosen
+                return None
+            else:
+                _choice = self.devchoosercombobox.get()
+                _choice = _choice.split("\t")
+                chosen_dev = _choice[0]
+            print(chosen_dev)
+            try:
+                self.destroy()
+            except:
+                print("[INFO] window might have been already destroyed")
+            return
+            
+        
+        self.title(f"{getCurrentLanguage().choose_a_device_window_title}")
+        self.appwidth = 605
+        self.appheight = 257
+        self.spawn_x = (int(self.winfo_screenwidth()) / 2) - (self.appwidth / 2)
+        self.spawn_y = (int(self.winfo_screenheight()) / 2) - (self.appheight / 2)
+        self.geometry(f'{self.appwidth}x{self.appheight}+{int(self.spawn_x)}+{int(self.spawn_y)}') # spawns in the middle of the screen.
+        self.resizable(False, False)
+        self.wm_resizable(False, False)
+        self.configure(bg=getCurrentAppearanceMode()[0])
+        try:
+            self.iconbitmap(f"{application_path}\\debug.ico")
+        except Exception as errorLoadingIconBitmap:
+            print(f"An exception has occured while attempting to load iconbitmap for the 'Connect Phone to PC Window'\nError details are:\n\n{errorLoadingIconBitmap}")
+            messagebox.showerror("Error", f"An exception has occured while attempting to load iconbitmap for 'connectphonetopc' window\nError details are:\n\n{errorLoadingIconBitmap}")
+            pass
+        
+        
+        
+        self.lbl0 = Label(self, text=getCurrentLanguage().choose_a_usb_debugging_device, font=("Arial Bold", 17), bg=getCurrentAppearanceMode()[0], fg=getCurrentAppearanceMode()[1], justify=getTextJustification())
+        self.lbl0.pack(expand=False)
+        self.lbl1 = Label(self, text=getCurrentLanguage().choose_a_device_info, font=("Arial", 12), bg=getCurrentAppearanceMode()[0], fg=getCurrentAppearanceMode()[1], justify=getTextJustification(), wraplength=599)
+        self.lbl1.pack(expand=False)
+        self.devchooser_combobox_values = [getCurrentLanguage().chooser_choose_a_device]
+        _deviceslst:list = adb_processor.listADBDevices()
+        for _dev in _deviceslst:
+            self.devchooser_combobox_values.append(_dev)
+        self.devchoosercombobox = CTkComboBox(self, width=450, values=self.devchooser_combobox_values)
+        self.devchoosercombobox.pack(expand=False, pady=0, padx=0, ipadx=0, ipady=0, after=self.lbl1)
+        self.continue_btn = CTkButton(self, text=getCurrentLanguage().continue_connection_window_btn, command=closeWindowAndReturnChoice)
+        self.continue_btn.pack(expand=False, pady=15, ipadx=170, ipady=5)
+        
+    
+    def __str__(self):
+        return chosen_dev
+        
+
+
+
 
 if __name__ == '__main__':
-    # ConnectPhoneToPCViaWiFiWindow().mainloop()
+    # ChooseADeviceWindow().mainloop()
+    # print(chosen_dev)
     # raise SystemExit(0)
     pass

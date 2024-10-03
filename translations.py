@@ -137,7 +137,7 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Cleaning Progress"
     about_window_txt = """Version: 7.0
-Release Channel: dev
+Release Channel: stable
 Additional features installed:
 1-Arabic Language Pack v1.1
 2-Minimal Accessibility Pack v1.0
@@ -320,6 +320,15 @@ check 'Always allow from this computer', then click 'Allow'
 
     ip_address_and_port = "IP address & port:"
     pairing_code = "Pairing Code:"
+    choose_a_device_window_title = "Choose a debugging device..."
+    choose_a_usb_debugging_device = "Choose a connected device to clean"
+    choose_a_device_info = """You have more than one Android smartphone device with USB or WiFi debugging enabled connected to this PC.
+and since Temp_Cleaner GUI can't tell by itself which of these devices to clean, you will have to choose one manually by yourself.
+
+Please choose a device from this list:
+"""
+    chooser_all_devices = "Clean all devices connected"
+    chooser_choose_a_device = "Choose a device..."
     
     
 
@@ -465,7 +474,7 @@ class ar:
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "تقدم التنظيف"
     about_window_txt = """ الإصدار: 7.0
-قناة الإصدار : التطوير
+قناة الإصدار : مستقر
 :المميزات الإضافية المفعلة
 1-Arabic Language Pack v1.1 (حزمة اللغة العربية v1.1)
 2-Minimal Accessibility Pack v1.0 (حزمة إمكانية الوصول الادني)
@@ -644,3 +653,11 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
 
     ip_address_and_port = "ﺬﻔﻨﻤﻟﺍﻭ IP ﻥﺍﻮﻨﻋ"
     pairing_code = "Wi-Fi ﻥﺍﺮﻗﺇ ﺰﻣﺭ"
+    choose_a_device_window_title = "...إختار جهاز تصحيح أخطاء"
+    choose_a_usb_debugging_device = "ﻪﻔﻴﻈﻨﺘﻟ ﻞﺼﺘﻣ ﺯﺎﻬﺟ ﺭﺎﺘﺧﺇ"
+    choose_a_device_info = """ﻲﺼﺨﺸﻟﺍ ﺏﻮﺳﺎﺤﻟﺍ ﻙﺯﺎﻬﺠﺑ ﻞﺼﺘﻣ ﻲﻜﻠﺳﻼﻟﺍ ﻭﺍ ﻲﻜﻠﺴﻟﺍ ﺀﺎﻄﺧﻷﺍ ﺢﻴﺤﺼﺗ ﻪﺑ ﻞﻌﻔﻣ ﻲﻛﺫ ﺪﻳﻭﺭﺪﻧﺍ ﺯﺎﻬﺟ ﻦﻣ ﺮﺘﻛﺍ ﻚﻳﺪﻟ
+.ﻚﺴﻔﻨﺑ ﺪﺣﺍﻭ ﺭﺎﻴﺘﺧﻹ ﺝﺎﺘﺤﺗ ﻑﻮﺳ ﻚﻟﺬﻟ ،ﻒﻴﻈﻨﺘﻟﺍ ﺔﻴﻠﻤﻋ ﻡﺎﻤﺗﻹ ﺐﺳﺎﻨﻤﻟﺍ ﻮﻫ ﺯﺎﻬﺟ ﻱﺃ ﻪﺴﻔﻨﺑ ﺭﺎﻴﺘﺧﻹﺍ ﻊﻴﻄﺘﺴﻳ ﻻ ﺞﻣﺎﻧﺮﺒﻟﺍ ﺍﺬﻫﻭ
+:ﺔﻤﺋﺎﻘﻟﺍ ﻦﻣ ﺯﺎﻬﺟ ﺭﺎﻴﺘﺧﺈﺑ ﻢﻗ ﻚﻠﻀﻓ ﻦﻣ
+"""
+    chooser_all_devices = "ﺔﻠﺼﺘﻤﻟﺍ ﺓﺰﻬﺟﻷﺍ ﻞﻛ ﻒﻴﻈﻨﺗ"
+    chooser_choose_a_device = "...ﺯﺎﻬﺟ ﺭﺎﺘﺧﺇ"
