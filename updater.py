@@ -350,11 +350,15 @@ class updaterProgramUI(Toplevel):
                     except:
                         pass
             except Exception:
-                self.release_notes_widget.configure(state='normal')
-                self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
-                self.release_notes_widget.insert(END, getCurrentLanguage().couldnt_download)
-                self.release_notes_widget.configure(state='disabled')
-            
+                try:
+                    self.release_notes_widget.configure(state='normal')
+                    self.release_notes_widget.delete(1.0, END) # clearing the release notes dialogbox.
+                    self.release_notes_widget.insert(END, getCurrentLanguage().couldnt_download)
+                    self.release_notes_widget.configure(state='disabled')
+                except Exception as _errReleaseNotesErrorDisplaying:
+                    print(f"[WARNING] an error has occured while trying to say that release notes couldn't be displayed\nThis can happen if the updater window is closed right before it downloads release notes from the server\nError details are:\n{_errReleaseNotesErrorDisplaying}")
+                    pass
+                    
             return None
         
 
