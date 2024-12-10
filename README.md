@@ -4,9 +4,13 @@
 
 **A Free and Open-Source program to help you free up disk space on your PC that is a way more powerful than you might expect**<br/>
 
-## ⚠ Attention users: Please update your copy of Temp_Cleaner GUI to v7.0
-**This copy of Temp_Cleaner GUI includes minor bug fixes and the new cleaner that cleans up temporary files on your Android smartphone, so please update your current copy of Temp_Cleaner GUI to this release, despite it's name that ends with `-testing` or `beta`, this is stable for everyday use and I can confirm that myself!** <br>
-Please tell me what do you think about this feature in the discussions of this release [here](https://github.com/InsertX2k/temp_cleaner_gui/releases/tag/v7.0-testing)
+## ⚠ Attention users: Please keep your copy of Temp_Cleaner GUI up-to-date!
+The built-in updater program should help you stay up-to-date, only if you download the latest release whenever prompted to do, the main and most important reason why you should stay up-to-date is that I sometimes discover bugs and fix them in the recent version (pretty much like any software or operating system that exists in this world), also I sometimes add new useful features (more like the new Android cleaner feature introduced in v7.0-testing) and I need some testers to tell me how do they perform and report bugs to me when necessary, also if you open a support ticket in the [SourceForge page](https://sourceforge.net/p/temp-cleaner-gui/tickets/), it will be closed if the user who created the ticket is not running the most recent version of Temp_Cleaner GUI, thank you for understanding.
+
+#### Also stop downloading older versions of Temp_Cleaner GUI from the sourceforge files section, use the [downloads page of the website instead](https://insertx2k.github.io/temp_cleaner_gui/downloads.html), it does always redirect you to the latest build.
+![STOP DOWNLOADING OLD BINARIES](https://github.com/user-attachments/assets/966f8405-df2e-4a6f-851a-53d6095d9195)
+
+
 
 # Features:
 * Free and Open-Source
