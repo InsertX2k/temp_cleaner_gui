@@ -136,7 +136,7 @@ Powered by Minimal Accessibility Pack v1.0 by Insertx2k Dev (Mr.X).
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "Help on using Minimal Accessibility Pack v1.0"
     console_output_text = "Cleaning Progress"
-    about_window_txt = """Version: 7.1
+    about_window_txt = """Version: 8.0
 Release Channel: stable
 Additional features installed:
 1-Arabic Language Pack v1.1
@@ -155,7 +155,7 @@ You can also press 'F2' to show you a message box containing useful information 
 You can press 'F1' to show you some help about using Minimal Accessibility Pack v1.0 or about increasing or decreasing screen font size.
 """
 
-    about_window_title = "About 'The Temp_Cleaner GUI Project (v7.1)'"
+    about_window_title = "About 'The Temp_Cleaner GUI Project (v8.0)'"
     cant_retrieve_config_fromfile_msgbox_content = "Unable to retrieve the configuration information, this can be due to a catastrophic failure, or a something else, the settings window will close."
     cant_retrieve_config_fromfile_msgbox_title = "Runtime Exception"
     cant_read_config_frominside_file_msgbox_title = "A runtime exception"
@@ -167,7 +167,7 @@ You can press 'F1' to show you some help about using Minimal Accessibility Pack 
     unable_to_save_your_changes_text = "Unable to save your changes to the file 'Config.ini', Nothing has been changed yet, and this window will not close."
     prog_title_no_username = "Temp_Cleaner GUI"
     prog_title_1 = "Welcome "
-    prog_title_2 = " to Temp_Cleaner GUI v7.1!"
+    prog_title_2 = " to Temp_Cleaner GUI v8.0!"
     settings_window_title = "Temp_Cleaner GUI Settings"
     settings_hint_one = "Change the way Temp_Cleaner GUI behaves"
     rammap_path_settings_hint = "RAMMap Executable Path:"
@@ -330,7 +330,19 @@ Please choose a device from this list:
     chooser_all_devices = "Clean all devices connected"
     chooser_choose_a_device = "Choose a device..."
     rebuild_icon_cache_winexplorer = "Rebuild Icon Cache (Windows Explorer)"
-    
+    found_winold_folder = "Found old Windows Installation folder:   "
+    del_memory_dump_file = "Windows Memory Dump File"
+    memdump_cleaner_path_settings_hint = "Specify a custom full path to the Windows Memory Dump file:"
+    no_path_memdump_file = "No custom path specified for the Windows Memory Dump file, will continue using the default path."
+    non_standard_memdump_ftypes = "Other Non-standard Memory Dump Files"
+    welcome_your_all_set_banner = "You're all set!"
+    welcome_your_all_set_extended_text = "Your PC is probably clean and you may not need to run any cleaning functions, also, your current installation of Temp_Cleaner GUI is up-to-date!, so while you are reading this, consider buying the dev a cup of coffee."
+    info_banner_new_tcg_release_text = "There is a new version of Temp_Cleaner GUI available, it is strongly recommended that you keep your copy of TCG up-to-date, You may press the button 'Update' to open the download webpage for you."
+    infobanner_cleaning_necessary = "Start cleaning up now!"
+    infobanner_cleaning_necessary_desc = "You need to start cleaning up, Temp_Cleaner GUI scanned the usual places of temporary files (meaning you could free up even more) and found out that you can free up over "
+    infobanner_config = "Information Banner:"
+    infobanner_config_desc = "Set the minimum amount of disk space used by common temporary folders before informing you about the need to clean up."
+
     
 
 class ar:
@@ -474,7 +486,7 @@ class ar:
 
     help_on_using_minimal_accessibility_pack_msgbox_title = "المساعدة في إستخدام حزمة إمكانية الوصول الإدني الاصدار 1.0"
     console_output_text = "تقدم التنظيف"
-    about_window_txt = """ الإصدار: 7.1
+    about_window_txt = """ الإصدار: 8.0
 قناة الإصدار : مستقر
 :المميزات الإضافية المفعلة
 1-Arabic Language Pack v1.1 (حزمة اللغة العربية v1.1)
@@ -493,7 +505,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
 لإظهار معلومات عن كيفية إستخدام حزمة امكانية الوصول او كيفية تكبير وتصغير الكتابه في الشاشة 'F1' يمكنك الضغط علي زر   
 """
 
-    about_window_title = "حول 'The Temp_Cleaner GUI Project (v7.1)'"
+    about_window_title = "حول 'The Temp_Cleaner GUI Project (v8.0)'"
     cant_retrieve_config_fromfile_msgbox_content = "خطأ في الحصول علي المعلومات من الضبط، هذا قد يكون بسبب خطأ كارثي او شئ اخر، شاشة الضبط سوف تغلق"
     cant_retrieve_config_fromfile_msgbox_title = "حدث خطأ في وقت التشغيل"
     cant_read_config_frominside_file_msgbox_title = "حدث خطأ في وقت التشغيل"
@@ -505,7 +517,7 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     unable_to_save_your_changes_text = "لم يتغير اي شئ حتي الان، وهذه النافذة لن تغلق ،'Config.ini' فشل في حفظ التغييرات في ملف "
     prog_title_no_username = "Temp_Cleaner GUI"
     prog_title_1 = " مرحبا"
-    prog_title_2 = " Temp_Cleaner GUI v7.1 في "
+    prog_title_2 = " Temp_Cleaner GUI v8.0 في "
     settings_window_title = "Temp_Cleaner GUI ضبط"
     settings_hint_one = "Temp_Cleaner GUI قم بتغيير الطريقة التي يتصرف بها "
     rammap_path_settings_hint = "Sysinternals من RAMMap ماهو مسار الملف التنفيذي لبرنامج :"
@@ -663,3 +675,15 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     chooser_all_devices = "ﺔﻠﺼﺘﻤﻟﺍ ﺓﺰﻬﺟﻷﺍ ﻞﻛ ﻒﻴﻈﻨﺗ"
     chooser_choose_a_device = "...ﺯﺎﻬﺟ ﺭﺎﺘﺧﺇ"
     rebuild_icon_cache_winexplorer = "ﺯﻭﺪﻨﻳﻮﻟﺍ ﻒﺸﻜﺘﺴﻤﺑ ﺔﺻﺎﺨﻟﺍ ﺕﺎﻧﻮﻘﻳﻺﻟ ﺔﺘﻗﺆﻤﻟﺍ ﺕﺎﻔﻠﻤﻟﺍ ﺀﺎﻨﺑ ﺓﺩﺎﻋﺇ"
+    found_winold_folder = "  : وجد مجلد يحتوي علي ملفات قديمة لنسخ الويندوز  "
+    del_memory_dump_file = "ﺯﻭﺪﻨﻳﻭ ﻡﺎﻈﻨﺑ ﺹﺎﺨﻟﺍ ﺓﺮﻛﺍﺬﻟﺍ ﻎﻳﺮﻔﺗ ﻒﻠﻣ"
+    memdump_cleaner_path_settings_hint = "حدد مسار مخصص لملف تفريغ الذاكرة"
+    no_path_memdump_file = "لم يتم تحديد مسار مخصص لملف تفريغ الذاكرة، سوف يتم الإستمرار بالمسار الإفتراضي"
+    non_standard_memdump_ftypes = "انواع اخري غير قياسية لملفات تفريغ الذاكرة"
+    welcome_your_all_set_banner = "كل شئ علي ما يرام"
+    welcome_your_all_set_extended_text = "كل شئ علي ما يرام، ربما انت لا تحتاج إلي تنظيف جهازك، ونسختك الحالية من البرنامج محدثة، بينما انت تقرأ هذا،\n ما رأيك في شراء كوب قهوة للمطور"
+    info_banner_new_tcg_release_text = "متاح للتحميل حاليا، إنه من المستحسن أن تبقي نسختك من هذا البرنامج محدثة دائما، يمكنك النقر علي زر التحديث لفتح صفحة التحميل Temp_Cleaner GUI هناك إصدار جديد من "
+    infobanner_cleaning_necessary = "إبدأ التنظيف الأن"
+    infobanner_cleaning_necessary_desc = "أنت تحتاج إلي بدء تنظيف جهازك الأن، هذا البرنامج قام بفحص الاماكن الطبيعية التي تتواجد  فيها الملفات المؤقتة في العادة ووجد انه يمكنك تفريغ اكتر من  "
+    infobanner_config = "لوحة المعلومات:"
+    infobanner_config_desc = "أختار الحد الأدني لحجم مجلدات الملفات المؤقتة التي إذا تعدتها سوف يتم مطالبتك بتنظيفها"

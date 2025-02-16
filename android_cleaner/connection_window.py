@@ -12,6 +12,7 @@ import time
 import threading
 from subprocess import getoutput
 from . import adb_processor
+
 # initializing a variable containing the path where program executable is stored.
 application_path = ''
 
@@ -28,6 +29,7 @@ print(f"[DEBUG]: connection_window module located at: {application_path}")
 # fixes for translations module outside of cwd.
 sys.path.append(f"{application_path}\\..")
 from translations import *
+
 
 try:
     # opening a configparser session for reading from the file 'Config.ini'
@@ -317,6 +319,8 @@ class ConnectPhoneToPCViaWiFiWindow(Toplevel):
         
         self.continue_btn = CTkButton(self, text=getCurrentLanguage().continue_connection_window_btn, command=self.closeWindowAndReturnData)
         self.continue_btn.pack(expand=False, pady=25, ipady=10, fill=X)
+        # binding Enter key to the continue button to help in situations where the window doesn't appear properly.
+        self.bind_all("<Return>", lambda callback: self.closeWindowAndReturnData())
         
     def closeWindowAndReturnData(self):
         """
@@ -438,7 +442,10 @@ class ChooseADeviceWindow(Toplevel):
 
 
 if __name__ == '__main__':
-    # ChooseADeviceWindow().mainloop()
+    # internal testing
+    # window = ConnectPhoneToPCViaWiFiWindow()
+    # window.mainloop()
+    # print(ipaddr_and_port, authcode)
     # print(chosen_dev)
     # raise SystemExit(0)
     pass
