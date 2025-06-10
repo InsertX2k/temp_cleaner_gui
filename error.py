@@ -11,7 +11,10 @@ from tkinter import ttk, messagebox, scrolledtext
 from translations import *
 import sys, os
 import configparser
-from PIL import ImageTk, Image
+# ensuring the error module will continue to work even tho
+# the pillow module couldn't be imported!
+try: from PIL import ImageTk, Image
+except: pass
 
 # initializing a variable containing the path where application files are stored.
 application_path = ''

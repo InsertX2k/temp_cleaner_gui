@@ -2,6 +2,7 @@
 Provides strings for use with Temp_Cleaner GUI's UI elements.
 """
 class en:
+    __str__ = "en"
     """
     Provides English translations for program Temp_Cleaner GUI by Ziad Ahmed (Mr.X)
 
@@ -97,7 +98,7 @@ class en:
     about_text = "About & Tips"
     executing_text = "Cleaning up..."
     restart_winupdate_window_title_text = "Restart Windows Update Service"
-    restart_winupdate_window_content_text = "After you delete all downloaded files by Windows Update, you must restart it's service to ensure proper functionality after cleaning, Do you want Temp_Cleaner GUI to do that for you now?"
+    restart_winupdate_window_content_text = "After you delete all downloaded files by Windows Update, you must restart it's service to ensure proper functionality after cleaning, Do you want Temp_Cleaner GUI to do that for you now?\nIt will default to No after 15 seconds."
     restarting_winupdate_service_text = "Restarting Windows Update Service..."
     restart_winupdate_service_done_text = "Windows Update Service has been restarted!"
     not_restarting_winupdate_service_warning_text = "You might face issues with the functionality of Windows Update if you didn't restart it as soon as possible."
@@ -342,10 +343,25 @@ Please choose a device from this list:
     infobanner_cleaning_necessary_desc = "You need to start cleaning up, Temp_Cleaner GUI scanned the usual places of temporary files (meaning you could free up even more) and found out that you can free up over "
     infobanner_config = "Information Banner:"
     infobanner_config_desc = "Set the minimum amount of disk space used by common temporary folders before informing you about the need to clean up."
+    oobe_first_stage_info = """It appears that this is your first time to run Temp_Cleaner GUI!
+This setup wizard will help you get started by setting up some basic settings like: changing display language, theme mode (Dark or Light), and whether you want Temp_Cleaner GUI to display tips of the day for you or not.
+You can press “Continue” to processed.
+"""
+    oobe_continue_btn = "Continue"
+    oobe_choose_theme_mode = "Select Theme Mode"
+    oobe_second_stage_info = "Choose a color mode (or a theme mode), the dark appearance mode is the best mode for using the application at night and reducing eyestrain, while the Light theme mode is generally the best for better clarity in bright rooms."
+    yes = "Yes"
+    no = "No"
+    oobe_configure_other_settings = "Change Other Settings"
+    oobe_change_settings = "Below are different settings you can change, take a look at them and modify them according to your preferences, when you are done, click Continue."
+    oobe_autoupdate_text = "You can enable automatic checking for updates at startup, this way, you will be always informed whenever an update to this program is available to download."
+    oobe_startup_tips_text = "Enabling this option will show you some useful tips at the startup of the program, these tips are like small help documentation for navigating through the program."
+    oobe_all_done = "All Set!"
+    oobe_your_all_done = "You are all set!, Now that you have configured the program the way you like, you can start using it right now!"
 
-    
 
 class ar:
+    __str__ = "ar"
     """
     Provides Arabic Translations for program Temp_Cleaner GUI by Ziad Ahmed (Mr.X)
     
@@ -449,7 +465,7 @@ class ar:
     about_text = "ﺢﺋﺎﺼﻧﻭ ﺞﻣﺎﻧﺮﺒﻟﺍ ﻝﻮﺣ"
     executing_text = "...ﻒﻴﻈﻨﺘﻟﺍ ﻱﺭﺎﺟ"
     restart_winupdate_window_title_text = "إعادة تشغيل خدمة تحديث ويندوز"
-    restart_winupdate_window_content_text = "بعد مسح جميع تنزيلات برنامج ترقية ويندوز يجب عليك إعادة تشغيل الخدمة الخاصة به، هل تريد القيام بذلك تلقائيا؟"
+    restart_winupdate_window_content_text = "لن يتم إعادة تشغيل الخدمة إذا لم تضغط علي نعم في خلال 15 ثانية \nبعد مسح جميع تنزيلات برنامج ترقية ويندوز يجب عليك إعادة تشغيل الخدمة الخاصة به، هل تريد القيام بذلك تلقائيا؟"
     restarting_winupdate_service_text = "جاري إعادة تشغيل خدمة تحديث ويندوز..."
     restart_winupdate_service_done_text = "تمت إعادة تشغيل خدمة تحديث ويندوز!"
     not_restarting_winupdate_service_warning_text = "قد لا تعمل ترقية ويندوز إذا لم تقم بإعادة تشغيلها في اسرع وقت ممكن"
@@ -687,3 +703,19 @@ https://github.com/insertx2k/temp_cleaner_gui : رابط مستودع جيتهب
     infobanner_cleaning_necessary_desc = "أنت تحتاج إلي بدء تنظيف جهازك الأن، هذا البرنامج قام بفحص الاماكن الطبيعية التي تتواجد  فيها الملفات المؤقتة في العادة ووجد انه يمكنك تفريغ اكتر من  "
     infobanner_config = "لوحة المعلومات:"
     infobanner_config_desc = "أختار الحد الأدني لحجم مجلدات الملفات المؤقتة التي إذا تعدتها سوف يتم مطالبتك بتنظيفها"
+    oobe_first_stage_info = """Temp_Cleaner GUI من الظاهر أنها اول مرة تستخدم فيها برنامج 
+معالج الإعداد هذا سوف يساعدك علي البدأ من خلال تغيير بعض الإعدادات الاساسية مثل: تغيير لغة العرض، وضع الثيمة، وما إذا كنت تريد ان يقوم البرنامج بعرض نصائح اليومية ام لا
+يمكنك الضغط علي زر المتابعة للإستمرار
+"""
+    oobe_continue_btn = "ﺔﻌﺑﺎﺘﻣ"
+    oobe_choose_theme_mode = "إختار وضع الثمة"
+    oobe_second_stage_info = """ﻞﻴﻠﻟﺍ ﻲﻓ ﻖﻴﺒﻄﺘﻟﺍ ﺍﺬﻫ ﻡﺍﺪﺨﺘﺳﺇ ﺪﻨﻋ ﻦﻴﻨﻴﻌﻠﻟ ﻞﻀﻓﺍ ﺔﺣﺍﺮﻟ ﺔﻤﻠﻈﻤﻟﺍ ﺔﻤﺜﻟﺍ ﺮﺘﺧﺇ ﻭﺍ ﺔﻌﻃﺎﺴﻟﺍ ﺕﺎﺌﻴﺒﻟﺍ ﻲﻓ ﻞﻀﻓﺍ ﺡﻮﺿﻮﻟ ﺔﺤﺗﺎﻔﻟﺍ ﺔﻤﺜﻟﺍ ﺮﺘﺧﺇ ،ﺔﻤﺋﺎﻘﻟﺍ ﻩﺬﻫ ﻦﻣ ﺔﻤﺜﻟﺍ ﻊﺿﻭ ﺭﺎﻴﺘﺧﺇ ﺀﺎﺟﺮﺑ
+"""
+    yes = "نعم"
+    no = "لا"
+    oobe_configure_other_settings = "تغيير الإعدادات الأخري"
+    oobe_change_settings = ".ﺭﺍﺮﻤﺘﺳﻹﺍ ﺭﺯ ﻲﻠﻋ ﻂﻐﻀﻟﺍ ﻚﻨﻜﻤﻳ ﺎﻫﺮﻴﻴﻐﺗ ﺪﻌﺑ ،ﺎﻫﺮﻴﻴﻐﺗ ﻲﻓ ﺐﻏﺮﺗ ﺪﻗ ﻲﺘﻟﺍ ﻱﺮﺧﻷﺍ ﺕﺍﺩﺍﺪﻋﻹﺍ ﺾﻌﺑ ﻩﺬﻫ"
+    oobe_autoupdate_text = ".ﻞﻳﺰﻨﺘﻠﻟ ﺡﺎﺘﻣ ﺪﻳﺪﺟ ﺚﻳﺪﺤﺗ ﺮﻓﻮﺘﻳ ﺎﻣﺪﻨﻋ ﻚﻣﻼﻋﺇ ﻢﺘﻳ ﻑﻮﺳ ،ﺍﺬﻫ ﻞﻴﻌﻔﺘﺑ ﺖﻤﻗ ﺍﺫﺇ ،ﺞﻣﺎﻧﺮﺒﻟﺍ ﺍﺬﻬﻟ ﺕﺎﺜﻳﺪﺤﺗ ﺩﻮﺟﻭ ﻦﻣ ﻲﺋﺎﻘﻠﺘﻟﺍ ﻖﻘﺤﺘﻟﺍ ﻞﻴﻌﻔﺗ ﻚﻨﻜﻤﻳ"
+    oobe_startup_tips_text = ".ﺞﻣﺎﻧﺮﺒﻟﺍ ﻞﻴﻐﺸﺗ ﺪﻨﻋ ﺢﺋﺎﺼﻨﻟﺍ ﺾﻌﺑ ﺭﺎﻬﻇﺈﺑ ﻡﻮﻘﻳ ﺞﻣﺎﻧﺮﺒﻟﺍ ﻞﻌﺠﻳ ﻑﻮﺳ ﺭﺎﻴﺘﺧﻹﺍ ﺍﺬﻫ ﻞﻴﻌﻔﺗ"
+    oobe_all_done = "إنتهاء"
+    oobe_your_all_done = "ﺞﻣﺎﻧﺮﺒﻟﺍ ﺍﺬﻫ ﻡﺍﺪﺨﺘﺳﺇ ﻲﻓ ﺀﺪﺒﻟﺍ ﻚﻨﻜﻤﻳ ﻥﻷﺍ ،ﻚﻟ ﺔﺒﺳﺎﻨﻤﻟﺍ ﺔﻘﻳﺮﻄﻟﺍ ﻲﻠﻋ ﺕﺍﺩﺍﺪﻋﻹﺍ ﺮﻴﻴﻐﺗ ﺪﻌﺑ ،ﺎﻣﺎﻤﺗ ﺰﻫﺎﺟ ﺖﻧﺃ"

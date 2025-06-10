@@ -98,6 +98,7 @@ try:
     from android_cleaner import connection_window
     import infobanner
     import time
+    import msgbox
 except Exception or ImportError as errorImport18s:
     try:
         window = error.ErrorWindow(errorMsgContent=f"An import error has occured!\n\nThis usually happens when Temp_Cleaner GUI couldn't import one or more of it's necessary modules or libraries\nMore information about this import error available below:\n{errorImport18s}\n\nPressing the 'Continue' button will NOT allow you to continue.") # creating an instance of the ErrorWindow for use.
@@ -584,6 +585,7 @@ class MainWindowLightMode(CTk):
                 self.output_show.configure(state='normal')
                 self.output_show.insert(END, f"\n{getCurrentLanguage().winupdate_downloadedfiles_text}")
                 self.output_show.insert(END, f"\n{getCurrentLanguage().attempting_to_take_folder_ownership}\n")
+                self.output_show.configure(state='disabled')
                 self.process = subprocess.getoutput('takeown /F "%windir%\\SoftwareDistribution\\Download" /A /R /D Y&icacls "%windir%\\SoftwareDistribution\\Download" /grant *S-1-5-32-544:F /T /C /Q')
                 self.output_show.configure(state='normal')
                 # self.output_show.insert(END, f"\n{self.process}")
@@ -601,8 +603,9 @@ class MainWindowLightMode(CTk):
                 self.output_show.insert(END, f"\n {self.process}")
                 self.output_show.configure(state='disabled')
 
-
-                self.reboot_uwp = messagebox.askquestion(getCurrentLanguage().restart_winupdate_window_title_text, getCurrentLanguage().restart_winupdate_window_content_text)
+                self.reboot_uwp = msgbox.YesNoMsgBox(title=getCurrentLanguage().restart_winupdate_window_title_text, message=getCurrentLanguage().restart_winupdate_window_content_text, timeout=15, default="no")
+                self.reboot_uwp.wait_window()
+                self.reboot_uwp = self.reboot_uwp.selection
                 if self.reboot_uwp == "yes":
                     self.output_show.configure(state='normal')
                     self.output_show.insert(END, f"\n{getCurrentLanguage().restarting_winupdate_service_text}\n")
@@ -3188,17 +3191,17 @@ class MainWindowLightMode(CTk):
             self.output_show.bind("<Control-I>", incrFontSizeCoutput)
             self.output_show.bind("<Control-d>", decrFontSizeCoutput)
             self.output_show.bind("<Control-D>", decrFontSizeCoutput)
-            self.output_show.bind("<F1>", showHelp)
-            self.show_frame.bind("<F1>", showHelp)
+            # self.output_show.bind("<F1>", showHelp)
+            # self.show_frame.bind("<F1>", showHelp)
             self.bind("<F1>", showHelp)
             self.main_canvas.bind('<Enter>', _bind_to_mousewheel)
             self.main_canvas.bind('<Leave>', _unbind_from_mousewheel)
             self.output_show.bind('<Enter>', _unbind_from_mousewheel)
             self.output_show.bind('<Leave>', _bind_to_mousewheel)
-            self.show_frame.bind("<F2>", show_used_systemdrive_space)
-            self.output_show.bind("<F2>", show_used_systemdrive_space)
-            self.main_canvas.bind("<F2>", show_used_systemdrive_space)
-            self.main_frame.bind("<F2>", show_used_systemdrive_space)
+            # self.show_frame.bind("<F2>", show_used_systemdrive_space)
+            # self.output_show.bind("<F2>", show_used_systemdrive_space)
+            # self.main_canvas.bind("<F2>", show_used_systemdrive_space)
+            # self.main_frame.bind("<F2>", show_used_systemdrive_space)
             self.bind("<F2>", show_used_systemdrive_space)
             # executing a command to terminate the program's interpreter upon pressing the [X] button on top of the window.
             self.protocol("WM_DELETE_WINDOW", close_main_screen)
