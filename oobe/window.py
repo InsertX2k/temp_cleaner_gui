@@ -14,7 +14,7 @@ if getattr(sys, 'frozen', False):
     # pyinstaller creates a sys attribute frozen=True during startup of pyinstaller bootloader to indicate
     # that pyinstaller has compiled (frozen) this program, then it creates a sys constant _MEIPASS containing the path
     # where the executable is found.
-    application_path = sys._MEIPASS
+    application_path = f"{sys._MEIPASS}\\oobe"
 else: # if program is running as a python script via python terminal
     application_path = os.path.dirname(os.path.abspath(__file__))
 # fixes for searching for external modules.
@@ -123,10 +123,11 @@ The OOBE program can't continue...
         self.stageFrame.pack(fill=BOTH, expand=True)
         # binding destroy event to the change displayed frame function
         self.stageFrame.bind("<Destroy>", lambda e: __changeDisplayedFrame())
-
         # setting window attributes to be topmost
         self.attributes("-topmost", True)
 
 
 if __name__ == '__main__':
     OOBEWindow().mainloop()
+    print("End of OOBE Window mainloop!")
+    raise SystemExit(0)

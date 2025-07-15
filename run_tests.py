@@ -75,7 +75,9 @@ MODULES = [
     "oobe",
     "urllib",
     "urllib.request",
-    "colorama"
+    "colorama",
+    "pwrcontrol",
+    "toasts"
 ]
 MOD_LENGTH: int = len(MODULES)
 

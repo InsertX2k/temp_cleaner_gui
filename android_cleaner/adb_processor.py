@@ -135,16 +135,30 @@ def cleanCachesViaADB(deviceName:str=None) -> str:
     
     for package in getoutput(f"{adb_exe_path} {device_arg} shell pm list packages -3").split("\n"):
         pkg = package.replace("package:",'')
+        if pkg[0:7] == "adb.exe":
+            # adb.exe shouldn't be shown here, because if it does, 
+            # this indicates an issue with the connection established with the phone.
+            userpkg_list = [] # emptying the list.
+            break
         userpkg_list.append(pkg)
-    print(f"query user packages list: \n{userpkg_list}")
-    output_str = output_str + "\nqueried user packages list"
-
-    for package in userpkg_list:
-        pkgclr = getoutput(f"{adb_exe_path} {device_arg} shell am force-stop {package}")
-        print(f"[DEBUG]: package: '{package}' has been force stopped!\n{pkgclr}")
-        output_str = output_str + f"\npackage: {package} has been force stopped!"    
-    print("[DEBUG]: force stopping all user packages has been completed!\n\n")
-    output_str = output_str + "\nForce stopping all user packages is completed!"
+    if len(userpkg_list) == 0: # empty list
+        print("[DEBUG]: quried user pkgs list from phone is empty, possible connection error is detected.")
+        output_str = output_str + "\nPhone is not connected!"
+    else:
+        print(f"query user packages list: \n{userpkg_list}")
+        output_str = output_str + "\nqueried user packages list"
+    
+    if len(userpkg_list) == 0:
+        # no pkgs have been force stopped since userpkg_list is empty.
+        print("[DEBUG]: No user packages have been force stopped, since the userpkg_list is empty!")
+        pass
+    else:
+        for package in userpkg_list:
+            pkgclr = getoutput(f"{adb_exe_path} {device_arg} shell am force-stop {package}")
+            print(f"[DEBUG]: package: '{package}' has been force stopped!\n{pkgclr}")
+            output_str = output_str + f"\npackage: {package} will be force stopped\n{pkgclr}"
+        print("[DEBUG]: force stopping all user packages has been completed!\n\n")
+        output_str = output_str + "\nForce stopping all user packages is completed!"
 
     trc = getoutput(f"{adb_exe_path} {device_arg} shell pm trim-caches 10000G")
     print(f"trim-caches 10000G command finished with output:\n{trc}\n\n")

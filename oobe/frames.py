@@ -18,7 +18,7 @@ if getattr(sys, 'frozen', False):
     # pyinstaller creates a sys attribute frozen=True during startup of pyinstaller bootloader to indicate
     # that pyinstaller has compiled (frozen) this program, then it creates a sys constant _MEIPASS containing the path
     # where the executable is found.
-    application_path = sys._MEIPASS
+    application_path = f"{sys._MEIPASS}\\oobe"
 else: # if program is running as a python script via python terminal
     application_path = os.path.dirname(os.path.abspath(__file__))
 # fixes for searching for external modules.
@@ -811,7 +811,7 @@ Press any button below to terminate the program's process...
                 raise SystemExit(523) # an exit error for not being able to save OOBE status to the
                                       # configuration file.
             # now, we can destroy the current frame and its parent window.
-            try: self.destroy();self.master.destroy()
+            try: self.destroy();self.quit();self.master.quit();self.master.destroy()
             except Exception as __errDestroyingSelf:
                 __window: error.ErrorWindow = error.ErrorWindow(f"""An error has occured while destroying the OOBE window and LastStage frame.
 Current program stage is: frames.LastStage.__init__().__destroyMasterAndSaveToCfgFile() @ destroying the frame and its parent window.

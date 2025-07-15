@@ -99,6 +99,9 @@ try:
     import infobanner
     import time
     import msgbox
+    import pwrcontrol
+    from oobe import window as oobe_window
+    import importlib
 except Exception or ImportError as errorImport18s:
     try:
         window = error.ErrorWindow(errorMsgContent=f"An import error has occured!\n\nThis usually happens when Temp_Cleaner GUI couldn't import one or more of it's necessary modules or libraries\nMore information about this import error available below:\n{errorImport18s}\n\nPressing the 'Continue' button will NOT allow you to continue.") # creating an instance of the ErrorWindow for use.
@@ -106,6 +109,19 @@ except Exception or ImportError as errorImport18s:
         window.mainloop()
     except:
         raise SystemExit(2790) # sys.exit 2790 is for unable to start error window even though there happened an error.
+
+# Declaring a constant that will hold modules to reload (as module objects).
+RT_RELOAD_MODULES: list = [
+    donators,
+    tips,
+    adb_processor,
+    connection_window,
+    infobanner,
+    msgbox,
+    pwrcontrol,
+    updater,
+    oobe_window
+]
 
 
 try:
@@ -115,6 +131,22 @@ try:
 except Exception as readingFromConfigFileError:
     messagebox.showerror("Unhandled runtime exception", f"Couldn't read from local configuration file (Config.ini), please make sure it exists in the current directory of the program and try again.\n\nError details for technical assistance:\n{readingFromConfigFileError}")
     raise SystemExit(255)
+
+# initializing useAdditionalCleaners, it will be used as a control variable
+# for controlling the use of additional cleaners functionality in various 
+# parts of this program.
+useAdditionalCleaners = None
+
+try:
+    # ConfigParser object for handling operations on the additional cleaners file
+    AddsCleaners: configparser.ConfigParser = configparser.ConfigParser()
+    AddsCleaners.read(f"{application_path}\\addsclean.ini")
+    useAdditionalCleaners = True
+    print(f"[DEBUG] useAdditionalCleaners = {useAdditionalCleaners}")
+except Exception as readingFromAddsCleanerCfgFileError:
+    useAdditionalCleaners = False
+    print(f"[DEBUG] useAdditionalCleaners = {useAdditionalCleaners}")
+    error.ErrorWindow(errorMsgContent=f"An error has occured while trying to read from the additional cleaners configuration file (addsclean.ini)\nIt may be missing or this program might not have the necessary permissions to access it.\nError details are:\n{readingFromAddsCleanerCfgFileError}")
 
 
 def _async_raise(tid, exctype=error.UserInitiatedThreadStop):
@@ -222,8 +254,11 @@ class ControllableThread(threading.Thread):
 # This is program's Main Window Class.
 class MainWindowLightMode(CTk):
     def __init__(self):
-        global GetConfig, font_size, application_path
+        global GetConfig, font_size, application_path, useAdditionalCleaners
+        if useAdditionalCleaners == True:
+            global AddsCleaners
         super().__init__() # initializing the self.
+        
         print(f"""[DEBUG]: Current display properties (resolution) are:
 * Display Width: {self.winfo_screenwidth()}
 * Display height: {self.winfo_screenheight()}
@@ -381,7 +416,13 @@ class MainWindowLightMode(CTk):
         #     except Exception as error_terminating_thread:
         #         error.ErrorWindow(errorMsgContent=f"An error has occured while attempting to stop the cleaning process\nError details are:\n{error_terminating_thread}").mainloop()
 
-
+        # declaring a variable that holds the status of the current wakelock mode.
+        # it must be set to True if this process acquired a wakelock, and False if 
+        # no wakelock is acquired!
+        # initially, this should be False
+        self.isWakeLockAcquired = False
+        # a self attribute for storing the power control request object.
+        self.__pwrctrlobj = None
 
         def execute_theprogram():
             """
@@ -398,7 +439,36 @@ class MainWindowLightMode(CTk):
             self.output_show.configure(state='disabled')
             self.cleaning_indicator_progressbar.configure(mode='indeterminate', indeterminate_speed=1, progress_color='#0097e1')
             self.cleaning_indicator_progressbar.start() # start moving...
-            
+
+            # now here, before even starting the actual cleaning process.
+            # we will begin to acquire wakelock, but first, we will need to check if it is already acquired or not
+            # we will use GetConfig and read from the configuration file to see if we are allowed to acquire a wakelock or no.
+            if str(GetConfig['ProgConfig']['AcquireWakeLock']) == '1':
+                # now we have to check whether a wakelock is already acquired or not.
+                if self.isWakeLockAcquired:
+                    # wakelock is already acquired, we don't have to send a new wakelock acquire request to the 
+                    # operating system
+                    pass
+                else:
+                    # a wake lock is not acquired, therefore we have to perform the real steps for acquiring
+                    # an actual wakelock.
+                    # create a power request object
+                    self.__pwrctrlobj = pwrcontrol.createPowerRequest("A System Wakelock has been acquired for this computer by Temp_Cleaner GUI to prevent the computer from going to sleep during a cleaning session.")
+                    # modify the power request object
+                    __retval: bool = pwrcontrol.modifyPowerRequest(self.__pwrctrlobj, pwrcontrol.POWER_REQUEST_SYSTEM_REQUIRED)
+                    if __retval: # wakelock has been successfully acquired!
+                        self.isWakeLockAcquired = True # informing other parts of the program that a wakelock is acquired.
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{getCurrentLanguage().acquired_wakelock}")
+                        self.output_show.configure(state='disabled')
+                    else: # wakelock couldn't be acquired!
+                        self.isWakeLockAcquired = False
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{getCurrentLanguage().failed_to_acquire_wakelock}")
+                        self.output_show.configure(state='disabled')
+                    # free up memory
+                    del __retval
+
             try:
                 # getting the systemdrive letter.
                 system_drive = str(os.getenv("SYSTEMDRIVE"))
@@ -407,7 +477,9 @@ class MainWindowLightMode(CTk):
             except Exception as exception_fetching_freeds_bexec:
                 messagebox.showerror("An ERROR has occured", f"An exception has occured while Temp_Cleaner GUI was trying to fetch the current available disk space, This can happen if the program doesn't have the administrative privileges or so on\nConsider trying to do any of the following:\n1-Restart Temp_Cleaner GUI\n2-Right click on Temp_Cleaner GUI's Icon and click on Run as Administrator and try again\n3-Create a Github issue on https://github.com/insertx2k/temp_cleaner_gui with a screenshot of this messagebox and more details you think that will be useful in solving this issue.\nMore details available below:\n{exception_fetching_freeds_bexec}")
                 
-
+            # =============================================
+            # Now from here, the actual cleaning process begins...
+            # =============================================
             self.selection = self.var0.get()
             if self.selection == '1':
                 # implement other drives recycle bin cleaning feature.
@@ -742,6 +814,63 @@ class MainWindowLightMode(CTk):
                 self.output_show.configure(state='normal')
                 self.output_show.insert(END, f"\n{getCurrentLanguage().roblox_textures_text}\n {self.process}")
                 self.output_show.configure(state='disabled')
+                self.process = subprocess.getoutput('erase /s /f /q "%localappdata%\\Roblox\\rbx-storage"')
+                self.output_show.configure(state='normal')
+                self.output_show.insert(END, f"\n{self.process}")
+                self.output_show.configure(state='disabled')
+                try: 
+                    __rblx_appdata_versions_dir = f"{os.getenv('localappdata')}\\Roblox\\Versions"
+                    # we need scandir since it gives a valid DirEntry object which allows us to use is_dir() method.
+                    __rblx_dir_scandir = os.scandir(__rblx_appdata_versions_dir)
+                    # a list for storing the valid roblox versions folders
+                    __rblx_folders = []
+
+                    for entry in __rblx_dir_scandir:
+                        if entry.is_dir(): # is a folder
+                            __rblx_folders.append(entry.name)
+
+                    # print(__rblx_folders)
+                    # print(len(list())) - length of an empty list is 0
+
+                    if len(__rblx_folders) == 0:
+                        # stop execution and inform user that their roblox installation is corrupt.
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{getCurrentLanguage().roblox_no_versions_folders}")
+                        self.output_show.configure(state='disabled')
+                        pass
+                    else: 
+                        # folders found, processed to cleaning up other folders
+                        for __dir in __rblx_folders:
+                            # now we will run commands to clear respective folders.
+                            __out = subprocess.getoutput(f'del /F /S /Q "{__rblx_appdata_versions_dir}\\{__dir}\\RobloxPlayerBeta.exe.WebView2\\EBWebView\\Default\\Cache"')
+                            # now lets print the output of the command into the respective widget.
+                            self.output_show.configure(state='normal');self.output_show.insert(END, f"\n{__out}");self.output_show.configure(state='disabled')
+                            __out = subprocess.getoutput(f'del /F /S /Q "{__rblx_appdata_versions_dir}\\{__dir}\\RobloxPlayerBeta.exe.WebView2\\EBWebView\\Default\\Code Cache"')
+                            # now lets print the output of the command into the respective widget.
+                            self.output_show.configure(state='normal');self.output_show.insert(END, f"\n{__out}");self.output_show.configure(state='disabled')
+                            __out = subprocess.getoutput(f'del /F /S /Q "{__rblx_appdata_versions_dir}\\{__dir}\\RobloxPlayerBeta.exe.WebView2\\EBWebView\\Default\\GPUCache"')
+                            # now lets print the output of the command into the respective widget.
+                            self.output_show.configure(state='normal');self.output_show.insert(END, f"\n{__out}");self.output_show.configure(state='disabled')
+                            __out = subprocess.getoutput(f'del /F /S /Q "{__rblx_appdata_versions_dir}\\{__dir}\\RobloxPlayerBeta.exe.WebView2\\EBWebView\\Default\\DawnWebGPUCache"')
+                            # now lets print the output of the command into the respective widget.
+                            self.output_show.configure(state='normal');self.output_show.insert(END, f"\n{__out}");self.output_show.configure(state='disabled')
+                            __out = subprocess.getoutput(f'del /F /S /Q "{__rblx_appdata_versions_dir}\\{__dir}\\RobloxPlayerBeta.exe.WebView2\\EBWebView\\Default\\DawnGraphiteCache"')
+                            # now lets print the output of the command into the respective widget.
+                            self.output_show.configure(state='normal');self.output_show.insert(END, f"\n{__out}");self.output_show.configure(state='disabled')
+                            __out = subprocess.getoutput(f'del /F /S /Q "{__rblx_appdata_versions_dir}\\{__dir}\\RobloxPlayerBeta.exe.WebView2\\EBWebView\\ShaderCache"')
+                            # now lets print the output of the command into the respective widget.
+                            self.output_show.configure(state='normal');self.output_show.insert(END, f"\n{__out}");self.output_show.configure(state='disabled')
+                            # deleting __out from memory, freeing up resources.
+                            del __out
+                except:     # if this try block fails, it possibly means two errors (or one of them)
+                            # has occured at the same time, the first one being an error in retrieving the 
+                            # localappdata env variable, which means that we still cannot continue
+                            # the second one being that the 'Versions' folder not existing, which means that
+                            # the user's installation of Roblox is corrupt.
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().roblox_no_versions_folders}")
+                    self.output_show.configure(state='disabled')
+            
             self.selection29 = self.var27.get()
             if self.selection29 == '1':
                 self.process = subprocess.getoutput('erase /s /f /q "%appdata%\\Adobe\\Adobe Photoshop 2020\\Adobe Photoshop 2020 Settings\\web-cache-temp\\GPUCache"&erase /s /f /q "%appdata%\\Adobe\\Adobe Photoshop 2020\\Adobe Photoshop 2020 Settings\\web-cache-temp\\Code Cache"&del /s /f /q "%appdata%\\Adobe\\Adobe Photoshop 2020\\Adobe Photoshop 2020 Settings\\web-cache-temp\\Visited Links"')
@@ -750,7 +879,7 @@ class MainWindowLightMode(CTk):
                 self.output_show.configure(state='disabled')
             self.selection30 = self.var28.get()
             if self.selection30 == '1':
-                self.process = subprocess.getoutput(' erase /S /F /Q "%localappdata%\VEGAS Pro\17.0\File Explorer Thumbnails"&erase /S /F /Q "%localappdata%\VEGAS Pro\17.0\Device Explorer Thumbnails"&erase /S /F /Q "%localappdata%\VEGAS Pro\17.0\*.autosave.veg.bak"&erase /S /F /Q "%localappdata%\VEGAS Pro\17.0\svfx_Ofx*.log"')
+                self.process = subprocess.getoutput(' erase /S /F /Q "%localappdata%\\VEGAS Pro\\17.0\\File Explorer Thumbnails"&erase /S /F /Q "%localappdata%\\VEGAS Pro\\17.0\\Device Explorer Thumbnails"&erase /S /F /Q "%localappdata%\\VEGAS Pro\\17.0\\*.autosave.veg.bak"&erase /S /F /Q "%localappdata%\\VEGAS Pro\\17.0\\svfx_Ofx*.log"')
                 self.output_show.configure(state='normal')
                 self.output_show.insert(END, f"\n{getCurrentLanguage().vegaspro17_temp_text}\n {self.process}")
                 self.output_show.configure(state='disabled')
@@ -1367,15 +1496,10 @@ class MainWindowLightMode(CTk):
                         _window.wait_window()
                         # _window.mainloop()
                         # when user presses the OK button, will continue to execute the cleaning up function.
-                        _out = adb_processor.cleanCachesViaADB(deviceName=chosen_device)
-                        self.output_show.configure(state='normal')
-                        self.output_show.insert(END, f"\n{_out}")
-                        self.output_show.configure(state='disabled')
-                    else: # if no authentication is needed.
-                        _out = adb_processor.cleanCachesViaADB(deviceName=chosen_device)
-                        self.output_show.configure(state='normal')
-                        self.output_show.insert(END, f"\n{_out}")
-                        self.output_show.configure(state='disabled')
+                    _out = adb_processor.cleanCachesViaADB(deviceName=chosen_device)
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{_out}")
+                    self.output_show.configure(state='disabled')
                 elif _chosen_cleaning_method == str(getCurrentLanguage().wifi_adb): # the chosen method is via Wi-Fi debugging (A11+ only)
                     self.output_show.configure(state='normal')
                     self.output_show.insert(END, f"\n({getCurrentLanguage().wifi_adb})")
@@ -1462,8 +1586,50 @@ class MainWindowLightMode(CTk):
                     self.output_show.insert(END, f"\n{self.process}")
                     self.output_show.configure(state='disabled')
             
-            
+            # =============================================
+            # reserved for additional cleaners 
+            if useAdditionalCleaners == True:
+                print(f"[DEBUG] execute_theprogram: additional cleaners are being used, will check every cleaning option of them...")
+                # additional cleaners are enabled, and no errors have occured while declaring 
+                # them as widgets (or cleaning options, in the main window UI)
+                for __section in AddsCleaners.sections():
+                    print(f"[DEBUG] execute_theprogram: checking additional cleaner {__section} (variable: self.var{__section})")
+                    if str(getattr(self, f"var{__section}").get()) == "1":
+                        print(f"[DEBUG] execute_theprogram: custom cleaning option with variable: self.var{__section} is checked! str(1)")
+                        self.process = subprocess.getoutput(str(AddsCleaners[__section]["Command".upper()]))
+                        print(f"[DEBUG] execute_theprogram: command for {__section} executed: {str(AddsCleaners[__section]['Command'.upper()])}")
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{AddsCleaners[__section]['Name'.upper()]}\n{self.process}")
+                        self.output_show.configure(state='disabled')
+            # =============================================
+
             # ------------------------------------------------------------------
+            # we will check if a wakelock is acquired or not
+            if self.isWakeLockAcquired:
+                # A wakelock is acquired, now we need to do 2 things
+                # 1-release the power control request
+                if pwrcontrol.clrPowerRequest(self.__pwrctrlobj, pwrcontrol.POWER_REQUEST_SYSTEM_REQUIRED):
+                    # we have successfully cleared the power control request, and released the wakelock!
+                    self.isWakeLockAcquired = False
+                    # now we have to close the handle (aka. the power control request object).
+                    if pwrcontrol.closeHandle(self.__pwrctrlobj):
+                        # we have successfully closed the handle.
+                        self.__pwrctrlobj = None
+                        # informing the user of a successful wakelock release.
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{getCurrentLanguage().released_wakelock}")
+                        self.output_show.configure(state='disabled')
+                    else:
+                        # in case it couldn't close the handle.
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{getCurrentLanguage().wakelock_released_but_handle_not_closed}")
+                        self.output_show.configure(state='disabled')
+                else:
+                    # power control request could not be cleared, so wakelock could not be released.
+                    self.output_show.configure(state='normal')
+                    self.output_show.insert(END, f"\n{getCurrentLanguage().failed_to_release_wakelock}")
+                    self.output_show.configure(state='disabled')
+
             # this is the code for finished cleaning text insertion.
             self.output_show.configure(state='normal')
             self.output_show.insert(END, f"\n\n\n{getCurrentLanguage().finish_cleaning}\n\n\n")
@@ -1501,8 +1667,6 @@ class MainWindowLightMode(CTk):
                 raise SystemExit(0) # quitting program.
             
 
-            # Sleeping a bit for longer (or equal) to 5 seconds.
-            # time.sleep(1)
             try:
                 # now logging after everything is done.
                 total_after, used_after, free_after = shutil.disk_usage(system_drive)
@@ -1597,6 +1761,31 @@ class MainWindowLightMode(CTk):
                 self.cleaning_indicator_progressbar.stop()
                 self.cleaning_indicator_progressbar.configure(mode='determinate', progress_color='red')
                 self.cleaning_indicator_progressbar.set(1)
+                # now we need to make sure an existing wakelock is released.
+                if self.isWakeLockAcquired:
+                    # A wakelock is acquired, now we need to do 2 things
+                    # 1-release the power control request
+                    if pwrcontrol.clrPowerRequest(self.__pwrctrlobj, pwrcontrol.POWER_REQUEST_SYSTEM_REQUIRED):
+                        # we have successfully cleared the power control request, and released the wakelock!
+                        self.isWakeLockAcquired = False
+                        # now we have to close the handle (aka. the power control request object).
+                        if pwrcontrol.closeHandle(self.__pwrctrlobj):
+                            # we have successfully closed the handle.
+                            self.__pwrctrlobj = None
+                            # informing the user of a successful wakelock release.
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n{getCurrentLanguage().released_wakelock}")
+                            self.output_show.configure(state='disabled')
+                        else:
+                            # in case it couldn't close the handle.
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n{getCurrentLanguage().wakelock_released_but_handle_not_closed}")
+                            self.output_show.configure(state='disabled')
+                    else:
+                        # power control request could not be cleared, so wakelock could not be released.
+                        self.output_show.configure(state='normal')
+                        self.output_show.insert(END, f"\n{getCurrentLanguage().failed_to_release_wakelock}")
+                        self.output_show.configure(state='disabled')
 
             pass
             
@@ -1622,6 +1811,31 @@ class MainWindowLightMode(CTk):
                     self.cleaning_indicator_progressbar.stop()
                     self.cleaning_indicator_progressbar.configure(mode='determinate', progress_color='yellow')
                     self.cleaning_indicator_progressbar.set(1)
+                    # we need to release a wakelock in case it is acquired.
+                    if self.isWakeLockAcquired:
+                        # A wakelock is acquired, now we need to do 2 things
+                        # 1-release the power control request
+                        if pwrcontrol.clrPowerRequest(self.__pwrctrlobj, pwrcontrol.POWER_REQUEST_SYSTEM_REQUIRED):
+                            # we have successfully cleared the power control request, and released the wakelock!
+                            self.isWakeLockAcquired = False
+                            # now we have to close the handle (aka. the power control request object).
+                            if pwrcontrol.closeHandle(self.__pwrctrlobj):
+                                # we have successfully closed the handle.
+                                self.__pwrctrlobj = None
+                                # informing the user of a successful wakelock release.
+                                self.output_show.configure(state='normal')
+                                self.output_show.insert(END, f"\n{getCurrentLanguage().released_wakelock}")
+                                self.output_show.configure(state='disabled')
+                            else:
+                                # in case it couldn't close the handle.
+                                self.output_show.configure(state='normal')
+                                self.output_show.insert(END, f"\n{getCurrentLanguage().wakelock_released_but_handle_not_closed}")
+                                self.output_show.configure(state='disabled')
+                        else:
+                            # power control request could not be cleared, so wakelock could not be released.
+                            self.output_show.configure(state='normal')
+                            self.output_show.insert(END, f"\n{getCurrentLanguage().failed_to_release_wakelock}")
+                            self.output_show.configure(state='disabled')
             except Exception as errorLaunchingCleanThread:
                 try:
                     error.ErrorWindow(errorMsgContent=f"An error has occured while attempting to handle the cleaning thread\nError details are:\n{errorLaunchingCleanThread}\n\n").mainloop()
@@ -1629,10 +1843,6 @@ class MainWindowLightMode(CTk):
                     raise SystemExit(2790)
             pass
         
-        
-        def empty_function():
-            "a function used to fix the issue when temp cleaner gui does not stop the executing button even when cleaning."
-            pass
         
         def uncheck_all_options():
             """
@@ -1722,6 +1932,10 @@ class MainWindowLightMode(CTk):
                 self.var81.set(0)
                 self.var82.set(0)
                 self.var83.set(0)
+                if useAdditionalCleaners == True:
+                    for __section in AddsCleaners.sections():
+                        print(f"[DEBUG] uncheck_all_options: additional cleaning section {__section} (variable: self.var{__section}) will be unchecked!")
+                        getattr(self, f"var{__section}").set(0)
             except Exception as unable_to_uncheck_all_exception:
                 print(f"[ERROR]: Unable to execute the function uncheck_all_options() due to this exception\n{unable_to_uncheck_all_exception}")
                 return False
@@ -1934,12 +2148,17 @@ class MainWindowLightMode(CTk):
             aboutWindowProcess.mainloop()
             return None
         
+        # declaring a control variable (for the loop that updates the info banner) when
+        # the program is running under the user SYSTEM
+        self.__runSysUsrWarnAnimation: bool = True
 
         def close_main_screen():
             """
             A function to be executed when the user closes the window of the Home Screen UI.
             """
             print("[DEBUG]: User has sent the command WM_DESTROY_WINDOW, will safely terminate the process of this program.")
+            # safely terminating the loop for the warning animation, if it was running.
+            self.__runSysUsrWarnAnimation = False
             self.destroy()
             raise SystemExit(0) # exiting python interpreter.
             return None
@@ -2060,6 +2279,14 @@ class MainWindowLightMode(CTk):
         self.var81 = StringVar() # for android userpkgs cache cleaner.
         self.var82 = StringVar() # for refreshing and rebuilding icon cache in windows.
         self.var83 = StringVar() # for windows memory dump file deletion
+        # if using additional cleaners
+        if useAdditionalCleaners == True:
+            __addscleaners_sections: list = AddsCleaners.sections()
+            for _section in __addscleaners_sections:
+                setattr(self, f"var{_section}", StringVar())
+                print(f"[DEBUG] declaring a variable: self.var{_section} with value StringVar()")
+        
+        
 
         # ----------------------------
         # a fix for 1024x768 or lower screen resolutions:
@@ -2143,7 +2370,7 @@ class MainWindowLightMode(CTk):
             # first we need to get the env values of localappdata & windir
             # we need to check whether a new update is available or not before overwritting the banner.
             if updater.readVersion() == None:
-                print(f"[DEBUG]: No new updates available, will continue executing the function normally.")
+                print(f"[DEBUG]: No new updates available, will continue executing the function normally.\n[DEBUG]: self.__runSysUsrWarnAnimation is set to {self.__runSysUsrWarnAnimation}")
                 _localappdata: str = str(os.getenv("localappdata"))
                 _windir: str = str(os.getenv("windir"))
                 print(f"[DEBUG] LocalAppData: {_localappdata} & Windir: {_windir}")
@@ -2232,6 +2459,85 @@ class MainWindowLightMode(CTk):
                 return _dir_size_in_bytes
             except:
                 return False
+
+
+        def checkIfRunningAsSYSTEMUser(currentUserName: str = os.getlogin()) -> bool:
+            """
+            **PLEASE IF YOU PLAN TO USE THIS FUNCTION, RUN IT UNDER A DIFFERENT THREAD ASIDE FROM THE MAIN ONE**
+
+            This function checks if the current user is the SYSTEM user (NT AUTHORITY\SYSTEM)
+
+            If the current user is SYSTEM, it will update the information banner widget to show
+            a warning that a user must be VERY careful about what they do with the program as it
+            could possibly mess their system up.
+
+            (we already assume by that check that even an administrator cannot create a user named SYSTEM)
+
+            parameters:
+
+            currentUserName: a string value representing the current username as reported by the operating system, defaults to os.getlogin() to retrieve the current username directly from the operating system APIs.
+
+            returns: False (if it didn't or couldn't update the info banner widget) and if the
+            current user is not the user SYSTEM
+
+            True: if it successfully updated the banner and the update loop is called to be terminated/stopped.
+
+            None: if there is an update available, the procedures to check if we are running the 
+            SYSTEM user or not are pointless at this stage.
+            """
+            print("[DEBUG] checkIfRunningAsSYSTEMUser: begin working...")
+            __SYSTEM_USER: str = 'SYSTEM'
+            # in this function we have these goals:
+            # check first if an update is available, because if yes, we will not do anything
+            # then, we will update the info banner widget to represent a warning
+            # this function will possibly be running all the time because it will priodically
+            # update the display icon.
+            try:
+                if updater.readVersion() == None:
+                    print("[DEBUG] checkIfRunningAsSYSTEMUser: no new updates available, its safe to continue.")
+                    # we are already running the latest version, we can continue
+                    if currentUserName == __SYSTEM_USER:
+                        print("[DEBUG] checkIfRunningAsSYSTEMUser: current User is SYSTEM")
+                        # we are already running the SYSTEM user, therefore we can run the logic
+                        # for updating the info banner widget
+                        # for updating and animating the info banner widget we need to do 2 things in
+                        # a loop (with a control variable, of course)
+                        # control variable self.__runSysUsrWarnAnimation
+                        # we do not need to store two instances of photoimage, instead, we will
+                        # just modify the self.iconObject using its configure() method.
+                        # we will retrieve banner mode first
+                        if int(self.winfo_screenwidth()) <= 1024 and int(self.winfo_screenheight()) <= 768: # banner mode = lowres
+                            print("[DEBUG] checkIfRunningAsSYSTEMUser: current banner mode will be lowres")
+                            __BANNER_MODE = infobanner.LOWRES
+                        else: # banner mode = highres
+                            print("[DEBUG] checkIfRunningAsSYSTEMUser: current banner mode will be high res!")
+                            __BANNER_MODE = infobanner.FULLRES 
+                        print("[DEBUG] checkIfRunningAsSYSTEMUser: will enter warning animation loop!")
+                        while self.__runSysUsrWarnAnimation:
+                            # while the control variable is set to True
+                            # we will update the info banner widget two times 
+                            # and between each time we have to set a delay (usually 1 sec)
+                            print("[DEBUG] checkIfRunningAsSYSTEMUser: will update the infobanner widget with the warn icon, then sleep for 1 secs")
+                            self.iconObject.configure(file=f"{application_path}\\warn.png")
+                            self.infoBanner.update_configuration(self.iconObject, getCurrentLanguage().sys_usr_warn_header, getCurrentLanguage().sys_usr_warn_content_txt, '', None, displayFuncBtn=False, bannerMode=__BANNER_MODE)
+                            print("[DEBUG] checkIfRunningAsSYSTEMUser: Updated the infobanner widget with the warn icon, will sleep for 1 secs!")
+                            time.sleep(1)
+                            print("[DEBUG] checkIfRunningAsSYSTEMUser: will update the infobanner widget with the transparent (empty) icon, then sleep for 1 secs")
+                            self.iconObject.configure(file=f"{application_path}\\transparent.png")
+                            self.infoBanner.update_configuration(self.iconObject, getCurrentLanguage().sys_usr_warn_header, getCurrentLanguage().sys_usr_warn_content_txt, '', None, displayFuncBtn=False, bannerMode=__BANNER_MODE)
+                            time.sleep(1)
+                            print("[DEBUG] checkIfRunningAsSYSTEMUser: Updated the infobanner widget with the transparent (empty) icon, and slept for 1 secs")
+                        print("[DEBUG] checkIfRunningAsSYSTEMUser: Exited animation loop, control variable is set to False!")
+                        return True
+                    else: # we are not running the SYSTEM user
+                        print("[DEBUG] checkIfRunningAsSYSTEMUser: Current user is NOT SYSTEM!!!")
+                        return False
+            except Exception as __errChangingBanner:
+                error.ErrorWindow(f"An error has occured while trying to change the info banner widget to show a warning for the SYSTEM user.\nError details are:\n{__errChangingBanner}").wait_window()
+                return False
+            print("[DEBUG] checkIfRunningAsSYSTEMUser: reached outer block, there is a new update available!!!")
+            return None
+
 
         # ------------------------------
         # getting widgets original direction according to the UI language
@@ -2657,6 +2963,49 @@ class MainWindowLightMode(CTk):
         self.lblframe18.grid(column=0, row=18, sticky=components_direction)
 
 
+        # ----------------------------------------
+        # reserved for the additional cleaners functionality (widgets)
+        if useAdditionalCleaners == True:
+            try:
+                print(f"[DEBUG]: additional cleaners are enabled, will show the label frame for additional cleaning options!")
+                # declare a Labelframe (ttk) for storing the additional cleaners as CTkCheckBoxes
+                self.additional_cleaners_lblframe = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().additional_cleaners)
+                # checkboxes inside of the additional cleaners lblframe will be declared here.
+                __widgetRow: int = 1
+                for __section in AddsCleaners.sections():
+                    print(f"[DEBUG]: will declare a CTkCheckBox widget for cleaning section {__section}")
+                    setattr(self,
+                        f"{__section}_btn",
+                        CTkCheckBox(
+                            self.additional_cleaners_lblframe,
+                            text=f"{AddsCleaners[__section]['Name'.upper()]}",
+                            command=None,
+                            onvalue="1",
+                            offvalue="0",
+                            variable=getattr(self, f"var{__section}")
+                        )
+                    )
+                    print(f"[DEBUG]: successfully declared CTkCheckBox widget self.{__section}_btn\nName={AddsCleaners[__section]['Name'.upper()]}\nCmd={AddsCleaners[__section]['Command'.upper()]}")
+                    getattr(self, f"{__section}_btn").grid(column=0, row=__widgetRow, sticky=components_direction)
+                    print(f"[DEBUG]: placed widget self.{__section}_btn in additional_cleaners_lblframe at row {__widgetRow}")
+                    __widgetRow += 1
+                print(f"[DEBUG]: declared all additional cleaning options widgets, exited loop.")
+                self.additional_cleaners_lblframe.grid(column=0, row=19, sticky=components_direction)
+            except Exception as __errLoadingAddsCleaners:
+                useAdditionalCleaners = False # will set it to False, hopefully it prevents other program parts
+                                              # from breaking.
+                print(f"[DEBUG]: set useAdditionalCleaners to {useAdditionalCleaners} (should be False), because of an error: {__errLoadingAddsCleaners}")
+                error.ErrorWindow(f"""Error loading and declaring additional cleaners!
+More Error details available below:
+{__errLoadingAddsCleaners}
+
+You may choose to continue (not recommended), or safely terminate the process of Temp_Cleaner GUI.
+""")
+        # ----------------------------------------
+
+
+
+
         self.lblframe15 = ttk.Labelframe(self.show_frame, text=getCurrentLanguage().alldone_text)
         # ---------------------------
         self.postcleaningpowerstate_options_frame = CTkFrame(self.lblframe15, bg_color="transparent", fg_color="transparent")
@@ -2682,7 +3031,7 @@ class MainWindowLightMode(CTk):
         self.destroy_activity_after_done_btn = CTkCheckBox(self.lblframe15, text=getCurrentLanguage().alldone_chkbox_text, variable=self.var64, onvalue="1", offvalue="0", command=None, cursor='hand2')
         self.destroy_activity_after_done_btn.grid(column=0, row=2, sticky=components_direction)
         # ---------------------------
-        self.lblframe15.grid(column=0, row=19, sticky=components_direction)
+        self.lblframe15.grid(column=0, row=20, sticky=components_direction)
 
         # ----------------------------------------
         # ----------------------------------------
@@ -2957,16 +3306,22 @@ class MainWindowLightMode(CTk):
             # a fix for 1024x768 or lower screen resolutions: (fix #2)
             # ----------------------------
             if int(self.winfo_screenwidth()) <= 1024 and int(self.winfo_screenheight()) <= 768:
-                self.about_window_btn.grid(ipady=40, ipadx=50)
-                self.exec_btn.grid(ipady=40, ipadx=50)
-                self.config_page_btn.grid(ipady=40, ipadx=50)
+                # width as a constant
+                self.__ACTIONBTNS_FRAME_LOWRES_WIDTH: int = 250
+                # height as a constant
+                self.__ACTIONBTNS_FRAME_LOWRES_HEIGHT: int = 100
                 self.banner_show.configure(width=775)
                 self.banner = PhotoImage(file=f"{application_path}\\bannerlowres.png")
                 self.banner_show.configure(image=self.banner)
+                self.about_window_btn_frame.grid_configure(padx=3)
+                self.exec_btn_frame.grid_configure(padx=3)
+                self.exec_btn_frame.configure(width=self.__ACTIONBTNS_FRAME_LOWRES_WIDTH, height=self.__ACTIONBTNS_FRAME_LOWRES_HEIGHT)
+                self.config_page_btn_frame.configure(width=self.__ACTIONBTNS_FRAME_LOWRES_WIDTH, height=self.__ACTIONBTNS_FRAME_LOWRES_HEIGHT)
+                self.about_window_btn_frame.configure(width=self.__ACTIONBTNS_FRAME_LOWRES_WIDTH, height=self.__ACTIONBTNS_FRAME_LOWRES_HEIGHT)
             # ----------------------------
         except Exception as errorApplyingLowResMods1:
             try:
-                error.ErrorWindow(errorMsgContent=f"An error has occured while attempting to load Low Resolution Display Modifications for this window\nError details are:\n{errorApplyingLowResMods1}\n\n").mainloop()
+                error.ErrorWindow(errorMsgContent=f"An error has occured while attempting to load Low Resolution Display Modifications for this window\nError details are:\n{errorApplyingLowResMods1}\n\n").wait_window()
             except:
                 raise SystemExit(2790)
 
@@ -3343,17 +3698,22 @@ class MainWindowLightMode(CTk):
             
         # running a new thread for informing the user whether cleaning is required or not by changing the infobanner widget.
         threading.Thread(target=updateBannerTmpFSizes, name="FSCHECK_BANNER_UPDATE_THREAD0").start()
-
+        # running a new thread for checking if the user is running under SYSTEM or not and to update infobanner widget.
+        threading.Thread(target=checkIfRunningAsSYSTEMUser, name="SYSUSRCHECK_BANNER_UPDATE_THREAD0").start()
         # self.show_frame.bind("<MouseWheel>", mouse_scroll)
         # self.bind("<F1>", showHelp) -> causes the messagebox.showinfo help to appear twice.
+        # declaring our own custom bgerr handler
+        self.tk.createcommand('tkerror', self.__custom_tkerr_handler)
+        self.tk.createcommand('bgerror', self.__custom_tkerr_handler)
 
-        
 
+    def __custom_tkerr_handler(self, *args):
+        """
+        Custom tkerr handler
+        """
+        print(f"[DEBUG] __custom_tkerr_handler: WARNING: {args}")
+        return None
 
-    
-
-    # Defining the function to execute the following selected commands : 
-    
 
     def StartConfigurationWindow(self):
         try:
@@ -3366,13 +3726,6 @@ class MainWindowLightMode(CTk):
                 raise SystemExit(2790)
         return None
     
-
-    
-    
-
-
-
-
 
 
 class SettingsWindow(Toplevel):
@@ -3467,6 +3820,7 @@ class SettingsWindow(Toplevel):
         # a variable for the check status of the checkbuttons here.
         self.autocheckboxvalue = IntVar()
         self.showtipsatstartupvalue = IntVar()
+        self.acquirewakelocksettingvalue = IntVar()
 
         # Defining the function to retrieve the configuration from the configuration file then outputs it into the textboxes.
         def RetrieveConfig():
@@ -3548,6 +3902,12 @@ class SettingsWindow(Toplevel):
                     self.threshold_combobox.set("100MB")
                     print("[DEBUG] retrieve_config: current threshold value in config file is not defined in self.threshold_combobox, will default to 100MB")
 
+                if str(self.RetrieveConfig_Init['ProgConfig']['AcquireWakeLock'.upper()]) == '1':
+                    # the acquire wakelock option in settings is turned on.
+                    self.acquirewakelocksettingvalue.set(1)
+                else:
+                    # the acquire wakelock option in settings is not turned on.
+                    self.acquirewakelocksettingvalue.set(0)
 
                 # if str(self.RetrieveConfig_Init['ProgConfig']['customcursors']) == "True":
                 #     self.custom_cursors_enable_state.set(True)
@@ -3645,7 +4005,12 @@ class SettingsWindow(Toplevel):
                     messagebox.showerror(getCurrentLanguage().cant_save_config_file_text, f"{getCurrentLanguage().incorrect_choice_text}\n\n{self.threshold_combobox.get()}")
                     sys.exit(165) # is for an incorrect threshold combobox choice
 
-
+                if int(self.acquirewakelocksettingvalue.get()) == 1: # enabled
+                    self.ConfigFileSaveProcess['ProgConfig']['AcquireWakeLock'.upper()] = "1"
+                    print("[DEBUG] settings_save: written AcquireWakeLock = 1 to Config.ini")
+                else: # disabled
+                    self.ConfigFileSaveProcess['ProgConfig']['AcquireWakeLock'.upper()] = "0"
+                    print("[DEBUG] settings_save: written AcquireWakeLock = 0 to Config.ini")
 
                 # if str(self.custom_cursors_enable_state.get()) == "True":
                 #     self.ConfigFileSaveProcess['ProgConfig']['customcursors'] = "True"
@@ -3884,29 +4249,17 @@ class SettingsWindow(Toplevel):
         # --------------------------------------
         self.infobannercfg_frame.grid(column=0, row=19, sticky='w')
 
+        self.lbl11_config = Label(self.show_wframe, text=getCurrentLanguage().wakelock_settings, foreground=getCurrentAppearanceMode()[1], background=getCurrentAppearanceMode()[0], font=("Arial", 12))
+        self.lbl11_config.grid(column=0, row=20, sticky='w', pady=3)
+        self.wakelock_setting_checkbutton = CTkCheckBox(self.show_wframe, text=getCurrentLanguage().acquire_wakelock_during_cleanup, command=None, variable=self.acquirewakelocksettingvalue, onvalue=1, offvalue=0)
+        self.wakelock_setting_checkbutton.grid(column=0, row=21, sticky='w')
+
+        # random spacing is essential for layout consistency.
         self.random_spacing = Label(self.show_wframe, text='', font=("Arial Bold", 85), bg=getCurrentAppearanceMode()[0], fg=getCurrentAppearanceMode()[1])
-        self.random_spacing.grid(column=0, row=20, sticky='w')
-        
-        # for x in range(20):
-        #     Button(self.show_wframe, text=f"{x}", command=None).grid(column=0, row=(x + 16), sticky='w')
+        self.random_spacing.grid(column=0, row=22, sticky='w')
 
-
-
-
-        # self.lbl8_config = Label(self, text=getCurrentLanguage().use_custom_cursors_text, foreground=getCurrentAppearanceMode()[1], background=getCurrentAppearanceMode()[0], font=("Arial", 12))
-        # self.lbl8_config.place(x=260, y=430)
-        # self.lbl9_config = Label(self, text=getCurrentLanguage().use_custom_cursors_hint, foreground='red', background=getCurrentAppearanceMode()[0], font=("Arial", 11))
-        # self.lbl9_config.place(x=260, y=450)
-
-
-        
-        # self.enable_custom_cursors_checkbutton = CTkCheckBox(self, text=getCurrentLanguage().use_custom_cursors_checkbox_text, variable=self.custom_cursors_enable_state)
-        # self.enable_custom_cursors_checkbutton.place(x=260, y=470)
-        
-        # defining the copyright window button.
-        
-
-
+        # other buttons like the close window, and commit changes button
+        # they currently use absolute positioning, but may in the future use something else.
         self.closewindow_btn = CTkButton(self, text=getCurrentLanguage().quit_settings_btn, command=SelfDestroy)
         self.closewindow_btn.place(x=230, y=495, relwidth=0.20, relheight=0.060)
 
@@ -4358,13 +4711,50 @@ if __name__ == '__main__':
     try:
         # change the current working directory (cwd) to application_path
         os.chdir(application_path)
+        
+        # logic for checking whether if is first run or not.
+        # check if --no-oobe or 'nooobe' exists in sys.argv (we will do it the manual old way)
+        __bypass_oobe_in_argv: bool = False
+        for __arg in sys.argv:
+            # we will declare a control variable
+            if __arg == "--no-oobe" or __arg == "nooobe":
+                __bypass_oobe_in_argv = True
+                break
+        # if the user has explicitly specified to bypass the OOBE in argv
+        if __bypass_oobe_in_argv == True:
+            print("[DEBUG] User has explicitly specified '--no-oobe' or 'nooobe' in system argv, will not check if it is the FirstRun!")
+        else:
+            # user hasn't explicitly specified to bypass the OOBE in argv
+            print("[DEBUG] User has NOT explicitly specified to bypass first run check in argv, will check if this is the first run....")
+            # checking if this is the first run or not
+            if str(GetConfig["ProgConfig"]["firstrun"]) == "1":
+                # this is the first run, will display the OOBE window!
+                print(f"[DEBUG] This is the First Run, will have to display the OOBE window!")
+                __oobe_window_obj = oobe_window.OOBEWindow()
+                __oobe_window_obj.tk.createcommand('bgerror', lambda err: None) # custom bgerror handler, fixes some bgerror
+                __oobe_window_obj.mainloop()
+                # __oobe_win.quit()
+                # if this code has been reached it means that the OOBEWindow is closed,
+                # and some changes has been done to the configuration file.
+                print("[DEBUG] OOBE Window has been closed, will re-read configuration file to update memory stored values.")
+                GetConfig.read(f"{application_path}\\Config.ini")
+                print("[DEBUG] Successfully re-read the configuration file, will now reload modules...")
+                for __mod in RT_RELOAD_MODULES:
+                    print(f"[DEBUG] will reload module: {__mod}")
+                    importlib.reload(__mod)
+                    print(f"[DEBUG] successfully reloaded module {__mod}!!!")
+                print("[DEBUG] successfully re-loaded all modules, will now display main window UI!")
+            else:
+                print("[DEBUG] This is not the First Run, will not need to display the OOBE window!")
+        # free up some memory.
+        del __bypass_oobe_in_argv
         # attempting to start the main program UI
+        print("[DEBUG] creating a new instance of main program UI into main_process")
         main_process = MainWindowLightMode()
+        # main_process.quit()
+        print("[DEBUG] calling mainloop of main window UI instance")
         main_process.mainloop()
-        # test = AboutWindow()
-        # test.mainloop()
-        # test = SettingsWindow()
-        # test.mainloop()
+        print("[DEBUG] mainloop of main window UI stopped.")
         # ensuring the program closes properly.
         raise SystemExit(0)
     except Exception as errorStartingProgram:
