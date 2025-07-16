@@ -6,6 +6,30 @@
     <link rel="stylesheet" href="downloads.css" />
     <link rel="icon" href="https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/74c79817039d950fa2e2b61891f65eada390fe39/tcgicon.png">
     <title>Download Temp_Cleaner GUI</title>
+    <script>
+        function download_windows1064() {
+            location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/v8.0-stable/temp_cleaner_gui_v8.0-stable_amd64_win7sp1to11_mrx.exe/download'
+        }
+        function download_windows832() {
+            location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/v8.0-stable/temp_cleaner_gui_v8.0-stable_x86_win8to10_mrx.exe/download'
+        }
+        function download_dev_windows1064() {
+            alert("No available up-to-date development pre-built binary for the Windows 64-bit architecture yet.");
+        }
+        function download_dev_windows832() {
+            alert("No available up-to-date development pre-built binary for the Windows 32-bit architecture yet.");
+        }
+        const GITHUB = "https://github.com/insertx2k/temp_cleaner_gui";
+        function softpedia() {
+            location.href='https://www.softpedia.com/get/Security/Secure-cleaning/Temp-Cleaner-GUI-Project.shtml';
+        }
+        function majorgeeks() {
+            location.href='https://www.majorgeeks.com/files/details/temp_cleaner_gui.html';
+        }
+        function oldergeeks() {
+            location.href='https://www.oldergeeks.com/downloads/file.php?id=4279';
+        }
+    </script>
 </head>
 <body class="bdy">
     <table class="main-header" border="0" width="100%">
@@ -79,11 +103,11 @@
     <br>
     <img src="ver_cyan.png" class="version_logo">
     <p class="ver_text">
-        Latest stable version is: <strong>v7.1-stable</strong>
+        Latest stable version is: <strong>v8.0-stable</strong>
     </p><br>
     <img src="update.png" alt="Update Icon" class="release_notes_logo">
     <p class="changelog_link">
-        Want to know what's new in the latest <strong>stable</strong> version?, Go to <a class="release_notes_link" target="_blank" href="https://github.com/InsertX2k/temp_cleaner_gui/releases/tag/v7.1-stable">Release Notes</a>
+        Want to know what's new in the latest <strong>stable</strong> version?, Go to <a class="release_notes_link" target="_blank" href="https://github.com/InsertX2k/temp_cleaner_gui/releases/tag/v8.0-stable">Release Notes</a>
     </p> 
     
 
@@ -98,16 +122,16 @@
         Or if you don't like winget, You can still download Temp_Cleaner GUI from here.
     </p> -->
     <div class="modernosdownloadbuttonsholder">
-        <div class="win1064downloadbutton" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/v7.1-stable/temp_cleaner_gui_v7.1-stable_amd64_win7sp1to11_mrx.exe/download'">
-            <img src="win10_cyan.png" class="win64logosmall" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/v7.1-stable/temp_cleaner_gui_v7.1-stable_amd64_win7sp1to11_mrx.exe/download'">
-            <p class="textwindows" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/v7.1-stable/temp_cleaner_gui_v7.1-stable_amd64_win7sp1to11_mrx.exe/download'">
+        <div class="win1064downloadbutton" onclick="download_windows1064();">
+            <img src="win10_cyan.png" class="win64logosmall" onclick="download_windows1064();">
+            <p class="textwindows" onclick="download_windows1064();">
                 Windows (64-bit stable) <br>
                 <p style="font-size: 14px;opacity: 70%;color: white;">For Windows 7 Service Pack 1, Windows 8, Windows 8.1, Windows 10, Windows 11 (64-bit)</p>
             </p>
         </div>
-        <div class="win1032downloadbutton" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/v7.1-stable/temp_cleaner_gui_v7.1-stable_x86_win8to10_mrx.exe/download'">
-            <img src="win10_cyan.png" style="padding-top:20px;" class="win64logosmall" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/v7.1-stable/temp_cleaner_gui_v7.1-stable_x86_win8to10_mrx.exe/download'">
-            <p class="textwindows" style="padding-top:15px;" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/v7.1-stable/temp_cleaner_gui_v7.1-stable_x86_win8to10_mrx.exe/download'">
+        <div class="win1032downloadbutton" onclick="download_windows832();">
+            <img src="win10_cyan.png" style="padding-top:20px;" class="win64logosmall" onclick="download_windows832();">
+            <p class="textwindows" style="padding-top:15px;" onclick="download_windows832();">
                 Windows (32-bit stable) <br>
                 <p style="font-size: 14px;opacity: 70%;color: white;">For Windows 8, Windows 8.1, Windows 10 (32-bit)</p>
             </p>
@@ -120,30 +144,54 @@
         To protect the data on your PC and ensure you are downloading a safe and official Temp_Cleaner GUI installer binary, You can compare the checksums of the downloaded binaries with the ones here. <br> <b>They must MATCH!</b>
     </p>
     <div class="hashesholder">
-        * temp_cleaner_gui_v7.1-stable_amd64_win7sp1to11_mrx.exe <br>
-        Algorithm : SHA256 <br>
-        Hash      : 35C31A8756592F428C097955441C0086EDCAC8C39FC2BBCFC6C1BAFCE4A11BEF <br><br>
-        Algorithm : SHA512 <br>
-        Hash      : 4F362270C8F92ADB1357F79B5D7D4945835DE454610316F94B7BA2D01C751C32A9E9F74BB68C06BEC3695978E91E78679EB6344C13EE99AB771A255B75B84008 <br><br>
-        Algorithm : MD5 <br>
-        Hash      : F786248F77BFF1CF45E11D908573B9F3 <br>
+        * <a class="release_notes_link" target="_blank" href="https://sourceforge.net/projects/temp-cleaner-gui/files/v8.0-stable/temp_cleaner_gui_debug_x86_v8.0-stable_win8to10_mrx.zip/download">temp_cleaner_gui_debug_x86_v8.0-stable_win8to10_mrx.zip (Download)</a> <br>
+<strong style="font-size: 20px;"><i>Please use this debug build when reporting any bugs since it has console and imports debugging enabled.</i></strong>
+<br>
         <br>
-        * temp_cleaner_gui_v7.1-stable_x86_win8to10_mrx.exe <br>
-        Algorithm : SHA256 <br>
-        Hash      : 0AA7447874A5FE80089ECB1AC31D9DCFE209FEC2E2FC17FD98AE3475A8D5D844 <br><br>
-        Algorithm : SHA512 <br>
-        Hash      : 6DC1067915404026219E7B383D44B6F3C6D6555DA4B9479C318D16AD20EEFE12BE0A81F7AEBB61CE048C8AB6167D067C6F1EE732E47100FA20B89C98804B07FE <br><br>
         Algorithm : MD5 <br>
-        Hash      : B07F4D2F40092E11BB1F5DE1D6C962F7 <br>
+        Hash      : 5C9336B6234EE88DF9208912D1A84BDA <br>
+<br>
+        Algorithm : SHA512 <br>
+        Hash      : 86E64DADB733178E66CE60752D95C9B13EA6B3790F795F7CBD31C5310D46C77446436FE235DB11329D6EEBBA2E49A361F4A6AD495D9 <br>
+                    B43667EC1E22EA6F9456F <br>
+<br>
+        Algorithm : SHA256 <br>
+        Hash      : 91FD666C499CB3E9E232B4C3BAB7057F89EC5E2BF7429DB7ED69C92AE8B482EA
+<br>
+<br>
+        * temp_cleaner_gui_v8.0-stable_amd64_win7sp1to11_mrx.exe <br>
+<br>
+        Algorithm : MD5 <br>
+        Hash      : 1EFF4AF501387BD7D6266FD25B58FB46 <br>
+<br>
+        Algorithm : SHA512 <br>
+        Hash      : 87419B7ACED5AA23FDB1213E3A9972C7BA6F193EBDBDDD933CBD0CFEEA1221653E5C9DD4A906C92907DE14E72EE51CA24D1309CA892 <br>
+                    8895651253C0609CA9865 <br>
+<br>
+        Algorithm : SHA256 <br>
+        Hash      : 3B754392BE1C31A5C5D51EF513E5C7BE46EF734A51ACB65CF825F038DF2BBB86 <br>
+<br>
+        * temp_cleaner_gui_v8.0-stable_x86_win8to10_mrx.exe <br>
+<br>
+        Algorithm : MD5 <br>
+        Hash      : 498E4E2CFAE561D824AFFD02D9101345 <br>
+<br>
+        Algorithm : SHA512 <br>
+        Hash      : 970BAFD908124128523EEF75F7F3B0AD4EA718B2D08FE23FA2323909E0B8DA68E717AA3123D796C6C9587250999C5B5CC40B451DF2E <br>
+                    3C3DD9966023CDE86EE90 <br>
+<br>
+        Algorithm : SHA256 <br>
+        Hash      : CF7D74FDD226C14482CE3BF45404A032516A194BDA5073E6F911E89916D8D3D6 <br>
+
     </div>
     <hr>
     <img src="ver_cyan.png" class="version_logo">
     <p class="ver_text_dev">
-        Latest development/beta version is: <strong>v6.7-dev (Update 1) Release 30-06-2023 (DO NOT Download it unless you need to test something)</strong> 
+        Latest development/beta version is: <strong>None</strong> 
     </p><br>
     <img src="update.png" alt="Update Icon" class="release_notes_logo">
     <p class="changelog_link">
-        Want to know what's new in the latest <strong>beta</strong> version?, Go to <a class="release_notes_link" target="_blank" href="https://github.com/InsertX2k/temp_cleaner_gui/releases/tag/v6.7-dev_u1">Dev release notes</a>
+        Want to know what's new in the latest <strong>beta</strong> version?, Go to <a class="release_notes_link" target="_blank" href="">Dev release notes</a>
     </p> 
     <img src="win10_cyan.png" class="windows_logo"><p class="osheader">Download Development version for Windows:</p><br><br><br><br><br>
     <!-- <img src="winget.png" alt="cmdline Icon" class="wingetlogo"><p class="wingetword0">Temp_Cleaner GUI can be obtained from winget (Windows 10 1709 (build 16299) or later)</p>
@@ -154,16 +202,16 @@
         Or if you don't like winget, You can still download Temp_Cleaner GUI from here.
     </p> -->
     <div class="modernosdownloadbuttonsholder">
-        <div class="win1064downloadbutton" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/temp_cleaner_gui_v6.7-dev_u1_win7sp1to11_amd64_mrx.exe/download'">
-            <img src="win10_cyan.png" class="win64logosmall" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/temp_cleaner_gui_v6.7-dev_u1_win7sp1to11_amd64_mrx.exe/download'">
-            <p class="textwindows" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/temp_cleaner_gui_v6.7-dev_u1_win7sp1to11_amd64_mrx.exe/download'">
+        <div class="win1064downloadbutton" onclick="download_dev_windows1064();">
+            <img src="win10_cyan.png" class="win64logosmall" onclick="download_dev_windows1064();">
+            <p class="textwindows" onclick="download_dev_windows1064();">
                 Windows (64-bit development) <br>
                 <p style="font-size: 14px;opacity: 70%;color: white;">For Windows 7 Service Pack 1, Windows 8, Windows 8.1, Windows 10, Windows 11 (64-bit)</p>
             </p>
         </div>
-        <div class="win1032downloadbutton" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/temp_cleaner_gui_v6.7-dev_u1_win8to10_x86_mrx.exe/download'">
-            <img src="win10_cyan.png" style="padding-top:20px;" class="win64logosmall" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/temp_cleaner_gui_v6.7-dev_u1_win8to10_x86_mrx.exe/download'">
-            <p class="textwindows" style="padding-top:15px;" onclick="location.href='https://sourceforge.net/projects/temp-cleaner-gui/files/temp_cleaner_gui_v6.7-dev_u1_win8to10_x86_mrx.exe/download'">
+        <div class="win1032downloadbutton" onclick="download_dev_windows832();">
+            <img src="win10_cyan.png" style="padding-top:20px;" class="win64logosmall" onclick="download_dev_windows832();">
+            <p class="textwindows" style="padding-top:15px;" onclick="download_dev_windows832();">
                 Windows (32-bit development) <br>
                 <p style="font-size: 14px;opacity: 70%;color: white;">For Windows 8, Windows 8.1, Windows 10 (32-bit)</p>
             </p>
@@ -179,9 +227,9 @@
 
     <img src="code_cyan.png" class="windows_logo"><p class="osheader">Download Source Code & Files (From Github):</p><br><br><br><br><br>
     <div class="sourcecodedownloadbuttonsholder">
-        <div class="githubdownloadsbutton" onclick="location.href='https://github.com/insertx2k/temp_cleaner_gui'">
-            <img src="github_cyan.png" class="winlogo_small" onclick="location.href='https://github.com/insertx2k/temp_cleaner_gui'">
-            <p class="textwindows" onclick="location.href='https://github.com/insertx2k/temp_cleaner_gui'">
+        <div class="githubdownloadsbutton" onclick="location.href=GITHUB">
+            <img src="github_cyan.png" class="winlogo_small" onclick="location.href=GITHUB">
+            <p class="textwindows" onclick="location.href=GITHUB">
                 Github Page for Temp_Cleaner GUI
             </p>
         </div>
@@ -193,21 +241,21 @@
         These sources are trusted as they were scanned for malware by <strong>Mr.X himself</strong>, they are also identified to contain the <strong>official installer</strong> made by <strong>Mr.X</strong> too.
     </p>
     <div class="othertrustedsourcesbuttonsholder">
-        <div class="softpediadownloadbutton" onclick="location.href='https://www.softpedia.com/get/Security/Secure-cleaning/Temp-Cleaner-GUI-Project.shtml'">
-            <img src="softpedia.png" class="winlogo_small_wide" onclick="location.href='https://www.softpedia.com/get/Security/Secure-cleaning/Temp-Cleaner-GUI-Project.shtml'">
-            <p class="textwindows" onclick="location.href='https://www.softpedia.com/get/Security/Secure-cleaning/Temp-Cleaner-GUI-Project.shtml'">
+        <div class="softpediadownloadbutton" onclick="softpedia();">
+            <img src="softpedia.png" class="winlogo_small_wide" onclick="softpedia();">
+            <p class="textwindows" onclick="softpedia();">
                 Softpedia
             </p>
         </div>
-        <div class="majorgeeksdownloadsbutton" onclick="location.href='https://www.majorgeeks.com/files/details/temp_cleaner_gui.html'">
-            <img src="majorgeeks.png" class="winlogo_small_square" onclick="location.href='https://www.majorgeeks.com/files/details/temp_cleaner_gui.html'">
-            <p class="textwindows" onclick="location.href='https://www.majorgeeks.com/files/details/temp_cleaner_gui.html'">
+        <div class="majorgeeksdownloadsbutton" onclick="majorgeeks();">
+            <img src="majorgeeks.png" class="winlogo_small_square" onclick="majorgeeks();">
+            <p class="textwindows" onclick="majorgeeks();">
                 MajorGeeks
             </p>
         </div>
-        <div class="oldergeeksdownloadsbutton" onclick="location.href='https://www.oldergeeks.com/downloads/file.php?id=4279'">
-            <img src="oldergeeks.jpg" class="winlogo_small_square" onclick="location.href='https://www.oldergeeks.com/downloads/file.php?id=4279'">
-            <p class="textwindows" onclick="location.href='https://www.oldergeeks.com/downloads/file.php?id=4279'">
+        <div class="oldergeeksdownloadsbutton" onclick="oldergeeks();">
+            <img src="oldergeeks.jpg" class="winlogo_small_square" onclick="oldergeeks();">
+            <p class="textwindows" onclick="oldergeeks();">
                 OlderGeeks.com
             </p>
         </div>
