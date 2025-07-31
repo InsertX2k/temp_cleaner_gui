@@ -97,6 +97,9 @@ Here are some standards that you must keep in mind if you want to make one by yo
 
 <br/>
 
+## Build the program from source into an executable file: <br/>
+You can find the accurate and up-to-date instructions for building this program from source in the Wiki. [You should start from the first step here](https://github.com/InsertX2k/temp_cleaner_gui/wiki/Environment-%E2%80%90-Building-Temp_Cleaner-GUI-from-source)
+
 ## Download an already compiled release with installer: <br/>
 **This page is not where you are supposed to find any compiled releases of such software, consider going to [This link](https://insertx2k.github.io/temp_cleaner_gui/downloads.html) for official downloads.**
 
