@@ -163,6 +163,12 @@ class UserInitiatedThreadStop(Exception):
         """
         super().__init__(*args)
 
+class AutomatedThreadTermination(Exception):
+    def __init__(self, *args) -> None:
+        """
+        Exception class for automated thread termination processes/tasks.
+        """
+        super().__init__(*args)
 
 if __name__ == '__main__':
     test = ErrorWindow()

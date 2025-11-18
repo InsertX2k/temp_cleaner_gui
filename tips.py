@@ -23,6 +23,9 @@ except Exception as errorImportingTkWebLib:
     messagebox.showerror("Unhandled runtime exception", f"Couldn't load TkWeb library necessary for displaying tips to the user\nError details are:\n{errorImportingTkWebLib}\n\nPressing OK will make the program continue to function despite this error.")
     pass
 import random
+# this will actually work and not generate duplicated thread names
+# because python imports the module only once per interpreter instance
+import animated_widgets
 
 # initializing a variable containing the path where program executable is stored.
 application_path = ''
@@ -224,9 +227,9 @@ class TipsWindow(Toplevel):
         self.closebtnframe.pack(fill=X, expand=False)
         self.closebtnframe.pack_propagate(False)
 
-        self.close_btn = CTkButton(self.closebtnframe, text=getCurrentLanguage().quit_settings_btn, command=quitBtnFunc)
+        self.close_btn = animated_widgets.HoverShrinkAnimatedButton(self.closebtnframe, buttonText=getCurrentLanguage().quit_settings_btn, buttonCommand=quitBtnFunc)
         self.close_btn.pack(expand=True, fill=BOTH, side=LEFT)
-        self.next_btn = CTkButton(self.closebtnframe, text=getCurrentLanguage().tips_next, command=openRandomTip)
+        self.next_btn = animated_widgets.HoverShrinkAnimatedButton(self.closebtnframe, buttonText=getCurrentLanguage().tips_next, buttonCommand=openRandomTip)
         self.next_btn.pack(expand=True, fill=BOTH, side=RIGHT)
 
 

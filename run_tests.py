@@ -77,7 +77,9 @@ MODULES = [
     "urllib.request",
     "colorama",
     "pwrcontrol",
-    "toasts"
+    "toasts",
+    "secure_delete.secu_delete",
+    "animated_widgets"
 ]
 MOD_LENGTH: int = len(MODULES)
 
@@ -101,6 +103,7 @@ WINDOWS = [
     (importlib.import_module("android_cleaner.connection_window"), "ConnectPhoneToPCWindow"),
     (importlib.import_module("android_cleaner.connection_window"), "ConnectPhoneToPCViaWiFiWindow"),
     (importlib.import_module("android_cleaner.connection_window"), "ChooseADeviceWindow")
+    # the wizard UI for the secure delete module
 ]
 
 # declaring a variable to be modified during the runtime of the script

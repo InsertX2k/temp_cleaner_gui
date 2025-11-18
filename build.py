@@ -84,6 +84,7 @@ DEPENDENCES = [
     "toasts",
     "oobe",
     "build_date"
+    "secure_delete"
 ]
 # List of files (non-executable, non-binary) to be included within the final executable
 # YOU ALSO DO NOT need to modify this list since IT IS manually updated and reviewed by the author
@@ -112,7 +113,11 @@ INCLUDE_FILES = [
     "updater_dark.png",
     "updatefb.png",
     "correctfb.png",
-    "cleanfb.png"
+    "cleanfb.png",
+    # we can just include the built binary for ata_trim 
+    # instead of including its whole dir (with python source files)
+    # this way, our directory tree will look a little bit more professional
+    "secure_delete\\ata_trim.exe"
 ]
 # INCLUDE_DIRS is a list of directories (folders) that will be RECURSIVELY included/bundled within the
 # final built executable, these directories are needed by the program to function properly, and IT DOES NOT
@@ -121,6 +126,7 @@ INCLUDE_DIRS = [
     f"{FULL_SRC_PATH}\\android_cleaner",
     f"{FULL_SRC_PATH}\\tips",
     f"{FULL_SRC_PATH}\\oobe",
+    f"{FULL_SRC_PATH}\\secure_delete",
     # other directories are for other used libraries
     # which we will retrieve programmatically
     os.path.dirname(os.path.abspath(customtkinter.__file__)),
@@ -213,7 +219,7 @@ SET_FIRSTRUN_VALUE = True
 
 
 if __name__ == '__main__': # if file is executed as a script file
-    # with sys.argv support.
+    # with sys.argv support (although we will not use sys.argv in this script).
 
     # Now we need to modify the first run value in the config file.
     if SET_FIRSTRUN_VALUE == True:
@@ -241,7 +247,30 @@ BUILD_DATE = '{datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")} ({datetime
 """)
         print("[DEBUG] Created build_time module!")
     bd_openf.close() # making available to other programs.
+    
+    # add code for building for ata_trim using Visual Studio here first.
+    print(f"[DEBUG] Building ata_trim executable using Microsoft Build tools...")
+    print(f"[DEBUG] In case of errors please make sure you have the MSBuild.exe executable full path listed in system or user's PATH environment variable.")
+    # we must create the folder to hold disk free space secure eraser tool and its components
+    print("[DEBUG] Creating folder \"disk_fspace_eraser\"")
+    try:
+        os.mkdir(f"{FULL_SRC_PATH}\\disk_fspace_eraser")
+        print(f"[DEBUG] Successfully created: \"{FULL_SRC_PATH}\\disk_fspace_eraser\"!")
+    except Exception as __errMakingDiskFSpaceEraserDir:
+        print(f"[ERROR] Failed to create directory: \"{FULL_SRC_PATH}\\disk_fspace_eraser\": {__errMakingDiskFSpaceEraserDir}")
+        print("[ERROR] Build process cannot continue!")
+        raise SystemExit(64) # sys exit 64 is for a failure to create directory that will hold disk fspace eraser tool and its dependencies.
+    # generate command line for building ata_trim executable from solution file.
+    ata_trim_build_vc_cli: str = f"MSBuild.exe \"{FULL_SRC_PATH}\\secure_delete\\ata_trim\\ata_trim.sln\" -isolateProjects:False -interactive:False -property:OutDir=\"{FULL_SRC_PATH}\\disk_fspace_eraser\";AdditionalDependencies=\"$(CoreLibraryDependencies);%(AdditionalDependencies);mi.lib\" -p:Configuration=Release"
+    # now let's build the ata_trim executable (aka. run the command generated above).
+    os.system(ata_trim_build_vc_cli)
+    # TODO: add code for building secu_delete module here
+        # I think only building the wizard program and running the secu_delete module under a different
+        # execution thread will be a better option.
+    # TODO: add code for building the wizard program for the secu_delete module here.
+        # Please don't forget to move it to the disk_fspace_eraser folder once building finishes.
 
+    # ---------------------- This is the stage for building main program Temp_Cleaner GUI ----------------------
     # lets write a spec file
     full_cli: str = f"pyi-makespec {'--onedir' if IS_FULL_BUILD == True else '--onefile'} --log-level {BUILD_TIME_LOGLEVEL} --name {NAME} "
     for _file in INCLUDE_FILES:
