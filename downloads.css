@@ -2,144 +2,14 @@
 .bdy{
     background-color: #212121;
 }
-.table-header{
-    font-size: xx-large;
-}
-/*Somewhat configuring the main header properties*/
-.main-header{
-    border-color: whitesmoke;
-    border-style: hidden;
-    border-color: rgb(0, 173, 173);
-}
-
-.col1{
-    width: 8%;
-    height: 3%;
-}
-.col2{
-    width: 8%;
-    height: 3%;
-}
-.col3{
-    width: 8%;
-    height: 3%;
-}
-
-.col2{
-    text-align: center;
-    cursor: pointer;
-}
-.col1{
-    text-align: center;
-    cursor: pointer;
-}
-.col3{
-    text-align: center;
-    cursor: pointer;
-}
-
-
-/* Somewhat configuring the style of the main-header's navigation buttons. */
-/* Let's remove the decoration of it*/
-.homeword0{
-    text-decoration: none;
-    cursor: pointer;
-}
-.homelinkword0{
-    text-decoration: none;
-    cursor: pointer;
-}
-.downloadslinkword0{
-    text-decoration: overline;
-    cursor: pointer;
-}
-.downloadsword0{
-    text-decoration: overline;
-    cursor: pointer;
-}
-.aboutword0{
-    text-decoration: none;
-    cursor: pointer;
-}
-.header-link{
-    text-decoration: none;
-    color: white;
-}
-.header-link:hover{
-    text-decoration: overline;
-    color: rgb(0, 173, 173);
-}
-
-.homeword0:hover{
-    text-decoration: overline;
-}
-.downloadsword0:hover{
-    text-decoration: overline;
-}
-.aboutword0:hover{
-    text-decoration: overline;
-}
-
 /*  Defining the on_hover effect for cols 1,2,3  */
-.col1:hover{
-    background-color: grey;
-}
 
-.col1:hover .homeword0{
-    text-decoration: overline;
-}
 
-.col2:hover{
-    background-color: grey;
-}
-
-.col2:hover .downloadsword0{
-    text-decoration: overline;
-}
-
-.col3:hover{
-    background-color: grey;
-}
-
-.col3:hover .aboutlnk{
-    text-decoration: overline;
-}
 
 /*        END                     */
 
-.maincol0{
-    background-color: black;
-    height: 3%;
-}
 
-.maincol0:hover{
-    background-color: grey;
-}
 
-.maincol0:hover .imgtcg{
-    opacity: 100%;
-    transform: rotate(-45deg);
-}
-
-.maincol0:hover .header-link{
-    text-decoration: overline;
-    color: rgb(0, 173, 173);
-}
-
-.maincol0:hover{
-    cursor: pointer;
-}
-
-.aboutlnk{
-    color:rgb(0, 255, 255);
-    text-decoration: none;
-    cursor: pointer;
-}
-.aboutlnk:hover{
-    color: rgb(0, 255, 255);
-    text-decoration: overline;
-    cursor: pointer;
-}
 .plusp{
     font-size: 20px;
 }
@@ -250,9 +120,11 @@
     float: left;
 }
 .ver_text{
+    margin-top: 15px;
     color: white;
     font-size: 18px;
-    margin-left: 70px;
+    margin-left: 20px;
+    display: inline-block;
 }
 .win7sp1downloadbutton{
     color: rgb(0, 0, 0);
@@ -345,10 +217,15 @@
     height: 50px;
     margin: 0%;
     padding: 0%;
-    float: left;
+    display: inline;
+    margin-top: 15px;
 }
 .changelog_link{
-    margin-left: 70px;
+    margin-left: 20px;
+    padding-top: 0px;
+    display: inline;
+    margin-top: 32px;
+    float: inline-end;
 }
 .server_small_logo{
     width: 50px;
@@ -362,7 +239,7 @@
     color: white;
     font-size: 18px;
     margin-left: 60px;
-    margin-top: 37px;
+    margin-top: 30px;
 }
 .server_support_table_link{
     color: rgb(0, 255, 255);
@@ -445,7 +322,7 @@
     color: white;
     font-size: 18px;
     display: inline-block;
-    margin-top: 0px;
+    margin-top: 10px;
     background-color: #333333;
     width: -webkit-fill-available;
     cursor: help;
@@ -453,7 +330,7 @@
     border-color: #727272;
     border-style: solid;
     border-width: 2px;
-    
+    margin-bottom: 15px;
     margin-left: 75px;
 }
 .tydonatorsword summary::-webkit-details-marker {
@@ -588,8 +465,10 @@ details[open].tydonatorsword > summary::after {
 .ver_text_dev{
     color: white;
     font-size: 18px;
-    margin-left: 70px;
-    margin-top: 23px;
+    margin-left: 20px;
+    margin-top: 15px;
+    display: inline;
+    float: inline-start;
 }
 .betabanner{
     width: 100%;
@@ -639,21 +518,6 @@ details[open].tydonatorsword > summary::after {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-right: 0px;
-}
-/* applying footer element configuration */
-footer{
-    font-size: 14px;
-    color: white;
-    background-color: #727272;
-    text-align: center;
-    margin-top: 15px;
-}
-.infolist{
-    list-style-type: none;
-    text-align: center;
-}
-.infolistelement{
-    display: inline;
 }
 .link0{
     color: cyan;

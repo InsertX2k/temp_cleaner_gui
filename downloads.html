@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Download the source code or an already compiled release of Temp_Cleaner GUI!" />
+    <meta name="description" content="Download the latest Temp_Cleaner GUI binaries and browse other trusted mirrors on this page. The full source code is also available for anyone interested in exploring it." />
     <link rel="stylesheet" href="downloads.css" />
     <link rel="icon" href="https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/74c79817039d950fa2e2b61891f65eada390fe39/tcgicon.png">
     <title>Download Temp_Cleaner GUI</title>
@@ -30,17 +30,32 @@
             location.href='https://www.oldergeeks.com/downloads/file.php?id=4279';
         }
     </script>
+    <noscript>
+        <h1
+        style="color: white;font-size: 20px;display: block;">
+            Detected Browser with Disabled Javascript, Redirecting to Warning Page...
+        </h1>
+        <meta http-equiv="refresh" content="0; url=nojs.html">
+    </noscript>
 </head>
 <body class="bdy">
-    <table class="main-header" border="0" width="100%">
-        <tr><th class="maincol0" colspan="3" onclick="parent.location='index.html'"><a href="index.html" target="_self"><img class="imgtcg" src="index.png" width="75" height="75" align="left" /></a> <h1 class="table-header" align="left"><font color="white"><a class="header-link" href="index.html">Temp_Cleaner GUI</a> </font></h1></th><td class="col1" onclick="parent.location='index.html'"><a class="homelinkword0" href="index.html" target="_self"><font class="homeword0" style="color:rgb(0, 230, 230)" face="arial" size="4" align="center">Home</font></a></td><td class="col2" onclick="parent.location='downloads.html'"><a class="downloadslinkword0" href="downloads.html" target="_self"><font class="downloadsword0" face="arial" style="color:rgb(0, 230, 230)" size="4">Downloads</font></a></td><td class="col3" onclick="parent.location='about.html'"><font class="aboutword0" face="arial" size="4" style="color:rgb(0, 230, 230)"><a href="about.html" class="aboutlnk" target="_self">About</a></font></td></tr>
-        <tr></tr>
-    </table>
+    <!-- The header / nav bar-->
+    <script>
+        fetch("header.html").then(r => r.text()).then(text => {
+            document.body.insertAdjacentHTML("afterbegin", text);
+        });
+    </script>
+    <!-- Modify the style of the nav-bar to overline the About link-->
+    <style>
+        .downloadsword0 {
+            text-decoration: overline;
+        }
+    </style>
+
     <h1 class="downloadtcgh1">Download Temp_Cleaner GUI for your PC</h1>
-    <p class="normaltext">
+    <p class="normaltext" style="margin-bottom: 15px;">
         This is the official website for Downloading <strong>Temp_Cleaner GUI</strong> for your PC, I will also give some links to other trusted websites that you can download <strong>Temp_Cleaner GUI</strong> from. 
-    </p> <br>
-     <br>
+    </p>
     <div class="warnbanner">
         <p>
             Previous versions of Temp_Cleaner GUI (probably including this one) might be falsely detected as malware/PUP by many antivirus software, This happens because in previous versions I used UPX to compress the executable and other binary files in the program's files and this triggers many antivirus software. <br>
@@ -70,13 +85,13 @@
 
     <img src="donate.png" alt="Donate icon" class="donate_logo">
     <p class="donatetext">
-        Thank you for downloading Temp_Cleaner GUI, please consider donating as it helps a lot with the development process <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="insertx2kdev" data-color="#00b3ff" data-emoji="❤️"  data-font="Lato" data-text="Support me!" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00" style="display:inline-block;"></script> <br>
-    </p> <details class="tydonatorsword">
-        <summary> <p class="summaryword">
+        Thank you for downloading Temp_Cleaner GUI, please consider donating as it helps a lot with the development process <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="insertx2kdev" data-color="#00b3ff" data-emoji="❤️"  data-font="Lato" data-text="Support me!" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#FFDD00" style="display:inline-block;"></script>
+    </p> <details class="tydonatorsword" style="margin-top: 10px;">
+        <summary> 
+            <img src="heartw10filled.png" alt="Donate icon" class="donlogosmall">
+            <p class="summaryword">
                 Ziad (Mr.X) wants to thank all of the following generous donators for choosing to support the development of Temp_Cleaner GUI!:
             </p>
-            <img src="heartw10filled.png" alt="Donate icon" class="donlogosmall">
-
         </summary>
         <ul class="donatorsul">
             <li>
@@ -96,24 +111,24 @@
             </li>
         </ul>
     </details>
-    
-    <br> 
-    
-
-    <br>
-    <img src="ver_cyan.png" class="version_logo">
-    <p class="ver_text">
-        Latest stable version is: <strong>v8.0-stable</strong>
-    </p><br>
-    <img src="update.png" alt="Update Icon" class="release_notes_logo">
-    <p class="changelog_link">
-        Want to know what's new in the latest <strong>stable</strong> version?, Go to <a class="release_notes_link" target="_blank" href="https://github.com/InsertX2k/temp_cleaner_gui/releases/tag/v8.0-stable">Release Notes</a>
-    </p> 
-    
-
+    <div style="display: block;">
+        <img src="ver_cyan.png" class="version_logo">
+        <p class="ver_text">
+            Latest stable version is: <strong>v8.0-stable</strong>
+        </p>
+    </div>
+    <div style="display: table-cell;padding-top: 0px;">
+        <img src="update.png" alt="Update Icon" class="release_notes_logo">
+        <p class="changelog_link">
+            Want to know what's new in the latest <strong>stable</strong> version?, Go to <a class="release_notes_link" target="_blank" href="https://github.com/InsertX2k/temp_cleaner_gui/releases/tag/v8.0-stable">Release Notes</a>
+        </p> 
+    </div>
     
 
-    <img src="win10_cyan.png" class="windows_logo"><p class="osheader">Download Stable version for Windows:</p><br><br><br><br><br>
+    
+    <div style="display: block;">
+        <img src="win10_cyan.png" class="windows_logo"><p class="osheader">Download Stable version for Windows:</p>
+    </div>
     <!-- <img src="winget.png" alt="cmdline Icon" class="wingetlogo"><p class="wingetword0">Temp_Cleaner GUI can be obtained from winget (Windows 10 1709 (build 16299) or later)</p>
     <p class="downloadline"> <br>
         winget install Ziad.TCG
@@ -185,15 +200,21 @@
 
     </div>
     <hr>
-    <img src="ver_cyan.png" class="version_logo">
-    <p class="ver_text_dev">
-        Latest development/beta version is: <strong>None</strong> 
-    </p><br>
-    <img src="update.png" alt="Update Icon" class="release_notes_logo">
-    <p class="changelog_link">
-        Want to know what's new in the latest <strong>beta</strong> version?, Go to <a class="release_notes_link" target="_blank" href="">Dev release notes</a>
-    </p> 
-    <img src="win10_cyan.png" class="windows_logo"><p class="osheader">Download Development version for Windows:</p><br><br><br><br><br>
+    <div style="display: block;">
+        <img src="ver_cyan.png" class="version_logo">
+        <p class="ver_text_dev">
+            Latest development/beta version is: <strong style="display: inline;">None</strong> 
+        </p>
+    </div>
+    <div style="display: block;padding-top: 0px;">
+        <img src="update.png" alt="Update Icon" class="release_notes_logo" style="float: left;">
+        <p class="changelog_link" style="float: left;margin-top: 31px;">
+            Want to know what's new in the latest <strong>beta</strong> version?, Go to <a class="release_notes_link" target="_blank" href="">Dev release notes</a>
+        </p> 
+    </div>
+    <div style="display: block;">
+        <img src="win10_cyan.png" class="windows_logo"><p class="osheader">Download Development version for Windows:</p>
+    </div>
     <!-- <img src="winget.png" alt="cmdline Icon" class="wingetlogo"><p class="wingetword0">Temp_Cleaner GUI can be obtained from winget (Windows 10 1709 (build 16299) or later)</p>
     <p class="downloadline"> <br>
         winget install Ziad.TCG
@@ -218,14 +239,16 @@
         </div>
     </div>
     <hr>
-
-    <img src="server.png" alt="Server Icon" class="server_small_logo">
-    <p class="didyouknow">
-        Did you know that <strong>Temp_Cleaner GUI</strong> supports <strong>Windows Server 2012</strong> onwards?, <a href="https://github.com/InsertX2k/temp_cleaner_gui/blob/main/README.md#whats-the-appropriate-binary-release-for-my-operating-system" target="_blank" class="server_support_table_link">Click here for more information</a>
-    </p>
+    <div style="display: block;padding-top: 0px;">
+        <img src="server.png" alt="Server Icon" class="server_small_logo">
+        <p class="didyouknow">
+            Did you know that <strong style="display: inline;">Temp_Cleaner GUI</strong> supports <strong style="display: inline;">Windows Server 2012</strong> onwards?, <a href="https://github.com/InsertX2k/temp_cleaner_gui/blob/main/README.md#whats-the-appropriate-binary-release-for-my-operating-system" target="_blank" class="server_support_table_link" style="display: inline;">Click here for more information</a>
+        </p>
+    </div>
     
-
-    <img src="code_cyan.png" class="windows_logo"><p class="osheader">Download Source Code & Files (From Github):</p><br><br><br><br><br>
+    <div style="display: block;padding-top: 0px;">
+        <img src="code_cyan.png" class="windows_logo"><p class="osheader">Download Source Code & Files (From Github):</p>
+    </div>
     <div class="sourcecodedownloadbuttonsholder">
         <div class="githubdownloadsbutton" onclick="location.href=GITHUB">
             <img src="github_cyan.png" class="winlogo_small" onclick="location.href=GITHUB">
@@ -235,8 +258,9 @@
         </div>
     </div>
     
-
-    <img src="webpage_cyan.png" class="windows_logo"><p class="osheader">Other trusted sources to download Temp_Cleaner GUI from:</p><br><br><br><br><br>
+    <div style="display: block;padding-top: 0px;">
+        <img src="webpage_cyan.png" class="windows_logo"><p class="osheader">Other trusted sources to download Temp_Cleaner GUI from:</p>
+    </div>
     <p class="normaltext">
         These sources are trusted as they were scanned for malware by <strong>Mr.X himself</strong>, they are also identified to contain the <strong>official installer</strong> made by <strong>Mr.X</strong> too.
     </p>
@@ -262,37 +286,12 @@
     </div>
     
 
-    <footer>
-        <p>
-            Copyright (C) 2021 - 2023 - Ziad Ahmed (Mr.X)'s Software - All Rights Reserved
-        </p>
-        <ul class="infolist">
-            <li class="infolistelement">
-                <a href="privacy.html" target="_self" class="link0">Privacy Policy</a>
-            </li>
-             - 
-            <li class="infolistelement">
-                <a href="downloads.html" target="_self" class="link0">Download Temp_Cleaner GUI</a>
-            </li>
-             - 
-            <li class="infolistelement">
-                <a href="index.html" target="_self" class="link0">Home</a>
-            </li>
-             - 
-            <li class="infolistelement">
-                <a href="https://sourceforge.net/projects/temp-cleaner-gui/" target="_blank" class="link0">SourceForge Page</a>
-            </li>
-             - 
-            <li class="infolistelement">
-                <a href="https://insertx2k.github.io/mrx" target="_self" class="link0">OSS Developer Ziad's Website</a>
-            </li>
-             - 
-            <li class="infolistelement">
-                <a href="https://github.com/InsertX2k/temp_cleaner_gui/tree/gh-pages" target="_self" class="link0">Source code</a>
-            </li>
-        </ul>
-        
-    </footer>
+    <!-- The footer -->
+    <script>
+        fetch("footer.html").then(r => r.text()).then(text => {
+            document.body.insertAdjacentHTML("beforeend", text);
+        });
+    </script>
 
 
 </body>
