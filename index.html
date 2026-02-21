@@ -13,6 +13,32 @@
         </h1>
         <meta http-equiv="refresh" content="0; url=nojs.html">
     </noscript>
+    <!-- Additional script for the screenshot preview frame -->
+    <script>
+        function displayPreviewFrameForSS(thisForSSImgElem) {
+            // first of all, we need to disable clicking for the body
+            document.body.classList.add("disableClicking");
+            // getting the full image path for the clicked screenshot
+            const SELECTED_IMG_PATH = thisForSSImgElem.src;
+            const IMG_ELEM_SS_PREVIEW_FRAME = document.getElementsByClassName("ssPreviewImgElem")[0];
+            // setting it as the source for the img element inside the preview frame.
+            IMG_ELEM_SS_PREVIEW_FRAME.src = SELECTED_IMG_PATH;
+            // registering an onclick handler for that same element just in case the user wanted to view it in full size.
+            IMG_ELEM_SS_PREVIEW_FRAME.onclick = function() {
+                parent.location = SELECTED_IMG_PATH;
+            }
+            // display the preview frame
+            document.getElementsByClassName("displayss")[0].style.display = "block";
+            return;
+        }
+        function closeSSPreviewFrame(thisElemOfCloseBtn) {
+            // set display none to the parent of the parent (displayss) of the parameter given
+            thisElemOfCloseBtn.parentElement.parentElement.style.display = "none";
+            // undo all the changes we did to make the body unclickable
+            document.body.classList.remove("disableClicking");
+            return;
+        }
+    </script>
 </head>
 <body class="bdy">
     <!-- The header / nav bar-->
@@ -29,17 +55,19 @@
     </style>
     
     <div class="largebanner">
-        <img src="banner2.png" class="bannerimg">
-        <p class="greeting">
-            Ready to use the most powerful free PC Cleaner?
-        </p>
-        <p class="greeting2">
-            Temp_Cleaner GUI can help you free up disk space you weren't expecting to free, as proven by first time users.
-        </p>
-        <div class="go_to_downloads_button" onclick="location.href='downloads.html'">
-            <p class="head_to_downloads_text" onclick="location.href='downloads.html'">
-                <a href="downloads.html" target="_self" class="hidden_link">Download now</a>
+        <img src="banner_img_blured.png" class="bannerimg">
+        <div class="bannerelems">
+            <p class="greeting">
+                Ready to use the most powerful free PC Cleaner?
             </p>
+            <p class="greeting2">
+                Temp_Cleaner GUI can help you free up disk space you weren't expecting to free, as proven by first time users.
+            </p>
+            <div class="go_to_downloads_button" onclick="location.href='downloads.html'">
+                <p class="head_to_downloads_text" onclick="location.href='downloads.html'">
+                    <a href="downloads.html" target="_self" class="hidden_link">Download now</a>
+                </p>
+            </div>
         </div>
     </div>
     <center class="whytcg">
@@ -112,7 +140,7 @@
         Introduction video
     </center>
     <center class="introvideocenter">
-        <video src="video_compressed.m4v" width="1280" height="720" controls class="videoplayer" preload="metadata">
+        <video src="video_compressed.m4v" playsinline height="720" controls class="videoplayer" preload="metadata">
             Your browser doesn't support loading videos on HTML5 websites, Please update your web browser and try again.
         </video>
     </center>
@@ -122,8 +150,22 @@
         Screenshots:
     </center>
     <div class="screenshots_div">
-        <img src="ss0.png" alt="Screenshot1" class="screenshotfirst" onclick="parent.location='ss0.png'"><img src="ss1.png" alt="Screenshot2" class="screenshotfirst" onclick="parent.location='ss1.png'"><img src="ss2.png" alt="Screenshot3" class="screenshotfirst" onclick="parent.location='ss2.png'"><img src="ss3.png" alt="Screenshot4" class="screenshotfirst" onclick="parent.location='ss3.png'">
+        <img src="ss0.png" alt="Screenshot1" class="screenshotfirst" onclick="displayPreviewFrameForSS(this)"><img src="ss1.png" alt="Screenshot2" class="screenshotfirst" onclick="displayPreviewFrameForSS(this)"><img src="ss2.png" alt="Screenshot3" class="screenshotfirst" onclick="displayPreviewFrameForSS(this)"><img src="ss3.png" alt="Screenshot4" class="screenshotfirst" onclick="displayPreviewFrameForSS(this)">
     </div>
+    <!-- The screenshot photo display div/frame -->
+    <div class="displayss">
+        <div class="ssPreviewFrameCloseBtnContainer">
+            <img src="preview.png" alt="KINDLYPLSUPDATEYOURWIFI" class="ssPreviewIco">
+            <div class="ssPreviewcloseBtn" onclick="closeSSPreviewFrame(this)">
+                <p class="ssPreviewCloseBtnTxt">X</p>
+            </div>
+            <p class="ssPreviewWndTitle">
+                Screenshot Preview
+            </p>
+        </div>
+        <img class="ssPreviewImgElem" src="banner_img_blured.png" alt="Failed to render preview!">
+    </div>
+    <!--  END of Screenshot photo preview div/frame -->
     <center class="bigwebsitessays">
         What popular websites say about Temp_Cleaner GUI:
     </center>
@@ -193,8 +235,8 @@
                 </p>
             </li>
         </ul>
-        
     </div>
+    
     <!-- The footer -->
     <script>
         fetch("footer.html").then(r => r.text()).then(text => {
