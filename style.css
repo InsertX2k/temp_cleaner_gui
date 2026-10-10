@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Instrument+Sans:wght@400;600&display=swap');
-:root{--bg:#f2f5f7;--surface:#fff;--ink:#101c24;--mute:#4c5e69;--line:#d3dce1;--accent:#007c85;--on:#fff;--warn:#fff0e3;--warn-line:#d9702a;--head:'Bricolage Grotesque',system-ui,sans-serif; --tl-bg: transparent;}
+:root{--bg:#f2f5f7;--surface:#fff;--ink:#101c24;--mute:#4c5e69;--line:#d3dce1;--accent:#007c85;--on:#fff;--warn:#fff0e3;--warn-line:#d9702a;--head:'Bricolage Grotesque',system-ui,sans-serif; --tl-bg: transparent; --meter-full: #FF0000}
 @media(prefers-color-scheme:dark){:root{--bg:#11161a;--surface:#192127;--ink:#e7eef1;--mute:#9db1bb;--line:#2a373f;--accent:#44c8d3;--on:#06262a;--warn:#2b1c10;--tl-bg: color-mix(in srgb, var(--accent), black 88%);}}
 *{box-sizing:border-box}
 html{scroll-padding-top:5rem; scroll-behavior: smooth;interpolate-size: allow-keywords;}
@@ -34,8 +34,8 @@ nav a:hover,nav a[aria-current]{border-color:var(--accent)}
 .drive{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.4rem}
 .drive b{display:flex;justify-content:space-between;gap:1rem;font-weight:600;flex-wrap:wrap}
 .meter{height:22px;border-radius:4px;background:var(--line);overflow:hidden;margin:.9rem 0 .6rem}
-.meter i{display:block;height:100%;width:87.5%;background:var(--accent);animation:clear 2.4s .6s cubic-bezier(.6,0,.2,1) backwards}
-@keyframes clear{from{width:93%}}
+.meter i{display:block;height:100%;width:61%;background:var(--accent);animation:clear 2.4s .6s cubic-bezier(.6,0,.2,1) backwards}
+@keyframes clear{from{width:100%;background: var(--meter-full);}}
 .drive small{color:var(--mute)}
 .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 3rem;margin:0}
 .feat div{padding:1.1rem 0;border-top:1px solid var(--line)}
