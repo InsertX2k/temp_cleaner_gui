@@ -2,40 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A free and open-source alternative to all Temporary folders cleaning software available!" />
-    <link rel="stylesheet" href="about.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/74c79817039d950fa2e2b61891f65eada390fe39/tcgicon.png">
+    <script src="links.js" defer></script>
+    <script src="site.js" defer></script>
     <title>About Temp_Cleaner GUI</title>
-    <noscript>
-        <h1
-        style="color: white;font-size: 20px;display: block;">
-            Detected Browser with Disabled Javascript, Redirecting to Warning Page...
-        </h1>
-        <meta http-equiv="refresh" content="0; url=nojs.html">
-    </noscript>
+    <noscript><meta http-equiv="refresh" content="0; url=nojs.html"></noscript>
 </head>
-<body class="bdy">
-    <!-- The header / nav bar-->
-    <script>
-        fetch("header.html").then(r => r.text()).then(text => {
-            document.body.insertAdjacentHTML("afterbegin", text);
-        });
-    </script>
-    <!-- Modify the style of the nav-bar to overline the About link-->
-    <style>
-        .aboutword0 {
-            text-decoration: overline;
-        }
-    </style>
-    <!--Actual website content -->
-    <p class="underconnote">
-        There is nothing here, This website is still under heavy construction, Which means this page does not have anything to show.
-    </p>
-    <!-- The footer -->
-    <script>
-        fetch("footer.html").then(r => r.text()).then(text => {
-            document.body.insertAdjacentHTML("beforeend", text);
-        });
-    </script>
+<body>
+<main class="wrap" style="padding-top:3rem">
+    <h1>About Temp_Cleaner GUI</h1>
+    <p>Temp_Cleaner GUI is a free, open-source Windows cleaning utility, engineered to give you back disk space with complete transparency. With more than 70 cleaning options, support for Windows 7 SP1 through Windows 11, and a live record of every file it removes, it delivers a thorough clean without the guesswork and without a single ad. It's made and maintained by Ziad (Mr.X), who also publishes as InsertX2k.</p>
+
+    <p>Downloaded more than 90,000 times and listed on <a href="#" data-link="softpedia" target="_blank" rel="noopener">Softpedia</a>, <a href="#" data-link="majorgeeks" target="_blank" rel="noopener">MajorGeeks</a> and <a href="#" data-link="oldergeeks" target="_blank" rel="noopener">OlderGeeks</a>.</p>
+
+    <h2>What sets it apart</h2>
+    <dl class="feat">
+        <div><dt>Comprehensive coverage</dt><dd>More than 70 cleaning options reach well beyond temporary folders: WinSxS, Windows.old and Service Pack leftovers, plus the caches of leading browsers, games, creative tools and developer software. It can even clean a connected Android device over ADB.</dd></div>
+        <div><dt>Complete transparency</dt><dd>Every deleted file appears in a live log, and every session ends with a summary of the space recovered. Because the code is open source, you can verify exactly what it does.</dd></div>
+        <div><dt>Control over every clean</dt><dd>Cleaning presets, from Web Browser only to Maximum, let you choose how thorough each run should be, so a quick tidy-up and a deep clean are one click apart.</dd></div>
+        <div><dt>Built for the PC you have</dt><dd>Supports Windows 7 SP1 through Windows 11, with native 32-bit and 64-bit builds, so older machines are treated as first-class citizens.</dd></div>
+        <div><dt>Privacy by design</dt><dd>No ads and no personal identification data collected. Our <a href="privacy.html">privacy policy</a> spells out, in plain terms, the little the program does touch.</dd></div>
+        <div><dt>Always up to date</dt><dd>A built-in updater keeps you informed when a new version is available, and a dedicated <a href="#" data-link="discord" target="_blank" rel="noopener">support community</a> is there when you need help.</dd></div>
+    </dl>
+
+    <h2>Version history</h2>
+    <p>Since 2021, Temp_Cleaner GUI has grown through 29 releases, each one shaped by real users and their feedback. Here is the journey so far and where we are headed. Hollow dots mark pre-release builds.</p>
+    <ol class="tl">
+        <li class="yr"><h3>2021: Foundations</h3><p>Temp_Cleaner GUI started small and found its footing fast. Within six months it gained a settings screen, live console output of what gets deleted, and its first accessibility options, with the source code open under the GNU GPL from the start.</p></li>
+        <li><time datetime="2021-04-11">Apr 11, 2021</time><code>v1.52-u3</code><p>A fresh look for the most-used buttons, plus layout fixes. Source code published under the GNU GPL.</p></li>
+        <li class="small_upds"><time datetime="2021-04-27">Apr 27, 2021 - Aug 23, 2021</time><p>A couple more fixes, strengthening what was built.</p></li>
+        <!-- <li><time datetime="2021-06-15">Jun 15, 2021</time><code>v2.0-u4</code><p>A new settings screen replaces environment variables, with performance gains and bug fixes.</p></li>
+        <li><time datetime="2021-06-24">Jun 24, 2021</time><code>v2.1-u5</code><p>A refreshed interface and home banner, with major bug and layout fixes.</p></li>
+        <li><time datetime="2021-07-15">Jul 15, 2021</time><code>v2.8-u10</code><p>A console output window shows exactly what is deleted and what isn't.</p></li>
+        <li><time datetime="2021-08-23">Aug 23, 2021</time><code>v3.1-u12</code><p>Console output moves into the main window, with fewer interruptions and major layout changes.</p></li> -->
+        <li><time datetime="2021-09-24">Sep 24, 2021</time><code>v3.2</code><p>Accessibility options debut, alongside stability improvements and major UI changes.</p></li>
+        <li class="yr"><h3>2022: Making it friendlier</h3><p>This was the year we made it friendlier and faster: dark and light themes, Arabic language support, cleaning that is more than 10x faster, presets suggested by the MajorGeeks community, and a summary of the disk space each session frees.</p></li>
+        <li><time datetime="2022-02-05">Feb 5, 2022</time><code>v4.0</code><p>Dark and light themes, switchable from Settings, with a new icon and banner.</p></li>
+        <li><time datetime="2022-02-25">Feb 25, 2022</time><code>v4.1</code><p>Arabic language support for the interface.</p></li>
+        <li><time datetime="2022-03-31">Mar 31, 2022</time><code>v4.7</code><p>Multithreading support: Now cleaning is more than 10x faster. Mouse-wheel scrolling added.</p></li>
+        <li class="pre"><time datetime="2022-06-05">Jun 5, 2022</time><code>v4.8-beta</code><em>pre-release</em><p>A first look at simpler code, easier translations and custom cursors.</p></li>
+        <li><time datetime="2022-06-16">Jun 16, 2022</time><code>v4.8-stable</code><p>Cleaning presets, an idea from MajorGeeks, plus right-to-left layout for Arabic.</p></li>
+        <li class="small_upds"><time datetime="2022-07-02">Jul 2, 2022 - Sep 12, 2022</time><p>Adding what was necessary for the completion of the recently added features.</p></li>
+        <!-- <li><time datetime="2022-07-02">Jul 2, 2022</time><code>v4.9-stable</code><p>A broad round of fixes for the issues users hit most often.</p></li>
+        <li class="pre"><time datetime="2022-07-14">Jul 14, 2022</time><code>v5.0-testing</code><em>pre-release</em><p>A preview of the new report of how much disk space each cleaning frees.</p></li>
+        <li><time datetime="2022-08-02">Aug 2, 2022</time><code>v5.0-stable</code><p>A drive info dialog on F2 and a post-cleaning summary of the space freed.</p></li>
+        <li><time datetime="2022-09-12">Sep 12, 2022</time><code>v5.1-stable</code><p>A redesigned Settings page that follows your theme, and a switch for custom cursors.</p></li> -->
+        <li class="yr"><h3>2023: Staying current</h3><p>The built-in updater arrived in v5.6, so you no longer have to check the website. The rest of the year deepened what the program can clean, from WinSxS and Windows.old to Opera and offline web pages, while updater reliability kept improving.</p></li>
+        <li><time datetime="2023-01-30">Jan 30, 2023</time><code>v5.6-stable</code><p>The built-in updater arrives, on a new customtkinter foundation with better low-resolution support.</p></li>
+        <!-- <li class="pre"><time datetime="2023-03-10">Mar 10, 2023</time><code>v5.8-testing</code><em>pre-release</em><p>Better handling of missing or unstable internet connections, and a smarter update check.</p></li> -->
+        <!-- <li><time datetime="2023-03-19">Mar 19, 2023</time><code>v6.0-stable</code><p>A smoother start-up: the app launches while it checks for updates and handles being offline.</p></li> -->
+        <!-- <li><time datetime="2023-03-21">Mar 21, 2023</time><code>v6.1-stable</code><p>Fixed button positions on high-DPI displays, reported through a support ticket.</p></li> -->
+        <li><time datetime="2023-05-25">May 25, 2023</time><code>v6.4-stable</code><p>A big cleaning upgrade: WinSxS, Service Pack, Windows.old, offline web pages and all-drives Recycle Bin. Plus a Donators window.</p></li>
+        <li><time datetime="2023-06-21">Jun 21, 2023</time><code>v6.6-stable</code><p>Better stability on older Windows, new Opera and Playnite cleaners, and a help document.</p></li>
+        <!-- <li class="pre"><time datetime="2023-06-23">Jun 23, 2023</time><code>v6.7-dev</code><em>pre-release</em><p>Updater and Donators window fixes, with further stability work.</p></li> -->
+        <!-- <li class="pre"><time datetime="2023-06-30">Jun 30, 2023</time><code>v6.7-dev_u1</code><em>pre-release</em><p>More updater fixes for slow connections and a steadier Windows.old cleaner.</p></li> -->
+        <!-- <li><time datetime="2023-07-03">Jul 3, 2023</time><code>v6.8-stable</code><p>Rolls up the v6.7 work: a more reliable updater and fewer unnecessary warnings.</p></li> -->
+        <!-- <li><time datetime="2023-07-26">Jul 26, 2023</time><code>v6.9-stable</code><p>The updater no longer holds up start-up and times out after 25 seconds, with better error handling.</p></li> -->
+        <li class="small_upds"><time datetime="2023-06-23">Jun 23, 2023 - Jul 26, 2023</time><p>Strengthening the recently added features.</p></li>
+        <li class="yr"><h3>2024: A new chapter</h3><p>Version 7 arrived in the autumn with a new set of capabilities: stopping a cleaning run midway, Android cleaning over ADB, post-cleaning power options and a progress bar. We also stopped compressing the program with UPX to cut down on false antivirus detections.</p></li>
+        <li class="pre"><time datetime="2024-09-02">Sep 2, 2024</time><code>v7.0-testing</code><em>pre-release</em><p>Stop a cleaning run midway, clean Android devices over ADB, pick a power action afterwards, and clean BeamNG.Drive temp files.</p></li>
+        <li><time datetime="2024-10-03">Oct 3, 2024</time><code>v7.0-stable</code><p>A progress bar for cleaning runs and an Android cleaner that asks which connected device to clean.</p></li>
+        <li><time datetime="2024-10-25">Oct 25, 2024</time><code>v7.1-stable</code><p>An option to rebuild the Windows icon cache, a better thumbnail cleaner, and sturdier error handling.</p></li>
+        <li class="yr now"><h3>Present: looking forward</h3><p>Temp_Cleaner GUI keeps evolving, with more new features and improvements to meet users' expectations and keep pace with advances in software. We're looking forward to what comes next, and your feedback helps shape it. <a href="#" data-link="github" target="_blank" rel="noopener">Follow along on GitHub.</a></p></li>
+    </ol>
+
+    <h2>Get involved</h2>
+    <p>Found a bug? Use the debug build from the <a href="downloads.html">downloads page</a> when you report it, since it has console and imports debugging enabled. Ideas, questions and code are welcome too.</p>
+    <div class="actions">
+        <a class="btn" href="downloads.html">Download Temp_Cleaner GUI</a>
+        <a class="btn alt" href="#" data-link="github" target="_blank" rel="noopener">Browse the source code</a>
+        <a class="btn alt" href="#" data-link="discord" target="_blank" rel="noopener">Join the support server</a>
+    </div>
+</main>
 </body>
 </html>

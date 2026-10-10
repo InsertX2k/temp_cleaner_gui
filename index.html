@@ -2,248 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="A free and open-source alternative to all Temporary folders cleaning software available!" />
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="https://raw.githubusercontent.com/InsertX2k/temp_cleaner_gui/74c79817039d950fa2e2b61891f65eada390fe39/tcgicon.png">
+    <script src="links.js" defer></script>
+    <script src="site.js" defer></script>
     <title>Temp_Cleaner GUI by Ziad (Mr.X)</title>
-    <noscript>
-        <h1
-        style="color: white;font-size: 20px;display: block;">
-            Detected Browser with Disabled Javascript, Redirecting to Warning Page...
-        </h1>
-        <meta http-equiv="refresh" content="0; url=nojs.html">
-    </noscript>
-    <!-- Additional script for the screenshot preview frame -->
-    <script>
-        function displayPreviewFrameForSS(thisForSSImgElem) {
-            // first of all, we need to disable clicking for the body
-            document.body.classList.add("disableClicking");
-            // getting the full image path for the clicked screenshot
-            const SELECTED_IMG_PATH = thisForSSImgElem.src;
-            const IMG_ELEM_SS_PREVIEW_FRAME = document.getElementsByClassName("ssPreviewImgElem")[0];
-            // setting it as the source for the img element inside the preview frame.
-            IMG_ELEM_SS_PREVIEW_FRAME.src = SELECTED_IMG_PATH;
-            // registering an onclick handler for that same element just in case the user wanted to view it in full size.
-            IMG_ELEM_SS_PREVIEW_FRAME.onclick = function() {
-                parent.location = SELECTED_IMG_PATH;
-            }
-            // display the preview frame
-            document.getElementsByClassName("displayss")[0].style.display = "block";
-            return;
-        }
-        function closeSSPreviewFrame(thisElemOfCloseBtn) {
-            // set display none to the parent of the parent (displayss) of the parameter given
-            thisElemOfCloseBtn.parentElement.parentElement.style.display = "none";
-            // undo all the changes we did to make the body unclickable
-            document.body.classList.remove("disableClicking");
-            return;
-        }
-    </script>
+    <noscript><meta http-equiv="refresh" content="0; url=nojs.html"></noscript>
 </head>
-<body class="bdy">
-    <!-- The header / nav bar-->
-    <script>
-        fetch("header.html").then(r => r.text()).then(text => {
-            document.body.insertAdjacentHTML("afterbegin", text);
-        });
-    </script>
-    <!-- Modify the style of the nav-bar to overline the About link-->
-    <style>
-        .homeword0 {
-            text-decoration: overline;
-        }
-    </style>
-    
-    <div class="largebanner">
-        <img src="banner_img_blured.png" class="bannerimg">
-        <div class="bannerelems">
-            <p class="greeting">
-                Ready to use the most powerful free PC Cleaner?
-            </p>
-            <p class="greeting2">
-                Temp_Cleaner GUI can help you free up disk space you weren't expecting to free, as proven by first time users.
-            </p>
-            <div class="go_to_downloads_button" onclick="location.href='downloads.html'">
-                <p class="head_to_downloads_text" onclick="location.href='downloads.html'">
-                    <a href="downloads.html" target="_self" class="hidden_link">Download now</a>
-                </p>
+<body>
+<main>
+    <section class="wrap hero">
+        <div>
+            <h1>Free up the disk space you didn't know you could.</h1>
+            <p>Temp_Cleaner GUI is a free, open-source cleaner for Windows. Tick the areas you want cleaned, then click "Start Cleaning".</p>
+            <div class="actions">
+                <a class="btn" href="downloads.html">Download for Windows</a>
+                <a class="btn alt" href="#" data-link="github" target="_blank" rel="noopener">View source on GitHub</a>
             </div>
+            <p class="small">Works on Windows 7 SP1<sup><a target="_self" href="#win_support_note">[2]</a></sup> through Windows 11, and Windows Server 2012 onwards.</p>
         </div>
-    </div>
-    <center class="whytcg">
-        Why Temp_Cleaner GUI?
-    </center>
-    <div class="freediv">
-        <img src="free.png" alt="Free" class="freeos"><p class="text0">Free and Open-Source</p><br><br>
-        <p class="text01">
-            Being a Free and Open-Source product gives you the freedom to share the program and use it for both personal and commerical purposes.
-        </p>
-    </div>
-
-    <div class="freediv">
-        <img src="easy.png" alt="Free" class="freeos"><p class="text0">Easy to use</p><br><br>
-        <p class="text01">
-            As you probably hinted, All you have to do is just checking the areas you want to clean and click the "Start Cleaning" button
-        </p>
-    </div>
-
-    <div class="freediv">
-        <img src="winold_cyan.png" alt="Free" class="freeos"><p class="text0">Supports vast majority of Windows Versions</p><br><br>
-        <p class="text01">
-            Compatibility is our top priority, That's why Temp_Cleaner GUI supports the vast majority of Windows Desktop Versions
-        </p>
-    </div>
-
-    <div class="freediv">
-        <img src="safety.png" alt="Free" class="freeos"><p class="text0">Safely cleans up your PC</p><br><br>
-        <p class="text01">
-            We made Temp_Cleaner GUI in a way that it doesn't negatively affect the performance and stability of your PC or any programs in it.
-        </p>
-    </div>
-
-    <div class="freediv">
-        <img src="users.png" alt="Free" class="freeos"><p class="text0">Trusted by many websites and users</p><br><br>
-        <p class="text01">
-            Temp_Cleaner GUI is trusted by many popular Software Listing Websites (check <a href="https://www.softpedia.com/get/Security/Secure-cleaning/Temp-Cleaner-GUI-Project.shtml" target="_blank" class="link_w_onhover_effect">Softpedia</a> and <a href="https://www.majorgeeks.com/files/details/temp_cleaner_gui.html" target="_blank" class="link_w_onhover_effect">Majorgeeks</a> and <a href="https://www.oldergeeks.com/downloads/file.php?id=4279" target="_blank" class="link_w_onhover_effect">Oldergeeks.com</a> pages for Temp_Cleaner GUI) and thousands of users worldwide
-        </p>
-    </div>
-
-    <div class="freediv">
-        <img src="cleans.png" alt="Free" class="freeos"><p class="text0">Cleans what other cleaners can't</p><br><br>
-        <p class="text01">
-            Temp_Cleaner GUI has a lot of cleaning options that aren't available in most popular PC cleaners.
-        </p>
-    </div>
-
-    <div class="freediv">
-        <img src="privacy.png" alt="Free" class="freeos"><p class="text0">It respects your privacy</p><br><br>
-        <p class="text01">
-            Temp_Cleaner GUI doesn't collect any sort of <strong>personal identification data</strong>.
-        </p>
-    </div>
-
-    <div class="freediv">
-        <img src="updater.png" alt="Free" class="freeos"><p class="text0">Provides an Updater Program (Introduced in v5.6-stable)</p><br><br>
-        <p class="text01">
-            You no longer have to bother going to this website just to check if there is an update available, <strong>We will inform you immediately when there is an update</strong>, Just be sure to enable Automatic Update Check in Settings.
-        </p>
-    </div>
-
-    <div class="freediv">
-        <img src="discord.png" alt="Free" class="freeos"><p class="text0">Has an active 24/7 support community</p><br><br>
-        <p class="text01">
-            Temp_Cleaner GUI has it's own dedicated Support Discord Server (<a href="https://discord.gg/HUMsUpaaHn" target="_blank" class="link_w_onhover_effect">Click here to join</a>)
-        </p>
-    </div>
-
-    <center class="introductionvideo">
-        Introduction video
-    </center>
-    <center class="introvideocenter">
-        <video src="video_compressed.m4v" playsinline height="720" controls class="videoplayer" preload="metadata">
-            Your browser doesn't support loading videos on HTML5 websites, Please update your web browser and try again.
-        </video>
-    </center>
-    
-    
-    <center class="screenshotscenter">
-        Screenshots:
-    </center>
-    <div class="screenshots_div">
-        <img src="ss0.png" alt="Screenshot1" class="screenshotfirst" onclick="displayPreviewFrameForSS(this)"><img src="ss1.png" alt="Screenshot2" class="screenshotfirst" onclick="displayPreviewFrameForSS(this)"><img src="ss2.png" alt="Screenshot3" class="screenshotfirst" onclick="displayPreviewFrameForSS(this)"><img src="ss3.png" alt="Screenshot4" class="screenshotfirst" onclick="displayPreviewFrameForSS(this)">
-    </div>
-    <!-- The screenshot photo display div/frame -->
-    <div class="displayss">
-        <div class="ssPreviewFrameCloseBtnContainer">
-            <img src="preview.png" alt="KINDLYPLSUPDATEYOURWIFI" class="ssPreviewIco">
-            <div class="ssPreviewcloseBtn" onclick="closeSSPreviewFrame(this)">
-                <p class="ssPreviewCloseBtnTxt">X</p>
-            </div>
-            <p class="ssPreviewWndTitle">
-                Screenshot Preview
-            </p>
+        <div class="drive" role="img" aria-label="Example: a 256 GB drive going from 238 GB used to 193 GB used after a cleaning session">
+            <b><span>Local Disk (C:)</span><span>193 GB used of 256 GB</span></b>
+            <div class="meter"><i></i></div>
+            <small>Example session: 45 GB freed. Results vary by PC.</small>
         </div>
-        <img class="ssPreviewImgElem" src="banner_img_blured.png" alt="Failed to render preview!">
-    </div>
-    <!--  END of Screenshot photo preview div/frame -->
-    <center class="bigwebsitessays">
-        What popular websites say about Temp_Cleaner GUI:
-    </center>
-    <ul>
-        <li class="complementdot">
-            <p class="softpediasentence">
-                "Temp_Cleaner GUI provides you with a user-friendly way to get rid of unnecessary files that take up space and affect the performance of your computer in a safe manner. In addition to these advantages, deleting temporary files can help solve various app crashes, increase privacy and can protect your system from cyber threats." <strong class="softpediaword">- Softpedia</strong>
-            </p>
-        </li>
-        <li class="complementdot">
-            <p class="softpediasentence">
-                "Temp_Cleaner GUI can clean many files that other drive cleaners can't" <strong class="softpediaword">- MajorGeeks</strong>
-            </p>
-        </li>
-        <li class="complementdot">
-            <p class="softpediasentence">
-                "Powerful yet free and open-source PC cleaner." <strong class="softpediaword">- OlderGeeks.com</strong>
-            </p>
-        </li>
-    </ul>
-    <center class="whatusersthinkcenter">
-        What our customers say:
-    </center>
-    <div class="yassenss"> 
-        <img src="yasso.png" alt="Yassen's Opinion of Temp_Cleaner GUI" class="yassoss" onclick="parent.location='yasso.png'">
-        <p class="yassenwords">
-            Yassen, a Customer of Temp_Cleaner GUI since June 2022
-        </p>
-    </div>
-    <div class="customerreviewdiv">
-        <img src="customerreview.png" alt="A screenshot of a customer saying true facts about Temp_Cleaner GUI" class="customerss" onclick="parent.location='customerreview.png'">
-        <p class="customerreviewwords">
-            One of our valuable customers from MajorGeeks
-        </p>
-    </div>
-    <div class="yossefreviewdiv">
-        <img src="yossefreview.png" alt="Yossef's Opinion of Temp_Cleaner GUI" class="yossefss" onclick="parent.location='yossefreview.png'">
-        <p class="yossefreviewwords">
-            Yossef, a Customer of Temp_Cleaner GUI since v4.1
-        </p>
-    </div>
-    
-    
-    <center class="donateword">
-        Want to help?
-    </center>
-    <div class="donatediv">
-        <p class="donatword">
-            <strong>As you can see, Temp_Cleaner GUI is a Free and Open-Source program, which means that it is entirely depending on donations, and as an End User like you I know how annoying it is to use a program that throws ads everywhere on it's interface and irritates you with it, Temp_Cleaner GUI is different because it doesn't do that (despite being a Free product), to help me keep it like that I need you to donate, because when you donate, You help me to afford PC upgrades (to accomodate with the future of Software) and save for a better web hosting.</strong>
-        </p>
-        <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="insertx2kdev" data-color="#5F7FFF" data-emoji="❤️"  data-font="Cookie" data-text="Donate" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00" ></script>
-    </div>
-    <p class="donthavemoneyword">
-        Don't have money?, No problem, You can still help.
-    </p>
-    <div class="communitysupportdiv">
-        <ul>
-            <li class="listelement1">
-                <p class="communitysupportword0">
-                    Are you a Coder willing to participate in popular projects?, Show me your skills in <a href="https://github.com/InsertX2k/temp_cleaner_gui" target="_blank" class="link_w_onhover_effect">Temp_Cleaner GUI's Github Repository</a>
-                </p>
-            </li>
-            <li class="listelement1">
-                <p class="communitysupportword0">
-                    <strong>Not a Coder, no problem</strong>, You can still help me by providing ideas to improve Temp_Cleaner GUI, or provide me with Logos and other medias to use in my program <br><br>
-                    Send your ideas or Logos and other medias to <a class="link_w_onhover_effect" href="https://twitter.com/insertplayztw" target="_blank">my personal Twitter</a> or <a class="link_w_onhover_effect" href="https://discord.gg/HUMsUpaaHn" target="_blank">Discord Server</a>
-                </p>
-            </li>
-        </ul>
-    </div>
-    
-    <!-- The footer -->
-    <script>
-        fetch("footer.html").then(r => r.text()).then(text => {
-            document.body.insertAdjacentHTML("beforeend", text);
-        });
-    </script>
+    </section>
+
+    <section class="wrap">
+        <h2>Why Temp_Cleaner GUI?</h2>
+        <dl class="feat">
+            <div><dt>Free and open-source</dt><dd>Share it and use it for both personal and commercial purposes. No ads in the interface<sup><a href="#ads_note" target="_self">[1]</a></sup>.</dd></div>
+            <div><dt>Easy to use</dt><dd>Check the areas you want to clean and click "Start Cleaning". That's all.</dd></div>
+            <div><dt>Supports most Windows versions</dt><dd>Compatibility is a top priority, so the vast majority of Windows desktop versions are supported.</dd></div>
+            <div><dt>Cleans safely</dt><dd>Built so it doesn't hurt the performance or stability of your PC or the programs on it.</dd></div>
+            <div><dt>Cleans what other cleaners can't</dt><dd>Many cleaning options that aren't available in most popular PC cleaners.</dd></div>
+            <div><dt>Cleans up your Android Smartphone too!<sup><a href="#android_cleaner_note" target="_self">[0]</a></sup></dt><dd>Thanks to the open nature of Android<sup><a href="#android_cleaner_note" target="_self">[0]</a></sup>, and my expertise in Android<sup><a href="#android_cleaner_note" target="_self">[0]</a></sup> modding, this app is one of the few (if not the only one) that can also clean up your Android<sup><a href="#android_cleaner_note" target="_self">[0]</a></sup> smartphone alongside your PC!</dd></div>
+            <div><dt>Respects your privacy</dt><dd>No personal identification data is collected. <a href="privacy.html">See exactly what is.</a></dd></div>
+            <div><dt>Built-in updater</dt><dd>Introduced in v5.6-stable. Turn on Automatic Update Check in Settings and you'll be told when an update is out.</dd></div>
+            <div><dt>Active support community</dt><dd>Get help on the dedicated <a href="#" data-link="discord" target="_blank" rel="noopener">Discord server</a>.</dd></div>
+            <div><dt>Trusted by reputable software sites</dt><dd>Listed on <a href="#" data-link="softpedia" target="_blank" rel="noopener">Softpedia</a>, <a href="#" data-link="majorgeeks" target="_blank" rel="noopener">MajorGeeks</a> and <a href="#" data-link="oldergeeks" target="_blank" rel="noopener">OlderGeeks</a>.</dd></div>
+        </dl>
+    </section>
 
 
+    <section class="wrap">
+        <h2>See it in action</h2>
+        <video src="video_compressed.m4v" playsinline controls preload="metadata">Your browser doesn't support HTML5 video. Please update it and try again.</video>
+        <h2>Screenshots</h2>
+        <div class="shots">
+            <img src="ss0.png" alt="Screenshot 1"><img src="ss1.png" alt="Screenshot 2"><img src="ss2.png" alt="Screenshot 3"><img src="ss3.png" alt="Screenshot 4">
+        </div>
+        <dialog id="lb"><img alt="Screenshot preview"></dialog>
+    </section>
+
+    <section class="wrap">
+        <h2>What people say</h2>
+        <div class="quotes">
+            <blockquote>Temp_Cleaner GUI provides you with a user-friendly way to get rid of unnecessary files that take up space and affect the performance of your computer in a safe manner.<cite>Softpedia</cite></blockquote>
+            <blockquote>Temp_Cleaner GUI can clean many files that other drive cleaners can't.<cite>MajorGeeks</cite></blockquote>
+            <blockquote>Powerful yet free and open-source PC cleaner.<cite>OlderGeeks.com</cite></blockquote>
+        </div>
+        <div class="reviews">
+            <figure><a href="yasso.png"><img src="yasso.png" alt="Yassen's opinion of Temp_Cleaner GUI"></a><figcaption>Yassen, a user since June 2022</figcaption></figure>
+            <figure><a href="customerreview.png"><img src="customerreview.png" alt="A MajorGeeks user's review of Temp_Cleaner GUI"></a><figcaption>A user on MajorGeeks</figcaption></figure>
+            <figure><a href="yossefreview.png"><img src="yossefreview.png" alt="Yossef's opinion of Temp_Cleaner GUI"></a><figcaption>Yossef, a user since v4.1</figcaption></figure>
+        </div>
+    </section>
+
+    <section class="wrap">
+        <div class="support">
+            <h2>Help keep it free and ad-free</h2>
+            <p>Temp_Cleaner GUI is free and open-source, so it depends on donations. They help pay for PC upgrades to keep up with the future of software, and for better web hosting.</p>
+            <p><a class="btn" href="#" data-link="donate" target="_blank" rel="noopener">Donate</a></p>
+            <p>Can't donate? You can still help:</p>
+            <ul>
+                <li>Coders: show your skills in the <a href="#" data-link="github" target="_blank" rel="noopener">GitHub repository</a>.</li>
+                <li>Not a coder? Send ideas, logos or other media on <a href="#" data-link="twitter" target="_blank" rel="noopener">Twitter</a> or the <a href="#" data-link="discord" target="_blank" rel="noopener">Discord server</a>.</li>
+            </ul>
+        </div>
+    </section>
+    <section class="wrap" id="notes">
+        <p id="android_cleaner_note" class="all_notes">
+            [0] - This feature works by integrating a 3rd-party app, the Android Debug Bridge, that communicates with your Android Smart Phone via the proprietary ADB protocol. <br>
+            - Your Android smartphone must be running at least Android 7.0 for the cleanup via USB debugging feature to work, or Android 11 (or newer) for the cleanup via Wi-Fi debugging feature (over the network cleanup). <br>
+            - Android and Android platform tools are separate products authored by Google, They're not owned nor are developed by Ziad (Mr.X)
+        </p>
+        <p id="ads_note" class="all_notes">
+            [1] - Ads for 3rd-party apps will never exist on the interface of this app, but ads for my apps will.
+        </p>
+        <p id="win_support_note" class="all_notes">
+            [2] - Windows 7 Service Pack 1 remains supported for as long as all dependencies remain compatible with it. <br>
+            - For Windows 7, you need the Service Pack 1 update along with the IE 11 (Internet Explorer 11) update for it to work. <br>
+            - ADB and the Android Smart Phone cleaner feature may not work on Windows 7.
+        </p>
+    </section>
+</main>
 </body>
 </html>
