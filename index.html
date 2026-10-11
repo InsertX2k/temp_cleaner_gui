@@ -15,7 +15,7 @@
 <main>
     <section class="wrap hero">
         <div>
-            <h1>Free up the disk space you didn't know you could.</h1>
+            <h1 data-typewriter>Free up the disk space you didn't know you could.</h1>
             <p>Temp_Cleaner GUI is a free, open-source cleaner for Windows. Tick the areas you want cleaned, then click "Start Cleaning".</p>
             <div class="actions">
                 <a class="btn" href="downloads.html">Download for Windows</a>
@@ -24,9 +24,9 @@
             <p class="small">Works on Windows 7 SP1<sup><a target="_self" href="#win_support_note">[2]</a></sup> through Windows 11, and Windows Server 2012 onwards.</p>
         </div>
         <div class="drive" role="img" aria-label="Example: a 128 GB drive going from 128 GB used to 78 GB used after a cleaning session">
-            <b><span>Local Disk (C:)</span><span>78 GB used of 128 GB</span></b>
+            <b><span>Local Disk (C:)</span><span id="after_anim">78 GB used of 128 GB</span><span id="before_anim">128 GB used of 128 GB</span></b>
             <div class="meter"><i></i></div>
-            <small>Example session: 50 GB freed. Results vary by PC.</small>
+            <small>Example session: 50 GB freed.<sup><a href="#results_differ_by_pc_note" target="_self">[3]</a></sup></small>
         </div>
     </section>
 
@@ -96,6 +96,10 @@
             [2] - Windows 7 Service Pack 1 remains supported for as long as all dependencies remain compatible with it. <br>
             - For Windows 7, you need the Service Pack 1 update along with the IE 11 (Internet Explorer 11) update for it to work. <br>
             - ADB and the Android Smart Phone cleaner feature may not work on Windows 7.
+        </p>
+
+        <p id="results_differ_by_pc_note" class="all_notes">
+            [3] - Results differ by a lot of factors like the when was the last cleaning session, the number of programs installed, and so on.
         </p>
     </section>
 </main>

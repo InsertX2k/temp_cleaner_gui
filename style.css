@@ -36,6 +36,32 @@ nav a:hover,nav a[aria-current]{border-color:var(--accent)}
 .meter{height:22px;border-radius:4px;background:var(--line);overflow:hidden;margin:.9rem 0 .6rem}
 .meter i{display:block;height:100%;width:61%;background:var(--accent);animation:clear 2.4s .6s cubic-bezier(.6,0,.2,1) backwards}
 @keyframes clear{from{width:100%;background: var(--meter-full);}}
+#after_anim{display: none; opacity: 0; animation: afterDriveUseTextAnim 2.4s .6s forwards;}
+#before_anim{display: block; opacity: 1; animation: beforeDriveUseTextAnim 2.4s .6s forwards;}
+
+@keyframes beforeDriveUseTextAnim {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes afterDriveUseTextAnim {
+    0%{
+        opacity: 0;
+        color: lightgreen;
+    }
+    75%{
+        color: lightgreen;
+    }
+    100%{
+        opacity: 1;
+        color: unset;
+    }
+}
+
 .drive small{color:var(--mute)}
 .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 3rem;margin:0}
 .feat div{padding:1.1rem 0;border-top:1px solid var(--line)}
@@ -157,3 +183,29 @@ details{
 details:hover {
     border-color: var(--accent);
 }
+
+.tw-rest  { visibility: hidden; display: inline; }
+.tw-caret { display: inline-block; width: 0; position: relative; margin-top: 0px; margin: 0px; padding: 0px; }
+.tw-caret::after {
+  content: ""; position: relative; left: 0.15em; top: 0%;
+  height: .85em; border-left: .07em solid var(--accent);
+  animation: tw-blink 1s steps(1) infinite;
+  display: inline;
+  margin-top: 0px;
+}
+@keyframes tw-blink { 50% { opacity: 0; } }
+
+.big_anim_title {
+    opacity: 0.25;
+    animation: onLoadAnim 1s 0s forwards;
+}
+
+@keyframes onLoadAnim {
+    0% {
+        opacity: 0.25;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
